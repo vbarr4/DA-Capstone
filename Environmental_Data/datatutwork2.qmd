@@ -1,0 +1,170 @@
+---
+title: "datawork2"
+format: html
+editor: visual
+---
+
+## 
+
+```{r}
+install.packages("dataRetrieval")
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+??dataRetrieval
+```
+
+```{r}
+library(dataRetrieval)
+```
+
+```{r}
+install.packages("read.csv")
+                 
+```
+
+```{r}
+wq2020hudsonSC <- read.csv("hudscwq2020.csv")
+
+```
+
+```{r}
+ok <- read.csv("/Users/josephinewhite/Downloads/hudscwq2020.csv")
+
+```
+
+```{r}
+getwd()
+```
+
+```{r}
+for2021 <- read.csv("hudscwq2021.csv")
+```
+
+```{r}
+
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+for2021 <- for2021 %>%
+  separate(DateTimeStamp, into = c("date", "time"), sep = " ")
+
+#separate datetime variable into date and time, separated by space
+#into =c","), sep=" "
+```
+
+```{r}
+# Remove leading/trailing whitespace
+for2021$date_clean <- trimws(for2021$date)
+
+# Remove any non-numeric/non-slash characters 
+
+for2021$date_clean <- gsub("[^0-9/]", "", for2021$date_clean) #idk i found this online and it worked bc date kept coming up NAs
+
+# Convert to Date
+for2021$date_update <- as.Date(for2021$date_clean, format = "%m/%d/%Y")
+
+```
+
+```{r}
+view(for2021)
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(data = for2021, aes(x = date_clean, y = Temp))+
+         geom_point(size = 0.2)
+  
+```
+
+```{r}
+ok$month <- as.numeric(format(for2021$date_update, "%m"))
+#need to inclute format bc changing to numeric
+#format as a numeric and only take month
+```
+
+```{r}
+class(for2021$date_clean)
+
+# needs to end up with dashes
+
+```
+
+```{r}
+for2021$date_clean <- as.Date(for2021$date_clean)
+```
+
+```{r}
+#using ifekse bc that works for multiple conditions
+
+for2021$month <- month(for2021$date_clean)
+
+for2021$season <- ifelse(for2021$month %in% 3:5, "Spring",
+                    ifelse(for2021$month %in% 6:8, "Summer",
+                           ifelse(for2021$month %in% 9:11, "Fall", "Winter")))
+  
+  
+```
+
+```{r}
+ggplot(data = for2021, aes(x= date_clean, y= Temp, color = season, group = season))+
+  geom_line()
+```
+
+```{r}
+ggplot(data = for2021, aes(x = date_clean, y = Temp, color = season))+
+  geom_line()+
+  facet_wrap(~month, scales = "free_x")+
+  theme_minimal()
+```
+
+```{r}
+ggplot(data = for2021, aes(x = Sal, fill = season, group = season))+
+  geom_bar()+
+  facet_wrap(~month)
+```
+
+```{r}
+library(ggplot2)
+ggplot(data = for2021, aes(x = Sal, fill = season))+ geom_bar
+```
+
+```{r}
+ggplot(data = for2021, aes(x = Temp, fill = season))+ geom_boxplot()
+```
+
+```{r}
+ggplot(data = for2021, aes(x = Temp, fill = season))+ geom_density(alpha = 0.8)
+```
+
+```{r}
+ggplot(data = for2021, aes(x = pH, fill =season)) + geom_density()+ facet_wrap(~season)
+```
+
+```{r}
+ggplot(data = for2021, aes(x = pH, fill = season))+ geom_boxplot()
+```
+
+```{r}
+
+for2021_daily <- for2021 %>%
+  group_by(date_clean, season)%>% # get a daily average bc multiple time stamps per day, group_by to keep date and season in relation to pH
+  summarise(meanpH = mean(pH, na.rm = TRUE))
+  
+ggplot(data = for2021_daily, aes(x = date_clean, y = meanpH, fill = season))+ facet_wrap(~season, scales = "free_x")+ geom_smooth(method = "loess", color = "black")+ geom_point()
+```
+
+```{r}
+ggplot(data = for2021_daily, aes(x = meanpH, fill =season)) + geom_density()+ facet_wrap(~season)
+```
+
+also make a daily average for all other variables since each obs represented means one time stamp

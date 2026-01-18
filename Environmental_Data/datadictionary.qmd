@@ -1,0 +1,53 @@
+---
+title: "data_dictionary"
+format: html
+editor: visual
+---
+
+## Data Source
+
+In this data exploration, we analyze the Stony Creek tributary in the Hudson River. In particular, we will look at various variables to study water quality and conditions.
+
+From the cdmo.baruch.sc.edu website, we can access the file "hudscwq2020.csv". File has been accessed by requesting water quality data from the Hudson River Reserve then selecting Stony Creek, which provides data from 2002-2021. From these options, the year 2020 was specified as the first year of study.
+
+Similarly, the next year (2021) can be accessed through its location in the same data file. All the same codes can be used for the new file, but outputs should be renamed to avoid overwriting. Codes were copy and pasted and adjusted for names to allow for comparison. Additional files for proceeding years can be added the same way for even further comparison.
+
+## File Access and Location
+
+All raw data files are stored in /data folder of the directory.
+
+To access, run read_csv line. \*Tidyverse must be installed and added to the library before running any scripts.
+
+## New Columns
+
+| Column           | Description                                                                                                                             | Type               |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------|--------------------|
+| date_clean       | Cleaned date, created by extracting the calendar day from time stamp                                                                    | Numeric variable   |
+| time             | Time extracted from the original timestamp                                                                                              | Character variable |
+| month            | Month extracted from date_clean                                                                                                         | Integer            |
+| season           | Season derived from month using case_when()                                                                                             | Factor             |
+| mean\[variable\] | Average \[variable\] by day. Raw measurements were collected at 15 minute intervals, so mean variables were introduced to reduce noise. | Numeric variable   |
+
+## Terms
+
+| Term     | Description                                                                                                                                                                  |
+|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| SpCond   | Specific conductivity measured in milli-Siemens per centimeter (mS/cm)                                                                                                       |
+| DO_pct   | Dissolved oxygen measured in percent saturation (%)                                                                                                                          |
+| DO_mgl   | Dissolved oxygen concentration measured in milligrams per Liter (mg/L)                                                                                                       |
+| Temp     | Water temperature in degrees Celsius (C)                                                                                                                                     |
+| Sal      | Salinity measured in practical salinity units (psu)                                                                                                                          |
+| pH       | Measure of acidity in standard units                                                                                                                                         |
+| Depth    | Sonde depth measured in meters (m)                                                                                                                                           |
+| cDepth   | Depth from a non-vented sensor to produce corrected changes in barometric pressure (m)                                                                                       |
+| Level    | Sonde depth, measured in meters, (m) referenced to a standard baseline referred to as a vertical datum (NAVD88). This variable was often disregarded due to its frequent NAs |
+| Turb     | Turbidity measured in units referred to as FNU/NTU, depending upon sensor.                                                                                                   |
+| ChlFlour | Chlorophyll fluorescence measured in micrograms per Liter (ug/L)                                                                                                             |
+
+## Parameters
+
+| Parameter     | Description                                                                                         |
+|---------------|-----------------------------------------------------------------------------------------------------|
+| DateTimeStamp | Date and time for the reading or end of interval where reading was taken.                           |
+| F_Record      | Flag column pertaining to all data parameters, may contain specific codes defined in metadata.      |
+| F_Parameter   | Flag column pertaining to given parameter, may contain relevant flags or codes defined in metadata. |

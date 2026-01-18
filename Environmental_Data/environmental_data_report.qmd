@@ -1,0 +1,582 @@
+---
+title: "Water Quality Data Report Stony Creek"
+format: pdf
+editor: visual
+---
+
+# Data Exploration with Water Quality Data 2020-2021 Hudson River
+
+#### Loading in the Data
+
+The first step in the exploration was to load in the datasets from 2020 and 2021, though I began with just working with 2020. Because I began with only 2020, datasets were not combined until later. The datasets originate from the National Estuarine Research Reserve System and the datasets contain water quality measurements for Stony Creek station of the Hudson River. The files were loaded in using read_csv() from tidyverse. The tidyverse package was used often in order to provide a consistent framework for data wrangling.
+
+#### Separating Date and Time Variables
+
+After successfully loading in the datasets, the DateTimeStamp variable was separated into two new components: date and time. Using the separate() function, I could then independently look at date or time, even though my main focus was date. The date_clean was created thereafter in order to ensure standardization in the variable. This also made sure that visualizations, using date like time series plots would properly interpret the date variable.
+
+#### Month and Season Variables
+
+After dates were clean and standardized, month was extracted from the new date variable using mutate() and month(). This categorization by month allows for an examination of monthly and later seasonal trends. After the monthly variable was created, I created a seasonal variable using case_when() to organize months into seasonal groups of Spring, Summer, Fall, and Winter. Although Winter was included in the data, its observations are infrequent due to collection gaps. Because of this, the season was later excluded for clarity.
+
+#### Missing Values
+
+Missing values were an especially prominent issue in this exploration. Counts of missing values by season and by month using group_by() and summarise(). Based on the outputs, Winter certainly had a consistently large number of missing values for both years. Monthly observations further highlighted gaps in missing values. Interestingly, for 2021, there is missing data around July/August in the Summer. I was unable to account for why this data was missing, however, this missing data is important to note for further analysis in 2021, especially in the Summer. This is because the gap in data may impact interpretation of seasonal trends, especially for variables which fluctuate in Summer in particular. In other words, this could skew the representation of variables during this period in 2021.
+
+#### Summary Statistics
+
+To begin exploring the variables after removing Winter, I created summary statistics for both years. These tables provide general information on the spread of measurements for the variables. The tables help provide basic overview of the central tendencies before visualizations for the summary statistics. After creating tables for overall summary statistics, I produced the same information except aggregated by season to look at seasonal spreads. In order to better show this information, I made box plot visualizations for both years. In 2020, variables including Depth, DO_mgl, DO_Pct, pH, SpCond, and Temp are quite fairly distributed. In contrast, the salinity variable is much less evenly distributed. Additionally, ChlFluor and Turbidity are even less evenly distributed and includes many high outliers. Also, the plot highlights the lack of information for the Level variable. Due to this observation, the Level variable was ignored for the rest of the exploration. These trends are similar for 2021, however, in 2021 the box plots reveal far more outliers. These boxplots were then organized seasonally by year in order to examine similar patterns on a more granular level.
+
+#### 
+
+```{r, echo = FALSE, warning = FALSE, show_col_types = FALSE}
+
+getwd()
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+install.packages("here")
+library(here)
+```
+
+```{r, echo = FALSE, warning = FALSE}
+        
+library(tidyverse)
+library(readr)
+        
+dataset_2020 <- read_csv(here("data", "hudscwq2020.csv"))
+
+dataset_2021 <- read_csv(here("data", "hudscwq2021.csv"))
+
+dataset_2020 <- dataset_2020 %>%
+  separate(DateTimeStamp, into = c("date", "time"), sep = " ")%>%
+  mutate(date_clean = mdy(str_trim(date)))
+
+dataset_2021 <- dataset_2021 %>%
+  separate(DateTimeStamp, into = c("date", "time"), sep = " ")%>%
+  mutate(date_clean = mdy(str_trim(date)))
+
+dataset_2020 <- dataset_2020 %>%
+  mutate(month = month(date_clean))
+
+dataset_2021 <- dataset_2021 %>%
+  mutate(month = month(date_clean))
+
+dataset_2020 <- dataset_2020 %>%
+  mutate(date_clean = as.Date(date_clean))
+
+dataset_2021 <- dataset_2021 %>%
+  mutate(date_clean = as.Date(date_clean))
+
+dataset_2020 <- dataset_2020 %>%
+  mutate(
+    month = as.numeric(month), #make sure its considered a numeric because maybe not all months are being read correctly since there is section of gray of unlabelled season data in the two plots.
+    season = case_when(
+      month %in% 3:5 ~ "Spring",
+      month %in% 6:8 ~ "Summer",
+      month %in% 9:11 ~ "Fall",
+      month %in% c(12, 1, 2) ~ "Winter",
+      TRUE ~ NA_character_ #clarifies that only values of 12,1 and 2 should go into winter to avoid mislabelling
+    )
+  )
+
+#copy for 2021
+dataset_2021 <- dataset_2021 %>%
+  mutate(
+    season = case_when(
+      month %in% 3:5 ~ "Spring",
+      month %in% 6:8 ~ "Summer",
+      month %in% 9:11 ~ "Fall",
+      month %in% c(12, 1, 2) ~ "Winter",
+      TRUE ~ NA_character_ #clarifies that only values of 12,1 and 2 should go into winter to avoid mislabelling
+    )
+  )
+
+no_winter_2020 <- dataset_2020 %>%
+  filter(season != "Winter")
+
+no_winter_2021 <- dataset_2021 %>%
+  filter(season != "Winter")
+
+#wwarnign also
+```
+
+#### 
+
+```{r, echo = FALSE, fig.width = 11, fig.height = 6, warning = FALSE}
+no_winter_2020 %>%
+  pivot_longer(
+    cols = c(Temp, Sal, Turb, ChlFluor, Level, Depth, pH, SpCond, DO_Pct, DO_mgl),
+    names_to = "variable",
+    values_to = "value") %>%
+  ggplot(aes(x = season, y = value, fill = season))+
+  geom_boxplot()+
+  facet_wrap(~ variable, scales = "free_y")+
+  scale_fill_manual(values = c(
+    "Fall" = "orange",
+    "Spring" = "springgreen4",
+    "Summer" = "red"
+  ))+
+  labs(title = "Distribution of Variables by Season 2020",
+       x = "Season",
+       y = "Value")
+#warning here
+```
+
+#### 
+
+```{r, echo = FALSE, fig.width = 11, fig.height = 6, warning = FALSE}
+no_winter_2021 %>%
+  pivot_longer(
+    cols = c(Temp, Sal, Turb, ChlFluor, Level, Depth, pH, SpCond, DO_Pct, DO_mgl),
+    names_to = "variable",
+    values_to = "value") %>%
+  ggplot(aes(x = season, y = value, fill = season))+
+  geom_boxplot()+
+  facet_wrap(~ variable, scales = "free_y")+
+  scale_fill_manual(values = c(
+    "Fall" = "orange",
+    "Spring" = "springgreen4",
+    "Summer" = "red"
+  ))+
+  labs(title = "Distribution of Variables by Season 2021",
+       x = "Season",
+       y = "Value")
+#warning here
+```
+
+#### Temperature Visualization- Initial Visual Exploration
+
+Using geom_point(), I firstly explored the temperature variable to look at general temperature trends. These plots showed predictable seasonal variation as temperatures peaked in Summer months and dropped in Fall. I later used geom_line() and colored temperature measurements by season to better visualize the seasonal changes while also acknowledging the limitations due to the nature of the Winter variable. The plot in 2021 visualized the missing data in the middle of the Summer. Importantly, both the 2020 and 2021 plots show that there was some unidentified data which is represented at the end of the plots. This is likely extra data from winter months that happened to be collected in the range of winter- for both years, there were a few data points that were collected for winter. However, overall, measurements in winter were very limited in comparison to other seasons, and therefore ignored because this would not create fair comparisons.
+
+Next, I produced seasonal temperature plots, faceted by month in order to display trends across months. Based on the plots. July and August seemed to experience the most consistent (high) temperatures, while other months fluctuated in 2020. In 2021 there was a bit less consistency for these months, but similar patterns overall. In the 2021 plot is is also shown that March generally had missing values as well. This likely reflects inconsistency due to wintry weather conditions.
+
+#### Visualizing Salinity and pH
+
+Other key variables like Salinity (Sal) and pH were examined using bar plots, density plots, and boxplots. Salinity was visualized using the counts with geom_bar() and also proportionality using position = "fill" in order to examine both the absolute and relative distributions by season. Monthly visualizations showed interesting differences in salinity levels, particularly the spread of them. For example, in November, 2020 salinity levels concentrate almost entirely at 0.2. In contrast, in September, levels were much more spread between 0.1 and 0.4. The boxplots allowed for a comparison of central tendencies and the presence of outliers. On the other hand, density plots showed subtle nuances in distributional shapes. For pH, density plots were faceted seasonally to showcase the specific differences by period in the year and boxplots explicitly showed ranges and medians. Since Salinity is not a raw variable, but rather, a derived variable, (from conductivity, in part), it was later mutated into bins for further analysis. Because of the nature of the variable, in the later half of my study, I focused on conductivity as a replacement for salinity.
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(data = no_winter_2020, aes(x = Sal, fill = season))+ geom_bar(position = "fill")+
+  ylab("Proportion")+
+  scale_fill_manual(values = c(
+  "Fall"   = "orange",
+  "Spring" = "springgreen4",
+  "Summer" = "red"
+))+
+  scale_x_continuous(limits = c(0, 0.5))+
+  labs(title = "Salinity by Season in 2020",
+       x = "Salinity",
+       y = "Proportion")
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(data = no_winter_2021, aes(x = Sal, fill = season))+ geom_bar(position = "fill")+
+  ylab("Proportion")+
+  scale_fill_manual(values = c(
+  "Fall"   = "orange",
+  "Spring" = "springgreen4",
+  "Summer" = "red"
+))+
+  scale_x_continuous(limits = c(0, 0.5))+
+  labs(title = "Salinity by Season in 2021",
+       x = "Salinity",
+       y = "Proportion")
+```
+
+#### Daily Average Calculations and Variable Time Series
+
+Daily averages for each variable were calculated by season using group_by and summarize(). This reduced noise from individual measurements and allowed a view of overall trends while also considering seasonal variation. These daily averages provided a solid foundation for subsequent visualizations including time series plots for each variable for both years. Plots were also colored by season. Interestingly, the seasonal variable time series plots show significant discrepancies when comparing 2020 to 2021, especially daily mean pH plots. Also when I later looked at pH more closely, faceted by season and smoothed using geom_smooth(method = "loess"), the differences between 2020 and 2021 became even more apparent.
+
+Some plots do follow similar patterns though, such as the temperature plots. Also, the dissolved oxygen plots (Pct and Mgl) vary significantly, even though these are similar variables. These differences likely reflect other environmental influences like temperature or salinity since warmer or saltier water may hold less oxygen. The percent dissolved oxygen measure accounts for such conditions, while the mg/L measure only shows the absolute amount of oxygen. The salinity plots were not as useful for analysis considering the nature of the variable and its narrow range. Also, the plots for turbidity reveal interesting spikes in the variable during different times for 2020 and 2021. Perhaps the turbidity variable ought to be examined more closely as it may reflect short-term weather disruptions.
+
+```{r, echo = FALSE, warning = FALSE}
+daily_2020 <- no_winter_2020 %>%
+  group_by(date_clean, season)%>%
+  summarise(
+    meanpH = mean(pH, na.rm = TRUE),
+    meanSal = mean(Sal, na.rm = TRUE),
+    meanTemp = mean(Temp, na.rm = TRUE),
+    meanDepth = mean(Depth, na.rm = TRUE),
+    meanSpCond = mean(SpCond, na.rm = TRUE),
+    meanTurb = mean(Turb, na.rm = TRUE),
+    meanChlFluor = mean(ChlFluor, na.rm = TRUE),
+    meanDO_Pct = mean(DO_Pct, na.rm = TRUE),
+    meanDO_mgl = mean(DO_mgl, na.rm = TRUE))
+
+daily_2021 <- no_winter_2021 %>%
+  group_by(date_clean, season)%>%
+  summarise(
+    meanpH = mean(pH, na.rm = TRUE),
+    meanSal = mean(Sal, na.rm = TRUE),
+    meanTemp = mean(Temp, na.rm = TRUE),
+    meanDepth = mean(Depth, na.rm = TRUE),
+    meanSpCond = mean(SpCond, na.rm = TRUE),
+    meanTurb = mean(Turb, na.rm = TRUE),
+    meanChlFluor = mean(ChlFluor, na.rm = TRUE),
+    meanDO_Pct = mean(DO_Pct, na.rm = TRUE),
+    meanDO_mgl = mean(DO_mgl, na.rm = TRUE))
+
+
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(data = daily_2020, aes(x = date_clean, y = meanpH, fill = season))+
+  facet_wrap(~season, scales = "free_x")+
+  geom_smooth(method = "loess", color = "black")+ geom_point()+
+  scale_fill_manual(values = c(
+  "Fall"   = "orange",
+  "Spring" = "springgreen4",
+  "Summer" = "red"
+))+
+  labs(title = "Mean pH over Time by Season in 2020",
+       x = "Date",
+       y = "pH")
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(data = daily_2021, aes(x = date_clean, y = meanpH, fill = season))+
+  facet_wrap(~season, scales = "free_x")+
+  geom_smooth(method = "loess", color = "black")+ geom_point()+
+  scale_fill_manual(values = c(
+  "Fall"   = "orange",
+  "Spring" = "springgreen4",
+  "Summer" = "red"
+))+
+  labs(title = "Mean pH over Time by Season in 2021",
+       x = "Date",
+       y = "pH")
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_2020, aes(x = date_clean, y = meanTurb, color = season))+
+  geom_line(size = 1.5)+
+  labs(title = "Daily Mean Turbidity Over Time 2020")+
+  scale_color_manual(values = c(
+  "Fall"   = "orange",
+  "Spring" = "springgreen4",
+  "Summer" = "red"))
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_2021, aes(x = date_clean, y = meanTurb, color = season))+
+  geom_line(size = 1.5)+
+  labs(title = "Daily Mean Turbidity Over Time 2021")+
+  scale_color_manual(values = c(
+  "Fall"   = "orange",
+  "Spring" = "springgreen4",
+  "Summer" = "red"))
+```
+
+#### Correlation Plots
+
+I firstly explored the relationship between mean salinity and mean temperature with jitter plots across both years. However, since salinity was still not yet binned, the plots were not visually striking. To fix this, salinity was binned at this point through a mutation. This allowed for discrete categories of salinity. Box plots colored by season were created using mean salinity bins to look at its relation to other variables and the influence of seasonality.
+
+Also, since salinity is in part derived from conductivity, the same plots were replicated using conductivity, a raw measure. I also created additional plots between salinity and conductivity in order to verify the consistency of the two variables. Ultimately, the conductivity variable provided wider variability and allowed for better interpretation of the relationships. Due to this, conductivity was considered a practical replacement for salinity for the rest of my analysis. For both years in comparing mean pH and mean conductivity, there was a negative relationship (though this was much stronger in 2020). After faceting this plot by season, seasonal influence between the two variables became evident, as patterns shifted across seasons for both years.
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_2020, aes(x = meanpH, y = meanSpCond))+
+  geom_jitter(alpha = 0.5, color = "royalblue3") +
+  geom_smooth(method = "lm", se = FALSE, color = "black")+
+  labs(title = "Mean pH v. Mean Conductivity in 2020",
+       x = "Mean pH",
+       y = "Mean Conductivity")
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_2021, aes(x = meanpH, y = meanSpCond))+
+  geom_jitter(alpha = 0.5, color = "mediumorchid3") +
+  geom_smooth(method = "lm", se = FALSE, color = "black")+
+  labs(title = "Mean pH v. Mean Conductivity in 2021",
+       x = "Mean pH",
+       y = "Mean Conductivity")
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_2020, aes(x = meanpH, y = meanSpCond))+
+  geom_jitter(alpha = 0.5, color = "royalblue3") +
+  geom_smooth(method = "lm", se = FALSE, color = "black")+
+  facet_wrap(~season)+
+  labs(title = "Mean pH v. Mean Conductivity by Season in 2020",
+       x = "Mean pH",
+       y = "Mean Conductivity")
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_2021, aes(x = meanpH, y = meanSpCond))+
+  geom_jitter(alpha = 0.5, color = "mediumorchid3") +
+  geom_smooth(method = "lm", se = FALSE, color = "black")+
+  facet_wrap(~season)+
+  labs(title = "Mean pH v. Mean Conductivity by Season in 2021",
+       x = "Mean pH",
+       y = "Mean Conductivity")
+```
+
+Next, I looked at the relationship between conductivity and temperature. These jitter plots of temperature versus conductivity produced an extremely dense cloud of overlapping points, creating a clustered pattern which were not visually effective for analysis. These plots suggest that there may be a distinctive relationship between conductivity and temperature. I also looked at the relationship between depth and conductivity for both years and found a consistent negative relationship. Temperature and depth for both years also shared a similar negative pattern.
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_2020, aes(x = meanDepth, y = meanSpCond))+
+  geom_jitter(alpha = 0.5, color = "royalblue3") +
+  geom_smooth(method = "lm", se = FALSE, color = "black")+
+  labs(title = "Mean Depth v. Mean Conductivity in 2020 (Jitter)",
+       x = "Mean Depth",
+       y = "Mean Conductivity")
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_2021, aes(x = meanDepth, y = meanSpCond))+
+  geom_jitter(alpha = 0.5, color = "mediumorchid3") +
+  geom_smooth(method = "lm", se = FALSE, color = "black")+
+  labs(title = "Mean Depth v. Mean Conductivity in 2021 (Jitter)",
+       x = "Mean Depth",
+       y = "Mean Conductivity")
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_2020, aes(x = meanTemp, y = meanDepth))+
+  geom_jitter(alpha = 0.5, color = "royalblue3") +
+  geom_smooth(method = "lm", se = FALSE, color = "black")+
+  labs(title = "Mean Temperature v. Mean Depth in 2020 (Jitter)",
+       x = "Mean Temperature",
+       y = "Mean Depth")
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_2021, aes(x = meanTemp, y = meanDepth))+
+  geom_jitter(alpha = 0.5, color = "mediumorchid3") +
+  geom_smooth(method = "lm", se = FALSE, color = "black")+
+  labs(title = "Mean Temperature v. Mean Depth in 2021 (Jitter)",
+       x = "Mean Temperature",
+       y = "Mean Depth")
+```
+
+#### Polar Plots Exploration
+
+I experimented with polar plots as a new way of visualizing temperature over time in a cyclical manner. This plot style was chosen to visualize temperature over time as an environmental cycle. By plotting temperature and date in the polar plots, I wanted to highlight possible recurring patterns in temperature. These plots offered an interesting visual perspective, but did not necessarily reveal new information. I also thought that the polar plot may clarify the relationship between conductivity and temperature, but the plot does not offer much insight. Ultimately, I found that polar plots worked most effectively looking at one variable over time.
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(no_winter_2020, aes(x = date_clean, y = Temp)) +
+  geom_point(alpha = 0.2, color = "royalblue3") +
+  coord_polar()+
+  labs(
+    title = "Temperature Patterns 2020",
+    x = "Date",
+    y = "Temperature")
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(no_winter_2021, aes(x = date_clean, y = Temp)) +
+  geom_point(alpha = 0.2, color= "mediumorchid3") +
+  coord_polar()+
+  labs(
+    title = "Temperature Patterns 2021",
+    x = "Date",
+    y = "Temperature")
+```
+
+#### Combined Dataset Exploration
+
+```{r, echo = FALSE, warning = FALSE}
+no_winter_year_2020 <- no_winter_2020 %>% mutate(year = 2020)
+no_winter_year_2021 <- no_winter_2021 %>% mutate(year = 2021)
+combined_datasets <- bind_rows(no_winter_year_2020, no_winter_year_2021)
+```
+
+For the last part of my study, I combined the two datasets from 2020 and 2021 for a more effective comparison. By restructuring the combined dataset into a long format, I created boxplots that display the same distribution of key variables, except side by side for each year. For the next plot, I created similar boxplots except colored by season in order to show how the variables varied both annually and seasonally.
+
+After creating plots to visualize the distributions of variables side by side, I then created time series plots for individual variables with a yearly comparison, similar to those created at the beginning of the study. However, this time, I explored using smoothed plots with a loess regression. I decided to use this approach in order to reduce noise and gain more clarity in overall yearly patterns for each variable. Additionally since two lines would be present in the same plot, without smoothing, interpretability could be challenging. However, results could be even more clear by increasing the width of each monthly plot, if possible.
+
+```{r, echo = FALSE, warning = FALSE}
+
+
+
+no_winter_year_2020 <- no_winter_2020 %>% mutate(year = 2020)
+no_winter_year_2021 <- no_winter_2021 %>% mutate(year = 2021)
+combined_datasets <- bind_rows(no_winter_year_2020, no_winter_year_2021)
+
+
+```
+
+```{r, echo = FALSE, fig.width = 11, fig.height = 6, warning = FALSE}
+combined_datasets %>%
+  pivot_longer(
+    cols = c(Temp, Sal, Turb, ChlFluor, Level, Depth, pH, SpCond, DO_Pct, DO_mgl),
+    names_to = "variable",
+    values_to = "value") %>%
+  ggplot(aes(x = factor(year), y = value, fill = factor(year)))+
+  geom_boxplot()+
+  facet_wrap(~variable, scales = "free_y")+
+  labs(y = NULL)+
+  labs(title = "Distribution of Variables in 2020 and 2021",
+       x = "Year",
+       y = "Value")+
+  scale_fill_manual(values = c("2020" = "royalblue3", "2021" = "mediumorchid3"))
+```
+
+```{r, echo = FALSE, fig.width = 7, fig.height = 10, echo = FALSE, warning = FALSE}
+
+combined_datasets %>%
+  pivot_longer(
+    cols = c(Temp, Sal, Turb, ChlFluor, Level, Depth, pH, SpCond, DO_Pct, DO_mgl),
+    names_to = "variable",
+    values_to = "value") %>%
+  ggplot(aes(x = season, y = value, fill = season))+
+  geom_boxplot()+
+  facet_grid(variable ~ year, scales = "free_y")+
+  labs(title = "Distribution of Variables by Season in 2020 and 2021",
+       x = "Year",
+       y = "Value")+
+  scale_fill_manual(values = c("Spring" = "springgreen4", 
+                               "Summer" = "red",
+                               "Fall" = "orange"))
+```
+
+```{r, echo = FALSE, fig.width=16, fig.height=4, warning = FALSE}
+
+ggplot(combined_datasets, aes(x = as.integer(format(date_clean, "%d")), y = Temp, color = factor(year), group = factor(year)))+
+  geom_smooth(method = "loess", se = FALSE)+
+  facet_wrap(~ month, scales = "free_x", nrow = 1) +
+  labs(title = "Mean Temperature by Month in 2020 and 2021",
+       x = "Date",
+       y = "Temp")+
+  scale_color_manual(values = c("2020" = "royalblue3", "2021" = "mediumorchid3"))
+```
+
+```{r, echo = FALSE, fig.width=16, fig.height=4, warning = FALSE}
+ggplot(combined_datasets, aes(x = as.integer(format(date_clean, "%d")), y = pH, color = factor(year), group = factor(year)))+
+  geom_smooth(method = "loess", se = FALSE)+
+  facet_wrap(~ month, scales = "free_x", nrow = 1) +
+  labs(title = "pH by Month in 2020 and 2021",
+       x = "Date",
+       y = "pH")+
+  scale_color_manual(values = c("2020" = "royalblue3", "2021" = "mediumorchid3"))
+```
+
+```{r, fig.width=16, fig.height=4, echo = FALSE, warning = FALSE}
+ggplot(combined_datasets, aes(x = as.integer(format(date_clean, "%d")), y = Depth, color = factor(year), group = factor(year)))+
+  geom_smooth(method = "loess", se = FALSE)+
+  facet_wrap(~ month, scales = "free_x", nrow = 1) +
+  labs(title = "Depth by Month in 2020 and 2021",
+       x = "Date",
+       y = "Depth")+
+  scale_color_manual(values = c("2020" = "royalblue3", "2021" = "mediumorchid3"))
+```
+
+```{r, fig.width=16, fig.height=4, echo = FALSE, warning = FALSE}
+ggplot(combined_datasets, aes(x = as.integer(format(date_clean, "%d")), y = SpCond, color = factor(year), group = factor(year)))+
+  geom_smooth(method = "loess", se = FALSE)+
+  facet_wrap(~ month, scales = "free_x", nrow = 1) +
+  labs(title = "Sp Conductivity by Month in 2020 and 2021",
+       x = "Date",
+       y = "Sp Conductivity")+
+  scale_color_manual(values = c("2020" = "royalblue3", "2021" = "mediumorchid3"))
+```
+
+```{r, fig.width=16, fig.height=4, echo = FALSE, warning = FALSE}
+ggplot(combined_datasets, aes(x = as.integer(format(date_clean, "%d")), y = Turb, color = factor(year), group = factor(year)))+
+  geom_smooth(method = "loess", se = FALSE)+
+  facet_wrap(~ month, scales = "free_x", nrow = 1) +
+  labs(title = "Turbidity by Month in 2020 and 2021",
+       x = "Date",
+       y = "Turbidity")+
+  scale_color_manual(values = c("2020" = "royalblue3", "2021" = "mediumorchid3"))
+```
+
+```{r, fig.width=16, fig.height=4, echo = FALSE, warning = FALSE}
+ggplot(combined_datasets, aes(x = as.integer(format(date_clean, "%d")), y = DO_mgl, color = factor(year), group = factor(year)))+
+  geom_smooth(method = "loess", se = FALSE)+
+  facet_wrap(~ month, scales = "free_x", nrow = 1) +
+  labs(title = "Dissolved Oxygen Mgl by Month in 2020 and 2021",
+       x = "Date",
+       y = "DO mgl")+
+  scale_color_manual(values = c("2020" = "royalblue3", "2021" = "mediumorchid3"))
+```
+
+```{r, fig.width=16, fig.height=4, echo = FALSE, warning = FALSE}
+ggplot(combined_datasets, aes(x = as.integer(format(date_clean, "%d")), y = DO_Pct, color = factor(year), group = factor(year)))+
+  geom_smooth(method = "loess", se = FALSE)+
+  facet_wrap(~ month, scales = "free_x", nrow = 1) +
+  labs(title = "Dissolved Oxygen Percent by Month in 2020 and 2021",
+       x = "Date",
+       y = "DO pct")+
+  scale_color_manual(values = c("2020" = "royalblue3", "2021" = "mediumorchid3"))
+```
+
+```{r, echo = FALSE, fig.width=16, fig.height=4, warning = FALSE}
+ggplot(combined_datasets, aes(x = as.integer(format(date_clean, "%d")), y = ChlFluor, color = factor(year), group = factor(year)))+
+  geom_smooth(method = "loess", se = FALSE)+
+  facet_wrap(~ month, scales = "free_x", nrow = 1) +
+  labs(title = "ChlFluor by Month in 2020 and 2021",
+       x = "Date",
+       y = "ChlFluor")+
+  scale_color_manual(values = c("2020" = "royalblue3", "2021" = "mediumorchid3"))
+```
+
+```{r, echo = FALSE, warning = FALSE}
+daily_combined_datasets <- combined_datasets %>%
+  group_by(year, month, date_clean, season)%>%
+  summarise(
+    meanpH = mean(pH, na.rm = TRUE),
+    meanSal = mean(Sal, na.rm = TRUE),
+    meanTemp = mean(Temp, na.rm = TRUE),
+    meanDepth = mean(Depth, na.rm = TRUE),
+    meanSpCond = mean(SpCond, na.rm = TRUE),
+    meanTurb = mean(Turb, na.rm = TRUE),
+    meanChlFluor = mean(ChlFluor, na.rm = TRUE),
+    meanDO_Pct = mean(DO_Pct, na.rm = TRUE),
+    meanDO_mgl = mean(DO_mgl, na.rm = TRUE),
+    .groups = "drop"
+)
+```
+
+```{r, echo = FALSE, warning = FALSE}
+daily_combined_datasets$doy <-
+  as.numeric(format(daily_combined_datasets$date_clean, "%j"))
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_combined_datasets, aes(x = meanTemp, y = meanpH, color = factor(year), group = factor(year)))+
+  geom_jitter(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE)+
+  labs(title = "Mean Temperature v. Mean pH",
+       x = "Mean Temperature",
+       y = "Mean pH")+
+  scale_color_manual(values = c("2020" = "royalblue3", "2021" = "mediumorchid3"))
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_combined_datasets, aes(x = meanpH, y = meanSpCond, color = factor(year), group = factor(year)))+
+  geom_jitter(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE)+
+  labs(title = "Mean pH v. Mean Conductivity",
+       x = "Mean pH",
+       y = "Mean Conductivity")+
+  scale_color_manual(values = c("2020" = "royalblue3", "2021" = "mediumorchid3"))
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_combined_datasets, aes(x = meanDepth, y = meanSpCond, color = factor(year), group = factor(year)))+
+  geom_jitter(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE)+
+  labs(title = "Mean Depth v. Mean Conductivity",
+       x = "Mean Depth",
+       y = "Mean Conductivity")+
+  scale_color_manual(values = c("2020" = "royalblue3", "2021" = "mediumorchid3"))
+```
+
+```{r, echo = FALSE, warning = FALSE}
+ggplot(daily_combined_datasets, aes(x = meanTemp, y = meanDepth, color = factor(year), group = factor(year)))+
+  geom_jitter(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE)+
+  labs(title = "Mean Temperature v. Mean Depth",
+       x = "Mean Temperature",
+       y = "Mean Depth")+
+  scale_color_manual(values = c("2020" = "royalblue3", "2021" = "mediumorchid3"))
+
+```
+
+#### Note on Warnings
+
+Throughout my study, my code produced several warnings. While generating boxplots and smoothed time series plots, R produced warnings about the removal of rows due to non-finite values. These warnings are expected in this dataset, since there are various gaps in data which vary by variable. The number of removed rows for each plot is higher for 2021, there are more missing values in the dataset. Likewise, combined dataset has more removed rows since the dataset contains both sets of missing values.
+
+Additionally, removals are slightly smaller for plots using daily means because these contain fewer points than the non-averaged plots. Also, the loess warnings likely reflect the smoothing algorithm adjusting for the gaps in the data. Ultimately, these warnings persisted because they generally stem from the structural issue of missing values in the datasets. Though, also, when combining the datasets, R produced a "new names" warning (...31 -\> ..32). This occurred because this variable did not align across both. However, these columns were not relevant to the analysis and were ignored. To keep the report clean, these warnings were suppressed.
+
+#### Conclusions & Future Opportunities
+
+The exploration of water quality from Stony Creek in the Hudson River across 2020 and 2021 highlighted seasonal patterns, monthly patterns, distributions of variables, and discrepancies between years. Also, the combination of the datsets more effectively compared trends among years. This could be strengthened by adding additional yearly datasets. However, missing data and the uneven timing of some missing data between both years may limit the findings. In the future, development of more robust methods for handling in-completion within the datasets. Also, it would be interesting to explore shifts in the variables over time by linking findings to external conditions at the time, such as climate or tides. Lastly, future work could include the development of predictive models in order to anticipate fluctuations or patterns.
