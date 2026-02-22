@@ -1,0 +1,833 @@
+---
+author: Ilianna Ditren
+---
+
+# Climate Change Effects of Water Quality (20-years change)
+
+## Project Set Up
+
+```{r, echo = FALSE, message=FALSE}
+#Downloading libraries
+
+library(readr)
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+```
+
+## Downloading and Data Cleaning
+
+```{r, echo = FALSE}
+
+#Stony Creek Data 2002-2021
+dir.create("data/stony_creek", recursive = TRUE, showWarnings = FALSE) #creates a folder for the new data
+
+#downloading Stony Creek data file from the web
+zip_sc <- tempfile(fileext = ".zip")                                       #creating a temporary zip file
+
+stony_creek_raw <- "http://cdmo.baruch.sc.edu/aqs/output/60521.zip"
+
+download.file(stony_creek_raw, zip_sc, mode = "wb")
+
+unzip(zip_sc, exdir = "data/stony_creek")                            #unzipping data from and placing it in a folder
+```
+
+```{r, echo = FALSE}
+#read in the files for all the years as a one data file
+files <- list.files(
+  "data/stony_creek",
+  pattern = "^hudscwq[0-9]{4}\\.csv$", # ^ -starts a string, hudscwq - the exact name in the file (constant), any digits from 0-9 might follow, {4} - we are looking for 4 digits pattern, \\. - there should be a dot, csv - it should end with "csv",  end a string
+  full.names = TRUE
+)
+
+sc_02_21_raw <- do.call(
+  rbind,
+  lapply(files, function(f) {
+    df <- read.csv(f, fileEncoding = "Latin1")
+    df$year <- as.integer(gsub(".*([0-9]{4})\\.csv$", "\\1", f))
+    df
+  })
+)
+
+```
+
+```{r, echo = FALSE}
+#get rid of the empty columns
+stony_creek <- sc_02_21_raw %>% 
+  select(-X, #empty columns
+        -cLevel, 
+        -F_cLevel, 
+        -Level, 
+        -isSWMP, #historical and provisionalPlus columns indicate the status of QAQC
+        -Historical, 
+        -ProvisionalPlus,
+        -F_Record, #Quality Assurance Flags (we should discuss if we need those)
+        -F_Temp, 
+        -F_SpCond, 
+        -F_Sal, 
+        -F_DO_Pct, 
+        -F_Level, 
+        -F_pH, 
+        -F_Turb, 
+        -F_ChlFluor 
+           )
+```
+
+```{r, echo = FALSE}
+#separate the date and time column
+stony_creek <- stony_creek %>%
+  mutate(
+    DateTimeStamp = as.POSIXct(DateTimeStamp, format = "%m/%d/%Y %H:%M"), #converts the variable into standard POSIXct format
+    date = as.Date(DateTimeStamp),
+    time = format(DateTimeStamp, "%H:%M:%S")
+  )
+
+#create a month column
+stony_creek <- stony_creek %>%
+  mutate(
+    month = month(DateTimeStamp)          
+  )
+
+#create a season column
+stony_creek <- stony_creek %>%
+  mutate(
+    season = case_when(
+      month %in% c(12, 1, 2) ~ "Winter",
+      month %in% 3:5        ~ "Spring",
+      month %in% 6:8        ~ "Summer",
+      month %in% 9:11       ~ "Fall"
+    )
+  )
+
+```
+
+## Exploratory Data Analysis
+
+### Water Temperature - Temp
+
+This section will begin by looking at water temperatures by season across the years 2002 - 2022.
+
+```{r, echo = FALSE, message = FALSE}
+
+#Selecting relevant data to look at temperature
+temp <- stony_creek |>
+  select(Temp, year, season)|>
+  filter(!is.na(Temp))
+
+#Creating mean column
+mean_temp <- temp |> 
+  group_by(season, year)|>
+  summarize(mean_temp = mean(Temp))
+
+```
+
+```{r, echo =FALSE}
+#Creating plots by the season
+##Spring
+mean_spring <- mean_temp |>
+  filter(season == "Spring")
+
+line_mean_spring <- ggplot(mean_spring)+
+  geom_line(aes(year, mean_temp))+
+  labs(title = "Mean Spring Temperature by Year")
+
+line_mean_spring
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall
+mean_fall <- mean_temp |>
+  filter(season == "Fall")
+
+line_mean_fall <- ggplot(mean_fall)+
+  geom_line(aes(year, mean_temp))+
+  labs(title = "Mean Fall Temperature by Year")
+
+line_mean_fall
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Summer
+mean_summer <- mean_temp |>
+  filter(season == "Summer")
+
+line_mean_summer <- ggplot(mean_summer)+
+  geom_line(aes(year, mean_temp))+
+  labs(title = "Mean Summer Temperature by Year")
+
+line_mean_summer
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Winter
+mean_winter <- mean_temp |>
+  filter(season == "Winter")
+
+line_mean_winter <- ggplot(mean_winter)+
+  geom_line(aes(year, mean_temp))+
+  labs(title = "Mean Winter Temperature by Year")
+
+line_mean_winter
+```
+
+```{r, echo=FALSE, message=FALSE}
+#plotting temperature by all seasons
+
+seasons_temp <- mean_temp|>
+  ggplot()+
+  geom_line(aes(year, mean_temp, color = season))+
+  scale_color_viridis_d()+
+  labs(title = "Mean Seasonal Temperature by Year")
+
+seasons_temp
+
+```
+
+# potential of Hydrogen - (pH)
+
+This section will begin by looking at the water ph by season across the years 2002 - 2022.
+
+```{r, echo = FALSE, message = FALSE}
+
+#Selecting relevant data to look at water pH
+ph <- stony_creek |>
+  select(pH, year, season)|>
+  filter(!is.na(pH))
+
+#Creating mean column
+mean_ph <- ph |> 
+  group_by(season, year)|>
+  summarize(mean_ph = mean(pH))
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+#Creating plots by the season
+##Spring ph
+ph_spring <- mean_ph |>
+  filter(season == "Spring")
+
+line_ph_spring <- ggplot(ph_spring)+
+  geom_line(aes(year, mean_ph))+
+  labs(title = "Mean Spring pH Level by Year")
+
+line_ph_spring
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall ph
+ph_fall <- mean_ph |>
+  filter(season == "Fall")
+
+line_ph_fall <- ggplot(ph_fall)+
+  geom_line(aes(year, mean_ph))+
+  labs(title = "Mean Fall pH Level by Year")
+
+line_ph_fall
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Summer ph
+ph_summer <- mean_ph |>
+  filter(season == "Summer")
+
+line_ph_summer <- ggplot(ph_summer)+
+  geom_line(aes(year, mean_ph))+
+  labs(title = "Mean Summer pH Level by Year")
+
+line_ph_summer
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall
+ph_winter <- mean_ph |>
+  filter(season == "Winter")
+
+line_ph_winter <- ggplot(ph_winter)+
+  geom_line(aes(year, mean_ph))+
+  labs(title = "Mean Winter pH Level by Year")
+
+line_ph_winter
+```
+
+```{r, echo=FALSE, message=FALSE}
+#plotting temperature by all seasons
+
+seasons_ph <- mean_ph|>
+  ggplot()+
+  geom_line(aes(year, mean_ph, color = season))+
+  scale_color_viridis_d()+
+  labs(title = "Mean Seasonal pH Levels by Year")
+
+seasons_ph
+
+```
+
+#Turbity of Water - (Turb)
+
+This section will begin by looking at the water turbidity by season across the years 2002 - 2022.
+
+```{r, echo = FALSE, message = FALSE}
+
+#Selecting relevant data to look at water turbidity only
+turb <- stony_creek |>
+  select(Turb, year, season)|>
+  filter(!is.na(Turb))
+
+#Creating mean column
+mean_turb <- turb |> 
+  group_by(season, year)|>
+  summarize(mean_turb = mean(Turb))
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+#Creating plots by the season
+##Spring turbidity
+turb_spring <- mean_turb |>
+  filter(season == "Spring")
+
+line_turb_spring <- ggplot(turb_spring)+
+  geom_line(aes(year, mean_turb))+
+  labs(title = "Mean Spring Water Turbidity Level by Year")
+
+line_turb_spring
+```
+Turbidity levels in Spring varies significantly every year. I wonder if that has anything to do with varying precipitation those years.
+
+```{r, echo=FALSE, message=FALSE}
+##Fall turbidity
+turb_fall <- mean_turb |>
+  filter(season == "Fall")
+
+line_turb_fall <- ggplot(turb_fall)+
+  geom_line(aes(year, mean_turb))+
+  labs(title = "Mean Fall Water Turbidity Level by Year")
+
+line_turb_fall
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Summer turbidity
+turb_summer <- mean_turb |>
+  filter(season == "Summer")
+
+line_turb_summer <- ggplot(turb_summer)+
+  geom_line(aes(year, mean_turb))+
+  labs(title = "Mean Summer Water Turbity Level by Year")
+
+line_turb_summer
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall
+turb_winter <- mean_turb |>
+  filter(season == "Winter")
+
+line_turb_winter <- ggplot(turb_winter)+
+  geom_line(aes(year, mean_turb))+
+  labs(title = "Mean Winter Water Turbidity Level by Year")
+
+line_turb_winter
+```
+
+```{r, echo=FALSE, message=FALSE}
+#plotting temperature by all seasons
+
+seasons_turb <- mean_turb|>
+  ggplot()+
+  geom_line(aes(year, mean_turb, color = season))+
+  scale_color_viridis_d()+
+  labs(title = "Mean Seasonal Water Turbidity Levels by Year")
+
+seasons_turb
+
+```
+
+#Dissolved oxygen measured in percent saturation (%) - (DO_pct)
+
+This section will begin by looking at the dissolved oxygen by season across the years 2002 - 2022.
+
+```{r, echo = FALSE, message = FALSE}
+
+#Selecting relevant data to look at water turbidity only
+do_pct <- stony_creek |>
+  select(DO_Pct, year, season)|>
+  filter(!is.na(DO_Pct))
+
+#Creating mean column
+mean_do_pct <- do_pct |> 
+  group_by(season, year)|>
+  summarize(mean_do_pct = mean(DO_Pct))
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+#Creating plots by the season
+##Spring turbidity
+do_pct_spring <- mean_do_pct |>
+  filter(season == "Spring")
+
+line_dopct_spring <- ggplot(do_pct_spring)+
+  geom_line(aes(year, mean_do_pct))+
+  labs(title = "Mean Spring Dissolved Oxygen Percent Saturation Level by Year")
+
+line_dopct_spring
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall turbidity
+do_pct_fall <- mean_do_pct |>
+  filter(season == "Fall")
+
+line_dopct_fall <- ggplot(do_pct_fall)+
+  geom_line(aes(year, mean_do_pct))+
+  labs(title = "Mean Fall Dissolved Oxygen Percent Saturation Level by Year")
+
+line_dopct_fall
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Summer turbidity
+do_pct_summer <- mean_do_pct |>
+  filter(season == "Summer")
+
+line_dopct_summer <- ggplot(do_pct_summer)+
+  geom_line(aes(year, mean_do_pct))+
+  labs(title = "Mean Summer Dissolved Oxygen Percent Saturation Level by Year")
+
+line_dopct_summer
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall
+do_pct_winter <- mean_do_pct |>
+  filter(season == "Winter")
+
+line_dopct_winter <- ggplot(do_pct_winter)+
+  geom_line(aes(year, mean_do_pct))+
+  labs(title = "Mean Winter Dissolved Oxygen Percent Saturation Level by Year")
+
+line_dopct_winter
+```
+
+```{r, echo=FALSE, message=FALSE}
+#plotting temperature by all seasons
+
+seasons_do_pct <- mean_do_pct|>
+  ggplot()+
+  geom_line(aes(year, mean_do_pct, color = season))+
+  scale_color_viridis_d()+
+  labs(title = "Mean Seasonal Dissolved Oxygen Percent Saturation Level by Year")
+
+seasons_do_pct
+
+```
+
+#Dissolved oxygen concentration measured in milligrams per Liter (mg/L) - (DO_mgl)
+
+This section will begin by looking at the dissolved oxygen by season across the years 2002 - 2022.
+
+```{r, echo = FALSE, message = FALSE}
+
+#Selecting relevant data to look at water turbidity only
+do_mgl <- stony_creek |>
+  select(DO_mgl, year, season)|>
+  filter(!is.na(DO_mgl))
+
+#Creating mean column
+mean_do_mgl <- do_mgl |> 
+  group_by(season, year)|>
+  summarize(mean_do_mgl = mean(DO_mgl))
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+#Creating plots by the season
+##Spring turbidity
+do_mgl_spring <- mean_do_mgl |>
+  filter(season == "Spring")
+
+line_domgl_spring <- ggplot(do_mgl_spring)+
+  geom_line(aes(year, mean_do_mgl))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_domgl_spring
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall turbidity
+do_mgl_fall <- mean_do_mgl |>
+  filter(season == "Fall")
+
+line_domgl_fall <- ggplot(do_mgl_fall)+
+  geom_line(aes(year, mean_do_mgl))+
+  labs(title = "Mean Fall Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_domgl_fall
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Summer turbidity
+do_mgl_summer <- mean_do_mgl |>
+  filter(season == "Summer")
+
+line_domgl_summer <- ggplot(do_mgl_summer)+
+  geom_line(aes(year, mean_do_mgl))+
+  labs(title = "Mean SummerDissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_domgl_summer
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall
+do_pct_winter <- mean_do_pct |>
+  filter(season == "Winter")
+
+line_dopct_winter <- ggplot(do_pct_winter)+
+  geom_line(aes(year, mean_do_pct))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_dopct_winter
+```
+
+```{r, echo=FALSE, message=FALSE}
+#plotting temperature by all seasons
+
+seasons_do_mgl <- mean_do_mgl|>
+  ggplot()+
+  geom_line(aes(year, mean_do_mgl, color = season))+
+  scale_color_viridis_d()+
+  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+seasons_do_mgl
+
+```
+
+
+#Dissolved oxygen concentration measured in milligrams per Liter (mg/L) - (DO_mgl)
+
+This section will begin by looking at the dissolved oxygen by season across the years 2002 - 2022.
+
+```{r, echo = FALSE, message = FALSE}
+
+#Selecting relevant data to look at water turbidity only
+sp_cond <- stony_creek |>
+  select(SpCond, year, season)|>
+  filter(!is.na(SpCond))
+
+#Creating mean column
+mean_sp_cond <- sp_cond |> 
+  group_by(season, year)|>
+  summarize(mean_sp_cond = mean(SpCond))
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+#Creating plots by the season
+##Spring turbidity
+sp_cond_spring <- mean_sp_cond |>
+  filter(season == "Spring")
+
+line_spcond_spring <- ggplot(sp_cond_spring)+
+  geom_line(aes(year, mean_sp_cond))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_spcond_spring
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall turbidity
+sp_cond_fall <- mean_sp_cond |>
+  filter(season == "Fall")
+
+line_spcond_fall <- ggplot(sp_cond_fall)+
+  geom_line(aes(year, mean_sp_cond))+
+  labs(title = "Mean Fall Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_spcond_fall
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Summer turbidity
+sp_cond_summer <- mean_sp_cond |>
+  filter(season == "Summer")
+
+line_spcond_summer <- ggplot(sp_cond_summer)+
+  geom_line(aes(year, mean_sp_cond))+
+  labs(title = "Mean SummerDissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_spcond_summer
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall
+sp_cond_winter <- mean_sp_cond |>
+  filter(season == "Winter")
+
+line_spcond_winter <- ggplot(sp_cond_winter)+
+  geom_line(aes(year, mean_sp_cond))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_spcond_winter
+```
+
+```{r, echo=FALSE, message=FALSE}
+#plotting temperature by all seasons
+
+seasons_sp_cond <- mean_sp_cond|>
+  ggplot()+
+  geom_line(aes(year, mean_sp_cond, color = season))+
+  scale_color_viridis_d()+
+  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+seasons_sp_cond
+
+```
+
+#Dissolved oxygen concentration measured in milligrams per Liter (mg/L) - (DO_mgl)
+
+This section will begin by looking at the dissolved oxygen by season across the years 2002 - 2022.
+
+```{r, echo = FALSE, message = FALSE}
+
+#Selecting relevant data to look at water turbidity only
+sal <- stony_creek |>
+  select(Sal, year, season)|>
+  filter(!is.na(Sal))
+
+#Creating mean column
+mean_sal <- sal |> 
+  group_by(season, year)|>
+  summarize(mean_sal = mean(Sal))
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+#Creating plots by the season
+##Spring turbidity
+sal_spring <- mean_sal |>
+  filter(season == "Spring")
+
+line_sal_spring <- ggplot(sal_spring)+
+  geom_line(aes(year, mean_sal))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_sal_spring
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall turbidity
+sal_fall <- mean_sal |>
+  filter(season == "Fall")
+
+line_sal_fall <- ggplot(sal_fall)+
+  geom_line(aes(year, mean_sal))+
+  labs(title = "Mean Fall Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_sal_fall
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Summer turbidity
+sal_summer <- mean_sal |>
+  filter(season == "Summer")
+
+line_sal_summer <- ggplot(sal_summer)+
+  geom_line(aes(year, mean_sal))+
+  labs(title = "Mean SummerDissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_sal_summer
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall
+sal_winter <- mean_sal |>
+  filter(season == "Winter")
+
+line_sal_winter <- ggplot(sal_winter)+
+  geom_line(aes(year, mean_sal))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_sal_winter
+```
+
+```{r, echo=FALSE, message=FALSE}
+#plotting temperature by all seasons
+
+seasons_sal <- mean_sal|>
+  ggplot()+
+  geom_line(aes(year, mean_sal, color = season))+
+  scale_color_viridis_d()+
+  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+seasons_sal
+
+```
+
+
+#Dissolved oxygen concentration measured in milligrams per Liter (mg/L) - (DO_mgl)
+
+This section will begin by looking at the dissolved oxygen by season across the years 2002 - 2022.
+
+```{r, echo = FALSE, message = FALSE}
+
+#Selecting relevant data to look at water turbidity only
+depth <- stony_creek |>
+  select(Depth, year, season)|>
+  filter(!is.na(Depth))
+
+#Creating mean column
+mean_depth <- depth |> 
+  group_by(season, year)|>
+  summarize(mean_depth = mean(Depth))
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+#Creating plots by the season
+##Spring turbidity
+depth_spring <- mean_depth |>
+  filter(season == "Spring")
+
+line_depth_spring <- ggplot(depth_spring)+
+  geom_line(aes(year, mean_depth))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_depth_spring
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall depth
+depth_fall <- mean_depth |>
+  filter(season == "Fall")
+
+line_depth_fall <- ggplot(depth_fall)+
+  geom_line(aes(year, mean_depth))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_depth_fall
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Summer depth
+depth_summer <- mean_depth |>
+  filter(season == "Summer")
+
+line_depth_summer <- ggplot(depth_summer)+
+  geom_line(aes(year, mean_depth))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_depth_summer
+```
+
+```{r, echo=FALSE, message=FALSE}
+## Winter depth
+depth_winter <- mean_depth |>
+  filter(season == "Winter")
+
+line_depth_winter <- ggplot(depth_winter)+
+  geom_line(aes(year, mean_depth))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_depth_winter
+```
+
+```{r, echo=FALSE, message=FALSE}
+#plotting temperature by all seasons
+
+seasons_depth <- mean_depth|>
+  ggplot()+
+  geom_line(aes(year, mean_depth, color = season))+
+  scale_color_viridis_d()+
+  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+seasons_depth
+
+```
+
+#Dissolved oxygen concentration measured in milligrams per Liter (mg/L) - (DO_mgl)
+
+This section will begin by looking at the dissolved oxygen by season across the years 2002 - 2022.
+
+```{r, echo = FALSE, message = FALSE}
+
+#Selecting relevant data to look at water turbidity only
+chloro <- stony_creek |>
+  select(ChlFluor, year, season)|>
+  filter(!is.na(ChlFluor))
+
+#Creating mean column
+mean_chloro <- chloro |> 
+  group_by(season, year)|>
+  summarize(mean_chloro = mean(ChlFluor))
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+#Creating plots by the season
+##Spring turbidity
+chloro_spring <- mean_chloro|>
+  filter(season == "Spring")
+
+line_chloro_spring <- ggplot(chloro_spring)+
+  geom_line(aes(year, mean_chloro))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_chloro_spring
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Fall depth
+chloro_fall <- mean_chloro|>
+  filter(season == "Fall")
+
+line_chloro_fall <- ggplot(chloro_fall)+
+  geom_line(aes(year, mean_chloro))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_chloro_fall
+```
+
+```{r, echo=FALSE, message=FALSE}
+##Summer depth
+chloro_summer <- mean_chloro |>
+  filter(season == "Summer")
+
+line_chloro_summer <- ggplot(chloro_summer)+
+  geom_line(aes(year, mean_chloro))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_chloro_summer
+```
+
+```{r, echo=FALSE, message=FALSE}
+## Winter depth
+chloro_winter <- mean_chloro |>
+  filter(season == "Winter")
+
+line_chloro_winter <- ggplot(chloro_winter)+
+  geom_line(aes(year, mean_chloro))+
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+line_chloro_winter
+```
+
+```{r, echo=FALSE, message=FALSE}
+#plotting temperature by all seasons
+
+seasons_chloro <- mean_chloro|>
+  ggplot()+
+  geom_line(aes(year, mean_chloro, color = season))+
+  scale_color_viridis_d()+
+  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+
+seasons_chloro
+
+```
+
+ChlFluor starts to be collected at a later date (2014)
+
