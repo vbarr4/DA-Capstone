@@ -6,7 +6,7 @@ author: Ilianna Ditren
 
 ## Project Set Up
 
-```{r, echo = FALSE, message=FALSE}
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
 #Downloading libraries
 
 library(readr)
@@ -176,7 +176,8 @@ line_mean_winter
 ```{r, echo=FALSE, message=FALSE}
 #plotting temperature by all seasons
 
-seasons_temp <- mean_temp|>
+seasons_temp <- mean_temp|> filter(!is.na(season))|> 
+  #removed 6 rows with missing values
   ggplot()+
   geom_line(aes(year, mean_temp, color = season))+
   scale_color_viridis_d()+
@@ -256,7 +257,7 @@ line_ph_winter
 ```{r, echo=FALSE, message=FALSE}
 #plotting temperature by all seasons
 
-seasons_ph <- mean_ph|>
+seasons_ph <- mean_ph|> filter(!is.na(season))|>
   ggplot()+
   geom_line(aes(year, mean_ph, color = season))+
   scale_color_viridis_d()+
@@ -337,7 +338,7 @@ line_turb_winter
 ```{r, echo=FALSE, message=FALSE}
 #plotting temperature by all seasons
 
-seasons_turb <- mean_turb|>
+seasons_turb <- mean_turb|> filter(!is.na(season))|>
   ggplot()+
   geom_line(aes(year, mean_turb, color = season))+
   scale_color_viridis_d()+
@@ -373,7 +374,8 @@ do_pct_spring <- mean_do_pct |>
 
 line_dopct_spring <- ggplot(do_pct_spring)+
   geom_line(aes(year, mean_do_pct))+
-  labs(title = "Mean Spring Dissolved Oxygen Percent Saturation Level by Year")
+  labs(title = "Mean Spring Dissolved Oxygen 
+       Percent Saturation Level by Year")
 
 line_dopct_spring
 ```
@@ -397,7 +399,8 @@ do_pct_summer <- mean_do_pct |>
 
 line_dopct_summer <- ggplot(do_pct_summer)+
   geom_line(aes(year, mean_do_pct))+
-  labs(title = "Mean Summer Dissolved Oxygen Percent Saturation Level by Year")
+  labs(title = "Mean Summer Dissolved Oxygen 
+       Percent Saturation Level by Year")
 
 line_dopct_summer
 ```
@@ -409,7 +412,8 @@ do_pct_winter <- mean_do_pct |>
 
 line_dopct_winter <- ggplot(do_pct_winter)+
   geom_line(aes(year, mean_do_pct))+
-  labs(title = "Mean Winter Dissolved Oxygen Percent Saturation Level by Year")
+  labs(title = "Mean Winter Dissolved Oxygen 
+                Percent Saturation Level by Year")
 
 line_dopct_winter
 ```
@@ -417,11 +421,12 @@ line_dopct_winter
 ```{r, echo=FALSE, message=FALSE}
 #plotting temperature by all seasons
 
-seasons_do_pct <- mean_do_pct|>
+seasons_do_pct <- mean_do_pct|> filter(!is.na(season))|>
   ggplot()+
   geom_line(aes(year, mean_do_pct, color = season))+
   scale_color_viridis_d()+
-  labs(title = "Mean Seasonal Dissolved Oxygen Percent Saturation Level by Year")
+  labs(title = "Mean Seasonal Dissolved Oxygen
+       Percent Saturation Level by Year")
 
 seasons_do_pct
 
@@ -453,7 +458,8 @@ do_mgl_spring <- mean_do_mgl |>
 
 line_domgl_spring <- ggplot(do_mgl_spring)+
   geom_line(aes(year, mean_do_mgl))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_domgl_spring
 ```
@@ -465,7 +471,8 @@ do_mgl_fall <- mean_do_mgl |>
 
 line_domgl_fall <- ggplot(do_mgl_fall)+
   geom_line(aes(year, mean_do_mgl))+
-  labs(title = "Mean Fall Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Fall Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_domgl_fall
 ```
@@ -477,7 +484,8 @@ do_mgl_summer <- mean_do_mgl |>
 
 line_domgl_summer <- ggplot(do_mgl_summer)+
   geom_line(aes(year, mean_do_mgl))+
-  labs(title = "Mean SummerDissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean SummerDissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_domgl_summer
 ```
@@ -489,7 +497,8 @@ do_pct_winter <- mean_do_pct |>
 
 line_dopct_winter <- ggplot(do_pct_winter)+
   geom_line(aes(year, mean_do_pct))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_dopct_winter
 ```
@@ -497,11 +506,12 @@ line_dopct_winter
 ```{r, echo=FALSE, message=FALSE}
 #plotting temperature by all seasons
 
-seasons_do_mgl <- mean_do_mgl|>
+seasons_do_mgl <- mean_do_mgl|> filter(!is.na(season))|>
   ggplot()+
   geom_line(aes(year, mean_do_mgl, color = season))+
   scale_color_viridis_d()+
-  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 seasons_do_mgl
 
@@ -534,7 +544,8 @@ sp_cond_spring <- mean_sp_cond |>
 
 line_spcond_spring <- ggplot(sp_cond_spring)+
   geom_line(aes(year, mean_sp_cond))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_spcond_spring
 ```
@@ -546,7 +557,8 @@ sp_cond_fall <- mean_sp_cond |>
 
 line_spcond_fall <- ggplot(sp_cond_fall)+
   geom_line(aes(year, mean_sp_cond))+
-  labs(title = "Mean Fall Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Fall Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_spcond_fall
 ```
@@ -558,7 +570,8 @@ sp_cond_summer <- mean_sp_cond |>
 
 line_spcond_summer <- ggplot(sp_cond_summer)+
   geom_line(aes(year, mean_sp_cond))+
-  labs(title = "Mean SummerDissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Summer Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_spcond_summer
 ```
@@ -570,7 +583,8 @@ sp_cond_winter <- mean_sp_cond |>
 
 line_spcond_winter <- ggplot(sp_cond_winter)+
   geom_line(aes(year, mean_sp_cond))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_spcond_winter
 ```
@@ -578,11 +592,12 @@ line_spcond_winter
 ```{r, echo=FALSE, message=FALSE}
 #plotting temperature by all seasons
 
-seasons_sp_cond <- mean_sp_cond|>
+seasons_sp_cond <- mean_sp_cond|> filter(!is.na(season))|>
   ggplot()+
   geom_line(aes(year, mean_sp_cond, color = season))+
   scale_color_viridis_d()+
-  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 seasons_sp_cond
 
@@ -614,7 +629,8 @@ sal_spring <- mean_sal |>
 
 line_sal_spring <- ggplot(sal_spring)+
   geom_line(aes(year, mean_sal))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_sal_spring
 ```
@@ -626,7 +642,8 @@ sal_fall <- mean_sal |>
 
 line_sal_fall <- ggplot(sal_fall)+
   geom_line(aes(year, mean_sal))+
-  labs(title = "Mean Fall Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Fall Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_sal_fall
 ```
@@ -638,7 +655,8 @@ sal_summer <- mean_sal |>
 
 line_sal_summer <- ggplot(sal_summer)+
   geom_line(aes(year, mean_sal))+
-  labs(title = "Mean SummerDissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean SummerDissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_sal_summer
 ```
@@ -650,7 +668,8 @@ sal_winter <- mean_sal |>
 
 line_sal_winter <- ggplot(sal_winter)+
   geom_line(aes(year, mean_sal))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_sal_winter
 ```
@@ -658,11 +677,12 @@ line_sal_winter
 ```{r, echo=FALSE, message=FALSE}
 #plotting temperature by all seasons
 
-seasons_sal <- mean_sal|>
+seasons_sal <- mean_sal|> filter(!is.na(season))|>
   ggplot()+
   geom_line(aes(year, mean_sal, color = season))+
   scale_color_viridis_d()+
-  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 seasons_sal
 
@@ -695,7 +715,8 @@ depth_spring <- mean_depth |>
 
 line_depth_spring <- ggplot(depth_spring)+
   geom_line(aes(year, mean_depth))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_depth_spring
 ```
@@ -707,7 +728,8 @@ depth_fall <- mean_depth |>
 
 line_depth_fall <- ggplot(depth_fall)+
   geom_line(aes(year, mean_depth))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_depth_fall
 ```
@@ -719,7 +741,8 @@ depth_summer <- mean_depth |>
 
 line_depth_summer <- ggplot(depth_summer)+
   geom_line(aes(year, mean_depth))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_depth_summer
 ```
@@ -731,7 +754,8 @@ depth_winter <- mean_depth |>
 
 line_depth_winter <- ggplot(depth_winter)+
   geom_line(aes(year, mean_depth))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_depth_winter
 ```
@@ -739,11 +763,13 @@ line_depth_winter
 ```{r, echo=FALSE, message=FALSE}
 #plotting temperature by all seasons
 
-seasons_depth <- mean_depth|>
+seasons_depth <- mean_depth|> filter(!is.na(season))|>
+  #removed 5 rows
   ggplot()+
   geom_line(aes(year, mean_depth, color = season))+
   scale_color_viridis_d()+
-  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 seasons_depth
 
@@ -775,7 +801,8 @@ chloro_spring <- mean_chloro|>
 
 line_chloro_spring <- ggplot(chloro_spring)+
   geom_line(aes(year, mean_chloro))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_chloro_spring
 ```
@@ -787,7 +814,8 @@ chloro_fall <- mean_chloro|>
 
 line_chloro_fall <- ggplot(chloro_fall)+
   geom_line(aes(year, mean_chloro))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Fall Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_chloro_fall
 ```
@@ -799,7 +827,8 @@ chloro_summer <- mean_chloro |>
 
 line_chloro_summer <- ggplot(chloro_summer)+
   geom_line(aes(year, mean_chloro))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Summer Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_chloro_summer
 ```
@@ -811,7 +840,8 @@ chloro_winter <- mean_chloro |>
 
 line_chloro_winter <- ggplot(chloro_winter)+
   geom_line(aes(year, mean_chloro))+
-  labs(title = "Mean Spring Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Winter Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 line_chloro_winter
 ```
@@ -819,11 +849,12 @@ line_chloro_winter
 ```{r, echo=FALSE, message=FALSE}
 #plotting temperature by all seasons
 
-seasons_chloro <- mean_chloro|>
+seasons_chloro <- mean_chloro|> filter(!is.na(season))|>
   ggplot()+
   geom_line(aes(year, mean_chloro, color = season))+
   scale_color_viridis_d()+
-  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration measured in milligrams per Liter (mg/L) by Year")
+  labs(title = "Mean Seasonal Dissolved Oxygen oxygen concentration 
+       measured in milligrams per Liter (mg/L) by Year")
 
 seasons_chloro
 
