@@ -1,0 +1,355 @@
+---
+title: "30_years_EDA"
+format: html
+---
+
+## Libraries
+
+```{r}
+#libraries
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(gt)
+library(ggplot2)
+```
+
+## Data
+
+```{r}
+#tivoli north data 1996-2015
+dir.create("data/tivoli_north", recursive = TRUE, showWarnings = FALSE) #creates a data folder for the specific site
+
+#using tempfile() to create a tempoarry storage
+zip <- tempfile(fileext = ".zip")
+
+#downlod the file from the url
+download.file("http://cdmo.baruch.sc.edu/aqs/output/444944.zip", zip, mode = "wb")
+
+unzip(zip, exdir = "data/tivoli_north")
+
+#read in the files for all the years as a one data file
+files <- list.files(
+  "data/tivoli_north",
+  pattern = "^hudtnwq[0-9]{4}\\.csv$", # ^ -starts a string
+                                       # hudtnwq - the exact name in the file (constant)
+                                       # any digits from 0-9 might follow
+                                       # {4} - we are looking for 4 digits pattern
+                                       # \\. - there should be a dot
+                                       # csv - it should end with "csv"
+                                       # end a string
+  full.names = TRUE
+)
+
+tn_96_25_raw <- do.call(
+  rbind,
+  lapply(files, function(f) {
+    df <- read.csv(f, fileEncoding = "Latin1")
+    df$year <- as.integer(gsub(".*([0-9]{4})\\.csv$", "\\1", f))
+    df
+  })
+)
+
+```
+
+```{r}
+#stony creek data 2002-2021
+dir.create("data/stony_creek", recursive = TRUE, showWarnings = FALSE) #creates a data folder for the specific site
+
+#using tempfile() to create a tempary storage
+zip <- tempfile(fileext = ".zip")
+
+#downlod the file from the url
+download.file("http://cdmo.baruch.sc.edu/aqs/output/60521.zip", zip, mode = "wb")
+
+unzip(zip, exdir = "data/stony_creek")
+
+#read in the files for all the years as a one data file
+files <- list.files(
+  "data/stony_creek",
+  pattern = "^hudscwq[0-9]{4}\\.csv$", # ^ -starts a string
+                                       # hudscwq - the exact name in the file (constant)
+                                       # any digits from 0-9 might follow
+                                       # {4} - we are looking for 4 digits pattern
+                                       # \\. - there should be a dot
+                                       # csv - it should end with "csv"
+                                       # end a string
+  full.names = TRUE
+)
+
+sc_02_21_raw <- do.call(
+  rbind,
+  lapply(files, function(f) {
+    df <- read.csv(f, fileEncoding = "Latin1")
+    df$year <- as.integer(gsub(".*([0-9]{4})\\.csv$", "\\1", f))
+    df
+  })
+)
+```
+
+## Data Cleaning
+
+Stony Creek
+
+```{r}
+#get rid of the empty columns
+sc_02_21 <- sc_02_21_raw %>% 
+  select(-X, #empty columns
+        -cLevel, 
+        -F_cLevel, 
+        -Level, 
+        -isSWMP, #historical and provisionalPlus columns indicate the status of QAQC
+        -Historical, 
+        -ProvisionalPlus,
+        -F_Record, #Quality Assurance Flags (we should discuss if we need those)
+        -F_Temp, 
+        -F_SpCond, 
+        -F_Sal, 
+        -F_DO_Pct, 
+        -F_Level, 
+        -F_pH, 
+        -F_Turb, 
+        -F_ChlFluor,
+        -F_DO_mgl,
+        -F_Depth,
+        -F_cDepth
+           )
+
+```
+
+```{r}
+#separate the data and time column
+sc_02_21 <- sc_02_21 %>%
+  mutate(
+    DateTimeStamp = as.POSIXct(DateTimeStamp, format = "%m/%d/%Y %H:%M"), #converts the variable into standard POSIXct format
+    date = as.Date(DateTimeStamp),
+    time = format(DateTimeStamp, "%H:%M:%S")
+  )
+
+#create a month column
+sc_02_21 <- sc_02_21 %>%
+  mutate(
+    month = month(DateTimeStamp)          
+  )
+
+#create a season column
+sc_02_21 <- sc_02_21 %>%
+  mutate(
+    season = case_when(
+      month %in% c(12, 1, 2) ~ "Winter",
+      month %in% 3:5        ~ "Spring",
+      month %in% 6:8        ~ "Summer",
+      month %in% 9:11       ~ "Fall"
+    )
+  )
+```
+
+## Tables and averages
+
+Number of observations
+
+```{r}
+sc_02_21_NAs <- sc_02_21 %>%
+  filter(is.na(season))#exclude
+
+sc_02_21 %>%
+  count(year, season) %>%
+  gt(groupname_col = "season") %>%
+  tab_header(
+    title = "Observation Coverage by Year and Season"
+  ) %>%
+  cols_label(
+    year = "Year",
+    n = "Number of Observations"
+  )
+#filter Season NAs??
+```
+
+Summary statistics (all years)
+
+```{r}
+sc_02_21 %>%
+  summarise(
+    Temp_mean = mean(Temp, na.rm = TRUE),
+    Temp_sd   = sd(Temp, na.rm = TRUE),
+    Temp_min  = min(Temp, na.rm = TRUE),
+    Temp_max  = max(Temp, na.rm = TRUE),
+
+    DO_mean   = mean(DO_mgl, na.rm = TRUE),
+    pH_mean   = mean(pH, na.rm = TRUE),
+    Sal_mean  = mean(Sal, na.rm = TRUE)
+  ) %>%
+  pivot_longer(everything(),
+               names_to = "Statistic",
+               values_to = "Value") %>%
+  gt() %>%
+  tab_header(
+    title = "Overall Summary Statistics"
+  )
+```
+
+Averages by season
+
+```{r}
+sc_02_21 %>%
+  group_by(season) %>%
+  summarise(
+    avg_temp = mean(Temp, na.rm = TRUE),
+    avg_do   = mean(DO_mgl, na.rm = TRUE),
+    avg_ph   = mean(pH, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  gt() %>%
+  tab_header(
+    title = "Average Water Quality Measures by Season"
+  ) %>%
+  fmt_number(decimals = 2)
+```
+
+Average temperatures by year
+
+```{r}
+avg_temp_by_year <- sc_02_21 %>%
+  group_by(year) %>%
+  summarise(
+    avg_temp = mean(Temp, na.rm = TRUE),
+    n_obs = n(),
+    .groups = "drop"
+  )
+
+avg_temp_by_year %>%
+  gt() %>%
+  tab_header(
+    title = "Average Water Temperature by Year"
+  ) %>%
+  fmt_number(
+    columns = avg_temp,
+    decimals = 2
+  ) %>%
+  cols_label(
+    year = "Year",
+    avg_temp = "Average Temperature (°C)",
+    n_obs = "Observations"
+  )
+```
+
+Average temperature by year and season (one table)
+
+```{r}
+avg_temp_by_year_season <- sc_02_21 %>%
+  group_by(season, year) %>%
+  summarise(
+    avg_temp = mean(Temp, na.rm = TRUE),
+    n_obs = n(),
+    .groups = "drop"
+  ) %>%
+  filter(!is.na(season))
+
+avg_temp_by_year_season %>%
+  gt(groupname_col = "season") %>%
+  tab_header(
+    title = "Average Water Temperature by Year and Season"
+  ) %>%
+  fmt_number(
+    columns = avg_temp,
+    decimals = 2
+  ) %>%
+  cols_label(
+    year = "Year",
+    avg_temp = "Average Temperature (°C)",
+    n_obs = "Observations"
+  )
+```
+
+Average temperature by year and season (as separate tables)
+
+```{r}
+season_tables <- avg_temp_by_year_season %>%
+  split(.$season) %>%
+  lapply(function(season_df) {
+    season_name <- unique(season_df$season)
+    
+    season_df %>%
+      select(year, avg_temp, n_obs) %>%
+      gt() %>%
+      tab_header(
+        title = paste("Average Water Temperature by Year"),
+        subtitle = paste("Season:", season_name)
+      ) %>%
+      fmt_number(
+        columns = avg_temp,
+        decimals = 2
+      ) %>%
+      cols_label(
+        year = "Year",
+        avg_temp = "Average Temperature (°C)",
+        n_obs = "Observations"
+      )
+  })
+
+season_tables$Spring
+season_tables$Summer
+season_tables$Fall
+season_tables$Winter
+```
+
+Seasonal extremes
+
+```{r}
+sc_02_21 %>%
+  group_by(season) %>%
+  summarise(
+    min_temp = min(Temp, na.rm = TRUE), #lowest observed temperature
+    max_temp = max(Temp, na.rm = TRUE), #highest observed temperature
+    p95_temp = quantile(Temp, 0.95, na.rm = TRUE), #the 95th percentile of temperature for each season, which excludes outliers (5% of the highest observation)
+    .groups = "drop"
+  ) %>%
+  gt() %>%
+  tab_header(
+    title = "Seasonal Temperature Extremes"
+  )
+```
+
+Changes in the magnitude of temperature changes
+
+```{r}
+sc_02_21 %>%
+  group_by(year) %>%
+  summarise(
+    avg_temp = mean(Temp, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(year) %>%
+  mutate(
+    delta_temp = avg_temp - lag(avg_temp)
+  ) %>%
+  gt() %>%
+  tab_header(
+    title = "Year-to-Year Change in Average Temperature"
+  )
+```
+
+Plot of the of the magnitude of temperature changes
+
+```{r}
+yearly_temp_change <- sc_02_21 %>%
+  group_by(year) %>%
+  summarise(
+    avg_temp = mean(Temp, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(year) %>%
+  mutate(
+    delta_temp = avg_temp - lag(avg_temp)
+  )
+
+ggplot(yearly_temp_change, aes(x = year, y = delta_temp, fill = delta_temp > 0)) +
+  geom_col(show.legend = FALSE) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(
+    title = "Year-to-Year Change in Average Temperature",
+    x = "Year",
+    y = "Change in Average Temperature (°C)"
+  ) +
+  theme_minimal()
+```
