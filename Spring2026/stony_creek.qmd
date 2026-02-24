@@ -838,6 +838,56 @@ seasons_chloro <- mean_chloro|> filter(!is.na(season))|>
 seasons_chloro
 
 ```
+```{r, echo=FALSE, warning=FALSE, error=FALSE}
+"
+Notes: During the meeting on 2/23 we discussed 
+Plotting values without separating by season
+#Box plots
+"
+#Plotting mean temp by year
 
+mean_yearly_temperature <- mean_temp|> filter(!is.na(season))|>
+  ggplot()+
+  geom_boxplot(aes(year, mean_temp))+
+  facet_wrap(~year)+
+  labs(title = "Mean Yearly Temperature")+
+  theme(
+    legend.position = "none"
+  )
+
+mean_yearly_temperature
+```
+```{r, echo=FALSE, error=FALSE, message=FALSE, warning=FALSE}
+#Comparing the first and last year of collected data
+temp2002Vs2021 <- mean_temp|> filter(!is.na(mean_temp))|>
+  filter(year== c(2002, 2021))|>
+  ggplot()+
+  geom_boxplot(aes(year, mean_temp))+
+  facet_wrap(~year)+
+  labs(title = "Mean Yearly Temperature")
+
+temp2002Vs2021
+```
+```{r, echo=FALSE, error=FALSE, warning=FALSE, message=FALSE}
+#Chloro levels by year (not separated by season)
+mean_yearly_chloro <- mean_chloro|> filter(!is.na(mean_chloro))|>
+  ggplot()+
+  geom_boxplot(aes(year, mean_chloro))+
+  facet_wrap(~year)+
+  labs(title = "Mean Yearly Chlorofluorocarbon Levels")
+
+mean_yearly_chloro
+```
+```{r, echo=FALSE, error=FALSE, message=FALSE, warning=FALSE}
+#Comparing the first and last year of collected data
+chloro2014Vs2021 <- mean_chloro|> filter(!is.na(mean_chloro))|>
+  filter(year== c(2014, 2021))|>
+  ggplot()+
+  geom_boxplot(aes(year, mean_chloro))+
+  facet_wrap(~year)+
+  labs(title = "Mean Yearly Chlorofluorocarbon Levels")
+
+chloro2014Vs2021
+```
 
 
