@@ -13,6 +13,8 @@ library(readr)
 library(tidyverse)
 library(dplyr)
 library(lubridate)
+library(janitor)
+
 ```
 
 ## Downloading and Data Cleaning
@@ -53,27 +55,63 @@ sc_02_21_raw <- do.call(
 
 ```
 
-```{r, echo = FALSE}
-#get rid of the empty columns
-stony_creek <- sc_02_21_raw %>% 
-  select(-X, #empty columns
-        -cLevel, 
-        -F_cLevel, 
-        -Level, 
+```{r, eval = FALSE}
+
+# Removing empty columns and other irrelant columns
+t <- sc_02_21_raw |>
+  remove_empty("cols")|>
+  select(-StationCode,
         -isSWMP, #historical and provisionalPlus columns indicate the status of QAQC
         -Historical, 
         -ProvisionalPlus,
-        -F_Record, #Quality Assurance Flags (we should discuss if we need those)
-        -F_Temp, 
-        -F_SpCond, 
-        -F_Sal, 
-        -F_DO_Pct, 
-        -F_Level, 
-        -F_pH, 
-        -F_Turb, 
-        -F_ChlFluor 
-           )
+  )
+
+#creating a vector with all the flags
+flags <- c("F_Record", "F_Temp", "F_SpCond", "F_Sal", "F_DO_Pct", "F_Depth", "F_cDepth", "F_Level", "F_pH", "F_Turb", "F_ChlFluor", "F_DO_mgl")
+
+t <- t |>
+  mutate(Temp = if_else(
+      if_any(all_of(flags), ~ str_detect(.x, "<-3>|<-2>|<1>")), NA_real_, Temp))
+
+#removing flag columns #remove comment of the next two lines once the previous step was done
+# stony_creek <- stony_creek |>
+#   select(-flags) 
+
+
 ```
+
+```{r}
+
+# Removing empty columns and other irrelant columns
+stony_creek <- sc_02_21_raw |>
+  remove_empty("cols")|>
+  select(-StationCode,
+        -isSWMP, #historical and provisional Plus columns indicate the status of QAQC
+        -Historical, 
+        -ProvisionalPlus,
+  )
+
+#creating a vector with all the flags
+flags <- c("F_Record", "F_Temp", "F_SpCond", "F_Sal", "F_DO_Pct", "F_Depth", "F_cDepth", "F_Level", "F_pH", "F_Turb", "F_ChlFluor", "F_DO_mgl")
+
+stony_creek <- stony_creek |>
+  mutate(Temp = if_else(str_detect(F_Temp, "<-3>|<-2>|<1>"), NA_real_, Temp),
+         SpCond = if_else(str_detect(F_SpCond, "<-3>|<-2>|<1>"), NA_real_, SpCond),
+         Sal = if_else(str_detect(F_Sal, "<-3>|<-2>|<1>"), NA_real_, Sal),
+         DO_Pct = if_else(str_detect(F_DO_Pct, "<-3>|<-2>|<1>"), NA_real_, DO_Pct),
+         Depth = if_else(str_detect(F_Depth, "<-3>|<-2>|<1>"), NA_real_, Depth),
+         cDepth = if_else(str_detect(F_cDepth, "<-3>|<-2>|<1>"), NA_real_, cDepth),
+         pH = if_else(str_detect(F_pH, "<-3>|<-2>|<1>"), NA_real_, pH),
+         Turb = if_else(str_detect(F_Turb, "<-3>|<-2>|<1>"), NA_real_, Turb),
+         ChlFluor = if_else(str_detect(F_ChlFluor, "<-3>|<-2>|<1>"), NA_real_, ChlFluor),
+         DO_mgl = if_else(str_detect(DO_mgl, "<-3>|<-2>|<1>"), NA_real_, DO_mgl)
+  )
+
+#removing flag columns 
+stony_creek <- stony_creek %>% select(-all_of(flags))
+
+```
+
 
 ```{r, echo = FALSE}
 #separate the date and time column
@@ -130,7 +168,7 @@ mean_spring <- mean_temp |>
   filter(season == "Spring")
 
 line_mean_spring <- ggplot(mean_spring)+
-  geom_line(aes(year, mean_temp))+
+  geom_point(aes(year, mean_temp))+
   labs(title = "Mean Spring Temperature by Year")
 
 line_mean_spring
@@ -143,7 +181,7 @@ mean_fall <- mean_temp |>
   filter(season == "Fall")
 
 line_mean_fall <- ggplot(mean_fall)+
-  geom_line(aes(year, mean_temp))+
+  geom_point(aes(year, mean_temp))+
   labs(title = "Mean Fall Temperature by Year")
 
 line_mean_fall
@@ -156,7 +194,7 @@ mean_summer <- mean_temp |>
   filter(season == "Summer")
 
 line_mean_summer <- ggplot(mean_summer)+
-  geom_line(aes(year, mean_temp))+
+  geom_point(aes(year, mean_temp))+
   labs(title = "Mean Summer Temperature by Year")
 
 line_mean_summer
@@ -169,7 +207,7 @@ mean_winter <- mean_temp |>
   filter(season == "Winter")
 
 line_mean_winter <- ggplot(mean_winter)+
-  geom_line(aes(year, mean_temp))+
+  geom_point(aes(year, mean_temp))+
   labs(title = "Mean Winter Temperature by Year")
 
 line_mean_winter
@@ -181,7 +219,7 @@ line_mean_winter
 seasons_temp <- mean_temp|> filter(!is.na(season))|> 
   #removed 6 rows with missing values
   ggplot()+
-  geom_line(aes(year, mean_temp, color = season))+
+  geom_point(aes(year, mean_temp, color = season))+
   scale_color_viridis_d()+
   labs(title = "Mean Seasonal Temperature by Year")
 
@@ -214,7 +252,7 @@ ph_spring <- mean_ph |>
   filter(season == "Spring")
 
 line_ph_spring <- ggplot(ph_spring)+
-  geom_line(aes(year, mean_ph))+
+  geom_point(aes(year, mean_ph))+
   labs(title = "Mean Spring pH Level by Year")
 
 line_ph_spring
@@ -226,7 +264,7 @@ ph_fall <- mean_ph |>
   filter(season == "Fall")
 
 line_ph_fall <- ggplot(ph_fall)+
-  geom_line(aes(year, mean_ph))+
+  geom_point(aes(year, mean_ph))+
   labs(title = "Mean Fall pH Level by Year")
 
 line_ph_fall
@@ -238,7 +276,7 @@ ph_summer <- mean_ph |>
   filter(season == "Summer")
 
 line_ph_summer <- ggplot(ph_summer)+
-  geom_line(aes(year, mean_ph))+
+  geom_point(aes(year, mean_ph))+
   labs(title = "Mean Summer pH Level by Year")
 
 line_ph_summer
@@ -250,7 +288,7 @@ ph_winter <- mean_ph |>
   filter(season == "Winter")
 
 line_ph_winter <- ggplot(ph_winter)+
-  geom_line(aes(year, mean_ph))+
+  geom_point(aes(year, mean_ph))+
   labs(title = "Mean Winter pH Level by Year")
 
 line_ph_winter
@@ -261,7 +299,7 @@ line_ph_winter
 
 seasons_ph <- mean_ph|> filter(!is.na(season))|>
   ggplot()+
-  geom_line(aes(year, mean_ph, color = season))+
+  geom_point(aes(year, mean_ph, color = season))+
   scale_color_viridis_d()+
   labs(title = "Mean Seasonal pH Levels by Year")
 
@@ -294,7 +332,7 @@ turb_spring <- mean_turb |>
   filter(season == "Spring")
 
 line_turb_spring <- ggplot(turb_spring)+
-  geom_line(aes(year, mean_turb))+
+  geom_point(aes(year, mean_turb))+
   labs(title = "Mean Spring Water Turbidity Level by Year")
 
 line_turb_spring
@@ -307,7 +345,7 @@ turb_fall <- mean_turb |>
   filter(season == "Fall")
 
 line_turb_fall <- ggplot(turb_fall)+
-  geom_line(aes(year, mean_turb))+
+  geom_point(aes(year, mean_turb))+
   labs(title = "Mean Fall Water Turbidity Level by Year")
 
 line_turb_fall
@@ -319,7 +357,7 @@ turb_summer <- mean_turb |>
   filter(season == "Summer")
 
 line_turb_summer <- ggplot(turb_summer)+
-  geom_line(aes(year, mean_turb))+
+  geom_point(aes(year, mean_turb))+
   labs(title = "Mean Summer Water Turbity Level by Year")
 
 line_turb_summer
@@ -331,7 +369,7 @@ turb_winter <- mean_turb |>
   filter(season == "Winter")
 
 line_turb_winter <- ggplot(turb_winter)+
-  geom_line(aes(year, mean_turb))+
+  geom_point(aes(year, mean_turb))+
   labs(title = "Mean Winter Water Turbidity Level by Year")
 
 line_turb_winter
@@ -342,7 +380,7 @@ line_turb_winter
 
 seasons_turb <- mean_turb|> filter(!is.na(season))|>
   ggplot()+
-  geom_line(aes(year, mean_turb, color = season))+
+  geom_point(aes(year, mean_turb, color = season))+
   scale_color_viridis_d()+
   labs(title = "Mean Seasonal Water Turbidity Levels by Year")
 
@@ -375,7 +413,7 @@ do_pct_spring <- mean_do_pct |>
   filter(season == "Spring")
 
 line_dopct_spring <- ggplot(do_pct_spring)+
-  geom_line(aes(year, mean_do_pct))+
+  geom_point(aes(year, mean_do_pct))+
   labs(title = "Mean Spring Dissolved Oxygent Percent Saturation Level by Year")
 
 line_dopct_spring
@@ -387,7 +425,7 @@ do_pct_fall <- mean_do_pct |>
   filter(season == "Fall")
 
 line_dopct_fall <- ggplot(do_pct_fall)+
-  geom_line(aes(year, mean_do_pct))+
+  geom_point(aes(year, mean_do_pct))+
   labs(title = "Mean Fall Dissolved Oxygen Percent Saturation Level by Year")
 
 line_dopct_fall
@@ -399,7 +437,7 @@ do_pct_summer <- mean_do_pct |>
   filter(season == "Summer")
 
 line_dopct_summer <- ggplot(do_pct_summer)+
-  geom_line(aes(year, mean_do_pct))+
+  geom_point(aes(year, mean_do_pct))+
   labs(title = "Mean Summer Dissolved Oxygen Percent Saturation Level by Year")
 
 line_dopct_summer
@@ -411,7 +449,7 @@ do_pct_winter <- mean_do_pct |>
   filter(season == "Winter")
 
 line_dopct_winter <- ggplot(do_pct_winter)+
-  geom_line(aes(year, mean_do_pct))+
+  geom_point(aes(year, mean_do_pct))+
   labs(title = "Mean Winter Dissolved Oxygen Percent Saturation Level by Year")
 
 line_dopct_winter
@@ -422,7 +460,7 @@ line_dopct_winter
 
 seasons_do_pct <- mean_do_pct|> filter(!is.na(season))|>
   ggplot()+
-  geom_line(aes(year, mean_do_pct, color = season))+
+  geom_point(aes(year, mean_do_pct, color = season))+
   scale_color_viridis_d()+
   labs(title = "Mean Seasonal Dissolved Oxygen Percent Saturation Level by Year")
 
@@ -455,7 +493,7 @@ do_mgl_spring <- mean_do_mgl |>
   filter(season == "Spring")
 
 line_domgl_spring <- ggplot(do_mgl_spring)+
-  geom_line(aes(year, mean_do_mgl))+
+  geom_point(aes(year, mean_do_mgl))+
   labs(title = "Mean Spring Dissolved Oxygen concentration 
        measured in milligrams per Liter (mg/L) by Year")
 
@@ -468,7 +506,7 @@ do_mgl_fall <- mean_do_mgl |>
   filter(season == "Fall")
 
 line_domgl_fall <- ggplot(do_mgl_fall)+
-  geom_line(aes(year, mean_do_mgl))+
+  geom_point(aes(year, mean_do_mgl))+
   labs(title = "Mean Fall Dissolved Oxygen concentration 
        measured in milligrams per Liter (mg/L) by Year")
 
@@ -481,7 +519,7 @@ do_mgl_summer <- mean_do_mgl |>
   filter(season == "Summer")
 
 line_domgl_summer <- ggplot(do_mgl_summer)+
-  geom_line(aes(year, mean_do_mgl))+
+  geom_point(aes(year, mean_do_mgl))+
   labs(title = "Mean Summer Dissolved Oxygen concentration 
        measured in milligrams per Liter (mg/L) by Year")
 
@@ -494,7 +532,7 @@ do_pct_winter <- mean_do_pct |>
   filter(season == "Winter")
 
 line_dopct_winter <- ggplot(do_pct_winter)+
-  geom_line(aes(year, mean_do_pct))+
+  geom_point(aes(year, mean_do_pct))+
   labs(title = "Mean Winter Dissolved Oxygen concentration 
        measured in milligrams per Liter (mg/L) by Year")
 
@@ -506,7 +544,7 @@ line_dopct_winter
 
 seasons_do_mgl <- mean_do_mgl|> filter(!is.na(season))|>
   ggplot()+
-  geom_line(aes(year, mean_do_mgl, color = season))+
+  geom_point(aes(year, mean_do_mgl, color = season))+
   scale_color_viridis_d()+
   labs(title = "Mean Seasonal Dissolved Oxygen concentration 
        measured in milligrams per Liter (mg/L) by Year")
@@ -541,7 +579,7 @@ sp_cond_spring <- mean_sp_cond |>
   filter(season == "Spring")
 
 line_spcond_spring <- ggplot(sp_cond_spring)+
-  geom_line(aes(year, mean_sp_cond))+
+  geom_point(aes(year, mean_sp_cond))+
   labs(title = "Mean Spring Water Conductivity by Year")
 
 line_spcond_spring
@@ -553,7 +591,7 @@ sp_cond_fall <- mean_sp_cond |>
   filter(season == "Fall")
 
 line_spcond_fall <- ggplot(sp_cond_fall)+
-  geom_line(aes(year, mean_sp_cond))+
+  geom_point(aes(year, mean_sp_cond))+
   labs(title = "Mean Fall Water Conductivity by Year")
 
 line_spcond_fall
@@ -565,7 +603,7 @@ sp_cond_summer <- mean_sp_cond |>
   filter(season == "Summer")
 
 line_spcond_summer <- ggplot(sp_cond_summer)+
-  geom_line(aes(year, mean_sp_cond))+
+  geom_point(aes(year, mean_sp_cond))+
   labs(title = "Mean Summer Water Conductivity by Year")
 
 line_spcond_summer
@@ -577,7 +615,7 @@ sp_cond_winter <- mean_sp_cond |>
   filter(season == "Winter")
 
 line_spcond_winter <- ggplot(sp_cond_winter)+
-  geom_line(aes(year, mean_sp_cond))+
+  geom_point(aes(year, mean_sp_cond))+
   labs(title = "Mean Winter Water Conductivity by Year")
 
 line_spcond_winter
@@ -588,7 +626,7 @@ line_spcond_winter
 
 seasons_sp_cond <- mean_sp_cond|> filter(!is.na(season))|>
   ggplot()+
-  geom_line(aes(year, mean_sp_cond, color = season))+
+  geom_point(aes(year, mean_sp_cond, color = season))+
   scale_color_viridis_d()+
   labs(title = "Mean Seasonal Water Conductivity by Year")
 
@@ -621,7 +659,7 @@ sal_spring <- mean_sal |>
   filter(season == "Spring")
 
 line_sal_spring <- ggplot(sal_spring)+
-  geom_line(aes(year, mean_sal))+
+  geom_point(aes(year, mean_sal))+
   labs(title = "Mean Spring Water Salinity by Year")
 
 line_sal_spring
@@ -633,7 +671,7 @@ sal_fall <- mean_sal |>
   filter(season == "Fall")
 
 line_sal_fall <- ggplot(sal_fall)+
-  geom_line(aes(year, mean_sal))+
+  geom_point(aes(year, mean_sal))+
   labs(title = "Mean Fall Water Salinity by Year")
 
 line_sal_fall
@@ -645,7 +683,7 @@ sal_summer <- mean_sal |>
   filter(season == "Summer")
 
 line_sal_summer <- ggplot(sal_summer)+
-  geom_line(aes(year, mean_sal))+
+  geom_point(aes(year, mean_sal))+
   labs(title = "Mean Summer Water Salinity by Year")
 
 line_sal_summer
@@ -657,7 +695,7 @@ sal_winter <- mean_sal |>
   filter(season == "Winter")
 
 line_sal_winter <- ggplot(sal_winter)+
-  geom_line(aes(year, mean_sal))+
+  geom_point(aes(year, mean_sal))+
   labs(title = "Mean Winter Water Salinity by Year")
 
 line_sal_winter
@@ -668,7 +706,7 @@ line_sal_winter
 
 seasons_sal <- mean_sal|> filter(!is.na(season))|>
   ggplot()+
-  geom_line(aes(year, mean_sal, color = season))+
+  geom_point(aes(year, mean_sal, color = season))+
   scale_color_viridis_d()+
   labs(title = "Mean Seasonal Water Salinity by Year")
 
@@ -702,7 +740,7 @@ depth_spring <- mean_depth |>
   filter(season == "Spring")
 
 line_depth_spring <- ggplot(depth_spring)+
-  geom_line(aes(year, mean_depth))+
+  geom_point(aes(year, mean_depth))+
   labs(title = "Mean Spring Water Depth by Year")
 
 line_depth_spring
@@ -714,7 +752,7 @@ depth_fall <- mean_depth |>
   filter(season == "Fall")
 
 line_depth_fall <- ggplot(depth_fall)+
-  geom_line(aes(year, mean_depth))+
+  geom_point(aes(year, mean_depth))+
   labs(title = "Mean Fall Water Depth by Year")
 
 line_depth_fall
@@ -726,7 +764,7 @@ depth_summer <- mean_depth |>
   filter(season == "Summer")
 
 line_depth_summer <- ggplot(depth_summer)+
-  geom_line(aes(year, mean_depth))+
+  geom_point(aes(year, mean_depth))+
   labs(title = "Mean Summer Water Depth by Year")
 
 line_depth_summer
@@ -738,7 +776,7 @@ depth_winter <- mean_depth |>
   filter(season == "Winter")
 
 line_depth_winter <- ggplot(depth_winter)+
-  geom_line(aes(year, mean_depth))+
+  geom_point(aes(year, mean_depth))+
   labs(title = "Mean Winter Water Depth by Year")
 
 line_depth_winter
@@ -750,7 +788,7 @@ line_depth_winter
 seasons_depth <- mean_depth|> filter(!is.na(season))|>
   #removed 5 rows
   ggplot()+
-  geom_line(aes(year, mean_depth, color = season))+
+  geom_point(aes(year, mean_depth, color = season))+
   scale_color_viridis_d()+
   labs(title = "Mean Seasonal Water Depth by Year")
 
@@ -784,7 +822,7 @@ chloro_spring <- mean_chloro|>
   filter(season == "Spring")
 
 line_chloro_spring <- ggplot(chloro_spring)+
-  geom_line(aes(year, mean_chloro))+
+  geom_point(aes(year, mean_chloro))+
   labs(title = "Mean Spring Chlorofluorocarbon Levels by Year")
 
 line_chloro_spring
@@ -796,7 +834,7 @@ chloro_fall <- mean_chloro|>
   filter(season == "Fall")
 
 line_chloro_fall <- ggplot(chloro_fall)+
-  geom_line(aes(year, mean_chloro))+
+  geom_point(aes(year, mean_chloro))+
   labs(title = "Mean Fall Chlorofluorocarbon Levels by Year")
 
 line_chloro_fall
@@ -808,7 +846,7 @@ chloro_summer <- mean_chloro |>
   filter(season == "Summer")
 
 line_chloro_summer <- ggplot(chloro_summer)+
-  geom_line(aes(year, mean_chloro))+
+  geom_point(aes(year, mean_chloro))+
   labs(title = "Mean Summer Chlorofluorocarbon Levels by Year")
 
 line_chloro_summer
@@ -820,7 +858,7 @@ chloro_winter <- mean_chloro |>
   filter(season == "Winter")
 
 line_chloro_winter <- ggplot(chloro_winter)+
-  geom_line(aes(year, mean_chloro))+
+  geom_point(aes(year, mean_chloro))+
   labs(title = "Mean Winter Chlorofluorocarbon Levels by Year")
 
 line_chloro_winter
@@ -831,7 +869,7 @@ line_chloro_winter
 
 seasons_chloro <- mean_chloro|> filter(!is.na(season))|>
   ggplot()+
-  geom_line(aes(year, mean_chloro, color = season))+
+  geom_point(aes(year, mean_chloro, color = season))+
   scale_color_viridis_d()+
   labs(title = "Mean Seasonal Chlorofluorocarbon Levels by Year")
 
