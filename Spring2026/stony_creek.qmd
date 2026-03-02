@@ -1,5 +1,5 @@
 ---
-author: Ilianna Ditren
+author: Ilianna Ditren, Joy Terentiev
 ---
 
 # Climate Change Effects of Water Quality (20-years change)
@@ -167,11 +167,25 @@ mean_temp <- temp |>
 mean_spring <- mean_temp |>
   filter(season == "Spring")
 
-line_mean_spring <- ggplot(mean_spring)+
-  geom_point(aes(year, mean_temp))+
-  labs(title = "Mean Spring Temperature by Year")
+mean_spring_temp <- ggplot(mean_spring)+
+  geom_point(aes(year, mean_temp, color= season))+
+scale_color_manual(values= c(
+    "Spring"= "#67a9cf"
+  ))+
+  labs(title = "Mean Spring Temperature by Year",
+       x= "Year",
+       y= "Mean Temperature")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_mean_spring
+mean_spring_temp
 
 ```
 
@@ -180,11 +194,25 @@ line_mean_spring
 mean_fall <- mean_temp |>
   filter(season == "Fall")
 
-line_mean_fall <- ggplot(mean_fall)+
-  geom_point(aes(year, mean_temp))+
-  labs(title = "Mean Fall Temperature by Year")
+mean_fall_temp <- ggplot(mean_fall)+
+  geom_point(aes(year, mean_temp, color= season))+
+  scale_color_manual(values= c(
+    "Fall"= "#fdae61"
+  ))+
+  labs(title = "Mean Fall Temperature by Year",
+       x= "Year",
+       y= "Mean Temperature")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_mean_fall
+mean_fall_temp
 
 ```
 
@@ -193,11 +221,25 @@ line_mean_fall
 mean_summer <- mean_temp |>
   filter(season == "Summer")
 
-line_mean_summer <- ggplot(mean_summer)+
-  geom_point(aes(year, mean_temp))+
-  labs(title = "Mean Summer Temperature by Year")
+mean_summer_temp <- ggplot(mean_summer)+
+  geom_point(aes(year, mean_temp, color= season))+
+  scale_color_manual(values= c(
+    "Summer"= "#d7191c"
+  ))+
+  labs(title = "Mean Summer Temperature by Year",
+       x= "Year",
+       y= "Mean Temperature")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_mean_summer
+mean_summer_temp
 
 ```
 
@@ -207,8 +249,22 @@ mean_winter <- mean_temp |>
   filter(season == "Winter")
 
 line_mean_winter <- ggplot(mean_winter)+
-  geom_point(aes(year, mean_temp))+
-  labs(title = "Mean Winter Temperature by Year")
+  geom_point(aes(year, mean_temp, color= season))+
+   scale_color_manual(values= c(
+    "Winter"= "#165ae6"
+  ))+
+  labs(title = "Mean Winter Temperature by Year",
+       x= "Year",
+       y= "Mean Temperature")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
 line_mean_winter
 ```
@@ -220,8 +276,23 @@ seasons_temp <- mean_temp|> filter(!is.na(season))|>
   #removed 6 rows with missing values
   ggplot()+
   geom_point(aes(year, mean_temp, color = season))+
-  scale_color_viridis_d()+
-  labs(title = "Mean Seasonal Temperature by Year")
+  scale_color_manual(values= c(
+    "Summer"= "#d7191c",
+    "Fall"= "#fdae61",
+    "Winter"= "#165ae6",
+    "Spring"= "#67a9cf"
+  ))+
+  labs(title = "Mean Seasonal Temperature by Year",
+       x= "Year",
+       y= "Mean Temperature")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5)
+  )
 
 seasons_temp
 
@@ -251,11 +322,25 @@ mean_ph <- ph |>
 ph_spring <- mean_ph |>
   filter(season == "Spring")
 
-line_ph_spring <- ggplot(ph_spring)+
-  geom_point(aes(year, mean_ph))+
-  labs(title = "Mean Spring pH Level by Year")
+mean_ph_spring <- ggplot(ph_spring)+
+  geom_point(aes(year, mean_ph, color=season))+
+scale_color_manual(values= c(
+    "Spring"= "#67a9cf"
+  ))+
+  labs(title = "Mean Spring pH Level by Year",
+       x= "Year",
+       y= "Mean pH Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_ph_spring
+mean_ph_spring
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -263,11 +348,25 @@ line_ph_spring
 ph_fall <- mean_ph |>
   filter(season == "Fall")
 
-line_ph_fall <- ggplot(ph_fall)+
-  geom_point(aes(year, mean_ph))+
-  labs(title = "Mean Fall pH Level by Year")
+mean_ph_fall <- ggplot(ph_fall)+
+  geom_point(aes(year, mean_ph, color=season))+
+scale_color_manual(values= c(
+    "Fall"= "#fdae61"
+  ))+
+  labs(title = "Mean Fall pH Level by Year",
+       x= "Year",
+       y= "Mean pH Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_ph_fall
+mean_ph_fall
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -276,8 +375,22 @@ ph_summer <- mean_ph |>
   filter(season == "Summer")
 
 line_ph_summer <- ggplot(ph_summer)+
-  geom_point(aes(year, mean_ph))+
-  labs(title = "Mean Summer pH Level by Year")
+  geom_point(aes(year, mean_ph, color=season))+
+scale_color_manual(values= c(
+    "Summer"= "#d7191c"
+  ))+
+  labs(title = "Mean Summer pH Level by Year",
+       x= "Year",
+       y= "Mean pH Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
 line_ph_summer
 ```
@@ -287,11 +400,25 @@ line_ph_summer
 ph_winter <- mean_ph |>
   filter(season == "Winter")
 
-line_ph_winter <- ggplot(ph_winter)+
-  geom_point(aes(year, mean_ph))+
-  labs(title = "Mean Winter pH Level by Year")
+mean_ph_winter <- ggplot(ph_winter)+
+  geom_point(aes(year, mean_ph, color=season))+
+scale_color_manual(values= c(
+    "Winter"= "#165ae6"
+  ))+
+  labs(title = "Mean Winter pH Level by Year",
+       x= "Year",
+       y= "Mean pH Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_ph_winter
+mean_ph_winter
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -300,8 +427,23 @@ line_ph_winter
 seasons_ph <- mean_ph|> filter(!is.na(season))|>
   ggplot()+
   geom_point(aes(year, mean_ph, color = season))+
-  scale_color_viridis_d()+
-  labs(title = "Mean Seasonal pH Levels by Year")
+  scale_color_manual(values= c(
+    "Summer"= "#d7191c",
+    "Fall"= "#fdae61",
+    "Winter"= "#165ae6",
+    "Spring"= "#67a9cf"
+    ))+
+    labs(title = "Mean Seasonal pH Levels by Year",
+       x= "Year",
+       y= "Mean pH Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5)
+  )
 
 seasons_ph
 
@@ -332,8 +474,22 @@ turb_spring <- mean_turb |>
   filter(season == "Spring")
 
 line_turb_spring <- ggplot(turb_spring)+
-  geom_point(aes(year, mean_turb))+
-  labs(title = "Mean Spring Water Turbidity Level by Year")
+  geom_point(aes(year, mean_turb, color=season))+
+   scale_color_manual(values= c(
+    "Spring"= "#67a9cf"
+  ))+
+  labs(title = "Mean Spring Water Turbidity Level by Year",
+       x= "Year",
+       y= "Mean Turbidity Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
 line_turb_spring
 ```
@@ -344,11 +500,25 @@ Turbidity levels in Spring varies significantly every year. I wonder if that has
 turb_fall <- mean_turb |>
   filter(season == "Fall")
 
-line_turb_fall <- ggplot(turb_fall)+
-  geom_point(aes(year, mean_turb))+
-  labs(title = "Mean Fall Water Turbidity Level by Year")
+mean_turb_fall <- ggplot(turb_fall)+
+  geom_point(aes(year, mean_turb, color=season))+
+   scale_color_manual(values= c(
+    "Fall"= "#fdae61"
+  ))+
+  labs(title = "Mean Fall Water Turbidity Level by Year",
+       x= "Year",
+       y= "Mean Turbidity Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_turb_fall
+mean_turb_fall
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -357,8 +527,22 @@ turb_summer <- mean_turb |>
   filter(season == "Summer")
 
 line_turb_summer <- ggplot(turb_summer)+
-  geom_point(aes(year, mean_turb))+
-  labs(title = "Mean Summer Water Turbity Level by Year")
+  geom_point(aes(year, mean_turb, color=season))+
+   scale_color_manual(values= c(
+    "Summer"= "#d7191c"
+  ))+
+  labs(title = "Mean Summer Water Turbity Level by Year",
+       x= "Year",
+       y= "Mean Turbidity Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
 line_turb_summer
 ```
@@ -368,11 +552,25 @@ line_turb_summer
 turb_winter <- mean_turb |>
   filter(season == "Winter")
 
-line_turb_winter <- ggplot(turb_winter)+
-  geom_point(aes(year, mean_turb))+
-  labs(title = "Mean Winter Water Turbidity Level by Year")
+mean_turb_winter <- ggplot(turb_winter)+
+  geom_point(aes(year, mean_turb, color=season))+
+   scale_color_manual(values= c(
+    "Winter"= "#165ae6"
+  ))+
+  labs(title = "Mean Winter Water Turbidity Level by Year",
+       x= "Year",
+       y= "Mean Turbidity Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_turb_winter
+mean_turb_winter
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -381,8 +579,24 @@ line_turb_winter
 seasons_turb <- mean_turb|> filter(!is.na(season))|>
   ggplot()+
   geom_point(aes(year, mean_turb, color = season))+
-  scale_color_viridis_d()+
-  labs(title = "Mean Seasonal Water Turbidity Levels by Year")
+  scale_color_manual(values= c(
+    "Summer"= "#d7191c",
+    "Fall"= "#fdae61",
+    "Winter"= "#165ae6",
+    "Spring"= "#67a9cf"
+    ))+
+  labs(title = "Mean Seasonal Water Turbidity Levels by Year",
+       x= "Year",
+       y= "Mean Turbidity Level")+
+    theme(
+   panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5)
+  )
+
 
 seasons_turb
 
@@ -413,8 +627,22 @@ do_pct_spring <- mean_do_pct |>
   filter(season == "Spring")
 
 line_dopct_spring <- ggplot(do_pct_spring)+
-  geom_point(aes(year, mean_do_pct))+
-  labs(title = "Mean Spring Dissolved Oxygent Percent Saturation Level by Year")
+  geom_point(aes(year, mean_do_pct, color=season))+
+   scale_color_manual(values= c(
+    "Spring"= "#67a9cf"
+  ))+
+  labs(title = "Mean Spring Dissolved Oxygent Percent Saturation Level by Year",
+       x= "Year",
+       y= "Mean Dissolved Oxygent Percent Saturation")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
 line_dopct_spring
 ```
@@ -424,11 +652,25 @@ line_dopct_spring
 do_pct_fall <- mean_do_pct |>
   filter(season == "Fall")
 
-line_dopct_fall <- ggplot(do_pct_fall)+
-  geom_point(aes(year, mean_do_pct))+
-  labs(title = "Mean Fall Dissolved Oxygen Percent Saturation Level by Year")
+mean_dopct_fall <- ggplot(do_pct_fall)+
+  geom_point(aes(year, mean_do_pct, color=season))+
+   scale_color_manual(values= c(
+    "Fall"= "#fdae61"
+  ))+
+  labs(title = "Mean Fall Dissolved Oxygen Percent Saturation Level by Year",
+       x= "Year",
+       y= "Mean Dissolved Oxygent Percent Saturation")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_dopct_fall
+mean_dopct_fall
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -436,11 +678,25 @@ line_dopct_fall
 do_pct_summer <- mean_do_pct |>
   filter(season == "Summer")
 
-line_dopct_summer <- ggplot(do_pct_summer)+
-  geom_point(aes(year, mean_do_pct))+
-  labs(title = "Mean Summer Dissolved Oxygen Percent Saturation Level by Year")
+mean_dopct_summer <- ggplot(do_pct_summer)+
+  geom_point(aes(year, mean_do_pct, color=season))+
+   scale_color_manual(values= c(
+    "Summer"= "#d7191c"
+  ))+
+  labs(title = "Mean Summer Dissolved Oxygen Percent Saturation Level by Year",
+       x= "Year",
+       y= "Mean Dissolved Oxygent Percent Saturation")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_dopct_summer
+mean_dopct_summer
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -448,11 +704,25 @@ line_dopct_summer
 do_pct_winter <- mean_do_pct |>
   filter(season == "Winter")
 
-line_dopct_winter <- ggplot(do_pct_winter)+
-  geom_point(aes(year, mean_do_pct))+
-  labs(title = "Mean Winter Dissolved Oxygen Percent Saturation Level by Year")
+mean_dopct_winter <- ggplot(do_pct_winter)+
+  geom_point(aes(year, mean_do_pct, color=season))+
+   scale_color_manual(values= c(
+    "Winter"= "#165ae6"
+  ))+
+  labs(title = "Mean Winter Dissolved Oxygen Percent Saturation Level by Year",
+       x= "Year",
+       y= "Mean Dissolved Oxygent Percent Saturation")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_dopct_winter
+mean_dopct_winter
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -461,8 +731,23 @@ line_dopct_winter
 seasons_do_pct <- mean_do_pct|> filter(!is.na(season))|>
   ggplot()+
   geom_point(aes(year, mean_do_pct, color = season))+
-  scale_color_viridis_d()+
-  labs(title = "Mean Seasonal Dissolved Oxygen Percent Saturation Level by Year")
+  scale_color_manual(values= c(
+    "Summer"= "#d7191c",
+    "Fall"= "#fdae61",
+    "Winter"= "#165ae6",
+    "Spring"= "#67a9cf"
+    ))+
+  labs(title = "Mean Seasonal Dissolved Oxygen Percent Saturation Level by Year",
+       x= "Year",
+       y= "Mean Dissolved Oxygent Percent Saturation")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+  )
 
 seasons_do_pct
 
@@ -492,12 +777,26 @@ mean_do_mgl <- do_mgl |>
 do_mgl_spring <- mean_do_mgl |>
   filter(season == "Spring")
 
-line_domgl_spring <- ggplot(do_mgl_spring)+
-  geom_point(aes(year, mean_do_mgl))+
-  labs(title = "Mean Spring Dissolved Oxygen concentration 
-       measured in milligrams per Liter (mg/L) by Year")
+mean_domgl_spring <- ggplot(do_mgl_spring)+
+  geom_point(aes(year, mean_do_mgl, color=season))+
+   scale_color_manual(values= c(
+    "Spring"= "#67a9cf"
+  ))+
+  labs(title = "Mean Spring Dissolved Oxygen concentration
+      measured in milligrams per Liter (mg/L) by Year",
+       x= "Year",
+       y= "Mean Dissolved Oxygent (mg/L)")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_domgl_spring
+mean_domgl_spring
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -505,12 +804,26 @@ line_domgl_spring
 do_mgl_fall <- mean_do_mgl |>
   filter(season == "Fall")
 
-line_domgl_fall <- ggplot(do_mgl_fall)+
-  geom_point(aes(year, mean_do_mgl))+
+mean_domgl_fall <- ggplot(do_mgl_fall)+
+  geom_point(aes(year, mean_do_mgl, color=season))+
+   scale_color_manual(values= c(
+    "Fall"= "#fdae61"
+  ))+
   labs(title = "Mean Fall Dissolved Oxygen concentration 
-       measured in milligrams per Liter (mg/L) by Year")
+       measured in milligrams per Liter (mg/L) by Year",
+       x= "Year",
+       y= "Mean Dissolved Oxygent (mg/L)")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_domgl_fall
+mean_domgl_fall
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -518,12 +831,26 @@ line_domgl_fall
 do_mgl_summer <- mean_do_mgl |>
   filter(season == "Summer")
 
-line_domgl_summer <- ggplot(do_mgl_summer)+
-  geom_point(aes(year, mean_do_mgl))+
+mean_domgl_summer <- ggplot(do_mgl_summer)+
+  geom_point(aes(year, mean_do_mgl, color=season))+
+   scale_color_manual(values= c(
+    "Summer"= "#d7191c"
+  ))+
   labs(title = "Mean Summer Dissolved Oxygen concentration 
-       measured in milligrams per Liter (mg/L) by Year")
+    measured in milligrams per Liter (mg/L) by Year",
+       x= "Year",
+       y= "Mean Dissolved Oxygent (mg/L)")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_domgl_summer
+mean_domgl_summer
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -531,12 +858,26 @@ line_domgl_summer
 do_pct_winter <- mean_do_pct |>
   filter(season == "Winter")
 
-line_dopct_winter <- ggplot(do_pct_winter)+
-  geom_point(aes(year, mean_do_pct))+
+mean_dopct_winter <- ggplot(do_pct_winter)+
+  geom_point(aes(year, mean_do_pct, color=season))+
+   scale_color_manual(values= c(
+    "Winter"= "#165ae6"
+  ))+
   labs(title = "Mean Winter Dissolved Oxygen concentration 
-       measured in milligrams per Liter (mg/L) by Year")
+   measured in milligrams per Liter (mg/L) by Year",
+       x= "Year",
+       y= "Mean Dissolved Oxygent (mg/L)")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_dopct_winter
+mean_dopct_winter
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -545,9 +886,25 @@ line_dopct_winter
 seasons_do_mgl <- mean_do_mgl|> filter(!is.na(season))|>
   ggplot()+
   geom_point(aes(year, mean_do_mgl, color = season))+
-  scale_color_viridis_d()+
+  scale_color_manual(values= c(
+    "Summer"= "#d7191c",
+    "Fall"= "#fdae61",
+    "Winter"= "#165ae6",
+    "Spring"= "#67a9cf"
+    ))+
   labs(title = "Mean Seasonal Dissolved Oxygen concentration 
-       measured in milligrams per Liter (mg/L) by Year")
+measured in milligrams per Liter (mg/L) by Year",
+       x= "Year",
+       y= "Mean Dissolved Oxygent (mg/L)")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5)
+  )
+
 
 seasons_do_mgl
 
@@ -578,11 +935,25 @@ mean_sp_cond <- sp_cond |>
 sp_cond_spring <- mean_sp_cond |>
   filter(season == "Spring")
 
-line_spcond_spring <- ggplot(sp_cond_spring)+
-  geom_point(aes(year, mean_sp_cond))+
-  labs(title = "Mean Spring Water Conductivity by Year")
+mean_spcond_spring <- ggplot(sp_cond_spring)+
+  geom_point(aes(year, mean_sp_cond, color=season))+
+   scale_color_manual(values= c(
+    "Spring"= "#67a9cf"
+  ))+
+  labs(title = "Mean Spring Water Conductivity by Year",
+       x= "Year",
+       y= "Mean Water Conductivity")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_spcond_spring
+mean_spcond_spring
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -590,11 +961,25 @@ line_spcond_spring
 sp_cond_fall <- mean_sp_cond |>
   filter(season == "Fall")
 
-line_spcond_fall <- ggplot(sp_cond_fall)+
-  geom_point(aes(year, mean_sp_cond))+
-  labs(title = "Mean Fall Water Conductivity by Year")
+mean_spcond_fall <- ggplot(sp_cond_fall)+
+  geom_point(aes(year, mean_sp_cond, color=season))+
+   scale_color_manual(values= c(
+    "Fall"= "#fdae61"
+  ))+
+  labs(title = "Mean Fall Water Conductivity by Year",
+       x= "Year",
+       y= "Mean Water Conductivity")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_spcond_fall
+mean_spcond_fall
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -602,11 +987,25 @@ line_spcond_fall
 sp_cond_summer <- mean_sp_cond |>
   filter(season == "Summer")
 
-line_spcond_summer <- ggplot(sp_cond_summer)+
-  geom_point(aes(year, mean_sp_cond))+
-  labs(title = "Mean Summer Water Conductivity by Year")
+mean_spcond_summer <- ggplot(sp_cond_summer)+
+  geom_point(aes(year, mean_sp_cond, color=season))+
+   scale_color_manual(values= c(
+    "Summer"= "#d7191c"
+  ))+
+  labs(title = "Mean Summer Water Conductivity by Year",
+       x= "Year",
+       y= "Mean Water Conductivity")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_spcond_summer
+mean_spcond_summer
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -614,11 +1013,25 @@ line_spcond_summer
 sp_cond_winter <- mean_sp_cond |>
   filter(season == "Winter")
 
-line_spcond_winter <- ggplot(sp_cond_winter)+
-  geom_point(aes(year, mean_sp_cond))+
-  labs(title = "Mean Winter Water Conductivity by Year")
+mean_spcond_winter <- ggplot(sp_cond_winter)+
+  geom_point(aes(year, mean_sp_cond, color=season))+
+   scale_color_manual(values= c(
+    "Winter"= "#165ae6"
+  ))+
+  labs(title = "Mean Winter Water Conductivity by Year",
+       x= "Year",
+       y= "Mean Water Conductivity")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_spcond_winter
+mean_spcond_winter
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -627,8 +1040,24 @@ line_spcond_winter
 seasons_sp_cond <- mean_sp_cond|> filter(!is.na(season))|>
   ggplot()+
   geom_point(aes(year, mean_sp_cond, color = season))+
-  scale_color_viridis_d()+
-  labs(title = "Mean Seasonal Water Conductivity by Year")
+  scale_color_manual(values= c(
+    "Summer"= "#d7191c",
+    "Fall"= "#fdae61",
+    "Winter"= "#165ae6",
+    "Spring"= "#67a9cf"
+    ))+
+  labs(title = "Mean Seasonal Water Conductivity by Year",
+       x= "Year",
+       y= "Mean Water Conductivity")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5)
+  )
+
 
 seasons_sp_cond
 
@@ -658,11 +1087,25 @@ mean_sal <- sal |>
 sal_spring <- mean_sal |>
   filter(season == "Spring")
 
-line_sal_spring <- ggplot(sal_spring)+
-  geom_point(aes(year, mean_sal))+
-  labs(title = "Mean Spring Water Salinity by Year")
+mean_sal_spring <- ggplot(sal_spring)+
+  geom_point(aes(year, mean_sal, color=season))+
+   scale_color_manual(values= c(
+    "Spring"= "#67a9cf"
+  ))+
+  labs(title = "Mean Spring Water Salinity by Year",
+       x= "Year",
+       y= "Mean Water Salinity")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_sal_spring
+mean_sal_spring
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -670,11 +1113,25 @@ line_sal_spring
 sal_fall <- mean_sal |>
   filter(season == "Fall")
 
-line_sal_fall <- ggplot(sal_fall)+
-  geom_point(aes(year, mean_sal))+
-  labs(title = "Mean Fall Water Salinity by Year")
+mean_sal_fall <- ggplot(sal_fall)+
+  geom_point(aes(year, mean_sal, color=season))+
+   scale_color_manual(values= c(
+    "Fall"= "#fdae61"
+  ))+
+  labs(title = "Mean Fall Water Salinity by Year",
+       x= "Year",
+       y= "Mean Water Salinity")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_sal_fall
+mean_sal_fall
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -682,11 +1139,25 @@ line_sal_fall
 sal_summer <- mean_sal |>
   filter(season == "Summer")
 
-line_sal_summer <- ggplot(sal_summer)+
-  geom_point(aes(year, mean_sal))+
-  labs(title = "Mean Summer Water Salinity by Year")
+mean_sal_summer <- ggplot(sal_summer)+
+  geom_point(aes(year, mean_sal, color=season))+
+   scale_color_manual(values= c(
+    "Summer"= "#d7191c"
+  ))+
+  labs(title = "Mean Summer Water Salinity by Year",
+       x= "Year",
+       y= "Mean Water Salinity")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_sal_summer
+mean_sal_summer
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -694,11 +1165,25 @@ line_sal_summer
 sal_winter <- mean_sal |>
   filter(season == "Winter")
 
-line_sal_winter <- ggplot(sal_winter)+
-  geom_point(aes(year, mean_sal))+
-  labs(title = "Mean Winter Water Salinity by Year")
+mean_sal_winter <- ggplot(sal_winter)+
+  geom_point(aes(year, mean_sal, color=season))+
+   scale_color_manual(values= c(
+    "Winter"= "#165ae6"
+  ))+
+  labs(title = "Mean Winter Water Salinity by Year",
+       x= "Year",
+       y= "Mean Water Salinity")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_sal_winter
+mean_sal_winter
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -707,8 +1192,24 @@ line_sal_winter
 seasons_sal <- mean_sal|> filter(!is.na(season))|>
   ggplot()+
   geom_point(aes(year, mean_sal, color = season))+
-  scale_color_viridis_d()+
-  labs(title = "Mean Seasonal Water Salinity by Year")
+  scale_color_manual(values= c(     
+    "Summer"= "#d7191c",
+    "Fall"= "#fdae61",
+    "Winter"= "#165ae6",
+    "Spring"= "#67a9cf"
+    ))+
+  labs(title = "Mean Seasonal Water Salinity by Year",
+       x= "Year",
+       y= "Mean Water Salinity")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5)
+  )
+
 
 seasons_sal
 
@@ -739,11 +1240,25 @@ mean_depth <- depth |>
 depth_spring <- mean_depth |>
   filter(season == "Spring")
 
-line_depth_spring <- ggplot(depth_spring)+
-  geom_point(aes(year, mean_depth))+
-  labs(title = "Mean Spring Water Depth by Year")
+mean_depth_spring <- ggplot(depth_spring)+
+  geom_point(aes(year, mean_depth, color=season))+
+   scale_color_manual(values= c(
+    "Spring"= "#67a9cf"
+  ))+
+  labs(title = "Mean Spring Water Depth by Year",
+       x= "Year",
+       y= "Mean Water Depth")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_depth_spring
+mean_depth_spring
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -751,11 +1266,25 @@ line_depth_spring
 depth_fall <- mean_depth |>
   filter(season == "Fall")
 
-line_depth_fall <- ggplot(depth_fall)+
-  geom_point(aes(year, mean_depth))+
-  labs(title = "Mean Fall Water Depth by Year")
+mean_depth_fall <- ggplot(depth_fall)+
+  geom_point(aes(year, mean_depth, color=season))+
+   scale_color_manual(values= c(
+    "Fall"= "#fdae61"
+  ))+
+  labs(title = "Mean Fall Water Depth by Year",
+       x= "Year",
+       y= "Mean Water Depth")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_depth_fall
+mean_depth_fall
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -763,11 +1292,25 @@ line_depth_fall
 depth_summer <- mean_depth |>
   filter(season == "Summer")
 
-line_depth_summer <- ggplot(depth_summer)+
-  geom_point(aes(year, mean_depth))+
-  labs(title = "Mean Summer Water Depth by Year")
+mean_depth_summer <- ggplot(depth_summer)+
+  geom_point(aes(year, mean_depth, color=season))+
+   scale_color_manual(values= c(
+    "Summer"= "#d7191c"
+  ))+
+  labs(title = "Mean Summer Water Depth by Year",
+       x= "Year",
+       y= "Mean Water Depth")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_depth_summer
+mean_depth_summer
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -775,11 +1318,25 @@ line_depth_summer
 depth_winter <- mean_depth |>
   filter(season == "Winter")
 
-line_depth_winter <- ggplot(depth_winter)+
-  geom_point(aes(year, mean_depth))+
-  labs(title = "Mean Winter Water Depth by Year")
+mean_depth_winter <- ggplot(depth_winter)+
+  geom_point(aes(year, mean_depth, color=season))+
+   scale_color_manual(values= c(
+    "Winter"= "#165ae6"
+  ))+
+  labs(title = "Mean Winter Water Depth by Year",
+       x= "Year",
+       y= "Mean Water Depth")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_depth_winter
+mean_depth_winter
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -789,14 +1346,29 @@ seasons_depth <- mean_depth|> filter(!is.na(season))|>
   #removed 5 rows
   ggplot()+
   geom_point(aes(year, mean_depth, color = season))+
-  scale_color_viridis_d()+
-  labs(title = "Mean Seasonal Water Depth by Year")
+  scale_color_manual(values= c(
+    "Summer"= "#d7191c",
+    "Fall"= "#fdae61",
+    "Winter"= "#165ae6",
+    "Spring"= "#67a9cf"   ))+
+  labs(title = "Mean Seasonal Water Depth by Year",
+       x= "Year",
+       y= "Mean Water Depth")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5)
+  )
+
 
 seasons_depth
 
 ```
 
-#Chlorofluorocarbons (ChlFluor)
+#Chlorophyll Fluorescence  (ChlFluor)
 ***ChlFluor starts to be collected at a later date (2014)
 
 This section will begin by looking at the Chlorofluorocarbons levels by season across the years 2002 - 2022.
@@ -821,11 +1393,25 @@ mean_chloro <- chloro |>
 chloro_spring <- mean_chloro|>
   filter(season == "Spring")
 
-line_chloro_spring <- ggplot(chloro_spring)+
-  geom_point(aes(year, mean_chloro))+
-  labs(title = "Mean Spring Chlorofluorocarbon Levels by Year")
+mean_chloro_spring <- ggplot(chloro_spring)+
+  geom_point(aes(year, mean_chloro, color=season))+
+   scale_color_manual(values= c(
+    "Spring"= "#67a9cf"
+  ))+
+  labs(title = "Mean Spring Chlorophyll Fluorescence Levels by Year",
+       x= "Year",
+       y= "Mean Chlorophyll Fluorescence Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_chloro_spring
+mean_chloro_spring
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -833,11 +1419,25 @@ line_chloro_spring
 chloro_fall <- mean_chloro|>
   filter(season == "Fall")
 
-line_chloro_fall <- ggplot(chloro_fall)+
-  geom_point(aes(year, mean_chloro))+
-  labs(title = "Mean Fall Chlorofluorocarbon Levels by Year")
+mean_chloro_fall <- ggplot(chloro_fall)+
+  geom_point(aes(year, mean_chloro, color=season))+
+   scale_color_manual(values= c(
+    "Fall"= "#fdae61"
+  ))+
+  labs(title = "Mean Fall Chlorophyll Fluorescence Levels by Year",
+       x= "Year",
+       y= "Mean Chlorophyll Fluorescence Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_chloro_fall
+mean_chloro_fall
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -845,11 +1445,25 @@ line_chloro_fall
 chloro_summer <- mean_chloro |>
   filter(season == "Summer")
 
-line_chloro_summer <- ggplot(chloro_summer)+
-  geom_point(aes(year, mean_chloro))+
-  labs(title = "Mean Summer Chlorofluorocarbon Levels by Year")
+mean_chloro_summer <- ggplot(chloro_summer)+
+  geom_point(aes(year, mean_chloro, color=season))+
+   scale_color_manual(values= c(
+    "Summer"= "#d7191c"
+  ))+
+  labs(title = "Mean Summer Chlorophyll Fluorescence Levels by Year",
+       x= "Year",
+       y= "Mean Chlorophyll Fluorescence Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_chloro_summer
+mean_chloro_summer
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -857,11 +1471,25 @@ line_chloro_summer
 chloro_winter <- mean_chloro |>
   filter(season == "Winter")
 
-line_chloro_winter <- ggplot(chloro_winter)+
-  geom_point(aes(year, mean_chloro))+
-  labs(title = "Mean Winter Chlorofluorocarbon Levels by Year")
+mean_chloro_winter <- ggplot(chloro_winter)+
+  geom_point(aes(year, mean_chloro, color=season))+
+   scale_color_manual(values= c(
+    "Winter"= "#165ae6"
+  ))+
+  labs(title = "Mean Winter Chlorophyll Fluorescence Levels by Year",
+       x= "Year",
+       y= "Mean Chlorophyll Fluorescence Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
 
-line_chloro_winter
+mean_chloro_winter
 ```
 
 ```{r, echo=FALSE, message=FALSE}
@@ -870,8 +1498,24 @@ line_chloro_winter
 seasons_chloro <- mean_chloro|> filter(!is.na(season))|>
   ggplot()+
   geom_point(aes(year, mean_chloro, color = season))+
-  scale_color_viridis_d()+
-  labs(title = "Mean Seasonal Chlorofluorocarbon Levels by Year")
+  scale_color_manual(values= c(     
+    "Summer"= "#d7191c",
+    "Fall"= "#fdae61",
+    "Winter"= "#165ae6",
+    "Spring"= "#67a9cf"
+    ))+
+  labs(title = "Mean Seasonal Chlorophyll Fluorescence Levels by Year",
+       x= "Year",
+       y= "Mean Chlorophyll Fluorescence Level")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5)
+  )
+
 
 seasons_chloro
 
