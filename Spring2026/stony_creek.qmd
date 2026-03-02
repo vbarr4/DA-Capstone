@@ -1526,18 +1526,136 @@ Notes: During the meeting on 2/23 we discussed
 Plotting values without separating by season
 #Box plots
 "
-#Plotting mean temp by year
-
-mean_yearly_temperature <- mean_temp|> filter(!is.na(season))|>
-  ggplot()+
-  geom_boxplot(aes(year, mean_temp))+
-  facet_wrap(~year)+
-  labs(title = "Mean Yearly Temperature")+
+  boxPlot_spring<- ggplot()+
+  geom_boxplot(data= (temp|> filter(!is.na(season))|>
+  filter(season=="Spring")), aes(Temp, year, group=year, color=season))+
+  scale_color_manual(values= c(     
+    "Spring"= "#67a9cf"
+    ))+
+  labs(title = "Spring Yearly Temperature",
+       x= "Temperature",
+       y= "Year")+
   theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
+  
+ boxPlot_summer<- ggplot()+
+   geom_boxplot(data= (temp|> filter(!is.na(season))|>
+  filter(season=="Summer")), aes(Temp, year, group=year, color=season))+
+  scale_color_manual(values= c(
+    "Summer"= "#d7191c"
+    ))+
+   labs(title = "Summer Yearly Temperature",
+       x= "Temperature",
+       y= "Year")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
+ 
+boxPlot_winter<- ggplot()+
+   geom_boxplot(data= (temp|> filter(!is.na(season))|>
+  filter(season=="Winter")), aes(Temp, year, group=year, color=season))+
+  scale_color_manual(values= c(
+    "Winter"= "#165ae6"
+    ))+
+  labs(title = "Winter Yearly Temperature",
+       x= "Temperature",
+       y= "Year")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
     legend.position = "none"
   )
 
-mean_yearly_temperature
+boxPlot_fall<- ggplot()+
+   geom_boxplot(data= (temp|> filter(!is.na(season))|>
+  filter(season=="Fall")), aes(Temp, year, group=year, color=season))+
+  scale_color_manual(values= c(
+    "Fall"= "#fdae61"
+    ))+
+  labs(title = "Fall Yearly Temperature",
+       x= "Temperature",
+       y= "Year")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
+
+boxPlot_yearlyTemp<- ggplot()+
+  geom_boxplot(data= (temp|> filter(!is.na(season))), 
+               aes(Temp, year, group=year, color=season))+
+  scale_color_manual(values= c(     
+    "Summer"= "#d7191c",
+    "Fall"= "#fdae61",
+    "Winter"= "#165ae6",
+    "Spring"= "#67a9cf"
+    ))+
+  labs(title = "Seasonal Yearly Temperature",
+       x= "Temperature",
+       y= "Year")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )+
+  facet_grid(~season)
+
+boxPlot_yearlyTemp1<- ggplot()+
+  geom_boxplot(data= (temp|> filter(!is.na(season))), 
+               aes(Temp, season, group=season, color=season))+
+  scale_color_manual(values= c(     
+    "Summer"= "#d7191c",
+    "Fall"= "#fdae61",
+    "Winter"= "#165ae6",
+    "Spring"= "#67a9cf"
+    ))+
+  labs(title = "Seasonal Yearly Temperature",
+       x= "Temperature",
+       y= "")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )+
+  facet_wrap(~year)
+
+
+
+boxPlot_spring
+boxPlot_summer
+boxPlot_winter
+boxPlot_fall
+boxPlot_yearlyTemp
+boxPlot_yearlyTemp1
 ```
 ```{r, echo=FALSE, error=FALSE, message=FALSE, warning=FALSE}
 #Comparing the first and last year of collected data
