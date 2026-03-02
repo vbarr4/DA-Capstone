@@ -1,0 +1,589 @@
+---
+title: Exploratory Data Analysis on Meteorological Data from (2001 - 2026)
+author: Ilianna Ditren
+---
+
+## Project Set Up
+
+##### Loading libraries
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+#Downloading libraries
+
+library(readr)
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(janitor)
+
+```
+
+##### Importing data containing meteorological data from the website
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#field station meteorological data 2001-2026
+
+#creates a data folder
+dir.create("data/field_station_weather", recursive = TRUE, showWarnings = FALSE) 
+
+#using tempfile() to create a temporary storage
+zip <- tempfile(fileext = ".zip")
+
+#download the file from the url
+download.file("http://cdmo.baruch.sc.edu/aqs/output/854334.zip", zip, mode = "wb")
+
+unzip(zip, exdir = "data/field_station_weather")
+
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+#read in the files for all the years as a one data file hudfsmet-p
+files <- list.files(
+  "data/field_station_weather",
+  pattern = "^hudfsmet[0-9]{4}\\.csv$", # ^ -starts a string, hudfsmet - the exact name in the file (constant), any digits from 0-9 might follow, {4} - we are looking for 4 digits pattern, \\. - there should be a dot, csv - it should end with "csv",  end a string
+  full.names = TRUE
+)
+#combines all data files into one dataset
+stony_creek_weather_raw <- do.call(
+  rbind,
+  lapply(files, function(f) {
+    df <- read.csv(f, fileEncoding = "Latin1")
+    df$year <- as.integer(gsub(".*([0-9]{4})\\.csv$", "\\1", f))
+    df
+  })
+)
+```
+
+##### Data Cleaning
+
+###### Removing irrelevant columns
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+# Removing empty columns and other irrelant columns
+stony_creek_weather <- stony_creek_weather_raw |>
+  remove_empty("cols")|>
+  select(-StationCode,
+        -isSWMP, #historical and provisional Plus columns indicate the status of QAQC
+        -Historical, 
+        -ProvisionalPlus,
+  )
+
+```
+
+###### Removing invalid data
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+#creating a vector with all the flags
+flags_weather <- c(
+  "F_Record",
+  "F_ATemp",
+  "F_RH",
+  "F_BP",
+  "F_WSpd",
+  "F_MaxWSpd",
+  "F_Wdir",
+  "F_SDWDir",
+  "F_TotPAR",
+  "F_TotPrcp",
+  "F_TotSoRad")
+
+flagged_data <- "<-3>|<-2>|<1>"
+
+stony_creek_weather <- stony_creek_weather |>
+  mutate(ATemp = if_else(str_detect(F_ATemp, flagged_data), NA_real_, ATemp),
+         RH = if_else(str_detect(F_RH, flagged_data), NA_real_, RH),
+         BP = if_else(str_detect(F_BP, flagged_data), NA_real_, BP),
+         WSpd = if_else(str_detect(F_WSpd, flagged_data), NA_real_, WSpd),
+         MaxWSpd = if_else(str_detect(F_MaxWSpd, flagged_data), NA_real_, MaxWSpd),
+         Wdir = if_else(str_detect(F_Wdir, flagged_data), NA_real_, Wdir),
+         SDWDir = if_else(str_detect(F_SDWDir, flagged_data), NA_real_, SDWDir),
+         TotPAR = if_else(str_detect(F_TotPAR, flagged_data), NA_real_, TotPAR),
+         TotPrcp = if_else(str_detect(F_TotPrcp, flagged_data), NA_real_, TotPrcp)
+  )
+
+#removing flag columns 
+stony_creek_weather <- stony_creek_weather |> 
+  select(-all_of(flags_weather))
+
+```
+
+###### Cleaning and creating new dates column
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+#separate the data and time column
+stony_creek_weather <- stony_creek_weather %>%
+  mutate(
+    DatetimeStamp = as.POSIXct(DatetimeStamp, format = "%m/%d/%Y %H:%M"), #converts the variable into standard POSIXct format
+    date = as.Date(DatetimeStamp),
+    time = format(DatetimeStamp, "%H:%M:%S")
+  )
+
+#create a month column
+stony_creek_weather <- stony_creek_weather %>%
+  mutate(
+    month = month(DatetimeStamp)          
+  )
+
+#create a season column
+stony_creek_weather <- stony_creek_weather %>%
+  mutate(
+    season = case_when(
+      month %in% c(12, 1, 2) ~ "Winter",
+      month %in% 3:5        ~ "Spring",
+      month %in% 6:8        ~ "Summer",
+      month %in% 9:11       ~ "Fall"
+    )
+  )
+```
+
+## Exploratory Data Analysis
+
+### Average Air Temperature (ATemp)
+
+`ATemp` measures average air temperature measured in degrees Celsius (C).
+
+#### Subsetting: ATemp
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+#Selecting relevant data to look at temperature
+atemp <- stony_creek_weather |>
+  select(ATemp, year, season)|>
+  filter(!is.na(ATemp))
+
+```
+
+#### Plots
+
+##### Line/Scatterplot
+
+###### Avg Air Temperature (Year-round)
+
+###### Avg Air Temperature (Winter)
+
+###### Avg Air Temperature (Spring)
+
+###### Avg Air Temperature (Summer)
+
+###### Avg Air Temperature (Fall)
+
+##### Boxplots:
+
+###### Avg Air Temperature (Year-round)
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+
+#average temperature by year
+
+box_season_atemp <- atemp |> ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature (Year-round)") +
+  xlim(-25, 40)
+
+box_season_atemp
+
+```
+
+###### Avg Air Temperature (Winter)
+
+```{r, echo = FALSE, message = FALSE}
+
+#average temperature by year
+
+box_winter_atemp <- filter(atemp, season == "Winter") |> 
+  ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature in the Winter (C)") +
+  xlim(-25, 40)
+
+box_winter_atemp
+
+```
+
+###### Avg Air Temperature (Spring)
+
+```{r, echo = FALSE, message = FALSE}
+
+#average temperature by year
+
+box_spring_atemp <- filter(atemp, season == "Spring") |> 
+  ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature in the Spring (C)") +
+  xlim(-25, 40)
+
+box_spring_atemp
+
+```
+
+###### Avg Air Temperature (Summer)
+
+```{r, echo = FALSE, message = FALSE}
+
+#average temperature by year
+
+box_summer_atemp <- filter(atemp, season == "Summer") |> 
+  ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature in the Summer (C)") +
+  xlim(-25, 40)
+
+box_summer_atemp
+
+```
+
+###### Avg Air Temperature (Fall)
+
+```{r, echo = FALSE, message = FALSE}
+
+#average temperature by year
+
+box_fall_atemp <- filter(atemp, season == "Fall") |> 
+  ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature in the Fall (C)") +
+  xlim(-25, 40)
+
+box_fall_atemp
+
+```
+
+### Average Relative Humidity (RH)
+
+RH: average relative humidity measured in percent saturation (%)
+
+
+#### Subsetting: RH
+
+#### Plots
+
+##### Line/Scatterplot
+
+###### Average Relative Humidity (Year-round)
+
+###### Average Relative Humidity (Winter)
+
+###### Average Relative Humidity (Spring)
+
+###### Average Relative Humidity (Summer)
+
+###### Average Relative Humidity (Fall)
+
+##### Boxplots:
+
+###### Average Relative Humidity (Year-round)
+
+###### Average Relative Humidity (Winter)
+
+###### Average Relative Humidity (Spring)
+
+###### Average Relative Humidity (Summer)
+
+###### Average Relative Humidity (Fall)
+
+### Average Barometric Pressure (BP)
+
+BP: average barometric pressure measured in millibars (mb)
+
+
+#### Subsetting: BP
+
+#### Plots
+
+##### Line/Scatterplot
+
+###### Average Barometric Pressure (Year-round)
+
+###### Average Barometric Pressure (Winter)
+
+###### Average Barometric Pressure (Spring)
+
+###### Average Barometric Pressure (Summer)
+
+###### Average Barometric Pressure (Fall)
+
+##### Boxplots:
+
+###### Average Barometric Pressure (Year-round)
+
+###### Average Barometric Pressure (Winter)
+
+###### Average Barometric Pressure (Spring)
+
+###### Average Barometric Pressure (Summer)
+
+###### Average Barometric Pressure (Fall)
+
+### Average Wind Speed (WSpd)
+
+WSpd: average wind speed measured in meters per second (m/s)
+
+#### Subsetting: WSpd
+
+#### Plots
+
+##### Line/Scatterplot
+
+###### Average Wind Speed (Year-round)
+
+###### Average Wind Speed (Winter)
+
+###### Average Wind Speed (Spring)
+
+###### Average Wind Speed (Summer)
+
+###### Average Wind Speed (Fall)
+
+##### Boxplots:
+
+###### Average Wind Speed (Year-round)
+
+###### Average Wind Speed (Winter)
+
+###### Average Wind Speed (Spring)
+
+###### Average Wind Speed (Summer)
+
+###### Average Wind Speed (Fall)
+
+### Maximum Wind Speed (MaxWSpd)
+
+MaxWSpd: max wind speed measured in meters per second (m/s)
+
+#### Subsetting: MaxWSpd
+
+#### Plots
+
+##### Line/Scatterplot
+
+###### Maximum Wind Speed (Year-round)
+
+###### Maximum Wind Speed (Winter)
+
+###### Maximum Wind Speed (Spring)
+
+###### Maximum Wind Speed (Summer)
+
+###### Maximum Wind Speed (Fall)
+
+##### Boxplots:
+
+###### Maximum Wind Speed (Year-round)
+
+###### Maximum Wind Speed (Winter)
+
+###### Maximum Wind Speed (Spring)
+
+###### Maximum Wind Speed (Summer)
+
+###### Maximum Wind Speed (Fall)
+
+### Time of Maximum Wind Speed Measurement #most likely not needed
+
+MaxWSpdT: time of max wind speed measurement (hh:mm)
+
+#### Subsetting: MaxWSpdT
+
+#### Plots
+
+##### Line/Scatterplot
+
+###### Time of Maximum Wind Speed Measurement (Year-round)
+
+###### Time of Maximum Wind Speed Measurement (Winter)
+
+###### Time of Maximum Wind Speed Measurement (Spring)
+
+###### Time of Maximum Wind Speed Measurement (Summer)
+
+###### Time of Maximum Wind Speed Measurement (Fall)
+
+##### Boxplots:
+
+###### Time of Maximum Wind Speed Measurement (Year-round)
+
+###### Time of Maximum Wind Speed Measurement (Winter)
+
+###### Time of Maximum Wind Speed Measurement (Spring)
+
+###### Time of Maximum Wind Speed Measurement (Summer)
+
+###### Time of Maximum Wind Speed Measurement (Fall)
+
+### Average Wind Direction 
+
+Wdir: average wind direction measured in degrees true North as of April 1, 2008. Prior to April 1, 2008 wind direction was measured with no correction for magnetic declination. See Reserve metadata for exact date of shift to true North.
+
+
+#### Subsetting: Wdir
+
+#### Plots
+
+##### Line/Scatterplot
+
+###### Average Wind Direction (Year-round)
+
+###### Average Wind Direction (Winter)
+
+###### Average Wind Direction (Spring)
+
+###### Average Wind Direction (Summer)
+
+###### Average Wind Direction (Fall)
+
+##### Boxplots:
+
+###### Average Wind Direction (Year-round)
+
+###### Average Wind Direction (Winter)
+
+###### Average Wind Direction (Spring)
+
+###### Average Wind Direction (Summer)
+
+###### Average Wind Direction (Fall)
+
+### Wind Direction Standard Deviation (SDWDir)
+
+SDWDir: wind direction standard deviation (sd)
+
+
+#### Subsetting: SDWDir
+
+#### Plots
+
+##### Line/Scatterplot
+
+###### Wind Direction Standard Deviation (Year-round)
+
+###### Wind Direction Standard Deviation (Winter)
+
+###### Wind Direction Standard Deviation (Spring)
+
+###### Wind Direction Standard Deviation (Summer)
+
+###### Wind Direction Standard Deviation (Fall)
+
+##### Boxplots:
+
+###### Wind Direction Standard Deviation (Year-round)
+
+###### Wind Direction Standard Deviation (Winter)
+
+###### Wind Direction Standard Deviation (Spring)
+
+###### Wind Direction Standard Deviation (Summer)
+
+###### Wind Direction Standard Deviation (Fall)
+
+### Total Photosynthetically Active Radiation (TotPAR)
+
+TotPAR: total photosynthetically active radiation measured in millimoles per square meter (total flux integrated over each 15-minute logging interval)
+
+#### Subsetting: TotPAR
+
+#### Plots
+
+##### Line/Scatterplot
+
+###### Total Photosynthetically Active Radiation (Year-round)
+
+###### Total Photosynthetically Active Radiation (Winter)
+
+###### Total Photosynthetically Active Radiation (Spring)
+
+###### Total Photosynthetically Active Radiation (Summer)
+
+###### Total Photosynthetically Active Radiation (Fall)
+
+##### Boxplots:
+
+###### Total Photosynthetically Active Radiation (Year-round)
+
+###### Total Photosynthetically Active Radiation (Winter)
+
+###### Total Photosynthetically Active Radiation (Spring)
+
+###### Total Photosynthetically Active Radiation (Summer)
+
+###### Total Photosynthetically Active Radiation (Fall)
+
+### Total Precipitation (TotPrcp)
+
+TotPrcp: total precipitation measured in millimeters (mm)
+
+
+#### Subsetting: TotPrcp
+
+#### Plots
+
+##### Line/Scatterplot
+
+###### Total Precipitation (Year-round)
+
+###### Total Precipitation (Winter)
+
+###### Total Precipitation (Spring)
+
+###### Total Precipitation (Summer)
+
+###### Total Precipitation (Fall)
+
+##### Boxplots:
+
+###### Total Precipitation (Year-round)
+
+###### Total Precipitation (Winter)
+
+###### Total Precipitation (Spring)
+
+###### Total Precipitation (Summer)
+
+###### Total Precipitation (Fall)
+
+### Cumulative Precipitation (CumPrcp)
+
+CumPrcp: cumulative precipitation measured in millimeters (mm)
+
+
+#### Subsetting: CumPrcp
+
+#### Plots
+
+##### Line/Scatterplot
+
+###### Cumulative Precipitation (Year-round)
+
+###### Cumulative Precipitation (Winter)
+
+###### Cumulative Precipitation (Spring)
+
+###### Cumulative Precipitation (Summer)
+
+###### Cumulative Precipitation (Fall)
+
+##### Boxplots:
+
+###### Cumulative Precipitation (Year-round)
+
+###### Cumulative Precipitation (Winter)
+
+###### Cumulative Precipitation (Spring)
+
+###### Cumulative Precipitation (Summer)
+
+###### Cumulative Precipitation (Fall)
