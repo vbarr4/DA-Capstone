@@ -1658,34 +1658,85 @@ boxPlot_yearlyTemp
 boxPlot_yearlyTemp1
 ```
 ```{r, echo=FALSE, error=FALSE, message=FALSE, warning=FALSE}
+#Temperature box plots withought separating by season
+tempByYear <- temp|> filter(!is.na(Temp))|>
+  ggplot()+
+  geom_boxplot(aes(Temp, year, group=year))+
+  #facet_wrap(~year)+
+  labs(title = "Yearly Temperature",
+       x= "Temperature",
+       y= "Year")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
+
 #Comparing the first and last year of collected data
-temp2002Vs2021 <- mean_temp|> filter(!is.na(mean_temp))|>
+temp2002Vs2021 <- temp|> filter(!is.na(Temp))|>
   filter(year== c(2002, 2021))|>
   ggplot()+
-  geom_boxplot(aes(year, mean_temp))+
-  facet_wrap(~year)+
-  labs(title = "Mean Yearly Temperature")
+  geom_boxplot(aes(Temp, year, group=year))+
+  labs(title = "2002 Vs. 2021 Yearly Temperature",
+       x= "Temperature",
+       y= "")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )+
+   scale_y_continuous(breaks=c(2002, 2021))
 
+tempByYear
 temp2002Vs2021
 ```
 ```{r, echo=FALSE, error=FALSE, warning=FALSE, message=FALSE}
 #Chloro levels by year (not separated by season)
-mean_yearly_chloro <- mean_chloro|> filter(!is.na(mean_chloro))|>
+yearly_chloro <- chloro|> filter(!is.na(ChlFluor))|>
   ggplot()+
-  geom_boxplot(aes(year, mean_chloro))+
-  facet_wrap(~year)+
-  labs(title = "Mean Yearly Chlorofluorocarbon Levels")
+  geom_boxplot(aes(ChlFluor, year, group=year))+
+  labs(title = "Chlorophyll Fluorescence Levels by Year",
+       x= "Chlorophyll Fluorescence",
+       y= "Year")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5)
+  )+
+   scale_y_continuous(breaks=c(2014, 2015, 2016,2017,2018, 2019))
 
-mean_yearly_chloro
+yearly_chloro
 ```
 ```{r, echo=FALSE, error=FALSE, message=FALSE, warning=FALSE}
 #Comparing the first and last year of collected data
-chloro2014Vs2021 <- mean_chloro|> filter(!is.na(mean_chloro))|>
-  filter(year== c(2014, 2021))|>
+chloro2014Vs2021 <- chloro|> filter(!is.na(ChlFluor))|>
+  filter(year== c(2014, 2019))|>
   ggplot()+
-  geom_boxplot(aes(year, mean_chloro))+
-  facet_wrap(~year)+
-  labs(title = "Mean Yearly Chlorofluorocarbon Levels")
+  geom_boxplot(aes(ChlFluor, year, group=year))+
+ # facet_wrap(~year)+
+  labs(title = "Chlorophyll Fluorescence Levels by in 2014 Vs. 2019",
+       x= "Chlorophyll Fluorescence",
+       y= "Year")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5)
+  )+
+  scale_y_continuous(breaks=c(2014, 2019))
 
 chloro2014Vs2021
 ```
