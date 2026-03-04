@@ -1,60 +1,66 @@
 ---
-title: "30_years_EDA"
+title: "EDA_stony_creek"
+author: Natalie Novoseltseva
 format: html
 ---
+Measuring Climate Change Effects through Water Quality 
+Stony Creek EDA
 
-## Libraries
-
-```{r}
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
 #libraries
 library(tidyverse)
 library(dplyr)
 library(lubridate)
 library(gt)
 library(ggplot2)
+library(stringr)
+library(janitor)
 ```
 
 ## Data
 
-```{r}
-#tivoli north data 1996-2015
-dir.create("data/tivoli_north", recursive = TRUE, showWarnings = FALSE) #creates a data folder for the specific site
+To obtain raw water quality and weather data, use the Centralized Data Management Office (CDMO) website: <https://cdmo.baruch.sc.edu/>
 
-#using tempfile() to create a tempoarry storage
-zip <- tempfile(fileext = ".zip")
+1.  Navigate to the CDMO website: <https://cdmo.baruch.sc.edu/>.
 
-#downlod the file from the url
-download.file("http://cdmo.baruch.sc.edu/aqs/output/444944.zip", zip, mode = "wb")
+2.  Click on the **Get Data** tab at the top of the page.
 
-unzip(zip, exdir = "data/tivoli_north")
+3.  Select **Advanced Query System** and click **Launch**.
 
-#read in the files for all the years as a one data file
-files <- list.files(
-  "data/tivoli_north",
-  pattern = "^hudtnwq[0-9]{4}\\.csv$", # ^ -starts a string
-                                       # hudtnwq - the exact name in the file (constant)
-                                       # any digits from 0-9 might follow
-                                       # {4} - we are looking for 4 digits pattern
-                                       # \\. - there should be a dot
-                                       # csv - it should end with "csv"
-                                       # end a string
-  full.names = TRUE
-)
+4.  Locate the **Zip Downloads** option and click **Choose ZIP Files**.
 
-tn_96_25_raw <- do.call(
-  rbind,
-  lapply(files, function(f) {
-    df <- read.csv(f, fileEncoding = "Latin1")
-    df$year <- as.integer(gsub(".*([0-9]{4})\\.csv$", "\\1", f))
-    df
-  })
-)
+5.  From the list of National Estuarine Research Reserves, select **Hudson River, NY**.
 
-```
+6.  Select the appropriate dataset:
+
+    -   For **weather data** from the field station, select **hudfsmet-p**.
+
+    -   For **Stony Creek water quality data**, select **hudscwq-p**.
+
+    -   For **Tivoli North water quality data**, select **hudtnwq-p**.
+
+    Each dataset must be requested separately, as the website generates one download link per request, and the analysis code is structured to process each dataset independently.
+
+7.  After selecting the desired site, click **Submit location and proceed to next step.**
+
+8.  Select the desired range of years and click **Get files**.
+
+    -   For the DA Capstone Spring 2026 project, requests were made for all available years.
+
+9.  Complete the required information requested by the website and submit the request.
+
+10. Shortly after submission, an email will be sent to the provided email address containing a download link to the data files.
+
+11. Copy and paste this link into the corresponding section of the code for the selected site.
+
+12. Run the code. After execution, all files will be downloaded into a subfolder named after the site within your data folder.
+
 
 ```{r}
 #stony creek data 2002-2021
-dir.create("data/stony_creek", recursive = TRUE, showWarnings = FALSE) #creates a data folder for the specific site
+
+#creates a data folder for the specific site
+dir.create("data/stony_creek", recursive = TRUE, showWarnings = FALSE) 
 
 #using tempfile() to create a tempary storage
 zip <- tempfile(fileext = ".zip")
@@ -77,6 +83,7 @@ files <- list.files(
   full.names = TRUE
 )
 
+#combines all data files into one dataset
 sc_02_21_raw <- do.call(
   rbind,
   lapply(files, function(f) {
@@ -89,37 +96,34 @@ sc_02_21_raw <- do.call(
 
 ## Data Cleaning
 
-Stony Creek
-
 ```{r}
-#get rid of the empty columns
-sc_02_21 <- sc_02_21_raw %>% 
-  select(-X, #empty columns
-        -cLevel, 
-        -F_cLevel, 
-        -Level, 
+# Removing empty columns and other irrelant columns
+stony_creek <- sc_02_21_raw |>
+  remove_empty("cols")|>
+  select(-StationCode,
         -isSWMP, #historical and provisionalPlus columns indicate the status of QAQC
         -Historical, 
-        -ProvisionalPlus,
-        -F_Record, #Quality Assurance Flags (we should discuss if we need those)
-        -F_Temp, 
-        -F_SpCond, 
-        -F_Sal, 
-        -F_DO_Pct, 
-        -F_Level, 
-        -F_pH, 
-        -F_Turb, 
-        -F_ChlFluor,
-        -F_DO_mgl,
-        -F_Depth,
-        -F_cDepth
-           )
+        -ProvisionalPlus
+        
+  )
+
+#creating a vector with all the flags
+flags <- c("F_Record", "F_Temp", "F_SpCond", "F_Sal", "F_DO_Pct", "F_Depth", "F_cDepth", "F_Level", "F_pH", "F_Turb", "F_ChlFluor", "F_DO_mgl")
+
+stony_creek <- stony_creek |>
+  mutate(Temp = if_else(
+      if_any(all_of(flags), ~ str_detect(.x, "<-3>|<-2>|<1>")), NA_real_, Temp))
+
+#removing flag columns #remove comment of the next two lines once the previous step was done
+# stony_creek <- stony_creek |>
+#   select(-flags) 
 
 ```
 
+
 ```{r}
 #separate the data and time column
-sc_02_21 <- sc_02_21 %>%
+sc_02_21 <- sc_02_21_raw %>%
   mutate(
     DateTimeStamp = as.POSIXct(DateTimeStamp, format = "%m/%d/%Y %H:%M"), #converts the variable into standard POSIXct format
     date = as.Date(DateTimeStamp),
@@ -144,13 +148,14 @@ sc_02_21 <- sc_02_21 %>%
   )
 ```
 
+
 ## Tables and averages
 
 Number of observations
 
 ```{r}
 sc_02_21_NAs <- sc_02_21 %>%
-  filter(is.na(season))#exclude
+  filter(is.na(season))
 
 sc_02_21 %>%
   count(year, season) %>%
@@ -162,7 +167,7 @@ sc_02_21 %>%
     year = "Year",
     n = "Number of Observations"
   )
-#filter Season NAs??
+
 ```
 
 Summary statistics (all years)
@@ -313,6 +318,70 @@ sc_02_21 %>%
 Changes in the magnitude of temperature changes
 
 ```{r}
+#calculate yearly average air temperature and difference from overall mean
+avg_air_temp_by_year <- sc_02_21 %>%
+  group_by(year) %>%
+  summarise(
+    avg_air_temp = mean(Temp, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    delta_overall = avg_air_temp - mean(avg_air_temp, na.rm = TRUE)  #difference from overall mean
+  )
+
+#gt table
+avg_air_temp_by_year %>%
+  gt() %>%
+  tab_header(
+    title = "Average Air Temperature by Year",
+    subtitle = "Deviation from Overall Mean (2001–2026)"
+  ) %>%
+  fmt_number(
+    columns = c(avg_air_temp, delta_overall),
+    decimals = 2
+  ) %>%
+  cols_label(
+    year = "Year",
+    avg_air_temp = "Average Air Temperature (°C)",
+    delta_overall = "Difference from Overall Average (°C)"
+  )
+```
+
+Plot of the of the magnitude of temperature changes
+
+```{r}
+#calculate yearly average and deviation from overall mean
+avg_air_temp_by_year <- sc_02_21 %>%
+  group_by(year) %>%
+  summarise(
+    avg_air_temp = mean(Temp, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    delta_overall = avg_air_temp - mean(avg_air_temp, na.rm = TRUE)  #deviation from overall mean
+  )
+
+overall_mean <- mean(avg_air_temp_by_year$avg_air_temp)
+
+#plot
+ggplot(avg_air_temp_by_year, aes(x = factor(year), y = avg_air_temp, fill = delta_overall > 0)) +
+  geom_col(show.legend = FALSE) +
+  geom_hline(yintercept = overall_mean, color = "red", linetype = "dashed", size = 1) +
+  labs(
+    title = "Average Air Temperature by Year",
+    subtitle = "Bars show yearly averages; red dashed line = overall mean (2001–2026)",
+    x = "Year",
+    y = "Average Air Temperature (°C)"
+  ) +
+  scale_fill_manual(values = c("TRUE" = "steelblue", "FALSE" = "lightgray")) +
+  theme_minimal(base_size = 14) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
+Changes in the magnitude of temperature changes
+
+```{r}
 sc_02_21 %>%
   group_by(year) %>%
   summarise(
@@ -353,3 +422,14 @@ ggplot(yearly_temp_change, aes(x = year, y = delta_temp, fill = delta_temp > 0))
   ) +
   theme_minimal()
 ```
+
+Joining the water quality and weather datasets (?)
+
+```{r}
+#merged_data <- left_join(
+#  sc_02_21,
+#  fs_weather_01_26,
+#  by = c("DateTimeStamp" = "DatetimeStamp")
+#)
+```
+
