@@ -1,6 +1,6 @@
 ---
 title: Exploratory Data Analysis on Meteorological Data from (2001 - 2026)
-author: Ilianna Ditren
+author: Ilianna Ditren, Joy Terentiev
 ---
 
 ## Project Set Up
@@ -15,7 +15,6 @@ library(tidyverse)
 library(dplyr)
 library(lubridate)
 library(janitor)
-library(ggplot2)
 
 ```
 
@@ -156,6 +155,12 @@ atemp <- stony_creek_weather |>
   select(ATemp, year, season)|>
   filter(!is.na(ATemp))
 
+#Mean air temp
+meanAirTemp <- atemp |> 
+  group_by(season, year)|>
+  summarize(meanTemp = mean(ATemp))|>
+  filter(!is.na(season))
+
 ```
 
 #### Plots
@@ -163,14 +168,126 @@ atemp <- stony_creek_weather |>
 ##### Line/Scatterplot
 
 ###### Avg Air Temperature (Year-round)
+```{r}
+airTemp <- ggplot(meanAirTemp)+
+  geom_point(aes(year, meanTemp, color= season))+
+scale_color_manual(values= c(
+    "Summer"= "#d7191c",
+    "Fall"= "#fdae61",
+    "Winter"= "#165ae6",
+    "Spring"= "#67a9cf"
+  ))+
+  labs(title = "Mean Seasonal Air Temperature by Year",
+       x= "Year",
+       y= "Mean Air Temperature")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5)
+  )
+
+airTemp
+
+```
 
 ###### Avg Air Temperature (Winter)
+```{r}
+mWinterAirTemp <- ggplot(meanAirTemp|> filter(season=="Winter"))+
+  geom_point(aes(year, meanTemp, color= season))+
+scale_color_manual(values= c(
+    "Winter"= "#165ae6"
+  ))+
+  labs(title = "Mean Winter Air Temperature by Year",
+       x= "Year",
+       y= "Mean Air Temperature")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
+
+mWinterAirTemp
+```
+
 
 ###### Avg Air Temperature (Spring)
+```{r}
+mSpringAirTemp <- ggplot(meanAirTemp|> filter(season=="Spring"))+
+  geom_point(aes(year, meanTemp, color= season))+
+scale_color_manual(values= c(
+    "Spring"= "#67a9cf"
+  ))+
+  labs(title = "Mean Spring Air Temperature by Year",
+       x= "Year",
+       y= "Mean Air Temperature")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
+
+mSpringAirTemp
+```
+
 
 ###### Avg Air Temperature (Summer)
+```{r}
+mSummerAirTemp <- ggplot(meanAirTemp|> filter(season=="Summer"))+
+  geom_point(aes(year, meanTemp, color= season))+
+scale_color_manual(values= c(
+    "Summer"= "#d7191c"
+  ))+
+  labs(title = "Mean Summer Air Temperature by Year",
+       x= "Year",
+       y= "Mean Air Temperature")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
+
+mSummerAirTemp
+```
+
 
 ###### Avg Air Temperature (Fall)
+```{r}
+mFallAirTemp <- ggplot(meanAirTemp|> filter(season=="Fall"))+
+  geom_point(aes(year, meanTemp, color= season))+
+scale_color_manual(values= c(
+    "Fall"= "#fdae61"
+  ))+
+  labs(title = "Mean Fall Air Temperature by Year",
+       x= "Year",
+       y= "Mean Air Temperature")+
+  theme(
+    panel.background = element_rect(fill="white"),
+    plot.background = element_rect(fill= "#f4f4f4"),
+    panel.grid.major = element_line(color="lightgray"),
+    panel.grid.minor = element_line(color="lightgray"),
+    panel.grid.major.x = element_line(color="#f0f0f0"),
+    plot.title = element_text(hjust= 0.5),
+    legend.position = "none"
+  )
+
+mFallAirTemp
+```
+
 
 ##### Boxplots:
 
@@ -275,6 +392,10 @@ RH: average relative humidity measured in percent saturation (%)
 ##### Line/Scatterplot
 
 ###### Average Relative Humidity (Year-round)
+```{r}
+
+```
+
 
 ###### Average Relative Humidity (Winter)
 
