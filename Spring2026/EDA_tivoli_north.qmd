@@ -1,0 +1,60 @@
+---
+title: "EDA_tivoli_north"
+author: Natalie Novoseltseva
+format: html
+---
+
+Measuring Climate Change Effects through Water Quality
+
+Tivoli North EDA
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+#libraries
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(gt)
+library(ggplot2)
+library(stringr)
+```
+
+## Data
+
+```{r}
+#tivoli north data 1996-2015
+
+#creates a data folder for the specific site
+dir.create("data/tivoli_north", recursive = TRUE, showWarnings = FALSE) 
+
+#using tempfile() to create a tempoarry storage
+zip <- tempfile(fileext = ".zip")
+
+#downlod the file from the url
+download.file("http://cdmo.baruch.sc.edu/aqs/output/444944.zip", zip, mode = "wb")
+
+unzip(zip, exdir = "data/tivoli_north")
+
+#read in the files for all the years as a one data file
+files <- list.files(
+  "data/tivoli_north",
+  pattern = "^hudtnwq[0-9]{4}\\.csv$", # ^ -starts a string
+                                       # hudtnwq - the exact name in the file (constant)
+                                       # any digits from 0-9 might follow
+                                       # {4} - we are looking for 4 digits pattern
+                                       # \\. - there should be a dot
+                                       # csv - it should end with "csv"
+                                       # end a string
+  full.names = TRUE
+)
+
+#combines all data files into one dataset
+tn_96_25_raw <- do.call(
+  rbind,
+  lapply(files, function(f) {
+    df <- read.csv(f, fileEncoding = "Latin1")
+    df$year <- as.integer(gsub(".*([0-9]{4})\\.csv$", "\\1", f))
+    df
+  })
+)
+
+```

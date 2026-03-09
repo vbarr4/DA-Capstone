@@ -1,0 +1,56 @@
+---
+author: Ilianna Ditren, Joy T., Natalie N.
+---
+
+# Climate Change Effects of Water Quality (20-years change)
+
+## Project Set Up
+
+```{r, echo = FALSE, message=FALSE}
+#Downloading libraries
+
+library(readr)
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+```
+
+## Downloading and Data Cleaning
+
+```{r, echo = FALSE}
+
+#dowloading data
+
+#Tivoli North Data 1996 - 2025
+dir.create("data/tivoli_north", recursive = TRUE, showWarnings = FALSE) #creates a folder for the new data
+
+zip_tn <- tempfile(fileext = ".zip")                                       #creating a temporary zip file
+
+tiv_north_raw <- "http://cdmo.baruch.sc.edu/aqs/output/444944.zip"
+
+download.file(tiv_north_raw, zip_tn, mode = "wb")
+
+unzip(zip_tn, exdir = "data/tivoli_north")                          #unzipping data from and placing it in a folder
+
+```
+
+```{r, echo = FALSE}
+#read in the files for all the years as a one data file
+
+#Tivoli North Data 1996 - 2025
+files <- list.files(
+  "data/tivoli_north",
+  pattern = "^hudtnwq[0-9]{4}\\.csv$", # ^ -starts a string, hudtnwq - the exact name in the file (constant), any digits from 0-9 might follow, {4} - we are looking for 4 digits pattern, \\. - there should be a dot, csv - it should end with "csv",  end a string
+  full.names = TRUE
+)
+
+tn_96_25 <- do.call(
+  rbind,
+  lapply(files, function(f) {
+    df <- read.csv(f, fileEncoding = "Latin1")
+    df$year <- as.integer(gsub(".*([0-9]{4})\\.csv$", "\\1", f))
+    df
+  })
+)
+
+```
