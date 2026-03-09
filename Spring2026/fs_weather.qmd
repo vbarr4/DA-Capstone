@@ -45,7 +45,7 @@ files <- list.files(
   full.names = TRUE
 )
 #combines all data files into one dataset
-stony_creek_weather_raw <- do.call(
+fs_weather_raw <- do.call(
   rbind,
   lapply(files, function(f) {
     df <- read.csv(f, fileEncoding = "Latin1")
@@ -62,7 +62,7 @@ stony_creek_weather_raw <- do.call(
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 # Removing empty columns and other irrelant columns
-stony_creek_weather <- stony_creek_weather_raw |>
+fs_weather <- fs_weather_raw |>
   remove_empty("cols")|>
   select(-StationCode,
         -isSWMP, #historical and provisional Plus columns indicate the status of QAQC
@@ -92,7 +92,7 @@ flags_weather <- c(
 
 flagged_data <- "<-3>|<-2>|<1>"
 
-stony_creek_weather <- stony_creek_weather |>
+fs_weather <- fs_weather |>
   mutate(ATemp = if_else(str_detect(F_ATemp, flagged_data), NA_real_, ATemp),
          RH = if_else(str_detect(F_RH, flagged_data), NA_real_, RH),
          BP = if_else(str_detect(F_BP, flagged_data), NA_real_, BP),
@@ -105,7 +105,7 @@ stony_creek_weather <- stony_creek_weather |>
   )
 
 #removing flag columns 
-stony_creek_weather <- stony_creek_weather |> 
+fs_weather <- fs_weather |> 
   select(-all_of(flags_weather))
 
 ```
@@ -115,7 +115,7 @@ stony_creek_weather <- stony_creek_weather |>
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 #separate the data and time column
-stony_creek_weather <- stony_creek_weather %>%
+fs_weather <- fs_weather %>%
   mutate(
     DatetimeStamp = as.POSIXct(DatetimeStamp, format = "%m/%d/%Y %H:%M"), #converts the variable into standard POSIXct format
     date = as.Date(DatetimeStamp),
@@ -123,13 +123,13 @@ stony_creek_weather <- stony_creek_weather %>%
   )
 
 #create a month column
-stony_creek_weather <- stony_creek_weather %>%
+fs_weather <- fs_weather %>%
   mutate(
     month = month(DatetimeStamp)          
   )
 
 #create a season column
-stony_creek_weather <- stony_creek_weather %>%
+fs_weather <- fs_weather %>%
   mutate(
     season = case_when(
       month %in% c(12, 1, 2) ~ "Winter",
@@ -151,7 +151,7 @@ stony_creek_weather <- stony_creek_weather %>%
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 #Selecting relevant data to look at temperature
-atemp <- stony_creek_weather |>
+atemp <- fs_weather |>
   select(ATemp, year, season)|>
   filter(!is.na(ATemp))
 
