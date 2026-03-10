@@ -1,0 +1,431 @@
+---
+title: "fs_weather_tables"
+author: Natalie Novoseltseva
+format: html
+---
+
+Measuring Climate Change Effects through Water Quality
+
+Field Station Weather Data EDA
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+#libraries
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(gt)
+library(ggplot2)
+library(stringr)
+```
+
+## Data
+
+```{r}
+#field station meteorological data 2001-2026
+
+#creates a data folder
+dir.create("data/field_station_weather", recursive = TRUE, showWarnings = FALSE) 
+
+#using tempfile() to create a tempoarry storage
+zip <- tempfile(fileext = ".zip")
+
+#downlod the file from the url
+download.file("http://cdmo.baruch.sc.edu/aqs/output/854334.zip", zip, mode = "wb")
+
+unzip(zip, exdir = "data/field_station_weather")
+
+#read in the files for all the years as a one data file hudfsmet-p
+files <- list.files(
+  "data/field_station_weather",
+  pattern = "^hudfsmet[0-9]{4}\\.csv$", # ^ -starts a string
+                                       # hudfsmet - the exact name in the file (constant)
+                                       # any digits from 0-9 might follow
+                                       # {4} - we are looking for 4 digits pattern
+                                       # \\. - there should be a dot
+                                       # csv - it should end with "csv"
+                                       # end a string
+  full.names = TRUE
+)
+
+fs_weather_01_26_raw <- do.call(
+  rbind,
+  lapply(files, function(f) {
+    df <- read.csv(f, fileEncoding = "Latin1")
+    df$year <- as.integer(gsub(".*([0-9]{4})\\.csv$", "\\1", f))
+    df
+  })
+)
+```
+
+## Data Cleaning
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+# Removing empty columns and other irrelant columns
+fs_weather_01_26 <- fs_weather_01_26_raw |>
+  remove_empty("cols")|>
+  select(-StationCode,
+        -isSWMP, #historical and provisional Plus columns indicate the status of QAQC
+        -Historical, 
+        -ProvisionalPlus,
+  )
+
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+#creating a vector with all the flags
+flags_weather <- c(
+  "F_Record",
+  "F_ATemp",
+  "F_RH",
+  "F_BP",
+  "F_WSpd",
+  "F_MaxWSpd",
+  "F_Wdir",
+  "F_SDWDir",
+  "F_TotPAR",
+  "F_TotPrcp",
+  "F_TotSoRad")
+
+flagged_data <- "<-3>|<-2>|<1>"
+
+fs_weather_01_26 <- fs_weather_01_26 |>
+  mutate(ATemp = if_else(str_detect(F_ATemp, flagged_data), NA_real_, ATemp),
+         RH = if_else(str_detect(F_RH, flagged_data), NA_real_, RH),
+         BP = if_else(str_detect(F_BP, flagged_data), NA_real_, BP),
+         WSpd = if_else(str_detect(F_WSpd, flagged_data), NA_real_, WSpd),
+         MaxWSpd = if_else(str_detect(F_MaxWSpd, flagged_data), NA_real_, MaxWSpd),
+         Wdir = if_else(str_detect(F_Wdir, flagged_data), NA_real_, Wdir),
+         SDWDir = if_else(str_detect(F_SDWDir, flagged_data), NA_real_, SDWDir),
+         TotPAR = if_else(str_detect(F_TotPAR, flagged_data), NA_real_, TotPAR),
+         TotPrcp = if_else(str_detect(F_TotPrcp, flagged_data), NA_real_, TotPrcp)
+  )
+
+#removing flag columns 
+fs_weather_01_26 <- fs_weather_01_26 |> 
+  select(-all_of(flags_weather))
+
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+#separate the data and time column
+fs_weather_01_26 <- fs_weather_01_26 %>%
+  mutate(
+    DatetimeStamp = as.POSIXct(DatetimeStamp, format = "%m/%d/%Y %H:%M"), #converts the variable into standard POSIXct format
+    date = as.Date(DatetimeStamp),
+    time = format(DatetimeStamp, "%H:%M:%S")
+  )
+
+#create a month column
+fs_weather_01_26 <- fs_weather_01_26 %>%
+  mutate(
+    month = month(DatetimeStamp)          
+  )
+
+#create a season column
+fs_weather_01_26 <- fs_weather_01_26 %>%
+  mutate(
+    season = case_when(
+      month %in% c(12, 1, 2) ~ "Winter",
+      month %in% 3:5        ~ "Spring",
+      month %in% 6:8        ~ "Summer",
+      month %in% 9:11       ~ "Fall"
+    )
+  )
+```
+
+## Tables and averages
+
+Number of observations
+
+```{r}
+fs_weather_01_26_NAs <- fs_weather_01_26 %>%
+  filter(is.na(season))
+
+fs_weather_01_26 %>%
+  count(year, season) %>%
+  gt(groupname_col = "season") %>%
+  tab_header(
+    title = "Observation Coverage by Year and Season"
+  ) %>%
+  cols_label(
+    year = "Year",
+    n = "Number of Observations"
+  )
+
+```
+
+Summary statistics (all years)
+
+```{r}
+weather_summary <- fs_weather_01_26 %>%
+  summarise(
+    Mean_ATemp    = mean(ATemp, na.rm = TRUE),
+    SD_ATemp      = sd(ATemp, na.rm = TRUE),
+    Mean_RH       = mean(RH, na.rm = TRUE),
+    SD_RH         = sd(RH, na.rm = TRUE),
+    Mean_BP       = mean(BP, na.rm = TRUE),
+    SD_BP         = sd(BP, na.rm = TRUE),
+    Mean_WSpd     = mean(WSpd, na.rm = TRUE),
+    SD_WSpd       = sd(WSpd, na.rm = TRUE),
+    Mean_MaxWSpd  = mean(MaxWSpd, na.rm = TRUE),
+    SD_MaxWSpd    = sd(MaxWSpd, na.rm = TRUE),
+    Mean_TotPAR   = mean(TotPAR, na.rm = TRUE),
+    SD_TotPAR     = sd(TotPAR, na.rm = TRUE),
+    Mean_TotPrcp  = mean(TotPrcp, na.rm = TRUE),
+    SD_TotPrcp    = sd(TotPrcp, na.rm = TRUE)
+  ) %>%
+  tidyr::pivot_longer(
+    cols = everything(),
+    names_to = c("Statistic", "Variable"),
+    names_sep = "_",
+    values_to = "Value"
+  ) %>%
+  tidyr::pivot_wider(
+    names_from = Statistic,
+    values_from = Value
+  ) %>%
+  mutate(
+    Variable = recode(
+      Variable,
+      ATemp   = "Air Temperature (°C)",
+      RH      = "Relative Humidity (%)",
+      BP      = "Barometric Pressure (hPa)",
+      WSpd    = "Wind Speed (m/s)",
+      MaxWSpd = "Maximum Wind Speed (m/s)",
+      TotPAR  = "Total PAR (µmol/m²)",
+      TotPrcp = "Total Precipitation (mm)"
+    )
+  )
+
+weather_summary %>%
+  gt() %>%
+  tab_header(
+    title = "Summary Statistics for Weather Variables",
+    subtitle = "Hudson River Field Station Weather Data (2001–2026)"
+  ) %>%
+  cols_label(
+    Variable = "Variable",
+    Mean = "Mean",
+    SD = "Standard Deviation"
+  ) %>%
+  fmt_number(
+    columns = c(Mean, SD),
+    decimals = 2
+  )
+```
+
+Averages by season
+
+```{r}
+fs_weather_01_26 %>%
+  group_by(season) %>%
+  summarise(
+    avg_air_temp = mean(ATemp, na.rm = TRUE),
+    avg_humidity = mean(RH, na.rm = TRUE),
+    avg_wind_spd = mean(WSpd, na.rm = TRUE),
+    avg_precip   = mean(TotPrcp, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  gt() %>%
+  tab_header(
+    title = "Average Weather Conditions by Season",
+    subtitle = "Hudson River Field Station (2001–2026)"
+  ) %>%
+  cols_label(
+    season        = "Season",
+    avg_air_temp  = "Air Temperature (°C)",
+    avg_humidity  = "Relative Humidity (%)",
+    avg_wind_spd  = "Wind Speed (m/s)",
+    avg_precip    = "Total Precipitation (mm)"
+  ) %>%
+  fmt_number(
+    decimals = 2
+  )
+```
+
+Average temperatures by year
+
+```{r}
+avg_temp_by_year <- fs_weather_01_26 %>%
+  group_by(year) %>%
+  summarise(
+    avg_air_temp = mean(ATemp, na.rm = TRUE),
+    n_obs = n(),
+    .groups = "drop"
+  )
+
+avg_temp_by_year %>%
+  gt() %>%
+  tab_header(
+    title = "Average Air Temperature by Year",
+    subtitle = "Hudson River Field Station Weather Data (2001–2026)"
+  ) %>%
+  fmt_number(
+    columns = avg_air_temp,
+    decimals = 2
+  ) %>%
+  cols_label(
+    year = "Year",
+    avg_air_temp = "Average Air Temperature (°C)",
+    n_obs = "Observations"
+  )
+```
+
+Average temperature by year and season (one table)
+
+```{r}
+avg_air_temp_by_year_season <- fs_weather_01_26 %>%
+  group_by(season, year) %>%
+  summarise(
+    avg_air_temp = mean(ATemp, na.rm = TRUE),
+    n_obs = n(),
+    .groups = "drop"
+  ) %>%
+  filter(!is.na(season))
+
+avg_air_temp_by_year_season %>%
+  gt(groupname_col = "season") %>%
+  tab_header(
+    title = "Average Air Temperature by Year and Season",
+    subtitle = "Hudson River Field Station Weather Data (2001–2026)"
+  ) %>%
+  fmt_number(
+    columns = avg_air_temp,
+    decimals = 2
+  ) %>%
+  cols_label(
+    year = "Year",
+    avg_air_temp = "Average Air Temperature (°C)",
+    n_obs = "Observations"
+  )
+```
+
+Seasonal extremes
+
+```{r}
+fs_weather_01_26 %>%
+  group_by(season) %>%
+  summarise(
+    min_air_temp = min(ATemp, na.rm = TRUE),  #lowest observed air temperature
+    max_air_temp = max(ATemp, na.rm = TRUE),  #highest observed air temperature
+    p95_air_temp = quantile(ATemp, 0.95, na.rm = TRUE), #95th percentile (excludes extreme outliers)
+    .groups = "drop"
+  ) %>%
+  gt() %>%
+  tab_header(
+    title = "Seasonal Air Temperature Extremes",
+    subtitle = "Hudson River Field Station Weather Data (2001–2026)"
+  ) %>%
+  fmt_number(
+    decimals = 2
+  ) %>%
+  cols_label(
+    season = "Season",
+    min_air_temp = "Minimum Air Temperature (°C)",
+    max_air_temp = "Maximum Air Temperature (°C)",
+    p95_air_temp = "95th Percentile Air Temperature (°C)"
+  )
+```
+
+Changes in the magnitude of temperature changes
+
+```{r}
+avg_air_temp_by_year <- fs_weather_01_26 %>%
+  group_by(year) %>%
+  summarise(
+    avg_air_temp = mean(ATemp, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    delta_overall = avg_air_temp - mean(avg_air_temp, na.rm = TRUE) # difference from overall average
+  )
+
+avg_air_temp_by_year %>%
+  gt() %>%
+  tab_header(
+    title = "Average Air Temperature by Year",
+    subtitle = "Deviation from Overall Mean (2001–2026)"
+  ) %>%
+  fmt_number(
+    columns = c(avg_air_temp, delta_overall),
+    decimals = 2
+  ) %>%
+  cols_label(
+    year = "Year",
+    avg_air_temp = "Average Air Temperature (°C)",
+    delta_overall = "Difference from Overall Average (°C)"
+  )
+```
+
+Plot of the magnitude of temperature changes
+
+```{r}
+avg_air_temp_by_year <- fs_weather_01_26 %>%
+  group_by(year) %>%
+  summarise(
+    avg_air_temp = mean(ATemp, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    delta_overall = avg_air_temp - mean(avg_air_temp, na.rm = TRUE) #difference from overall average
+  )
+
+overall_mean <- mean(avg_air_temp_by_year$avg_air_temp)
+
+#plot
+ggplot(avg_air_temp_by_year, aes(x = factor(year), y = avg_air_temp, fill = delta_overall > 0)) +
+  geom_col(show.legend = FALSE) +
+  geom_hline(yintercept = overall_mean, linetype = "dashed", color = "red", size = 1) +
+  labs(
+    title = "Average Air Temperature by Year",
+    subtitle = "Deviation from Overall Mean (2001–2026)",
+    x = "Year",
+    y = "Average Air Temperature (°C)"
+  ) +
+  scale_fill_manual(values = c("TRUE" = "steelblue", "FALSE" = "lightgray")) +
+  theme_minimal(base_size = 14) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+Plot of the magnitude of temperature changes by season
+
+```{r}
+#calculate average air temperature by year and season
+avg_air_temp_by_year_season <- fs_weather_01_26 %>%
+  filter(!is.na(season)) %>%  # exclude missing seasons
+  group_by(season, year) %>%
+  summarise(
+    avg_air_temp = mean(ATemp, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+#calculate overall seasonal averages (one per season)
+seasonal_mean <- avg_air_temp_by_year_season %>%
+  group_by(season) %>%
+  summarise(season_mean = mean(avg_air_temp, na.rm = TRUE), .groups = "drop")
+
+#merge seasonal mean back to the yearly data
+avg_air_temp_by_year_season <- avg_air_temp_by_year_season %>%
+  left_join(seasonal_mean, by = "season") %>%
+  mutate(
+    delta_overall = avg_air_temp - season_mean
+  )
+
+#plot
+ggplot(avg_air_temp_by_year_season, aes(x = factor(year), y = avg_air_temp, fill = delta_overall > 0)) +
+  geom_col(show.legend = FALSE) +
+  geom_hline(aes(yintercept = season_mean), color = "red", linetype = "dashed", size = 1) +
+  facet_wrap(~season, scales = "free_y") +
+  labs(
+    title = "Average Air Temperature by Year and Season",
+    subtitle = "Bars show yearly averages; red dashed line = seasonal mean (2001–2026)",
+    x = "Year",
+    y = "Average Air Temperature (°C)"
+  ) +
+  scale_fill_manual(values = c("TRUE" = "steelblue", "FALSE" = "lightgray")) +
+  theme_minimal(base_size = 14) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
