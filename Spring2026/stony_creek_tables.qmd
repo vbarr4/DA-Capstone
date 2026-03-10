@@ -61,7 +61,7 @@ sc_02_21_raw <- do.call(
 ## Data Cleaning
 
 ```{r}
-# Removing empty columns and other irrelant columns
+# Removing empty columns and other irrelevant columns
 stony_creek <- sc_02_21_raw |>
   remove_empty("cols")|>
   select(-StationCode,
@@ -118,9 +118,11 @@ sc_02_21 <- sc_02_21 %>%
 Number of observations
 
 ```{r}
+#extract observations with missing season values
 sc_02_21_NAs <- sc_02_21 %>%
   filter(is.na(season))
 
+#count observations by year and season and display as a formatted table
 sc_02_21 %>%
   count(year, season) %>%
   gt(groupname_col = "season") %>%
@@ -137,6 +139,7 @@ sc_02_21 %>%
 Summary statistics (all years)
 
 ```{r}
+#compute summary statistics for selected variables, reshape, and display as a formatted table
 sc_02_21 %>%
   summarise(
     Temp_mean = mean(Temp, na.rm = TRUE),
@@ -148,9 +151,11 @@ sc_02_21 %>%
     pH_mean   = mean(pH, na.rm = TRUE),
     Sal_mean  = mean(Sal, na.rm = TRUE)
   ) %>%
+#convert wide summary to long format for easier display
   pivot_longer(everything(),
                names_to = "Statistic",
                values_to = "Value") %>%
+#format as a table using gt
   gt() %>%
   tab_header(
     title = "Overall Summary Statistics"
@@ -178,6 +183,7 @@ sc_02_21 %>%
 Average temperatures by year
 
 ```{r}
+#calculate average water quality measures by season and display as a formatted table
 avg_temp_by_year <- sc_02_21 %>%
   group_by(year) %>%
   summarise(
@@ -185,7 +191,7 @@ avg_temp_by_year <- sc_02_21 %>%
     n_obs = n(),
     .groups = "drop"
   )
-
+#format the summary as a table using gt
 avg_temp_by_year %>%
   gt() %>%
   tab_header(
@@ -205,6 +211,7 @@ avg_temp_by_year %>%
 Average temperature by year and season (one table)
 
 ```{r}
+#calculate average temperature and number of observations by season and year
 avg_temp_by_year_season <- sc_02_21 %>%
   group_by(season, year) %>%
   summarise(
@@ -212,17 +219,21 @@ avg_temp_by_year_season <- sc_02_21 %>%
     n_obs = n(),
     .groups = "drop"
   ) %>%
+#remove rows with missing season values
   filter(!is.na(season))
 
+#display the results as a formatted table
 avg_temp_by_year_season %>%
   gt(groupname_col = "season") %>%
   tab_header(
     title = "Average Water Temperature by Year and Season"
   ) %>%
+#round average temperature to 2 decimal places
   fmt_number(
     columns = avg_temp,
     decimals = 2
   ) %>%
+#rename columns
   cols_label(
     year = "Year",
     avg_temp = "Average Temperature (°C)",
@@ -233,11 +244,14 @@ avg_temp_by_year_season %>%
 Average temperature by year and season (as separate tables)
 
 ```{r}
+#split the data by season and create a separate formatted table for each season
 season_tables <- avg_temp_by_year_season %>%
   split(.$season) %>%
   lapply(function(season_df) {
+    #get the season name
     season_name <- unique(season_df$season)
-    
+
+#select relevant columns and format as a gt table
     season_df %>%
       select(year, avg_temp, n_obs) %>%
       gt() %>%
@@ -256,6 +270,7 @@ season_tables <- avg_temp_by_year_season %>%
       )
   })
 
+#access the tables for each season
 season_tables$Spring
 season_tables$Summer
 season_tables$Fall
@@ -265,6 +280,7 @@ season_tables$Winter
 Seasonal extremes
 
 ```{r}
+#calculate seasonal temperature extremes and display as a formatted table
 sc_02_21 %>%
   group_by(season) %>%
   summarise(
@@ -273,6 +289,7 @@ sc_02_21 %>%
     p95_temp = quantile(Temp, 0.95, na.rm = TRUE), #the 95th percentile of temperature for each season, which excludes outliers (5% of the highest observation)
     .groups = "drop"
   ) %>%
+#format the summary as a table
   gt() %>%
   tab_header(
     title = "Seasonal Temperature Extremes"
@@ -282,7 +299,7 @@ sc_02_21 %>%
 Changes in the magnitude of temperature changes
 
 ```{r}
-#calculate yearly average air temperature and difference from overall mean
+#calculate yearly average air temperature and its deviation from the overall mean
 avg_air_temp_by_year <- sc_02_21 %>%
   group_by(year) %>%
   summarise(
@@ -314,17 +331,18 @@ avg_air_temp_by_year %>%
 Plot of the of the magnitude of temperature changes
 
 ```{r}
-#calculate yearly average and deviation from overall mean
+#calculate yearly average air temperature and deviation from overall mean
 avg_air_temp_by_year <- sc_02_21 %>%
   group_by(year) %>%
   summarise(
-    avg_air_temp = mean(Temp, na.rm = TRUE),
+    avg_air_temp = mean(Temp, na.rm = TRUE), #yearly average temperature
     .groups = "drop"
   ) %>%
   mutate(
     delta_overall = avg_air_temp - mean(avg_air_temp, na.rm = TRUE)  #deviation from overall mean
   )
 
+#store overall mean temperature for reference in the plot
 overall_mean <- mean(avg_air_temp_by_year$avg_air_temp)
 
 #plot
@@ -346,6 +364,8 @@ ggplot(avg_air_temp_by_year, aes(x = factor(year), y = avg_air_temp, fill = delt
 Changes in the magnitude of temperature changes
 
 ```{r}
+#calculate yearly average temperature and year-to-year changes
+sc_02_21 %>%
 sc_02_21 %>%
   group_by(year) %>%
   summarise(
@@ -356,6 +376,7 @@ sc_02_21 %>%
   mutate(
     delta_temp = avg_temp - lag(avg_temp)
   ) %>%
+#display as a table
   gt() %>%
   tab_header(
     title = "Year-to-Year Change in Average Temperature"
@@ -365,17 +386,18 @@ sc_02_21 %>%
 Plot of the of the magnitude of temperature changes
 
 ```{r}
+#calculate yearly average temperature and year-to-year changes
 yearly_temp_change <- sc_02_21 %>%
   group_by(year) %>%
   summarise(
     avg_temp = mean(Temp, na.rm = TRUE),
     .groups = "drop"
   ) %>%
-  arrange(year) %>%
+  arrange(year) %>% #chronological order
   mutate(
-    delta_temp = avg_temp - lag(avg_temp)
+    delta_temp = avg_temp - lag(avg_temp) #change from the previous year
   )
-
+#plot year-to-year temperature changes as a bar chart
 ggplot(yearly_temp_change, aes(x = year, y = delta_temp, fill = delta_temp > 0)) +
   geom_col(show.legend = FALSE) +
   geom_hline(yintercept = 0, linetype = "dashed") +

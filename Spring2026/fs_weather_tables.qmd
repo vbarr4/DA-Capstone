@@ -141,9 +141,11 @@ fs_weather_01_26 <- fs_weather_01_26 %>%
 Number of observations
 
 ```{r}
+#extract observations with missing season values
 fs_weather_01_26_NAs <- fs_weather_01_26 %>%
   filter(is.na(season))
 
+#count observations by year and season and display as a formatted table
 fs_weather_01_26 %>%
   count(year, season) %>%
   gt(groupname_col = "season") %>%
@@ -160,7 +162,9 @@ fs_weather_01_26 %>%
 Summary statistics (all years)
 
 ```{r}
+#create a summary table from the dataset
 weather_summary <- fs_weather_01_26 %>%
+#calculate summary statistics (mean and standard deviation) for each variable
   summarise(
     Mean_ATemp    = mean(ATemp, na.rm = TRUE),
     SD_ATemp      = sd(ATemp, na.rm = TRUE),
@@ -177,16 +181,20 @@ weather_summary <- fs_weather_01_26 %>%
     Mean_TotPrcp  = mean(TotPrcp, na.rm = TRUE),
     SD_TotPrcp    = sd(TotPrcp, na.rm = TRUE)
   ) %>%
+  #convert the wide summary output into a long format
   tidyr::pivot_longer(
     cols = everything(),
     names_to = c("Statistic", "Variable"),
     names_sep = "_",
     values_to = "Value"
   ) %>%
+  #convert back to wide format so Mean and SD become columns
+  tidyr::pivot_wider(
   tidyr::pivot_wider(
     names_from = Statistic,
     values_from = Value
   ) %>%
+  #replace abbreviated variable names with descriptive labels
   mutate(
     Variable = recode(
       Variable,
@@ -199,7 +207,7 @@ weather_summary <- fs_weather_01_26 %>%
       TotPrcp = "Total Precipitation (mm)"
     )
   )
-
+#create a formatted table using the gt package
 weather_summary %>%
   gt() %>%
   tab_header(
@@ -220,8 +228,10 @@ weather_summary %>%
 Averages by season
 
 ```{r}
+#group weather data by season
 fs_weather_01_26 %>%
   group_by(season) %>%
+#calculate seasonal averages
   summarise(
     avg_air_temp = mean(ATemp, na.rm = TRUE),
     avg_humidity = mean(RH, na.rm = TRUE),
@@ -229,11 +239,13 @@ fs_weather_01_26 %>%
     avg_precip   = mean(TotPrcp, na.rm = TRUE),
     .groups = "drop"
   ) %>%
+#convert to a formatted table
   gt() %>%
   tab_header(
     title = "Average Weather Conditions by Season",
     subtitle = "Hudson River Field Station (2001–2026)"
   ) %>%
+#rename columns
   cols_label(
     season        = "Season",
     avg_air_temp  = "Air Temperature (°C)",
@@ -277,6 +289,7 @@ avg_temp_by_year %>%
 Average temperature by year and season (one table)
 
 ```{r}
+#calculate average air temperature for each year
 avg_air_temp_by_year_season <- fs_weather_01_26 %>%
   group_by(season, year) %>%
   summarise(
@@ -286,6 +299,7 @@ avg_air_temp_by_year_season <- fs_weather_01_26 %>%
   ) %>%
   filter(!is.na(season))
 
+#display results as a formatted table
 avg_air_temp_by_year_season %>%
   gt(groupname_col = "season") %>%
   tab_header(
@@ -306,6 +320,7 @@ avg_air_temp_by_year_season %>%
 Seasonal extremes
 
 ```{r}
+#calculate seasonal air temperature extremes
 fs_weather_01_26 %>%
   group_by(season) %>%
   summarise(
@@ -314,6 +329,7 @@ fs_weather_01_26 %>%
     p95_air_temp = quantile(ATemp, 0.95, na.rm = TRUE), #95th percentile (excludes extreme outliers)
     .groups = "drop"
   ) %>%
+#display results as a formatted table
   gt() %>%
   tab_header(
     title = "Seasonal Air Temperature Extremes",
@@ -333,8 +349,9 @@ fs_weather_01_26 %>%
 Changes in the magnitude of temperature changes
 
 ```{r}
+#calculate average air temperature for each year
 avg_air_temp_by_year <- fs_weather_01_26 %>%
-  group_by(year) %>%
+  group_by(year) %>% #group data by year
   summarise(
     avg_air_temp = mean(ATemp, na.rm = TRUE),
     .groups = "drop"
@@ -343,6 +360,7 @@ avg_air_temp_by_year <- fs_weather_01_26 %>%
     delta_overall = avg_air_temp - mean(avg_air_temp, na.rm = TRUE) # difference from overall average
   )
 
+#display results as a formatted table
 avg_air_temp_by_year %>%
   gt() %>%
   tab_header(
@@ -363,6 +381,7 @@ avg_air_temp_by_year %>%
 Plot of the magnitude of temperature changes
 
 ```{r}
+#calculate average air temperature for each year
 avg_air_temp_by_year <- fs_weather_01_26 %>%
   group_by(year) %>%
   summarise(
@@ -373,9 +392,10 @@ avg_air_temp_by_year <- fs_weather_01_26 %>%
     delta_overall = avg_air_temp - mean(avg_air_temp, na.rm = TRUE) #difference from overall average
   )
 
+#calculate the overall mean temperature across all years
 overall_mean <- mean(avg_air_temp_by_year$avg_air_temp)
 
-#plot
+#plot yearly average air temperature
 ggplot(avg_air_temp_by_year, aes(x = factor(year), y = avg_air_temp, fill = delta_overall > 0)) +
   geom_col(show.legend = FALSE) +
   geom_hline(yintercept = overall_mean, linetype = "dashed", color = "red", size = 1) +

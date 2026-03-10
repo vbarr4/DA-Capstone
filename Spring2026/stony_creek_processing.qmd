@@ -134,6 +134,20 @@ stony_creek <- stony_creek |>
          DO_mgl = if_else(str_detect(DO_mgl, "<-3>|<-2>|<1>"), NA_real_, DO_mgl)
   )
 
+#stony_creek <- stony_creek |>
+#  mutate(
+#    Temp = if_else(str_detect(F_Temp, "<-3>|<-2>") | (str_detect(F_Temp, "<1>") & year != 2019), NA_real_, Temp),
+#    SpCond = if_else(str_detect(F_SpCond, "<-3>|<-2>") | (str_detect(F_SpCond, "<1>") & year != 2019), NA_real_, SpCond),
+#    Sal = if_else(str_detect(F_Sal, "<-3>|<-2>") | (str_detect(F_Sal, "<1>") & year != 2019), NA_real_, Sal),
+#    DO_Pct = if_else(str_detect(F_DO_Pct, "<-3>|<-2>") | (str_detect(F_DO_Pct, "<1>") & year != 2019), NA_real_, DO_Pct),
+#    Depth = if_else(str_detect(F_Depth, "<-3>|<-2>") | (str_detect(F_Depth, "<1>") & year != 2019), NA_real_, Depth),
+#    cDepth = if_else(str_detect(F_cDepth, "<-3>|<-2>") | (str_detect(F_cDepth, "<1>") & year != 2019), NA_real_, cDepth),
+#    pH = if_else(str_detect(F_pH, "<-3>|<-2>") | (str_detect(F_pH, "<1>") & year != 2019), NA_real_, pH),
+#    Turb = if_else(str_detect(F_Turb, "<-3>|<-2>") | (str_detect(F_Turb, "<1>") & year != 2019), NA_real_, Turb),
+#    ChlFluor = if_else(str_detect(F_ChlFluor, "<-3>|<-2>") | (str_detect(F_ChlFluor, "<1>") & year != 2019), NA_real_, ChlFluor),
+#    DO_mgl = if_else(str_detect(F_DO_mgl, "<-3>|<-2>") | (str_detect(F_DO_mgl, "<1>") & year != 2019), NA_real_, DO_mgl)
+  )
+
 #removing flag columns 
 stony_creek <- stony_creek %>% select(-all_of(flags))
 
