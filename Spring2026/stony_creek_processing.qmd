@@ -1,0 +1,193 @@
+---
+author: Ilianna Ditren, Joy Terentiev, Natalie Novoseltseva
+---
+
+```{r}
+#Downloading libraries
+library(readr)
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(janitor)
+```
+
+Data and Cleaning
+
+To obtain raw water quality and weather data, use the Centralized Data Management Office (CDMO) website: <https://cdmo.baruch.sc.edu/>
+
+1.  Navigate to the CDMO website: <https://cdmo.baruch.sc.edu/>.
+
+2.  Click on the **Get Data** tab at the top of the page.
+
+3.  Select **Advanced Query System** and click **Launch**.
+
+4.  Locate the **Zip Downloads** option and click **Choose ZIP Files**.
+
+5.  From the list of National Estuarine Research Reserves, select **Hudson River, NY**.
+
+6.  Select the appropriate dataset:
+
+    -   For **weather data** from the field station, select **hudfsmet-p**.
+
+    -   For **Stony Creek water quality data**, select **hudscwq-p**.
+
+    -   For **Tivoli North water quality data**, select **hudtnwq-p**.
+
+    Each dataset must be requested separately, as the website generates one download link per request, and the analysis code is structured to process each dataset independently.
+
+7.  After selecting the desired site, click **Submit location and proceed to next step.**
+
+8.  Select the desired range of years and click **Get files**.
+
+    -   For the DA Capstone Spring 2026 project, requests were made for all available years.
+
+9.  Complete the required information requested by the website and submit the request.
+
+10. Shortly after submission, an email will be sent to the provided email address containing a download link to the data files.
+
+11. Copy and paste this link into the corresponding section of the code for the selected site.
+
+12. Run the code. After execution, all files will be downloaded into a subfolder named after the site within your data folder.
+
+```{r, echo = FALSE}
+
+#Stony Creek Data 2002-2021
+dir.create("Spring2026/data/stony_creek", recursive = TRUE, showWarnings = FALSE)#creates a folder for the new data
+
+#downloading Stony Creek data file from the web
+zip_sc <- tempfile(fileext = ".zip")           #creating a temporary zip file
+
+stony_creek_raw <- "http://cdmo.baruch.sc.edu/aqs/output/60521.zip"
+
+download.file(stony_creek_raw, zip_sc, mode = "wb")
+
+unzip(zip_sc, exdir = "Spring2026/data/stony_creek") #unzipping data from and placing it in a folder
+```
+
+```{r, echo = FALSE}
+#read in the files for all the years as a one data file
+files <- list.files(
+  "data/stony_creek",
+  pattern = "^hudscwq[0-9]{4}\\.csv$", # ^ -starts a string, hudscwq - the exact name in the file (constant), any digits from 0-9 might follow, {4} - we are looking for 4 digits pattern, \\. - there should be a dot, csv - it should end with "csv",  end a string
+  full.names = TRUE
+)
+
+sc_02_21_raw <- do.call(
+  rbind,
+  lapply(files, function(f) {
+    df <- read.csv(f, fileEncoding = "Latin1")
+    df$year <- as.integer(gsub(".*([0-9]{4})\\.csv$", "\\1", f))
+    df
+  })
+)
+
+```
+
+```{r, eval = FALSE}
+
+# Removing empty columns and other irrelant columns
+t <- sc_02_21_raw |>
+  remove_empty("cols")|>
+  select(-StationCode,
+        -isSWMP, #historical and provisionalPlus columns indicate the status of QAQC
+        -Historical, 
+        -ProvisionalPlus
+  )
+
+#creating a vector with all the flags
+flags <- c("F_Record", "F_Temp", "F_SpCond", "F_Sal", "F_DO_Pct", "F_Depth", "F_cDepth", "F_Level", "F_pH", "F_Turb", "F_ChlFluor", "F_DO_mgl")
+
+t <- t |>
+  mutate(Temp = if_else(
+      if_any(all_of(flags), ~ str_detect(.x, "<-3>|<-2>|<1>")), NA_real_, Temp))
+
+#removing flag columns #remove comment of the next two lines once the previous step was done
+# stony_creek <- stony_creek |>
+#   select(-flags) 
+
+```
+
+```{r}
+
+# Removing empty columns and other irrelant columns
+stony_creek <- sc_02_21_raw |>
+  remove_empty("cols")|>
+  select(-StationCode,
+        -isSWMP, #historical and provisional Plus columns indicate the status of QAQC
+        -Historical, 
+        -ProvisionalPlus,
+  )
+
+#creating a vector with all the flags
+flags <- c("F_Record", "F_Temp", "F_SpCond", "F_Sal", "F_DO_Pct", "F_Depth", "F_cDepth", "F_Level", "F_pH", "F_Turb", "F_ChlFluor", "F_DO_mgl")
+
+stony_creek <- stony_creek |>
+  mutate(Temp = if_else(str_detect(F_Temp, "<-3>|<-2>|<1>"), NA_real_, Temp),
+         SpCond = if_else(str_detect(F_SpCond, "<-3>|<-2>|<1>"), NA_real_, SpCond),
+         Sal = if_else(str_detect(F_Sal, "<-3>|<-2>|<1>"), NA_real_, Sal),
+         DO_Pct = if_else(str_detect(F_DO_Pct, "<-3>|<-2>|<1>"), NA_real_, DO_Pct),
+         Depth = if_else(str_detect(F_Depth, "<-3>|<-2>|<1>"), NA_real_, Depth),
+         cDepth = if_else(str_detect(F_cDepth, "<-3>|<-2>|<1>"), NA_real_, cDepth),
+         pH = if_else(str_detect(F_pH, "<-3>|<-2>|<1>"), NA_real_, pH),
+         Turb = if_else(str_detect(F_Turb, "<-3>|<-2>|<1>"), NA_real_, Turb),
+         ChlFluor = if_else(str_detect(F_ChlFluor, "<-3>|<-2>|<1>"), NA_real_, ChlFluor),
+         DO_mgl = if_else(str_detect(DO_mgl, "<-3>|<-2>|<1>"), NA_real_, DO_mgl)
+  )
+
+#stony_creek <- stony_creek |>
+#  mutate(
+#    Temp = if_else(str_detect(F_Temp, "<-3>|<-2>") | (str_detect(F_Temp, "<1>") & year != 2019), NA_real_, Temp),
+#    SpCond = if_else(str_detect(F_SpCond, "<-3>|<-2>") | (str_detect(F_SpCond, "<1>") & year != 2019), NA_real_, SpCond),
+#    Sal = if_else(str_detect(F_Sal, "<-3>|<-2>") | (str_detect(F_Sal, "<1>") & year != 2019), NA_real_, Sal),
+#    DO_Pct = if_else(str_detect(F_DO_Pct, "<-3>|<-2>") | (str_detect(F_DO_Pct, "<1>") & year != 2019), NA_real_, DO_Pct),
+#    Depth = if_else(str_detect(F_Depth, "<-3>|<-2>") | (str_detect(F_Depth, "<1>") & year != 2019), NA_real_, Depth),
+#    cDepth = if_else(str_detect(F_cDepth, "<-3>|<-2>") | (str_detect(F_cDepth, "<1>") & year != 2019), NA_real_, cDepth),
+#    pH = if_else(str_detect(F_pH, "<-3>|<-2>") | (str_detect(F_pH, "<1>") & year != 2019), NA_real_, pH),
+#    Turb = if_else(str_detect(F_Turb, "<-3>|<-2>") | (str_detect(F_Turb, "<1>") & year != 2019), NA_real_, Turb),
+#    ChlFluor = if_else(str_detect(F_ChlFluor, "<-3>|<-2>") | (str_detect(F_ChlFluor, "<1>") & year != 2019), NA_real_, ChlFluor),
+#    DO_mgl = if_else(str_detect(F_DO_mgl, "<-3>|<-2>") | (str_detect(F_DO_mgl, "<1>") & year != 2019), NA_real_, DO_mgl)
+  )
+
+#removing flag columns 
+stony_creek <- stony_creek %>% select(-all_of(flags))
+
+```
+
+
+```{r, echo = FALSE}
+#separate the date and time column
+stony_creek <- stony_creek %>%
+  mutate(
+    DateTimeStamp = as.POSIXct(DateTimeStamp, format = "%m/%d/%Y %H:%M"), #converts the variable into standard POSIXct format
+    date = as.Date(DateTimeStamp),
+    time = format(DateTimeStamp, "%H:%M:%S")
+  )
+
+#create a month column
+stony_creek <- stony_creek %>%
+  mutate(
+    month = month(DateTimeStamp)          
+  )
+
+#create a season column
+stony_creek <- stony_creek %>%
+  mutate(
+    season = case_when(
+      month %in% c(12, 1, 2) ~ "Winter",
+      month %in% 3:5        ~ "Spring",
+      month %in% 6:8        ~ "Summer",
+      month %in% 9:11       ~ "Fall"
+    )
+  )
+
+```
+
+```{r}
+#the code to write out the dataset
+write_csv(stony_creek, "Spring2026/data/stony_creek.csv")
+
+#uncomment the code to write out the new/updated version of the dataset. It might be better to delete the old one first.
+
+```
+
+

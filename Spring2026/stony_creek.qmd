@@ -8,7 +8,6 @@ author: Ilianna Ditren, Joy Terentiev
 
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
 #Downloading libraries
-
 library(readr)
 library(tidyverse)
 library(dplyr)
@@ -26,7 +25,7 @@ dir.create("data/stony_creek", recursive = TRUE, showWarnings = FALSE)
 #creates a folder for the new data
 
 #downloading Stony Creek data file from the web
-zip_sc <- tempfile(fileext = ".zip")                                       #creating a temporary zip file
+zip_sc <- tempfile(fileext = ".zip") #creating a temporary zip file
 
 stony_creek_raw <- "http://cdmo.baruch.sc.edu/aqs/output/60521.zip"
 
@@ -140,6 +139,8 @@ stony_creek <- stony_creek %>%
   )
 
 ```
+
+
 
 ## Exploratory Data Analysis
 

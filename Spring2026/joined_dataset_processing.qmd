@@ -1,0 +1,83 @@
+---
+title: "joined_dataset_processing"
+format: html
+---
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+#libraries
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(gt)
+library(ggplot2)
+library(stringr)
+library(janitor)
+library(reshape2)
+```
+
+Data
+```{r}
+water <- read_csv("Spring2026/data/stony_creek.csv")
+weather <- read_csv("Spring2026/data/fs_weather_01_26.csv")
+```
+
+Exploring the structure of the data
+```{r}
+str(weather)
+str(water)
+
+names(weather)
+names(water)
+```
+
+```{r}
+#rename the column in the water dataset to easier join the datasets
+weather <- weather %>%
+  rename(DateTimeStamp = DatetimeStamp)
+```
+
+Join the data
+```{r}
+#join water and weather data with inner join
+combined <- inner_join(water, weather, by = "DateTimeStamp")
+```
+
+```{r}
+#get rid of the duplicate columns and 
+combined <- combined %>%
+  select(-year.y, -date.y, -time.y, -month.y, -season.y) %>%
+  rename(
+    year = year.x,
+    date = date.x,
+    time = time.x,
+    month = month.x,
+    season = season.x
+  )
+```
+
+```{r}
+#the code to write out the dataset
+write_csv(combined, "Spring2026/data/joined_dataset.csv")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
