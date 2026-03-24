@@ -1,0 +1,288 @@
+---
+title: "joined_dataset_EDA"
+format: html
+---
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+#libraries
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(gt)
+library(ggplot2)
+library(stringr)
+library(janitor)
+library(reshape2)
+```
+
+Data
+```{r}
+combined <- read_csv("Spring2026/data/joined_dataset.csv")
+```
+
+EDA
+```{r}
+#overview of variables and NAs
+glimpse(combined) 
+
+#summaries of all variables
+summary(combined) 
+```
+
+Plots
+
+Correlation matrix
+
+```{r}
+#select meaningful numeric variables
+cor_vars <- combined %>%
+  select(
+    ATemp, RH, BP, WSpd, MaxWSpd, Wdir, SDWDir, TotPAR, TotPrcp,  #weather
+    Temp, DO_mgl, DO_Pct, Sal, SpCond, pH, Turb, ChlFluor, Depth   #water
+  ) %>%
+  select(where(~sum(!is.na(.)) > 0))#remove NA columns
+
+#compute correlation matrix
+cor_matrix <- cor(cor_vars, use = "pairwise.complete.obs")
+
+#remove the upper triangle of the matrix
+cor_matrix[upper.tri(cor_matrix)] <- NA
+
+#melt for ggplot
+cor_long <- melt(cor_matrix, na.rm = TRUE)
+names(cor_long) <- c("Variable1", "Variable2", "Correlation")
+
+
+#plot lower-triangle matrix
+ggplot(cor_long, aes(x = Variable1, y = Variable2, fill = Correlation)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient2(low = "#a6cee3", mid = "#f7f7f7", high = "#fb9a99", midpoint = 0) +
+  geom_text(aes(label = round(Correlation, 2)), size = 3) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid = element_blank()
+  ) +
+  labs(title = "Correlation Matrix", fill = "r")
+```
+
+Relationship between the variables
+
+```{r}
+#wind can affect oxygen mixing???
+ggplot(combined, aes(x = WSpd, y = DO_mgl)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "loess") +
+  labs(x = "Wind speed (m/s)", y = "Dissolved Oxygen (mg/L)")
+```
+
+```{r}
+#heavy rain may dilute salinity 
+ggplot(combined, aes(x = TotPrcp, y = Sal)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "loess") +
+  labs(x = "Total Precipitation (mm)", y = "Salinity (ppt)")
+```
+
+```{r}
+#photosynthesis response to light
+ggplot(combined, aes(x = TotPAR, y = ChlFluor)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "gam") +
+  labs(x = "Total PAR", y = "Chlorophyll Fluorescence")
+```
+
+This looks crazy!
+```{r}
+#warmer air => dissolved oxygen decreases
+ggplot(combined, aes(x = Temp, y = DO_mgl)) +
+  geom_point(alpha = 0.05) +
+  geom_smooth(method = "lm") +
+  labs(x = "Air Temperature (°C)", y = "Dissolved Oxygen (mg/L)")
+```
+
+```{r}
+#temperature changes can influence pH through shifts in biological activity and gas solubility???
+ggplot(combined, aes(x = ATemp, y = pH)) +
+  geom_point(alpha = 0.05) +
+  geom_smooth(method = "lm") +
+  labs(x = "Air Temperature (°C)", y = "pH")
+```
+
+```{r}
+#changes in atmospheric pressure can slightly affect water level measurements 
+ggplot(combined, aes(x = BP, y = Depth)) +
+  geom_point(alpha = 0.05) +
+  geom_smooth(method = "lm") +
+  labs(x = "BP", y = "Depth")
+```
+
+```{r}
+#high turbidity can reduce light penetration, potentially limiting chlorophyll production
+ggplot(combined, aes(x = TotPrcp, y = Sal)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "loess") +
+  labs(x = "Total Precipitation (mm)", y = "Salinity (ppt)")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+Trends over time (STILL WORK IN PROGRESS!!!)
+```{r}
+#new column to proxy for time
+combined <- combined %>%
+  mutate(
+    year = year(DateTimeStamp),
+    doy = yday(DateTimeStamp),  #day of year (1–365)
+    decimal_year = year + (doy - 1)/365 #smooth time variable
+  )
+```
+
+Increase of air temperature
+```{r}
+daily <- combined %>%
+  group_by(date) %>%
+  summarise(
+    mean_ATemp = mean(ATemp, na.rm = TRUE),
+    mean_Temp = mean(Temp, na.rm = TRUE),
+    total_Prcp = sum(TotPrcp, na.rm = TRUE)
+  ) %>%
+  mutate(decimal_year = year(date) + (yday(date)-1)/365)
+```
+
+```{r}
+#plot the relationship
+ggplot(daily, aes(x = decimal_year, y = mean_ATemp)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "lm", color = "red") +
+  labs(title = "Air Temperature Trend Over Time",
+       x = "Year", y = "Mean Air Temp")
+```
+
+Temperature Outliers/Anomalies
+```{r}
+daily <- daily %>%
+  mutate(doy = yday(date)) %>%
+  group_by(doy) %>%
+  mutate(
+    clim_ATemp = mean(mean_ATemp, na.rm = TRUE),
+    anomaly_ATemp = mean_ATemp - clim_ATemp
+  ) %>%
+  ungroup()
+```
+
+```{r}
+#plot the relationship
+ggplot(daily, aes(x = decimal_year, y = anomaly_ATemp)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "lm", color = "blue") +
+  labs(title = "Air Temperature Anomalies Over Time")
+```
+
+Extreme rainfall events
+```{r}
+#define what is considered extreme
+threshold <- quantile(daily$total_Prcp, 0.95, na.rm = TRUE)
+
+daily <- daily %>%
+  mutate(extreme_rain = total_Prcp > threshold)
+
+#count per year
+rain_extremes <- daily %>%
+  group_by(year(date)) %>%
+  summarise(extreme_days = sum(extreme_rain, na.rm = TRUE))
+
+#plot the relationship
+ggplot(rain_extremes, aes(x = `year(date)`, y = extreme_days)) +
+  geom_line() +
+  geom_smooth(method = "lm", color = "red") +
+  labs(title = "Extreme Rainfall Events per Year")
+
+```
+
+Extreme temperature changes
+```{r}
+daily <- daily %>%
+  arrange(date) %>%
+  mutate(
+    temp_change = abs(mean_ATemp - lag(mean_ATemp)),
+    extreme_temp_change = temp_change > quantile(temp_change, 0.95, na.rm = TRUE)
+  )
+```
+
+```{r}
+temp_extremes <- daily %>%
+  group_by(year(date)) %>%
+  summarise(extreme_changes = sum(extreme_temp_change, na.rm = TRUE))
+```
+
+```{r}
+#plot the relationship
+ggplot(temp_extremes, aes(x = `year(date)`, y = extreme_changes)) +
+  geom_line() +
+  geom_smooth(method = "lm", color = "red") +
+  labs(title = "Extreme temperature changes per Year")
+```
+
+Heat events
+```{r}
+heat_threshold <- quantile(daily$mean_ATemp, 0.95, na.rm = TRUE)
+
+daily <- daily %>%
+  mutate(heat_day = mean_ATemp > heat_threshold)
+```
+
+```{r}
+daily %>%
+  group_by(year(date)) %>%
+  summarise(heat_days = sum(heat_day, na.rm = TRUE))
+```
+
+```{r}
+heat_yearly <- daily %>%
+  group_by(year = year(date)) %>%
+  summarise(heat_days = sum(heat_day, na.rm = TRUE))
+```
+
+```{r}
+ggplot(heat_yearly, aes(x = year, y = heat_days)) +
+  geom_line() +
+  geom_smooth(method = "lm", color = "red") +
+  labs(title = "Heat Days per Year",
+       x = "Year",
+       y = "Number of Heat Days")
+```
+
+Monthly changes
+```{r}
+monthly_heat <- daily %>%
+  mutate(
+    year = year(date),
+    month = month(date)
+  ) %>%
+  group_by(year, month) %>%
+  summarise(
+    heat_days = sum(heat_day, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+
+```{r}
+ggplot(monthly_heat, aes(x = year + (month-1)/12, y = heat_days)) +
+  geom_line(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "red") +
+  labs(
+    title = "Monthly Heat Events Over Time",
+    x = "Year",
+    y = "Number of Heat Days"
+  )
+```

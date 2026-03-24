@@ -16,6 +16,8 @@ library(lubridate)
 library(gt)
 library(ggplot2)
 library(stringr)
+library(janitor)
+
 ```
 
 ## Data
@@ -36,7 +38,7 @@ unzip(zip, exdir = "Spring2026/data/field_station_weather")
 
 #read in the files for all the years as a one data file hudfsmet-p
 files <- list.files(
-  "data/field_station_weather",
+  "Spring2026/data/field_station_weather",
   pattern = "^hudfsmet[0-9]{4}\\.csv$", # ^ -starts a string
                                        # hudfsmet - the exact name in the file (constant)
                                        # any digits from 0-9 might follow
