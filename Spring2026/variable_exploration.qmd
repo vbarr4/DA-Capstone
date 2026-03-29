@@ -1,0 +1,185 @@
+---
+title: "variable_exploration"
+author: "Joy Terentiev"
+format: pdf
+editor: visual
+---
+
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+#libraries
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(gt)
+library(ggplot2)
+library(stringr)
+library(janitor)
+library(reshape2)
+```
+
+Data
+```{r}
+combined <- read_csv("data/joined_dataset.csv")
+```
+
+EDA
+```{r}
+#overview of variables and NAs
+glimpse(combined) 
+
+#summaries of all variables
+summary(combined) 
+```
+
+Plots
+
+Correlation matrix
+
+```{r}
+#select meaningful numeric variables
+cor_vars <- combined %>%
+  select(
+    ATemp, RH, BP, WSpd, MaxWSpd, Wdir, SDWDir, TotPAR, TotPrcp,  #weather
+    Temp, DO_mgl, DO_Pct, Sal, SpCond, pH, Turb, ChlFluor, Depth   #water
+  ) %>%
+  select(where(~sum(!is.na(.)) > 0))#remove NA columns
+
+#compute correlation matrix
+cor_matrix <- cor(cor_vars, use = "pairwise.complete.obs")
+
+#remove the upper triangle of the matrix
+cor_matrix[upper.tri(cor_matrix)] <- NA
+
+#melt for ggplot
+cor_long <- melt(cor_matrix, na.rm = TRUE)
+names(cor_long) <- c("Variable1", "Variable2", "Correlation")
+
+
+#plot lower-triangle matrix
+ggplot(cor_long, aes(x = Variable1, y = Variable2, fill = Correlation)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient2(low = "#a6cee3", mid = "#f7f7f7", high = "#fb9a99", midpoint = 0) +
+  geom_text(aes(label = round(Correlation, 2)), size = 3) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid = element_blank()
+  ) +
+  labs(title = "Correlation Matrix", fill = "r")
+```
+
+Exploring Variables:
+1) Depth
+2) ChlFl
+3) SpCond
+4) Temp
+5) TotPAR
+
+1. It seems *Depth* has a moderate/weak correlation with:
+Temp, DO_mgl, DO_pct, sal, SpCond, ChlFlour, pH, Turb <- WATER
+ATemp, BP <- WEATHER
+
+```{r, warning=FALSE, message=FALSE}
+#Preparing to plot variable means by season
+
+exploring_depth <- combined|> 
+  select(year, season, Temp, DO_mgl,Depth, DO_Pct, Sal, SpCond, ChlFluor,
+         ATemp, BP, pH, Turb)|>
+  group_by(season,year)|> 
+  summarise(mDepth= mean(Depth, na.rm = TRUE),
+            mTemp= mean(Temp, na.rm = TRUE),
+            mDO_mgl= mean(DO_mgl, na.rm = TRUE),
+            mDO_Pct= mean(DO_Pct, na.rm = TRUE),
+            mSal= mean(Sal, na.rm = TRUE),
+            mSpCond= mean(SpCond, na.rm = TRUE),
+            mChlFluor= mean(ChlFluor, na.rm = TRUE),
+            mpH= mean(pH, na.rm = TRUE),
+            mTurb= mean(Turb, na.rm= TRUE),
+            mBP= mean(BP, na.rm = TRUE),
+            mATemp= mean(ATemp, na.rm = TRUE))|>
+  filter(!is.na(season))
+```
+
+
+Ploting Temp and Depth
+```{r}
+#Need to fix the color
+
+  ggplot(data= exploring_depth)+
+  geom_point(aes(year, mDepth, color="green"))+
+  geom_point(aes(year, mTemp, color="blue"))+
+  labs(title = "Mean Seasonal Depth and Temperature of Water",
+       x= "Year",
+       y= "Mean Temp/Depth")+
+  theme_minimal()+
+  facet_wrap(~season)
+```
+```{r}
+#Need to fix the color
+
+  ggplot(data= exploring_depth)+
+  geom_point(aes(year, mDepth, color="green"))+
+  geom_point(aes(year, mATemp, color="blue"))+
+  labs(title = "Mean Seasonal Depth and Temperature of Air",
+       x= "Year",
+       y= "Mean Temp/Depth")+
+  theme_minimal()+
+  facet_wrap(~season)
+```
+
+```{r}
+  ggplot(data= exploring_depth)+
+  geom_point(aes(year, mDepth, color="green"))+
+  geom_point(aes(year, mBP, color="blue"))+
+  labs(title = "Mean Seasonal Depth and BP",
+       x= "Year",
+       y= "Mean Temp/BP")+
+  theme_minimal()+
+  facet_wrap(~season)
+```
+
+```{r}
+  ggplot(data= exploring_depth)+
+  geom_point(aes(year, mDepth, color="green"))+
+  geom_point(aes(year, mDO_mgl, color="blue"))+
+  labs(title = "Mean Seasonal Depth and DO_mgl",
+       x= "Year",
+       y= "Mean Depth/DO_mgl")+
+  theme_minimal()+
+  facet_wrap(~season)
+```
+
+```{r}
+ggplot(data= exploring_depth)+
+  geom_point(aes(year, mDepth, color="green"))+
+  geom_point(aes(year, mDO_Pct, color="blue"))+
+  labs(title = "Mean Seasonal Depth and DO_pct",
+       x= "Year",
+       y= "Mean Depth/DO_pct")+
+  theme_minimal()+
+  facet_wrap(~season)
+```
+
+```{r}
+ggplot(data= exploring_depth)+
+  geom_point(aes(year, mChlFluor, color="green"))+
+  geom_point(aes(year, mSal, color="blue"))+
+  labs(title = "Mean Seasonal ChlFluor and Sal",
+       x= "Year",
+       y= "Mean ChlFluor/Sal")+
+  theme_minimal()+
+  facet_wrap(~season)
+```
+
+```{r}
+ggplot(data= exploring_depth)+
+  geom_point(aes(year, mSpCond, color="green"))+
+  geom_point(aes(year, mDO_Pct, color="blue"))+
+  labs(title = "Mean Seasonal SpCond and DO_Pct",
+       x= "Year",
+       y= "Mean SpCond/DO_Pct")+
+  theme_minimal()+
+  facet_wrap(~season)
+```
+
