@@ -21,6 +21,7 @@ wq_clean_names <- c(
   DO_Pct = "Dissolved Oxygen (% Saturation)",
   DO_mgl = "Dissolved Oxygen (mg/L)",
   Depth = "Sonde Depth (m)",
+  pH = "pH",
   ChlFluor = "Chlorophyll Fluorescence (ug/L)", # include foot note
   Turb = "Turbidity (NTU)",
   ATemp = "Average Air Temperature (C)",
