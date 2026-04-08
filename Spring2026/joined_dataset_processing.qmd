@@ -3,13 +3,13 @@ title: "joined_dataset_processing"
 format: html
 ---
 
+This document contains the processing steps for the main datasets. Initially, water quality data collected from Stony Creek and weather data collected from Field Station were explored individually. In the following steps, we combine the two datasets in order to perform multivariate exploratory data analysis.
+
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
 #libraries
 library(tidyverse)
 library(dplyr)
 library(lubridate)
-library(gt)
-library(ggplot2)
 library(stringr)
 library(janitor)
 library(reshape2)
@@ -17,6 +17,7 @@ library(reshape2)
 
 Data
 ```{r}
+# reading main datasets
 water <- read_csv("Spring2026/data/stony_creek.csv")
 weather <- read_csv("Spring2026/data/fs_weather_01_26.csv")
 ```
@@ -36,7 +37,7 @@ weather <- weather %>%
   rename(DateTimeStamp = DatetimeStamp)
 ```
 
-Join the data
+Joining the water quality and weather datasets
 ```{r}
 #join water and weather data with inner join
 combined <- inner_join(water, weather, by = "DateTimeStamp")
@@ -60,24 +61,43 @@ combined <- combined %>%
 write_csv(combined, "Spring2026/data/joined_dataset.csv")
 ```
 
+The combined dataset contained variables measured every 15-30 minutes. In this section, the data will be summarized to contain daily averages only. 
 
+```{r}
 
+#creating a vector with all numerical variable that need mean computed and extracting a name list
+combined_names <- combined |>
+  select(
+    -DateTimeStamp, 
+    -year, 
+    -date, 
+    -time, 
+    -month, 
+    -season, 
+    -Frequency
+  ) |> 
+  names()
 
+# computing the daily mean values for all variables in the combined_names object
+ daily_combined <- combined |> 
+   group_by(date) |>
+   summarize(across(all_of(combined_names), ~ mean(.x, na.rm = TRUE)))
+ 
+#writing new csv
+write_csv(daily_combined, "Spring2026/data/daily_combined.csv")
+   
+```
 
+In this chunk, the function `week()` is doing all the work of grouping the dates and assigning them a value from 1 to 52 based on which number of week the grouped dates fall in.
 
+```{r}
 
+# weekly averages of all variables in the combined dataset
+weekly_combined <- combined |>
+  group_by(week_n = week(DateTimeStamp), year) |>
+   summarize(across(all_of(combined_names), ~ mean(.x, na.rm = TRUE)))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#writing new csv
+write_csv(weekly_combined, "Spring2026/data/weekly_combined.csv")
+             
+```
