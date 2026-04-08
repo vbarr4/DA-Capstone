@@ -55,7 +55,7 @@ wq_scatterplot <- function(df, var1, var2) {
 
   df |>
     ggplot() +
-    geom_point(aes(x = {{var1}}, y = {{var2}})) +
+    geom_point(aes(x = {{var1}}, y = {{var2}}), alpha = 0.5) +
     geom_smooth(aes(x = {{var1}}, y = {{var2}}), method = "lm", color = "red") +
     labs(
       title = label,
