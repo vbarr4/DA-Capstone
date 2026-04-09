@@ -41,13 +41,11 @@ wq_clean_names <- c(
   date = "Date")
 
 # function to streamline scatter plots
-wq_scatterplot <- function(df, var1, var2) {
+wq_scatterplot <- function(df, var1, var2, plot_title = NULL) {
 
   # creating
   var1_name <- as_name(ensym(var1))
   var2_name <- as_name(ensym(var2))
-
-  label  <- englue("{var1_name} {var2_name}")
 
 # accessing the variable name from the wq_clean_names object and assigning it to the x and y labels
   x_label <- wq_clean_names[[var1_name]]
@@ -55,10 +53,10 @@ wq_scatterplot <- function(df, var1, var2) {
 
   df |>
     ggplot() +
-    geom_point(aes(x = {{var1}}, y = {{var2}}), alpha = 0.5) +
+    geom_point(aes(x = {{var1}}, y = {{var2}}), alpha = 0.5, color = "steelblue") +
     geom_smooth(aes(x = {{var1}}, y = {{var2}}), method = "lm", color = "red") +
     labs(
-      title = label,
+      title = {{plot_title}},
       x = x_label,
       y = y_label) +
     theme_minimal()
