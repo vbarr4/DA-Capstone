@@ -5,7 +5,6 @@ format: pdf
 editor: visual
 ---
 
-
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
 #libraries
 library(tidyverse)
@@ -19,11 +18,13 @@ library(reshape2)
 ```
 
 Data
+
 ```{r}
 combined <- read_csv("data/joined_dataset.csv")
 ```
 
 EDA
+
 ```{r}
 #overview of variables and NAs
 glimpse(combined) 
@@ -38,7 +39,7 @@ Correlation matrix
 
 ```{r}
 #select meaningful numeric variables
-cor_vars <- combined %>%
+cor_vars <- combined %>% 
   select(
     ATemp, RH, BP, WSpd, MaxWSpd, Wdir, SDWDir, TotPAR, TotPrcp,  #weather
     Temp, DO_mgl, DO_Pct, Sal, SpCond, pH, Turb, ChlFluor, Depth   #water
@@ -69,16 +70,9 @@ ggplot(cor_long, aes(x = Variable1, y = Variable2, fill = Correlation)) +
   labs(title = "Correlation Matrix", fill = "r")
 ```
 
-Exploring Variables:
-1) Depth
-2) ChlFl
-3) SpCond
-4) Temp
-5) TotPAR
+Exploring Variables: 1) Depth 2) ChlFl 3) SpCond 4) Temp 5) TotPAR
 
-1. It seems *Depth* has a moderate/weak correlation with:
-Temp, DO_mgl, DO_pct, sal, SpCond, ChlFlour, pH, Turb <- WATER
-ATemp, BP <- WEATHER
+1.  It seems *Depth* has a moderate/weak correlation with: Temp, DO_mgl, DO_pct, sal, SpCond, ChlFlour, pH, Turb \<- WATER ATemp, BP \<- WEATHER
 
 ```{r, warning=FALSE, message=FALSE}
 #Preparing to plot variable means by season
@@ -101,76 +95,96 @@ exploring_depth <- combined|>
   filter(!is.na(season))
 ```
 
-
-Ploting Temp and Depth
+Plotting and exploring Temp and Depth:
+Seems that the deepest depth measurement is in the summer, 
+probably due to the ice in the winter?
 ```{r}
-#Need to fix the color
-
-  ggplot(data= exploring_depth)+
-  geom_point(aes(year, mDepth, color="green"))+
-  geom_point(aes(year, mTemp, color="blue"))+
-  labs(title = "Mean Seasonal Depth and Temperature of Water",
-       x= "Year",
-       y= "Mean Temp/Depth")+
-  theme_minimal()+
-  facet_wrap(~season)
-```
-```{r}
-#Need to fix the color
-
-  ggplot(data= exploring_depth)+
-  geom_point(aes(year, mDepth, color="green"))+
-  geom_point(aes(year, mATemp, color="blue"))+
-  labs(title = "Mean Seasonal Depth and Temperature of Air",
-       x= "Year",
-       y= "Mean Temp/Depth")+
-  theme_minimal()+
+ggplot(data= combined)+
+  geom_point(aes(Depth, Temp, color="pink"))+
   facet_wrap(~season)
 ```
 
+Plotting and exploring ATemp and Depth:
+Seems that the deepest depth measurement is in the summer, 
+probably due to the ice in the winter?
 ```{r}
-  ggplot(data= exploring_depth)+
-  geom_point(aes(year, mDepth, color="green"))+
-  geom_point(aes(year, mBP, color="blue"))+
-  labs(title = "Mean Seasonal Depth and BP",
-       x= "Year",
-       y= "Mean Temp/BP")+
-  theme_minimal()+
+ggplot(data= combined, aes(Depth, ATemp, color="pink"))+
+  geom_point()+
+  geom_smooth(method = "lm", color= "black")+
+  labs(title= "Air Temperature and Depth by Season")+
+  xlim(-0.5,1.5)+
   facet_wrap(~season)
 ```
 
+Seems that depth measures are deepest August and October
 ```{r}
-  ggplot(data= exploring_depth)+
-  geom_point(aes(year, mDepth, color="green"))+
-  geom_point(aes(year, mDO_mgl, color="blue"))+
-  labs(title = "Mean Seasonal Depth and DO_mgl",
-       x= "Year",
-       y= "Mean Depth/DO_mgl")+
-  theme_minimal()+
+ggplot(data= combined, aes(ATemp, Depth, color="pink"))+
+  geom_point()+
+  geom_smooth(method = "lm", color= "black")+
+  xlim(-10,50)+
+  ylim(-1, 2)+
+  facet_wrap(~month)
+```
+
+*Summer looks Interesting*
+```{r}
+ggplot(data= combined)+
+  geom_point(aes(Depth, BP, color="pink"))+
   facet_wrap(~season)
 ```
 
 ```{r}
-ggplot(data= exploring_depth)+
-  geom_point(aes(year, mDepth, color="green"))+
-  geom_point(aes(year, mDO_Pct, color="blue"))+
-  labs(title = "Mean Seasonal Depth and DO_pct",
-       x= "Year",
-       y= "Mean Depth/DO_pct")+
-  theme_minimal()+
+ggplot(data= combined, aes(Depth, BP, color="pink"))+
+  geom_point()+
+  geom_smooth(method = "lm", color= "black")+
+  facet_wrap(~month)
+```
+Winter, fall, and spring have more BP
+```{r}
+ggplot(data= combined)+
+  geom_boxplot(aes(BP, Depth, group= season, color=season))+
+  coord_flip()+
+  facet_wrap(~year)
+```
+```{r}
+ggplot(data= combined)+
+  geom_boxplot(aes(Depth, BP, color="pink"))+
+  facet_grid(~season)
+```
+
+
+```{r}
+ggplot(data= combined)+
+  geom_point(aes(Depth, DO_mgl, color="pink"))+
+  facet_wrap(~season)
+```
+Looks very simillar to DO and ATemp
+```{r}
+ggplot(data= combined, aes(DO_mgl, Depth, color="pink"))+
+  geom_point()+
+  geom_smooth(method = "lm", color= "black")+
+  facet_wrap(~month)
+```
+
+```{r}
+ggplot(data= combined, aes(DO_Pct, Depth, color="pink"))+
+  geom_point()+
+  geom_smooth(method = "lm", color= "black")+
+  facet_wrap(~month)
+```
+
+```{r}
+ggplot(data= combined)+
+  geom_point(aes(ChlFluor, Sal, color="pink"))+
   facet_wrap(~season)
 ```
 
 ```{r}
-ggplot(data= exploring_depth)+
-  geom_point(aes(year, mChlFluor, color="green"))+
-  geom_point(aes(year, mSal, color="blue"))+
-  labs(title = "Mean Seasonal ChlFluor and Sal",
-       x= "Year",
-       y= "Mean ChlFluor/Sal")+
-  theme_minimal()+
-  facet_wrap(~season)
+ggplot(data= combined)+
+  geom_point(aes(ChlFluor, Sal, color="pink"))+
+  facet_wrap(~month)
 ```
+
 
 ```{r}
 ggplot(data= exploring_depth)+
@@ -182,4 +196,3 @@ ggplot(data= exploring_depth)+
   theme_minimal()+
   facet_wrap(~season)
 ```
-
