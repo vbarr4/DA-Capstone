@@ -76,11 +76,20 @@ raw_combined <- combined |>
     season == "Fall" ~ 4,
   ))
 
+combined_names <- raw_combined |>
+  select(
+    -Frequency,
+    -DateTimeStamp,
+    -date, 
+    -time,
+    -year) |>names()
+
 # computing the daily mean values for all variables in the combined_names object
 daily_combined <- raw_combined |>
   group_by(date) |> 
-  summarize(across(
-    where(is.numeric), ~ mean(.x, na.rm = TRUE)),.groups = "drop")
+  summarize(across(all_of(combined_names), ~ mean(.x, na.rm = TRUE))) |>
+  mutate(daily_combined, year = year(date), month = month(date))
+
 
 #writing new csv
 write_csv(daily_combined, "Spring2026/data/combined_dataset/daily_combined.csv")
@@ -92,14 +101,12 @@ In this chunk, the function `week()` is doing all the work of grouping the dates
 ```{r}
 
 # weekly averages of all variables in the combined dataset
-weekly_combined <- combined |>
+weekly_combined <- raw_combined |>
   mutate(
     week_n = week(DateTimeStamp), 
     year = year(DateTimeStamp)) |>
   group_by(week_n, year) |>
-  summarize(across(
-    where(is.numeric), ~ mean(.x, na.rm = TRUE)),.groups = "drop") |>
-  select(-month, -Frequency)
+  summarize(across(all_of(combined_names), ~ mean(.x, na.rm = TRUE)))
 
 #writing new csv
 write_csv(weekly_combined, "Spring2026/data/combined_dataset/weekly_combined.csv")
