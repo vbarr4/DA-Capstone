@@ -73,7 +73,7 @@ wq_boxplot <- function(df, var1, var2) {
 }
 
 # function to streamline line graphs. Ensure the way is a valid time variable
-wq_line_graph <- function(df, var1, var2, var3, plot_title = NULL) {
+wq_line_graph <- function(df, var1, var2, var3 = NULL, plot_title = NULL) {
 
   # creating
   var1_name <- as_name(ensym(var1))
