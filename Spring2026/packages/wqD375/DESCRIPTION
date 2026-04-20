@@ -1,0 +1,10 @@
+Package: wqD375
+Type: Package
+Title: Streamlines water quality and weather visualization
+Version: 0.1.0
+Author: Ilianna Ditren
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: Streamlines the creation of visualizations. Currently, it is made specifically for water quality and weather data. It can be modified and generalized for other purposes.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
