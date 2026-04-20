@@ -1,17 +1,3 @@
-# Hello, world!
-#
-# This is an example function named 'hello'
-# which prints 'Hello, world!'.
-#
-# You can learn more about package authoring with RStudio at:
-#
-#   https://r-pkgs.org
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Install Package:           'Cmd + Shift + B'
-#   Check Package:             'Cmd + Shift + E'
-#   Test Package:              'Cmd + Shift + T'
 
 #cleans names of water quality and weather dataset
 wq_clean_names <- c(
@@ -38,7 +24,8 @@ wq_clean_names <- c(
   time = "Time",
   month = "Month",
   season = "Season",
-  date = "Date")
+  date = "Date",
+  week_n = "Week")
 
 # function to streamline scatter plots
 wq_scatterplot <- function(df, var1, var2, plot_title = NULL) {
@@ -86,25 +73,29 @@ wq_boxplot <- function(df, var1, var2) {
 }
 
 # function to streamline line graphs. Ensure the way is a valid time variable
-wq_line_graph <- function(df, var1, var2) {
+wq_line_graph <- function(df, var1, var2, var3, plot_title = NULL) {
 
   # creating
   var1_name <- as_name(ensym(var1))
   var2_name <- as_name(ensym(var2))
+  var3_name <- as_name(ensym(var3))
+
 
   label  <- englue("{var1_name} {var2_name}")
 
   # accessing the variable name from the wq_clean_names object and assigning it to the x and y labels
   x_label <- wq_clean_names[[var1_name]]
   y_label <- wq_clean_names[[var2_name]]
+  color_label <- wq_clean_names[[var3_name]]
 
   df |>
     ggplot() +
-    geom_line(aes(x = {{var1}}, y = {{var2}})) +
+    geom_line(aes(x = {{var1}}, y = {{var2}}, color = {{var3}})) +
     labs(
-      title = label,
+      title = {{plot_title}},
       x = x_label,
-      y = y_label) +
+      y = y_label,
+      color = var3_name) +
     theme_minimal()
 }
 
