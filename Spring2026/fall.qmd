@@ -76,7 +76,7 @@ ggplot(dAverage, aes(x = date, y = mTemp)) +
 ```{r}
 #Rain
 ggplot(dAverage, aes(x = date, y = mTotPrcp)) +
-  geom_point(alpha = 0.05) +
+  geom_point(alpha = 0.4) +
   geom_smooth(method = "lm")
   #labs(x = "time", y = "SpCond")
 ```
@@ -96,16 +96,74 @@ noRain_highTurb<- noRain|> filter(mTurb >(mean(mTurb, na.rm=TRUE)+1.65*mTurbSd))
 
 
 ```{r}
-#High Fall turbidity when there was no rain
+#High turbidity when there was no rain
 ggplot(noRain_highTurb, aes(x = date, y = mTurb)) +
-  geom_point(alpha = 0.2) +
-  geom_smooth(method = "lm")
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm")+
+  theme_minimal()
 ```
 ```{r}
 #High Fall turbidity when there was no rain
-ggplot(noRain_highTurb, aes(x = date, y = mTurb, color=year)) +
+ggplot(noRain_highTurb, aes(x = date, y = mTurb)) +
   geom_point() +
-  geom_smooth(method = "lm")+
-  ylim(0,250)
- # facet_wrap(~year)
+  ylim(0,250)+
+    theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())+
+ facet_grid(~year)
 ```
+
+
+```{r}
+#When there was no rain, at what times conductivity was high?
+cond<- noRain|> select(mSpCond)
+mCondSd<- sd(unlist(cond), na.rm = TRUE)       #sd is 0.1431, zcrit=1.65
+#Isolating the top %5 of Turbidity values
+noRain_highCond<- noRain|> 
+  filter(mSpCond > (mean(mSpCond, na.rm=TRUE)+1.65*mCondSd))
+#summary(noRain_highCond) 
+```
+
+```{r}
+#High conductivity when there was no rain
+ggplot(noRain_highCond, aes(x = date, y = mSpCond)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm")+
+  theme_minimal()
+```
+
+```{r}
+#High conductivity when there was no rain
+ggplot(noRain_highCond, aes(x = date, y = mSpCond)) +
+   geom_point() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())+
+ facet_grid(~year)
+```
+
+```{r}
+#When were the#When there was no rain, at what times conductivity was high?
+temp<- dAverage|> select(mTemp)
+mTempSd<- sd(unlist(temp), na.rm = TRUE)       #sd is 5.1318, zcrit=1.65
+#Isolating the top %5 of Turbidity values
+highTemp<- dAverage|> 
+  filter(mTemp > (mean(mTemp, na.rm=TRUE)+1.65*mTempSd))
+#summary(highTemp)  warmest days?
+```
+
+```{r}
+#Hot days in the fall
+ggplot(highTemp, aes(x = date, y = mTemp)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm")+
+  theme_minimal()
+```
+
+```{r}
+#High temp (by year)
+ggplot(highTemp, aes(x = date, y = mTemp)) +
+   geom_point() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())+
+ facet_grid(~year)
+```
+
