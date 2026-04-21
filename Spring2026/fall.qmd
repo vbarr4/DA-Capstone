@@ -1,0 +1,111 @@
+---
+title: "fall"
+author: "Joy Terentiev"
+format: html
+editor: visual
+---
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+#libraries
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(gt)
+library(ggplot2)
+library(stringr)
+library(janitor)
+library(reshape2)
+```
+
+Data
+```{r, message=FALSE, warning=FALSE, error=FALSE}
+combined <- read_csv("data/joined_dataset.csv")
+
+combined <-combined %>% 
+  mutate(
+  season_astro = case_when(
+    date >= as.Date(paste0(year, "-12-21")) | date < as.Date(paste0(year, "-03-20")) ~ "Winter",
+    date >= as.Date(paste0(year, "-03-20")) & date < as.Date(paste0(year, "-06-21")) ~ "Spring",
+    date >= as.Date(paste0(year, "-06-21")) & date < as.Date(paste0(year, "-09-22")) ~ "Summer",
+    TRUE ~ "Fall"
+  )
+)
+
+#filtering to only keep fall observations
+cfall <- combined|> filter(season_astro== "Fall") 
+
+#Daily average dataSet
+dAverage<- cfall |>
+  mutate(date = floor_date(DateTimeStamp, "day")) |> 
+  group_by(date) |>
+  summarize(mTemp = mean(Temp, na.rm = TRUE),
+            mSpCond= mean(SpCond, na.rm = TRUE),
+            mTurb= mean(Turb, na.rm = TRUE),
+            mTotPrcp= mean(TotPrcp, na.rm=TRUE))|>
+    mutate(year = year(date))
+```
+
+EDA
+```{r}
+#overview of variables and NAs
+glimpse(dAverage) 
+
+#summaries of all variables
+summary(dAverage) 
+```
+
+##Plots
+Daily time series
+
+```{r}
+#SpCond
+ggplot(dAverage, aes(x = date, y = mSpCond)) +
+  geom_point(alpha = 0.05) +
+  geom_smooth(method = "lm")
+  #labs(x = "time", y = "SpCond")
+```
+
+```{r}
+#Temperature
+ggplot(dAverage, aes(x = date, y = mTemp)) +
+  geom_point(alpha = 0.05) +
+  geom_smooth(method = "lm")
+  #labs(x = "time", y = "SpCond")
+```
+
+```{r}
+#Rain
+ggplot(dAverage, aes(x = date, y = mTotPrcp)) +
+  geom_point(alpha = 0.05) +
+  geom_smooth(method = "lm")
+  #labs(x = "time", y = "SpCond")
+```
+
+
+```{r}
+#When there was no rain, at what times turbidity was high?
+noRain<- dAverage|> filter(mTotPrcp== 0)
+
+summary(noRain)
+turb<- noRain|> select(mTurb)
+mTurbSd<- sd(unlist(turb), na.rm = TRUE)       #sd is 8.527183, zcrit=1.65
+#Isolating the top %5 of Turbidity values
+noRain_highTurb<- noRain|> filter(mTurb >(mean(mTurb, na.rm=TRUE)+1.65*mTurbSd))
+#summary(noRain_highTurb) 
+```
+
+
+```{r}
+#High Fall turbidity when there was no rain
+ggplot(noRain_highTurb, aes(x = date, y = mTurb)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth(method = "lm")
+```
+```{r}
+#High Fall turbidity when there was no rain
+ggplot(noRain_highTurb, aes(x = date, y = mTurb, color=year)) +
+  geom_point() +
+  geom_smooth(method = "lm")+
+  ylim(0,250)
+ # facet_wrap(~year)
+```
