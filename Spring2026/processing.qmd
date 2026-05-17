@@ -10,7 +10,7 @@ This document contains the processing steps for downloading the main datasets. I
 
 ## Downloading libraries
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 library(readr)
 library(tidyverse)
@@ -66,7 +66,7 @@ Note: Download link expires after certain amount of time. Ensure to download the
 
 ## Data Download
 
-```{r, echo = FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 #creates a folder for the new data
 dir.create("Spring2026/data/stony_creek", recursive = TRUE, showWarnings = FALSE)
@@ -85,7 +85,7 @@ unzip(zip_sc, exdir = "Spring2026/data/stony_creek")
 
 ```
 
-```{r, echo = FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 #read in the files for all the years as a one data file using regex (regular expressions)
 files <- list.files(
@@ -107,7 +107,7 @@ sc_02_21_raw <- do.call(
 
 ## Data Cleaning
 
-```{r, eval = FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 # Removing empty columns and other irrelevant columns
 t <- sc_02_21_raw |>
@@ -139,7 +139,7 @@ t <- t |>
 
 ```
 
-```{r, echo = FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 stony_creek <- stony_creek |>
   mutate(Temp = if_else(str_detect(F_Temp, "<-3>|<-2>|<1>"), NA_real_, Temp),
@@ -175,7 +175,7 @@ stony_creek <- stony_creek %>% select(-all_of(flags))
 
 ## Cleaning and creating new date and time columns
 
-```{r, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 #separate the date and time column
 stony_creek <- stony_creek %>%
   mutate(
@@ -203,7 +203,7 @@ stony_creek <- stony_creek %>%
 
 ```
 
-```{r, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 #the code to write out the dataset
 write_csv(stony_creek, "Spring2026/data/stony_creek.csv")
 
@@ -215,7 +215,7 @@ write_csv(stony_creek, "Spring2026/data/stony_creek.csv")
 
 ## Data Download
 
-```{r, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 #creates a folder for the new data
 dir.create("data/tivoli_north", recursive = TRUE, showWarnings = FALSE) 
@@ -232,7 +232,7 @@ unzip(zip_tn, exdir = "data/tivoli_north")
 
 ```
 
-```{r, echo = FALSE, eval= FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 #read in the files for all the years as a one data file
 files <- list.files(
@@ -256,7 +256,7 @@ tn_96_25 <- do.call(
 
 ## Data Download
 
-```{r, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 #creates a data folder
 dir.create("Spring2026/data/field_station_weather", recursive = TRUE, showWarnings = FALSE) 
@@ -295,7 +295,7 @@ fs_weather_01_26_raw <- do.call(
 
 ## Data Cleaning
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 # Removing empty columns and other irrelevant columns
 fs_weather_01_26 <- fs_weather_01_26_raw |>
@@ -308,7 +308,7 @@ fs_weather_01_26 <- fs_weather_01_26_raw |>
 
 ```
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 #creating a vector with all the weather flags
 flags_weather <- c(
@@ -345,7 +345,7 @@ fs_weather_01_26 <- fs_weather_01_26 |>
 
 ```
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 #separate the data and time column
 fs_weather_01_26 <- fs_weather_01_26 %>%
@@ -373,7 +373,7 @@ fs_weather_01_26 <- fs_weather_01_26 %>%
   )
 ```
 
-```{r, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 #the code to write out the dataset
 write_csv(fs_weather_01_26, "Spring2026/data/fs_weather_01_26.csv")
 
@@ -382,7 +382,7 @@ write_csv(fs_weather_01_26, "Spring2026/data/fs_weather_01_26.csv")
 
 # Joined dataset (Stony Creek Water Quality and Field Station Weather Data)
 
-```{r}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 # reading main datasets
 water <- read_csv("data/stony_creek.csv")
 weather <- read_csv("data/fs_weather_01_26.csv")
@@ -390,7 +390,7 @@ weather <- read_csv("data/fs_weather_01_26.csv")
 
 ## Exploring the structure of the data
 
-```{r}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 str(weather)
 str(water)
 
@@ -398,19 +398,19 @@ names(weather)
 names(water)
 ```
 
-```{r}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 #rename the column in the water dataset to easier join the datasets
 weather <- weather %>%
   rename(DateTimeStamp = DatetimeStamp)
 ```
 
 ## Joining the water quality and weather datasets
-```{r}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 #join water and weather data with inner join
 combined <- inner_join(water, weather, by = "DateTimeStamp")
 ```
 
-```{r}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 #get rid of the duplicate columns and 
 combined <- combined %>%
   select(-year.y, -date.y, -time.y, -month.y, -season.y) %>%
@@ -423,14 +423,14 @@ combined <- combined %>%
   )
 ```
 
-```{r, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 #the code to write out the dataset
 write_csv(combined, data/combined_dataset/joined_dataset.csv")
 ```
 
 The combined dataset contained variables measured every 15-30 minutes. In this section, the data will be summarized to contain daily averages only. 
 
-```{r}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 # recode the seasons:
 
@@ -475,7 +475,7 @@ daily_combined <- combined |>
    
 ```
 
-```{r}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 # calculate weekly averages:
 combined <- combined %>% #create a new dataset
