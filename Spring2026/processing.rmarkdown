@@ -5,6 +5,8 @@ author: "Ilianna Ditren, Joy Terentiev, Natalie Novoseltseva"
 format: pdf
 ---
 
+
+
 # Background Information
 
 This document contains the processing steps to download the main datasets of this exploratory data analysis. The first dataset contains water quality data from Stony Creek, the following contains water quality data from Tivoli North, and the third and final dataset contains water quality data from Field Station. Water quality on Stony Creek was explored first, and then the weather data from Field Station. Tivoli North water quality data was not explored, although the same steps taken to explore Stony Creek can be taken after an appropriate workflow is established. After exploring data on Stony Creek and data on Field Station weather individually, those datasets were combined in order to analyze them together.
@@ -13,7 +15,7 @@ Each dataset was downloaded directly from the web. There is a separate file for 
 
 Ultimately, there are 5 main datasets:
 
-- `stony_creek`: Water quality data from Stony Creek recorded every 15 minutes (2002-2005, and partially 2006 data was recorded every 30 minutes)
+- `stony_creek`: Water quality data from Stony Creek recorded every 15 minutes
 
 - `fs_weather_01_26`: Weather data from Field Station recorded every 15 minutes
 
@@ -27,6 +29,8 @@ Ultimately, there are 5 main datasets:
 
 ## Downloading libraries
 
+
+
 ```{r, warning=FALSE, message=FALSE}
 
 library(readr)
@@ -37,8 +41,11 @@ library(janitor)
 library(stringr)
 library(reshape2)
 
+view(read_csv("data/stony_creek.csv"))
 
 ```
+
+
 
 Data and Cleaning
 
@@ -84,6 +91,8 @@ Note: Download link expires after certain amount of time. Ensure to download the
 
 ## Data Download
 
+
+
 ```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 #creates a folder for the new data
@@ -124,7 +133,11 @@ stony_creek_raw <- do.call(
 
 ```
 
+
+
 ## Data Cleaning
+
+
 
 ```{r, warning=FALSE, message=FALSE, eval=TRUE}
 
@@ -171,7 +184,11 @@ stony_creek <- stony_creek %>% select(-all_of(flags))
 
 ```
 
+
+
 ## Cleaning Date and Time Columns
+
+
 
 ```{r, warning=FALSE, message=FALSE, eval=TRUE}
 #separate the date and time column
@@ -210,9 +227,13 @@ write_csv(stony_creek, "data/stony_creek.csv")
 
 ```
 
+
+
 # Tivoli North Water Quality (1996 - 2025)
 
 ## Data Download
+
+
 
 ```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
@@ -251,9 +272,13 @@ tn_96_25 <- do.call(
 
 ```
 
+
+
 # Field Station Meteorological Data (2001-2026)
 
 ## Data Download
+
+
 
 ```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
@@ -296,7 +321,11 @@ fs_weather_01_26_raw <- do.call(
 )
 ```
 
+
+
 ## Data Cleaning
+
+
 
 ```{r, warning=FALSE, message=FALSE, eval=TRUE}
 
@@ -383,7 +412,11 @@ write_csv(fs_weather_01_26, "data/fs_weather_01_26.csv")
 #uncomment the code to write out the new/updated version of the dataset.
 ```
 
+
+
 # Joining Water Quality and Weather Data
+
+
 
 ```{r, warning=FALSE, message=FALSE, eval=TRUE}
 # reading main datasets
@@ -391,7 +424,11 @@ water <- read_csv("data/stony_creek.csv")
 weather <- read_csv("data/fs_weather_01_26.csv")
 ```
 
+
+
 ## Exploring the structure of the data
+
+
 
 ```{r, warning=FALSE, message=FALSE, eval=TRUE}
 str(weather)
@@ -407,7 +444,11 @@ weather <- weather %>%
   rename(DateTimeStamp = DatetimeStamp)
 ```
 
+
+
 ## Joining the water quality and weather datasets
+
+
 ```{r, warning=FALSE, message=FALSE, eval=TRUE}
 #join water and weather data with inner join
 combined <- inner_join(water, weather, by = "DateTimeStamp")
@@ -431,7 +472,11 @@ combined <- combined %>%
 write_csv(combined, "data/combined.csv")
 ```
 
+
+
 The combined dataset contained variables measured every 15-30 minutes. In this section, the data will be summarized to contain daily averages only. 
+
+
 
 ```{r, warning=FALSE, message=FALSE, eval=TRUE}
 
@@ -485,3 +530,4 @@ weekly_combined <- combined %>% #create a new dataset
 write_csv(weekly_combined, "data/weekly_combined.csv")
  
 ```
+
