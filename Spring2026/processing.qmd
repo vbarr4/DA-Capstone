@@ -37,7 +37,6 @@ library(janitor)
 library(stringr)
 library(reshape2)
 
-view(read_csv("data/stony_creek.csv"))
 
 ```
 

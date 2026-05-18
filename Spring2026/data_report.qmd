@@ -1,0 +1,101 @@
+---
+title: "DA Capstone Final Report"
+subtitle: "Stony Creek Water Quality Analysis (2002–2021)"
+author: "Natalie Novoseltseva, Ilianna Ditren, Joy Terentiev"
+format: pdf
+---
+
+## Introduction
+
+Water and water quality data have remained important topics for researchers from many disciplines, ranging from chemistry to sociology, for decades. We are no exception to this trend and as part of the Data Analytics Capstone project, we contributed to the ongoing exploration of water quality data collected from Stony Creek, NY. 
+
+The project we inherited included an exploratory analysis of two years (2020-2021) of Stony Creek water quality data, with a primary focus on temperature, pH and salinity. Reviewing the existing work allowed us to become familiar with the topic, variables, and challenges related to data quality we faced when working with the dataset. Since we inherited the project at early stages, we also had the opportunity to contribute in many ways and expand the scope of analysis.
+
+With our contributions this semester, the project evolved into a broader longitudinal analysis covering all available years of water quality data (2002-2021). In addition, water quality measurements were combined with Hudson Field Station weather Indicator data (2001-2026) to explore the potential relationship between water quality and meteorological conditions. The expanded exploratory analysis focused on examining changes in the water indicators over time, exploring the relationships between weather and water conditions, and detecting unusual events and possible mistakes in the dataset. This led us to the following research question: **How did the water quality indicators change over time (almost 20 years), and were these changes associated with changes in weather conditions?**
+
+Even though we were only  able to conduct  an initial exploratory analysis, the overall question is important as a first step toward exploring weather-water consequences of climate change, which may be better examined further as more data become available.
+
+The report presents the data cleaning and preparation process, exploratory analysis, visualizations, seasonal analysis of the data, and the key findings. Particular attention is given to correlations among variables, detecting anomalies and describing the process of working with incomplete and inconsistent environmental data.
+
+## Data and Methods
+
+### Data
+
+To perform the analysis, we used Stony Creek water quality data for the years 2002-2021 and Hudson Field Station weather indicator data for the years 2001-2026. Raw water quality and weather data was obtained from the Centralized Data Management Office (CDMO) website ([https://cdmo.baruch.sc.edu](https://cdmo.baruch.sc.edu/)). Below are the detailed steps we took to obtain the data:
+
+1.  Navigate to the [CDMO website](https://cdmo.baruch.sc.edu/).
+
+2.  Click on the Get Data tab at the top of the page.
+
+3.  Select Advanced Query System and click Launch.
+
+4.  Locate the Zip Downloads option and click Choose ZIP Files.
+
+5.  From the list of National Estuarine Research Reserves, select Hudson River, NY.
+
+6.  Select the appropriate dataset:
+
+\- For **weather data** from the field station, select hudfsmet-p.
+
+\- For **Stony Creek water quality data**, select hudscwq-p.
+
+\- For **Tivoli North water quality data**, select hudtnwq-p.
+
+Each dataset must be requested separately, as the website generates one download link per request, and the analysis code is structured to process each dataset independently.\
+7.  After selecting the desired site, click Submit location and proceed to next step.
+
+8.  Select the desired range of years and click Get files.
+
+ For the DA Capstone Spring 2026 project, requests were made for all available years.
+
+9.  Complete the required information requested by the website and submit the request.
+
+10\. Shortly after submission, an email will be sent to the provided email address containing a download link to the data files.
+
+11\. Copy and paste this link into the corresponding section of the code for the selected site.
+
+12\. Run the code. After execution, all files will be downloaded into a subfolder named after the site within your data folder.
+
+### Data Cleaning
+
+### Final Dataset
+
+### Resources used
+
+#### Github (Joy)
+
+#### R (Joy)
+
+#### Package (Ilianna)
+
+#### Any other resource (Everybody)
+
+#### Initial EDA
+
+### Water Quality Data
+
+### Weather Data
+
+## Final Dataset EDA
+
+### Correlation matrix (Natalie)
+
+### General scatterplot (over all years and seasons) (Based on variable we had: Natalie, Joy, Ilianna)
+
+### Analysis by season (Spring - Ilianna, Summer - Natalie, Fall - Joy)
+
+## Next Steps
+
+## **Discussion**
+
+\
+
+## **References**
+
+\
+
+### 
+
+\
+
+\
