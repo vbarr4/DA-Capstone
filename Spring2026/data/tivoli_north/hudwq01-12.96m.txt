@@ -1,0 +1,762 @@
+                 Hudson River NERR (HUD) Water Quality Metadata Form
+                       (Jan. - Dec. 1996)
+                Latest Update: June 13, 2000
+                                
+               I. Data Set & Research Descriptors
+                               
+1.   Principal Investigator: William C. Nieder, Research
+     Coordinator
+
+     Contact Person: William C. Nieder
+                     Hudson River NERR
+                     c/o Bard College Field Station
+                     Annandale, NY 12504
+                     cnieder@ocean.nos.noaa.gov
+
+2.   Entry Verification:
+
+     Data are analyzed for outliers and anomalies using the outlier macro for 
+Excel 5.0 developed by the CDMO.  These macros discover outlier values which 
+fall outside the range that the instrument is designed to measure (see section 
+II.8 of this document). After outliers and anomalous data are identified, all 
+data are graphed in Excel to help identify outliers that fall within the range 
+of the probes and also anomalous trends. Missing data are identified using the 
+CDMO Excel Date, Hour Count macro.  All columns are formatted using the CDMO 
+Excel
+Column Reformat macro.  All data was FTPed to the CDMO via the CDMO dial-up 
+access.  All raw data files are archived at the CDMO and on 3.5" disks. 
+Questionable data are either deleted or identified in section II.10.  All 
+missing data and deleted data will be identified in section II.11.
+
+Person responsible for data verification:    Research Coordinator.
+
+3.   Research Objectives:
+
+     Measurements are taken every 30 minutes over a two to four week period from 
+April 1 through the end of November of each year at two locations within the 
+Tivoli Bays component of the Hudson River NERR.  One datalogger monitors 
+tributary water (Saw Kill, SK) entering the bay and the other monitors the 
+Hudson River water flooding and ebbing to and from the bay (TS).  The objective 
+of this study is to monitor the quality of the surface water  entering (via 
+stream flow and tidal exchange) and leaving (via tidal exchange) Tivoli South 
+Bay.  This will help us understand the relative importance on each source of 
+water on Tivoli South Bay.  The Reserve staff have identified urban and 
+residential land use practices as having a major influence on the water 
+chemistry of the Saw Kill.  Since residential coverage continues to increase, we 
+hope that the intensive monitoring of the surface waters in this watershed will 
+identify trends caused by this rapid development.  
+
+4.   Research Methods:  
+
+     Two YSI6000 dataloggers have been placed at the Tivoli Bays component site 
+of the Reserve.  The instruments are deployed 0.5 meters off the bottom in 
+vertically mounted perforated PVC tubes.  Instruments are deployed for a two to 
+four week duration from April through November each year.  Data are collected at 
+30 min. intervals.  After instruments are retrieved, instrument calibration is 
+checked against standards, data are uploaded, and instrument probes are 
+serviced. Before each YSI 6000 is deployed, calibration  and maintenance is 
+performed following the manufacturer's instructions (YSI Manual addendum 7/94, 
+sections 3,4, and 7). Data are uploaded via a cable to a laptop computer. 
+Calibration standards are required for pH, turbidity, and salinity; all other 
+parameters are done as described in the manual. Buffer solutions for 2 point 
+calibration (pH 7 and 10), salinity and turbidity standards are purchased 
+premade from a scientific supply house. The dissolved oxygen membranes are 
+replaced before deployment and are allowed to sit at least 24 hrs prior to 
+deployment. 
+
+5.   Site Location and Character:
+
+     The Hudson River National Estuarine Research Reserve (HUDNERR) is a 
+multicomponent site composed of approximately 5,000 acres of tidal wetland, open 
+water, and adjacent upland buffer habitat.  The four component sites of the 
+Reserve are located on the Hudson River in New York State by river miles (RM) 
+proceeding north from the southern tip of Manhattan.  These include: Stockport 
+Flats (RM 124)(42o02'30"N 73o46'00"W), Columbia County; Tivoli Bays (RM 
+98)(42o02'15"N 73o55'10"W), Dutchess County; and Iona Island (RM 45)(41o18'15"N 
+73o58'45"W) and Piermont Marsh (RM 24)(41o02'30"N 73o54'15"W), Rockland County.  
+These four components are located along 100 river miles of the Hudson and are 
+representative of the diverse plant and animal communities that occupy the 
+salinity gradient within the Hudson estuary.  Development within the watersheds 
+of Hudson River NERR component sites ranges from predominantly urban/suburban to 
+forested/agricultural. 
+     The two YSI6000 dataloggers are placed at Tivoli Bays component site. The 
+Saw Kill (SK) 42? 01’ 01.543”N, 73? 54’ 53.589”W drains a 26.6 square mile 
+(6886.5 hectares) watershed that is characterized as a highly mixed land use 
+watershed.  These are both freshwater sites (0.0 ppt salinity).  Water depth at 
+ranges from 0.0 to 2.0m at TS and 1.0 to 2.0 at SK.  Bottom type at TS is rocky 
+and at SK  is soft silt/clay.  The dominant land uses within this watershed 
+include: forested (51.1%), agriculture (25.8%), and urban (16.5%).  Tivoli South 
+Bay (TS) 42? 01’ 37.336”W, 73? 55’ 33.445”W, the receiving body for the Saw 
+Kill, is a tidal freshwater wetland with a tidal range of 3.9 ft. (1.19 m).  
+Tivoli North Bay (TN) 42? 02’ 11.56464”N, 73? 55’ 31.16645”W.  
+
+6.   Data collection period:
+
+     YSI6000 datalogger sampling at the Saw Kill (SK) and Tivoli South Bay (TS) 
+began during May, 1995.  Sampling at Tivoli North Bay (TN) began during July, 
+1996.  All sampling is ongoing, however, we cannot sample from approximately 
+December 1 through March 31 due to winter storms and ice on the Hudson River and 
+tributaries.  During a tropical storm during mid-July the SK deployment site was 
+damaged and we were unable to repair it during 1996.  This site should be 
+operational by April 1997.
+
+7.   Associated researchers and projects:
+
+     Hudson River NERR Water Quality Monitoring: Physical and chemical 
+constituents of the tributary waters discharging into HUDNERR marshes and marsh 
+waters during ebb tides are measured monthly and during storm events.  
+Concentrations of nitrate, phosphate, sulphate, dissolved oxygen (DO), and 
+chloride are measured, as well as, seston, alkalinity, pH, temperature,salinity, 
+and conductivity. 
+     Saw Kill Water Quality Monitoring:  The surface water draining from five 
+subcatchments representing five dominant land use practices within the Saw Kill 
+have been monitored during several storm events.  These five land use practices 
+include: row crop agriculture, orchard, residential, solid waste landfill, and 
+forested.  All of the above constituents have been monitored during this 
+project.
+     Associated researchers with the work at Tivoli Bays include: scientists 
+from the Institute of Ecosystem Studies, Millbrook, NY; Yale School of Forestry 
+and Environmental Studies, New Haven, CT; and Rensselaer Polytechnic Institute, 
+Troy, NY.
+
+                II. Physical Structure Descriptors
+
+8. Variable sequence, range of measurements, units, resolution, and accuracy:
+
+Variable Name   Range of Measurements (Units)     Resolution          Accuracy
+DATE            1-12, 1-31, 00-99 (mo,day,yr)     1mo, 1da, 1yr         NA
+HOUR            0-24, 0-60,0-60(hr,min,sec)       1hr, 1min, 1sec       NA 
+WTEMP           -5 to 45oC                        0.01 C             +/- 0.15C  
+SPCOND          0 to 100 mS/cm                    0.01mS/cm          +/- 0.5% of 
+reading+
+                                                                        
+0.001mS/cm
+SALINITY        0-70 parts per thousand(ppt)      0.01ppt            +/- 1.0% of 
+reading
+                                                           or 0.1ppt (whichever 
+is greater)    
+DOSAT           0-200% air saturation(air sat.)   0.1%@ air sat.     +/- 2% @ 
+air sat.
+DOSAT           200-500% air saturation(air sat.) 0.1%@ air sat.     +/- 6% @ 
+air sat.
+DOMG            0-20 mg/l                         0.01 mg/l          +/- 0.2 
+mg/l
+DOMG            20-50 mg/l                        0.01 mg/l          +/- 0.6 
+mg/l
+SHALLOW DEPTH   0 to 9.1 m                        0.001 m            +/- 0.018 m
+pH              2 to 14                           0.01 units         +/- 0.2 
+units
+TURB   0 to 1000 NTU                 0.1 NTU          +/- 5% or reading or 2 NTU 
+(whichever is
+greater)
+
+9.  Coded variable indicator and variable code definitions
+
+     Site definitions: 
+
+     SK = Saw Kill 
+     TS = Tivoli South Bay
+     TN = Tivoli North Bay
+
+10.  Data anomalies
+
+April
+ 
+SK:   No turbidity data for entire month, all data that was
+     collected was out of range and was deleted.  All values were
+     slightly negative.  Cause was probe failure.
+
+TS   Turbidity data for 04/26/96 @ 14:00:00 and 04/30/96 @
+     17:30:00 out of range and deleted.
+
+May
+
+SK   No turbidity data for entire month, all data that was
+     collected was out of range and was deleted.  Cause was instrument failure.
+
+TS   Turbidity data for 05/01/96 16:30:00 was slightly negative and
+     deleted.  Cause was likely mechanical and not a real turbidity event.
+
+
+June
+
+SK  The following turbidity data deleted because data were out
+     of measurable range of instrument: 06/04/96 @ 22:30:00 and
+     23:30:00; 06/05/96 @ 01:30:00 and 18:00:00 (values ranged
+     from -713.5 to -717.4 NTU.  YSI believes these data were
+     caused by an object passing by the turbidity probe during
+     the measurement.
+
+TS: The following turbidity data deleted because data were out
+     of measurable range of instrument: 06/11/96 @ 19:30:00 and
+     06/13/96 @ 13:00:00 (values were -155.7 and -109.0 NTU
+     respectively). YSI believes these data were caused by an
+     object passing by the turbidity probe during the
+     measurement.
+ 
+Negative turbidity spike occurred on 06/25/96 at 00:30 (-0440 NTU).  This data 
+point was
+likely caused by a probe blockage and was removed.
+
+July
+
+TN   SpCond data for the following dates and times were 00.00
+     mS/cm and all data associated with these dates and times has
+     been deleted because the instrument probes were exposed at
+     low tides:
+
+07/23/96 13:00:00 - 14:00:00
+07/24/96 13:30:00 - 14:30:00
+07/25/96 14:30:00 - 15:30:00
+07/26/96 15:30:00 - 16:30:00
+07/27/96 16:30:00 - 18:00:00
+07/28/96 05:30:00 - 07:30:00
+07/28/96 17:00:00 - 19:30:00
+07/29/96 06:30:00 - 08:00:00
+07/29/96 18:00:00 - 20:00:00
+07/30/96 07:30:00 - 09:00:00
+07/30/96 19:30:00 - 21:00:00 
+07/31/96 08:30:00 - 09:30:00
+07/31/96 21:00:00 - 21:30:00
+
+August
+
+TN   Negative depth values occurred at 08/24/96 03:00:00 &
+     17:00:00; 08/26/96 19:00:00.  Data left in, probes were not
+     exposed.
+
+     Large negative turbidity spikes occurred on 08/03 14:00 and 08/09 14:00 
+(both -737 
+NTU). 
+     These were likely caused by probe blockage and have been deleted.
+
+     SpCond data for the following dates and times was 00.00
+     mS/cm and all data associated with these date and times has
+     been deleted because the instrument probes were exposed at
+     low tides:
+
+08/01/96 09:30:00 - 10:00:00
+08/01/96 21:30:00 - 22:30:00  
+08/02/96 10:00:00 - 11:00:00
+08/02/96 22:30:00 - 23:30:00
+08/03/96 10:30:00 - 12:00:00
+08/03/96 23:30:00
+08/04/96 00:00:00
+08/04/96 11:00:00 - 13:00:00
+08/05/96 00:00:00 - 01:30:00
+08/05/96 12:00:00 - 14:00:00
+08/06/96 01:00:00 - 02:00:00
+08/06/96 12:30:00 - 15:00:00
+08/07/96 02:30:00 - 03:30:00
+08/07/96 13:30:00 - 15:30:00
+08/08/96 04:00:00
+08/08/96 15:00:00 - 16:30:00
+08/09/96 04:30:00 - 05:30:00
+08/09/96 16:00:00 - 17:00:00
+08/10/96 05:00:00 - 07:00:00
+08/10/96 16:30:00 - 18:00:00
+08/11/96 05:30:00 - 08:00:00
+08/11/96 17:30:00 - 19:00:00
+08/12/96 06:30:00 - 08:00:00
+08/12/96 18:30:00 - 19:30:00
+08/13/96 07:30:00 - 08:30:00
+08/14/96 08:30:00 - 09:00:00
+08/14/96 19:30:00 - 20:30:00
+08/16/96 10:00:00
+08/17/96 09:30:00 - 10:30:00
+08/17/96 22:00:00
+08/18/96 10:00:00 - 11:30:00
+08/18/96 22:30:00 - 23:30:00
+08/19/96 10:00:00 - 12:30:00 
+08/20/96 11:00:00 - 12:30:00
+08/22/96 12:30:00 - 14:30:00
+08/23/96 13:30:00 - 15:00:00 
+08/24/96 03:30:00 - 04:30:00 
+08/24/96 14:30:00 - 16:30:00 
+08/25/96 04:00:00 - 05:30:00 
+08/25/96 15:30:00 - 17:30:00
+08/26/96 05:00:00 - 06:30:00
+08/26/96 16:30:00 - 18:30:00 
+08/27/96 06:00:00 - 07:30:00 
+08/27/96 17:30:00 - 19:30:00 
+08/28/96 07:00:00 - 08:30:00 
+08/28/96 19:00:00 - 20:30:00 
+08/29/96 08:00:00 - 09:30:00 
+08/29/96 19:30:00 - 21:30:00
+08/30/96 08:00:00 - 09:30:00 
+08/30/96 20:30:00 - 22:30:00 
+08/31/96 09:00:00 - 11:00:00 
+08/31/96 21:30:00 - 23:00:00 
+
+September
+
+TS   Turbidity probe failure during deployment from 09/12/96
+     09:00:00 to 09/30/96 23:30:00. Turbidity values dropped
+     after this deployment to slightly negative values and only
+     ranged +/- 5NTU for entire deployment.  Unknown cause
+     and all turbidity data removed from 09/12/96 09:00:00 to
+     09/30/96 23:30:00.
+
+TN     SpCond data for the following dates and times was 00.00
+     mS/cm and all data associated with these date and times has
+     been deleted because the instrument probes were exposed at
+     low tides:
+
+09/01/96 09:30:00 - 11:30:00
+09/01/96 22:30:00 - 23:30:00
+09/02/96 00:00:00
+09/03/96 11:00:00 - 13:00:00
+09/11/96 07:00:00 - 07:30:00 
+09/11/96 19:00:00 - 19:30:00 
+09/16/96 09:30:00 - 10:30:00
+09/25/96 18:00:00 - 19:30:00
+09/26/96 06:30:00 - 08:00:00
+09/26/96 19:00:00 - 20:30:00
+09/27/96 07:00:00 - 09:00:00 
+09/27/96 20:00:00 - 21:00:00 
+09/28/96 08:30:00 - 09:00:00 
+09/29/96 09:30:00 - 10:00:00 
+09/29/96 22:00:00 - 22:30:00 
+09/30/96 09:30:00 - 11:00:00 
+09/30/96 22:00:00 - 23:30:00 
+
+The following depths were slightly negative but the probes were not exposed.  
+These data 
+should
+be treated as 0.0m and could have been caused by probe drift or changed in 
+barometric 
+pressure.
+
+Date Time Depth
+mm/dd/yy  hh:mm:ss   m
+09/02/96  11:30:00  -0.01
+09/03/96  00:30:00  -0.03
+09/09/96  17:30:00  -0.01
+09/10/96  06:00:00  -0.02
+09/10/96  06:30:00  -0.06
+09/10/96  07:00:00  -0.03
+09/10/96  18:00:00  -0.05
+09/10/96  18:30:00  -0.06
+09/10/96  19:00:00  -0.05
+09/11/96  06:30:00  -0.03
+09/11/96  08:00:00  -0.01
+09/11/96  18:30:00  -0.02
+09/12/96  07:00:00  -0.01
+09/12/96  07:30:00  -0.04
+09/12/96  08:00:00  -0.04
+09/14/96  09:00:00  -0.04
+09/14/96  09:30:00  -0.01
+09/15/96  09:30:00  -0.01
+09/18/96  11:00:00  -0.07
+09/18/96  11:30:00  -0.09
+09/18/96  12:00:00  -0.10
+09/18/96  12:30:00  -0.07
+09/18/96  23:30:00  -0.01
+09/19/96  00:00:00  -0.05
+09/22/96  03:30:00  -0.03
+09/22/96  04:00:00  -0.01
+09/22/96  15:00:00  -0.05
+09/22/96  15:30:00  -0.08
+09/22/96  16:00:00  -0.10
+09/23/96  04:00:00  -0.07
+09/23/96  04:30:00  -0.09
+09/23/96  05:00:00  -0.04
+09/23/96  16:30:00  -0.01
+     
+          
+     
+
+
+October
+
+TS   Turbidity data collected from 10/01/96 00:00:00 through
+     10/12/96 09:30:00 all slightly negative and ranged on +/- 5
+     NTU.  Cause was likely due to calibration error.  Data were deleted.
+
+
+TN   SpCond data for the following dates and times was 00.00
+     mS/cm and all data associated with these date and times has
+     been deleted because the instrument probes were exposed at
+     low tides:
+
+10/01/96 10:00:00 - 11:30:00
+10/01/96 23:00:00 - 23:30:00 
+10/02/96 00:00:00 
+10/02/96 11:30:00 - 12:00:00
+10/04/96 00:00:00 - 03:30:00 
+10/06/96 03:30:00 - 04:00:00
+10/11/96 05:30:00 - 08:30:00 
+10/11/96 18:30:00 - 20:00:00
+10/12/96 07:00:00 - 08:30:00 
+
+     Negative depth values were collected from 10/09/96 05:30:00
+- 07:00:00; 10/10/96 06:00:00 - 07:00:00 & 19:30:00.  These data
+appear good and were left in.
+
+November
+
+TN   SpCond data for the following dates and times was 00.00
+     mS/cm and all data associated with these date and times has
+     been deleted because the instrument probes were exposed at
+     low tides:
+
+11/27/96 07:00:00 - 11:00:00 
+11/27/96 20:00:00 - 11/28/96 00:00:00 
+11/29/96 10:00:00 - 11:00:00 
+11/29/96 23:00:00 - 23:30:00
+
+December
+
+TS
+        SpCond data for the following dates and times was 00.00
+     mS/cm and all data associated with these date and times has
+     been deleted because the instrument probes were exposed at
+     low tides: 12/21/96 04:30:00 - 05:30:00.
+
+TN   All DO Sat and DO mg/L data for entire month removed.  DO
+     probe drifted quickly to negative values and remained
+     negative for the entire deployment.
+
+     SpCond data for the following dates and times was 00.00
+     mS/cm and all data associated with these date and times has
+     been deleted because the instrument probes were exposed at
+     low tides:
+
+12/12/96 08:30:00 - 09:30:00 
+12/20/96 15:30:00 - 19:30:00
+12/21/96 02:00:00 - 07:00:00
+12/21/96 17:00:00 - 19:30:00
+12/22/96 05:00:00 - 07:00:00 
+12/22/96 18:30:00 - 20:00:00
+12/23/96 05:30:00 - 07:00:00
+12/23/96 20:00:00
+
+
+11.  Missing Data 
+
+January through March
+
+     No data collected at TS, TN, or SK, no instruments deployed
+until April due to ice and late winter storms.
+
+April
+
+SK   No data collected from 04/01/96 @ 00:00:00 through 04/25/96
+     @ 13:00:00, instruments not deployed until 04/25/96 at
+     13:30:00 due to ice and late winter storms.
+
+     No turbidity data for entire month, all data that was
+     collected was out of range and was deleted.  All values were
+     slightly negative.  Cause was likely probe failure.
+
+TS   No data collected from 04/01/96 @ 00:00:00 through 04/17/96
+     @ 07:30:00, instuments not deployed until 04/17/96 @
+     08:00:00 due to ice and winter storms.
+
+     Turbidity data for 04/26/96 @ 14:00:00 and 04/30/96 @
+     17:30:00 out of range and deleted.  Likely cause was probe blockage.
+
+TN   No data, instrument not deployed
+
+May
+
+SK   No turbidity data for entire month, all data that was
+     collected was out of range and was deleted.  Likely cause was probe 
+failure.
+
+     No data for 05/25/96 14:00:00 through end of month. 
+     Instruments out for servicing.
+
+TS   Turbidity data for 05/01/96 16:30:00 was slightly negative and
+     deleted.  Cause was likely mechanical and not a real turbidity event.
+
+     No data from 05/17/96 08:30:00 through 05/31/96 23:30:00,
+     instruments out for servicing.
+
+TN   No data, instrument not deployed
+
+June
+
+SK   No data from 06/01/96 @ 00:00:00 through 06/04/96 @ 08:30:00
+     and 06/20/96 @ 03:30:00 through 06/26/96 @ 13:00:00. 
+     Instrument out for servicing.
+
+     The following turbidity data deleted because data were out
+     of measurable range of instrument: 06/04/96 @ 22:30:00 and
+     23:30:00; 06/05/96 @ 01:30:00 and 18:00:00 (values ranged
+     from -713.5 to -717.4 NTU.  YSI believes these data were
+     caused by an object passing by the turbidity probe during
+     the measurement.
+
+TS   No data from 06/01/96 @ 00:00:00 through 06/04/96 @ 08:30:00
+     and 06/25/96 @ 10:30:00 through 06/26/96 @ 13:00:00. 
+     Instrument out for servicing.
+
+     The following turbidity data deleted because data were out
+     of measurable range of instrument: 06/11/96 @ 19:30:00 and
+     06/13/96 @ 13:00:00 (values were -155.7 and -109.0 NTU
+     respectively). YSI believes these data were caused by an
+     object passing by the turbidity probe during the
+     measurement.
+
+Negative turbidity spike occurred on 06/25/96 at 00:30 (-0440 NTU).  This data 
+point was
+likely caused by a probe blockage and was removed.
+
+
+TN   No data, instrument not deployed.
+
+July
+
+SK   No data collected from 07/11/96 08:00:00 through 09:30:00 and 07/11/96 
+23:00:00 
+through
+07/31/96 23:30:00.  High flows in the Saw Kill from a tropical storm
+     destroyed deployment site.  Instrument not damaged but did
+     stop collecting data.  All data up to 07/11/96 23:00:00
+     appear good.
+
+TS   No data from 07/17/96 10:00:00 through 07/30/96 09:30:00. 
+     Instruments pulled for servicing.
+
+     No salinity data collected for 07/01/96 00:00:00 - 07/17/96 09:30:00.  Did 
+not
+     program the instrument to collect data.  However, the site
+     is fresh water so salinity is essentially 0.0 ppt at all times.
+
+TN   Instrument deployed for first time on 07/23/96 at 11:45:00. 
+     No data from 07/01/96 at 00:00:00 through 07/23/96 at
+     11:30:00.
+
+     No salinity data collected for entire month.  Did not
+     program the instrument to collect salinity data.  However,
+     the site is fresh water so salinity is essentially 0.0 at
+     all times.
+
+     All data for the following dates and times has been deleted
+because the instrument probes were exposed at low tides:
+
+07/23/96 13:00:00 - 14:00:00
+07/24/96 13:30:00 - 14:30:00
+07/25/96 14:30:00 - 15:30:00
+07/26/96 15:30:00 - 16:30:00
+07/27/96 16:30:00 - 18:00:00
+07/28/96 05:30:00 - 07:30:00
+07/28/96 17:00:00 - 19:30:00
+07/29/96 06:30:00 - 08:00:00
+07/29/96 18:00:00 - 20:00:00
+07/30/96 07:30:00 - 09:00:00
+07/30/96 19:30:00 - 21:00:00 
+07/31/96 08:30:00 - 09:30:00
+07/31/96 21:00:00 - 21:30:00
+
+
+August
+
+SK   No data collected for entire month, deployment site
+     destroyed by high flows in the Saw Kill from a tropical
+     storm in July.
+
+TS   No data collected from 08/15/96 08:00:00 - 08/16/96
+     09:30:00.  Instument pulled for servicing.
+
+TN   No salinity data collected from 08/01/96 00:00:00 - 08/16/96
+     10:00:00. Failed to program the instrument to collect
+     salinity data.  However, the site is fresh water so salinity
+     is essentially 0.0 at all times.
+
+     Large negative turbidity spikes occurred on 08/03 14:00 and 08/09 14:00 
+(both -737). 
+     These were likely caused by probe blockage and have been deleted.
+
+     All data for the following dates and times has been deleted
+     because the instrument probes were exposed at low tides:
+
+08/01/96 09:30:00 - 10:00:00
+08/01/96 21:30:00 - 22:30:00  
+08/02/96 10:00:00 - 11:00:00
+08/02/96 22:30:00 - 23:30:00
+08/03/96 10:30:00 - 12:00:00
+08/03/96 23:30:00
+08/04/96 00:00:00
+08/04/96 11:00:00 - 13:00:00
+08/05/96 00:00:00 - 01:30:00
+08/05/96 12:00:00 - 14:00:00
+08/06/96 01:00:00 - 02:00:00
+08/06/96 12:30:00 - 15:00:00
+08/07/96 02:30:00 - 03:30:00
+08/07/96 13:30:00 - 15:30:00
+08/08/96 04:00:00
+08/08/96 15:00:00 - 16:30:00
+08/09/96 04:30:00 - 05:30:00
+08/09/96 16:00:00 - 17:00:00
+08/10/96 05:00:00 - 07:00:00
+08/10/96 16:30:00 - 18:00:00
+08/11/96 05:30:00 - 08:00:00
+08/11/96 17:30:00 - 19:00:00
+08/12/96 06:30:00 - 08:00:00
+08/12/96 18:30:00 - 19:30:00
+08/13/96 07:30:00 - 08:30:00
+08/14/96 08:30:00 - 09:00:00
+08/14/96 19:30:00 - 20:30:00
+08/15/96 07:30:00 - 08/16/96 10:00:00
+08/17/96 09:30:00 - 10:30:00
+08/17/96 22:00:00
+08/18/96 10:00:00 - 11:30:00
+08/18/96 22:30:00 - 23:30:00
+08/19/96 10:00:00 - 12:30:00
+08/20/96 11:00:00 - 12:30:00
+08/21/96 12:00:00 - 13:30:00
+08/22/96 01:30:00 - 02:00:00
+08/22/96 12:30:00 - 14:30:00
+08/23/96 13:30:00 - 15:00:00 
+08/24/96 03:30:00 - 04:30:00 
+08/24/96 14:30:00 - 16:30:00 
+08/25/96 04:00:00 - 05:30:00 
+08/25/96 15:30:00 - 17:30:00
+08/26/96 05:00:00 - 06:30:00
+08/26/96 16:30:00 - 18:30:00 
+08/27/96 06:00:00 - 07:30:00 
+08/27/96 17:30:00 - 19:30:00 
+08/28/96 07:00:00 - 08:30:00 
+08/28/96 19:00:00 - 20:30:00 
+08/29/96 08:00:00 - 09:30:00 
+08/29/96 19:30:00 - 21:30:00
+08/30/96 08:00:00 - 09:30:00 
+08/30/96 20:30:00 - 22:30:00 
+08/31/96 09:00:00 - 11:00:00 
+08/31/96 21:30:00 - 23:00:00 
+
+September
+
+SK   No data collected for entire month, deployment site
+     destroyed by high flows in the Saw Kill from a tropical
+     storm in July.
+
+TS   Turbidity probe failure during deployment from 09/12/96
+     09:00:00 to 09/30/96 23:30:00.  All turbidity values
+     removed.
+
+     No salinity data collected 09/12/96 09:00:00 - 09/30/96 23:30:00.  Program 
+error.  Site is
+freshwater so salinity is essentially 0.0 ppt at all times.
+
+     No data collected from 09/11/96 12:00:00 - 09/12/96
+     08:30:00.  Instruments serviced.
+
+TN   All data for the following dates and times has been deleted
+     because the instrument probes were exposed at low tides:
+
+09/01/96 09:30:00 - 11:30:00
+09/01/96 22:30:00 - 23:30:00
+09/02/96 00:00:00
+09/03/96 11:00:00 - 13:00:00
+09/11/96 07:00:00 - 07:30:00 
+09/11/96 19:00:00 - 19:30:00 
+09/16/96 09:30:00 - 10:30:00
+09/25/96 18:00:00 - 19:30:00
+09/26/96 06:30:00 - 08:00:00
+09/26/96 19:00:00 - 20:30:00
+09/27/96 07:00:00 - 09:00:00 
+09/27/96 20:00:00 - 21:00:00 
+09/28/96 08:30:00 - 09:00:00 
+09/29/96 09:30:00 - 10:00:00 
+09/29/96 22:00:00 - 22:30:00 
+09/30/96 09:30:00 - 11:00:00 
+09/30/96 22:00:00 - 23:30:00 
+
+October
+
+SK   No data collected for entire month, deployment site
+     destroyed by high flows in the Saw Kill from a tropical
+     storm in July.
+
+TS   No salinity data collected for entire month.  Did not
+     program the instrument to collect data.  However, the site
+     is fresh water so salinity is essentially 0.0 at all times.
+
+     No data from 10/12/96 09:30:00 to end of month.  Instruments
+     pulled for servicing and unanticipated delay in deployment.
+
+     No turbidity data for entire month.  Turbidity data
+     collected from 10/01/96 00:00:00 through 10/12/96 09:30:00
+     all slightly negative and ranged on +/- 5 NTU.  Cause
+     unknown but is likely due to probe failure since there essentially was no 
+response of the
+instrument to turbidity events. The data have been deleted.
+
+TN   No data from 10/12/96 09:30:00 to end of month.  Instruments
+     pulled for servicing and unanticipated delay in deployment.
+
+     All data for the following dates and times has been deleted
+     because the instrument probes were exposed at low tides:
+
+10/01/96 10:00:00 - 11:30:00
+10/01/96 23:00:00 - 23:30:00 
+10/02/96 00:00:00 
+10/02/96 11:30:00 - 12:00:00
+10/03/96 11:30:00 -14:00:00
+10/03/96 23:30:00 - 10/04/96 03:30:00 
+10/06/96 03:30:00 - 04:00:00
+10/11/96 05:30:00 - 08:30:00 
+10/11/96 18:30:00 - 20:00:00
+10/12/96 07:00:00 - 08:30:00 
+
+
+November
+
+SK   No data collected for entire month, deployment site
+     destroyed by high flows in the Saw Kill from a tropical
+     storm in July.
+
+TS   No data collected from 11/01/06 00:00:00 - 11/27/96
+     09:30:00.  Unanticipated delay in deploying instruments.
+
+     No salinity data collected for entire month.  Did not
+     program the instrument to collect data.  However, the site
+     is fresh water so salinity is essentially 0.0 at all times.
+
+TN   No data collected from 11/01/06 00:00:00 - 11/26/96
+     11:00:00.  Unanticipated delay in deploying instruments.
+
+     All data for the following dates and times has been deleted
+     because the instrument probes were exposed at low tides:
+
+11/27/96 07:00:00 - 11:00:00 
+11/27/96 20:00:00 - 11/28/96 00:00:00 
+11/29/96 10:00:00 - 11:00:00 
+11/29/96 23:00:00 - 23:30:00
+December
+
+SK   No data collected for entire month, deployment site
+     destroyed by high flows in the Saw Kill from a tropical
+     storm in July.
+
+TS   No data collected 12/24/96 08:00:00 - end of month. 
+     Instruments pulled for year due to ice.
+
+     No salinity data for entire month.  Did not program the
+     instrument to collect data.  However, the site is fresh
+     water so salinity is essentially 0.0 at all times.
+
+     No data 12/21/96 04:30:00 - 05:30:00.  Probes exposed to air.  Data 
+deleted.
+
+TN   No data collected 12/24/96 08:00:00 - end of month. 
+     Instruments pulled for year due to ice.
+
+     All DOSat and DOmg/L data for entire month removed.  DO
+     probe drifted quickly to negative values and remained
+     negative for the entire deployment.
+
+     All data for the following dates and times has been deleted
+     because the instrument probes were exposed at low tides:
+
+12/12/96 08:30:00 - 09:30:00 
+12/20/96 15:30:00 - 19:30:00
+12/21/96 02:00:00 - 07:00:00
+12/21/96 17:00:00 - 19:30:00
+12/22/96 05:00:00 - 07:00:00 
+12/22/96 18:30:00 - 20:00:00
+12/23/96 05:30:00 - 07:00:00
+12/23/96 20:00:00

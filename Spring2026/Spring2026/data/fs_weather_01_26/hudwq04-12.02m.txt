@@ -1,0 +1,1824 @@
+Hudson River (HUD) NERR Water Quality Metadata 
+(April - Dec. 2002)
+Latest Update: June 30, 2021
+
+I. Data Set & Research Descriptors
+
+1.   Principal Investigator: William C. Nieder, Research Coordinator
+
+	Contact Persons:
+	William C. Nieder, Research Coordinator
+			 email:wcnieder@gw.dec.state.ny.us
+	Erik Bedan, Research Assistant
+			 email: esbedan@gw.dec.state.ny.us
+
+	Address:	
+	Hudson River NERR
+	c/o Bard College Field Station
+	Annandale, NY 12504
+	Phone: 845-758-7010
+	Fax: 845-758-7033
+
+2.   Entry Verification:
+
+	The CDMO cdmomac3.xls macro will allow the user to automatically format 
+column widths to the correct number of decimal places based on YSI sensor 
+specifications.  It also allows the user to QA/QC each datalogger generated file 
+for missing data points, fill all cells that do not contain data with periods, 
+and find all data points that fall outside the range of what the data logger is 
+designed to measure (outliers).  The CDMO import.xls macro will allow PC users 
+with 30-minute data to automatically create a monthly Excel file from a two-week 
+deployment and insert periods for missing data.  In addition, in November 1999 a 
+graphing capability was added to this macro allowing users to produce single 
+parameter and missing data point graphs on a monthly basis.  Questionable data 
+are either deleted or identified in section II.10.
+	
+	Persons responsible for data verification are the Research Coordinator and 
+Research Assistant.
+
+3.   Research Objectives:
+
+	Measurements are taken every 30 minutes over a two to four week period 
+from the beginning of April through the end of December of each year at four 
+locations within the Tivoli Bays component of the Hudson River NERR.  Two 
+separate dataloggers monitor the Hudson River water flooding and ebbing within 
+each bay (Tivoli South Bay and Tivoli North Bay).  One datalogger monitors the 
+tributary water (Saw Kill Creek) entering the Tivoli South Bay, and the 
+tributary water (Stony Creek) entering the Tivoli North Bay is monitored by 
+another datalogger.  The objective of this study is to monitor the quality of 
+the surface water entering (via stream flow and tidal exchange) and leaving (via 
+tidal exchange) Tivoli South Bay and Tivoli North Bay.  This will help us 
+understand the relative importance on each source of water in Tivoli Bays.  The 
+Reserve staff has identified urban and residential land use practices as having 
+a major influence on the water chemistry of the Saw Kill Creek.  Since 
+residential coverage continues to increase, we hope that the intensive 
+monitoring of the surface waters in this watershed will identify trends caused 
+by this rapid development.
+
+4.   Research Methods:  
+
+	Four YSI 6-series datalogger instruments have been placed at the Tivoli 
+Bays component site of the Reserve.  The Saw Kill Creek and Tivoli South Bay 
+instruments are deployed at 0.5 and 0.5 meters respectively off the bottom in 
+vertically mounted perforated PVC tubes. These instruments also use a depth 
+sensor that is vented to the atmosphere for more precise depth readings.  Non-
+vented instruments are deployed at Stony Creek and Tivoli North Bay in 
+rectangular 24"x13"x13" cages that are plastic coated, 1/2 inch mesh. The cages 
+are weighted down with 4 bricks zip tied to the cage.  For deployments, the 
+instrument is strapped horizontally to the inside top of the cage with bungee 
+cords and rests .25 meters from the bottom of the cage.  At Stony Creek, the 
+cage is placed at the edge of the creek, resting on the bottom, beneath a 
+bridge. The cage is tethered with a cable and locked to an I-bolt attached to 
+the bridge.  At Tivoli North Bay, the cage is tied to a woodpile and rests on 
+the bottom. In addition, a cable is attached to the top of the cage and the 
+other end is anchored to the sediment.  Instruments are deployed for two to four 
+week durations from April through December of each year.  Data are collected at 
+30 minute intervals. After instruments are retrieved, instrument calibration is 
+checked against standards, and the instrument probes are serviced.  The data are 
+uploaded via a cable to a desktop computer.  Before each YSI 6-series datalogger 
+is deployed, calibration and maintenance is performed following the 
+manufacturer's instructions (YSI Manual, sections 3,4, and 7 as well as the YSI 
+6-series operations manual).  The dissolved oxygen membranes are replaced before 
+deployment, and are allowed to equilibrate for at least 24 hrs prior to 
+deployment.  Calibration standards are required for pH, turbidity, and 
+conductivity; all other parameters are calibrated as described in the manual.  
+Standard solutions of pH buffers, conductivity and turbidity are purchased pre-
+made from a scientific supply company.
+
+5.   Site Location and Character:
+
+	The Hudson River National Estuarine Research Reserve (HUDNERR) is a 
+multicomponent site composed of approximately 5,000 acres of tidal wetland, open 
+water, and adjacent upland buffer habitat.  The four component sites of the 
+Reserve are located on the Hudson River in New York State by river miles (RM) 
+proceeding north from the southern tip of Manhattan.  These include: Stockport 
+Flats (RM 124)(42° 02'30"N 73° 46'00"W), Columbia County; Tivoli Bays (RM 
+98)(42° 02'15"N 73(55'10"W), Dutchess County; and Iona Island (RM 45)(41° 
+18'15"N 73(58'45"W) and Piermont Marsh (RM 24)(41° 02'30"N 73° 54'15"W), 
+Rockland County.  These four components are located along 100 miles of the 
+Hudson River and are representative of the diverse plant and animal communities 
+that occupy the salinity gradient within the Hudson estuary.  Development within 
+the watersheds of Hudson River NERR component sites ranges from predominantly 
+urban/suburban to forested/agricultural.  The four YSI 6-series dataloggers are 
+placed at the Tivoli Bays component site.  The Saw Kill Creek (latitude 42° 01' 
+01.543" N, longitude 73° 54' 53.589" W) drains a 26.6 square mile area, and it 
+is the main tributary flowing into Tivoli South Bay.  Some characteristics of 
+the Saw kill include a rocky bottom type, and a watershed that is characterized 
+as a highly mixed land use watershed.  Water depth in this creek varies from 0.5 
+to 2.0 meters.  Tivoli South Bay (latitude 42° 01' 37.336" N, longitude 73° 55' 
+33.445" W) is the receiving body for the Saw Kill Creek.  This bay is a tidal 
+freshwater wetland with a tidal range of 1.19 meters, while the bottom type is a 
+soft, silt/clay.  Dominant land uses within its watershed include: forested 
+(51.1%), agriculture (25.8%), and urban (16.5%) areas.  Tivoli North Bay 
+(latitude 42° 02' 11.56464" N, longitude 73° 55' 31.16645" W) is a freshwater 
+tidal marsh dominated by Typha angustifolia.  Tivoli North Bay has a tidal range 
+of 1.19 meters, and a soft/silt bottom as well.  The primary watershed to this 
+bay is about 23 square miles in size, and it is dominated by agricultural lands. 
+Water depth ranges from 0.0 to 2.0 m at both Tivoli South Bay and Tivoli North 
+Bay. Stony Creek (latitude 42° 02' 45.556"  N, longitude 73° 54' 40.237" W) is 
+the main tributary for the Tivoli North Bay. The creek bottom type is mostly 
+solid rock, and the depth varies from 0.5 to 1.5 meters.  These sites of the 
+Tivoli Bays component are all freshwater sites (0.0 ppt salinity).
+
+6.   Data collection period:
+
+	YSI 6-series datalogger sampling at the Saw Kill (SK) and Tivoli South Bay 
+(TS) began during May, 1995.  Sampling at Tivoli North Bay (TN) began during 
+July, 1996, however ceased in 1997-1998 because at low tide the instrument was 
+exposed.  In 1999, an alternate site was established for Tivoli North, and 
+sampling began in July of 1999.  Sampling began at Stony Creek (SC) in April of 
+2002.  All sampling is ongoing, however, we cannot sample from approximately mid 
+December through the end of March due to winter storms and ice on the Hudson 
+River and the tributaries.  The YSI6600 datalogger was deployed at the Tivoli 
+South Bay site replacing the YSI6000 starting on July 1, 1999 @ 15:30:00. 
+
+Dates and times for site deployments and retrievals:
+
+Site	Deployment 	Deployment 		Retrieval 	Retrieval 
+	Date		Time			Date		Time
+	mm/dd/yy	hh:mm			mm/dd/yy	hh:mm
+SC	04/08/02	11:30:00		04/19/02	8:00:00
+SC	04/19/02	10:00:00		05/09/02	13:30:00
+SC	05/09/02	14:00:00		06/08/02	14:00:00
+SC	06/10/02	09:30:00		07/02/02	9:30:00
+SC	07/02/02	10:30:00		07/15/02	14:00:00
+SC	07/15/02	14:30:00		08/01/02	15:00:00
+SC	08/01/02	15:00:00		08/13/02	14:30:00
+SC	08/13/02	15:00:00		09/11/02	14:30:00
+SC	09/11/02	14:30:00		10/03/02	14:00:00
+SC	10/03/02	15:00:00		10/30/02	11:30:00
+SC	10/30/02	12:00:00		11/06/02	15:00:00
+SC	11/06/02	15:00:00		11/19/02	9:30:00
+SC	11/19/02	10:00:00		12/09/02	13:00:00
+SC	12/09/02	13:30:00		12/20/02	13:30:00
+
+SK	04/05/02	12:00:00		04/19/02	9:30:00
+SK	04/19/02	11:30:00		05/09/02	12:30:00
+SK	05/09/02	13:00:00		06/08/02	13:00:00
+SK	06/10/02	14:30:00		07/02/02	14:30:00
+SK	07/02/02	15:00:00		07/12/02	8:30:00
+SK	07/12/02	09:00:00		08/02/02	10:00:00
+SK	08/02/02	10:30:00		08/14/02	8:30:00
+SK	08/14/02	09:00:00		09/13/02	9:00:00
+SK	09/13/02	13:30:00		10/07/02	14:00:00
+SK	10/07/02	14:30:00		10/16/02	10:30:00
+SK	10/16/02	11:00:00		11/06/02	15:30:00
+SK	11/06/02	16:00:00		11/19/02	9:00:00
+SK	11/19/02	10:00:00		12/09/02	14:30:00
+SK	12/09/02	15:00:00		12/20/02	14:00:00
+
+TN	04/04/02	15:00:00		04/19/02	12:00:00
+TN	04/19/02	14:00:00		05/10/02	8:30:00
+TN	05/10/02	09:00:00		06/09/02	9:00:00
+TN	06/11/02	08:30:00		07/01/02	11:30:00
+TN	07/01/02	13:00:00		07/15/02	10:30:00
+TN	07/15/02	11:00:00		08/01/02	14:00:00
+TN	08/01/02	14:30:00		08/12/02	10:30:00
+TN	08/12/02	11:00:00		09/11/02	10:30:00
+TN	09/13/02	14:00:00		10/07/02	8:30:00
+TN	10/07/02	09:30:00		10/18/02	8:00:00
+TN	10/18/02	08:30:00		11/06/02	9:00:00
+TN	11/06/02	10:00:00		11/20/02	8:30:00
+TN	11/20/02	09:30:00		12/10/02	13:30:00
+TN	12/10/02	14:00:00		12/20/02	8:30:00
+
+TS	04/04/02	15:30:00		04/18/02	10:30:00
+TS	04/18/02	15:00:00		05/10/02	8:30:00
+TS	05/10/02	10:30:00		06/09/02	10:30:00
+TS	06/12/02	09:30:00		07/01/02	9:30:00
+TS	07/01/02	13:00:00		07/16/02	8:30:00
+TS	07/16/02	11:00:00		08/01/02	10:30:00
+TS	08/01/02	11:00:00		08/12/02	10:30:00
+TS	08/12/02	11:00:00		09/11/02	11:00:00
+TS	09/11/02	14:00:00		10/03/02	15:00:00
+TS	10/03/02	14:30:00		10/18/02	8:30:00
+TS	10/18/02	14:00:00		11/06/02	9:30:00
+TS	11/06/02	16:30:00		11/21/02	9:00:00
+TS	11/21/02	12:00:00		12/10/02	13:30:00
+										
+7.	Distribution
+	NOAA Ocean and Coastal Resource Management Data Ownership and 
+Dissemination Policy for the NERRS National Monitoring Program: 
+	Data collected in conjunction  with the National Estuarine Research 
+Reserve System's (NERRS) National Monitoring Program is considered public 
+information. The principle investigators (PIs) responsible for collecting data 
+at each NERRS site must process the data  using Estuarine Reserve Division (ERD) 
+approved quality assurance and quality control (QA/QC) protocols. The PI has 
+three (3) months from the date of data collection to process the data, and then 
+three (3) months from the date of data  processing to transmit the QA/QC 
+processed data to ERD or an ERD approved Centralized Data Management Office 
+(CDMO) in accordance with the standard rules for application to oceanographic 
+data sets (NOAA Administrative Order  216-101). The schedule reflected below 
+assumes an adequate and uninterrupted funding for the monitoring effort at each 
+site, therefore the data processing and the transmission timetable may be 
+adjusted accordingly. 
+	Unpublished intellectual property owned and developed by the recipient 
+with federal assistance funds, i.e., processed data, will not be officially 
+disseminated to the public for a period of one (1) year from the date of  data 
+processing. After one (1) year the QA/QC processed data will be made officially 
+available to the general public on the Internet by the CDMO. However, if the 
+data are requested pursuant to the Freedom of Information Act, the  Government 
+is required to release any data which are transferred to the Government by the 
+recipient under the award. 
+	An awardee may own a copyright on the publication of the processed data 
+developed or bought under a Federal assistance award. The Federal awarding 
+agency reserves a royalty-free, nonexclusive, and irrevocable license to 
+reproduce, publish, or otherwise use, and to authorize others to use, for 
+Federal government purposes, the copyright in any work developed under an award, 
+or any rights of copyright purchased by an awardee with Federal assistance 
+support (15 C.F.R. 24.34). Any such publication will include a notice 
+identifying the award and recognizing the license rights of the government under 
+this clause. This paragraph will have no force and effect for the processed data 
+not published by the recipient. 
+
+	NOAA/ERD retains the right to analyze, synthesize and publish summaries of 
+the NERRS System-wide Monitoring Program data. The PI retains the right to be 
+fully credited for having collected and processed the data. Following academic 
+courtesy standards, the PI and NERR site where the data were collected will be 
+contacted and fully acknowledged in any subsequent publications in which any 
+part of the data is used. Manuscripts resulting from this NOAA/OCRM-supported 
+research that are produced for publication in open literature, including 
+refereed scientific journals, will acknowledge that the research was conducted 
+under an award from the Estuarine Reserves Division, Office of Ocean and Coastal 
+Resource Management, National Ocean Service, National Oceanic and Atmospheric 
+Administration. .  The data set enclosed within this package/transmission 
+is only as good as the quality assurance and quality control procedures 
+outlined by the enclosed metadata reporting statement.  The user bears 
+all responsibility for its subsequent use/misuse in any further analyses 
+or comparisons.  The Federal government does not assume liability to the 
+Recipient or third persons, nor will the Federal government reimburse or 
+indemnify the Recipient for its liability due to any losses resulting in 
+any way from the use of this data. 
+
+NERR water quality data and metadata can be obtained from the Research 
+Coordinator at the individual NERR site (please see Section 2.2-1 Principal 
+investigators and contact persons), from the Data Manager at the Centralized 
+Data Management Office (please see personnel directory under the general 
+information link on the CDMO home page) and online at the CDMO home page 
+http://cdmo.baruch.sc.edu/.  Data are available in text tab-delimited format, 
+Microsoft Excel spreadsheet format and comma-delimited format.   
+
+
+8.   Associated researchers and projects:
+
+	Hudson River NERR Water Quality Monitoring: Physical and chemical 
+constituents of the tributary waters discharging into HUDNERR marshes and marsh 
+waters during ebb tides are measured monthly and during storm events. 
+Concentrations of nitrate, phosphate, sulphate, dissolved oxygen (DO), and 
+chloride are measured, as well as, seston, alkalinity, pH, temperature, 
+salinity, and conductivity.	Saw Kill Water Quality Monitoring:  The surface 
+water draining from five subcatchments representing five dominant land use 
+practices within the Saw Kill have been monitored during several storm events. 
+These five land use practices include: row crop agriculture, orchard, 
+residential, solid waste landfill, and forested. All of the above constituents 
+have been monitored during this project.
+	
+	Associated researchers with the work at Tivoli Bays include:  scientists 
+from the Institute of Ecosystem Studies, Millbrook, NY; Yale School of Forestry 
+and Environmental Studies, New Haven, CT; and Rensselaer Polytechnic Institute, 
+Troy, NY.
+
+II. Physical Structure Descriptors
+
+9. Variable sequence, range of measurements, units, resolution, and accuracy:
+
+YSI 6000/6600 datalogger
+
+Variable      Range of Measurements          Resolution           Accuracy
+Date          1-12, 1-31, 00-99 (Mo,Day,Yr)  1 mo, 1 day, 1 yr    NA
+Time          0-24, 0-60, 0-60 (Hr,Min,Sec)  1 hr, 1 min, 1 s     NA
+Temp               -5 to 45 (c)              0.01  C              +/-0.15C
+Sp COND            0-100(mS/cm)              0.01mS/cm            +/-0.5% Of 
+reading + 0.001mS/Cm
+Salinity      0-70 Parts per thousand (ppt)  0.01 ppt             +/- 1% of 
+reading or 0.1 ppt, (whichever is greater)
+DO            0-200 (% air saturation)       0.1% @air sat        +/-2% @air 
+saturation
+DO            200-500 (% air saturation      0.1% @ air sat       +/- 6% @ 
+saturation
+DO                 0-20 (mg/l)               0.01 mg/l            +/- 0.2mg/l
+DO                 20-50 (mg/l)              0.01 mg/l            +/- 0.6mg/l
+Depth (shallow)    0-9.1 (m)                 0.001m               +/- 0.018m
+PH                 2-14 units                0.01 units           +/- 0.2units
+Turb               0-1000 NTU                0.1 NTU              +/- 5% of 
+reading or 2 NTU (whichever is greater)
+
+Data columns are separated by tabs.  Each file contains a two line column header 
+at the top of the page which identifies measurements and units for each column.
+
+10.	Coded variable indicator and variable code definitions
+
+	Site definitions: 
+
+	SC = Stony Creek
+	SK = Saw Kill Creek
+	TN = Tivoli North Bay 
+	TS = Tivoli South Bay 
+
+11.  Data anomalies
+
+April
+
+SC
+
+Stony Creek sampling for 2002 began on April 8 at 11:30:00.
+
+Turbidity reading was very low including a negative value, but the negative 
+numbers were within the detection limit of the probe. The following data were 
+left in:
+Date	Time	Turb
+04/19/2002	10:00:00	0000
+
+Negative depth readings were recorded during the following times, however the 
+probes were not exposed to air. These negative measurements were likely due to 
+changes in atmospheric pressure, since the depth sensor is not vented. The 
+following data were left in:
+04/15/2002	00:30:00	
+04/15/2002	01:30:00	
+04/15/2002	04:00:00	
+04/17/2002	11:30:00 - 04/19/2002	09:30:00
+
+SK
+
+Saw Kill Creek sampling for 2002 began on April 5 at 12:00:00.
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time
+04/05/2002	12:00:00
+04/05/2002	14:30:00
+04/05/2002	15:00:00
+04/05/2002	18:30:00
+04/06/2002	09:00:00
+04/06/2002	10:00:00 - 04/06/2002	21:30:00
+04/06/2002	23:00:00
+04/07/2002	10:00:00
+04/07/2002	11:30:00 - 04/07/2002	15:00:00
+04/07/2002	16:00:00
+04/07/2002	17:00:00 - 04/07/2002	19:30:00
+04/07/2002	20:30:00
+04/08/2002	02:00:00
+04/08/2002	03:30:00
+04/08/2002	06:00:00
+04/08/2002	07:00:00 - 04/08/2002	12:00:00
+04/08/2002	13:00:00 - 04/08/2002	18:00:00
+04/08/2002	19:00:00 - 04/08/2002	20:30:00
+04/08/2002	22:00:00
+04/08/2002	23:00:00
+04/09/2002	02:00:00
+04/09/2002	03:30:00 - 04/09/2002	04:30:00
+04/09/2002	05:30:00
+04/09/2002	06:00:00
+04/09/2002	07:00:00 - 04/09/2002	16:00:00
+04/09/2002	17:00:00 - 04/09/2002	21:00:00
+04/09/2002	22:00:00
+04/09/2002	22:30:00
+04/10/2002	01:00:00 - 04/11/2002	22:30:00
+04/11/2002	23:30:00
+04/12/2002	00:00:00
+04/12/2002	02:00:00
+04/12/2002	03:30:00
+04/12/2002	04:00:00
+04/12/2002	05:30:00 - 04/12/2002	23:00:00
+04/13/2002	00:00:00 - 04/13/2002	01:00:00
+04/13/2002	02:00:00
+04/13/2002	02:30:00
+04/13/2002	04:00:00 - 04/13/2002	21:00:00
+04/14/2002	00:00:00
+04/14/2002	01:00:00
+04/14/2002	02:00:00 - 04/15/2002	00:00:00
+04/15/2002	07:30:00 - 04/15/2002	14:30:00
+04/15/2002	17:00:00
+04/15/2002	22:30:00 - 04/15/2002	23:30:00
+04/16/2002	01:00:00 - 04/16/2002	02:00:00
+04/16/2002	03:00:00
+04/16/2002	04:00:00 - 04/16/2002	14:00:00
+04/16/2002	15:00:00 - 04/16/2002	18:30:00
+04/16/2002	20:00:00 - 04/17/2002	06:00:00
+04/17/2002	07:00:00 - 04/17/2002	13:30:00
+04/17/2002	14:30:00 - 04/17/2002	16:30:00
+04/17/2002	19:00:00 - 04/18/2002	03:00:00
+04/18/2002	04:00:00 - 04/18/2002	16:00:00
+04/18/2002	17:30:00
+04/18/2002	19:00:00 - 04/19/2002	04:30:00
+04/19/2002	06:30:00 - 04/21/2002	10:00:00
+04/21/2002	11:30:00
+04/21/2002	13:00:00
+04/21/2002	15:00:00
+04/22/2002	08:00:00
+04/22/2002	08:30:00
+04/22/2002	09:30:00
+04/22/2002	10:00:00
+04/22/2002	11:00:00
+04/22/2002	12:30:00
+04/22/2002	13:00:00
+04/22/2002	14:00:00 - 04/22/2002	18:30:00
+04/23/2002	07:00:00
+04/23/2002	07:30:00
+04/23/2002	09:00:00
+04/23/2002	10:00:00
+04/23/2002	11:00:00
+04/23/2002	12:00:00
+04/23/2002	14:00:00
+04/23/2002	15:00:00
+04/23/2002	17:00:00
+04/23/2002	17:30:00
+04/23/2002	19:00:00
+04/23/2002	19:30:00
+04/23/2002	21:00:00
+04/23/2002	23:00:00
+04/24/2002	01:30:00
+04/24/2002	02:00:00
+04/24/2002	03:30:00
+04/24/2002	04:30:00
+04/24/2002	07:30:00 - 04/24/2002	09:00:00
+04/24/2002	10:30:00 - 04/24/2002	13:00:00
+04/24/2002	14:00:00 - 04/24/2002	16:30:00
+04/24/2002	17:30:00
+04/24/2002	18:00:00
+04/24/2002	20:30:00
+04/24/2002	22:30:00
+04/25/2002	01:00:00
+04/25/2002	02:00:00
+04/25/2002	08:00:00
+04/25/2002	09:00:00 - 04/25/2002	10:00:00
+04/25/2002	11:30:00 - 04/25/2002	13:00:00
+04/25/2002	14:00:00
+04/26/2002	16:30:00 - 04/26/2002	19:30:00
+04/26/2002	21:30:00 - 04/26/2002	22:30:00
+04/27/2002	00:00:00 - 04/27/2002	01:30:00
+04/27/2002	03:30:00 - 04/27/2002	06:30:00
+04/27/2002	07:30:00 - 04/27/2002	15:00:00
+04/27/2002	16:00:00 - 04/27/2002	18:30:00
+04/27/2002	19:00:00 - 04/28/2002	05:00:00
+
+TN
+
+Tivoli North Bay sampling for 2002 began on April 4 at 15:00:00.
+No missing data or data anomalies for this month.  
+
+TS
+
+Tivoli South Bay sampling for 2002 began on April 4 at 15:30:00. 
+
+The probes were out of the water and exposed to the air during low tide. The 
+following data were deleted:
+Date	Time
+04/10/2002	18:00:00 - 04/10/2002	19:30:00
+04/26/2002	20:00:00
+04/26/2002	20:30:00
+04/27/2002	20:30:00
+
+May
+
+SC
+
+The readings indicate the probes exposed to the air and the instrument may have 
+been above water. All the following data were removed:
+Date	Time
+05/13/02	22:00:00 - 05/31/02	23:30:00
+
+SK
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data were deleted:
+Date	Time	Turb
+05/21/2002	14:00:00	1735	
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time	
+05/04/2002	15:30:00
+05/05/2002	10:30:00 - 05/05/2002	12:00:00
+05/05/2002	14:00:00
+05/05/2002	14:30:00
+05/05/2002	18:00:00 - 05/05/2002	19:00:00
+05/05/2002	21:00:00 - 05/05/2002	23:30:00
+05/06/2002	00:30:00
+05/06/2002	04:30:00
+05/06/2002	05:00:00
+05/06/2002	06:00:00 - 05/06/2002	19:30:00
+05/06/2002	21:30:00
+05/06/2002	23:00:00
+05/06/2002	23:30:00
+05/07/2002	02:00:00
+05/07/2002	02:30:00
+05/07/2002	04:00:00 - 05/07/2002	13:30:00
+05/07/2002	14:30:00 - 05/07/2002	17:00:00
+05/07/2002	18:00:00 - 05/07/2002	19:30:00
+05/07/2002	20:00:00 - 05/08/2002	05:30:00
+05/08/2002	06:30:00 - 05/09/2002	12:30:00
+
+TN
+
+None
+
+TS
+
+The probes were out of the water and exposed to the air during low tide. The 
+following data were deleted:
+05/04/2002	14:30:00		
+05/04/2002	15:00:00		
+05/04/2002	15:30:00		
+05/07/2002	16:30:00		
+05/07/2002	17:00:00		
+05/07/2002	17:30:00		
+05/07/2002	18:00:00		
+05/08/2002	17:00:00		
+05/08/2002	17:30:00		
+05/08/2002	18:00:00		
+05/11/2002	07:30:00		
+05/11/2002	08:00:00		
+05/11/2002	08:30:00		
+05/11/2002	18:30:00		
+05/11/2002	19:00:00		
+05/11/2002	19:30:00		
+05/11/2002	20:00:00		
+05/15/2002	21:30:00		
+05/15/2002	22:00:00		
+05/15/2002	22:30:00		
+
+June
+
+SC
+
+Negative and/or zero depth readings were recorded during the following times, 
+however the probes were not exposed to air. These negative measurements were 
+likely due to changes in atmospheric pressure, since the depth sensor is not 
+vented. The following data were left in:
+06/11/2002	19:00:00
+06/12/2002	01:30:00 - 06/12/2002	18:30:00
+06/26/2002	12:30:00 - 06/28/2002	22:00:00
+
+The readings indicate the probes exposed to the air and the instrument may have 
+been above water. All the following data were removed:
+Date	Time
+06/01/02	00:00:00 - 06/08/02	14:00:00
+
+Sonde was deployed but the program stopped before the instrument was exchanged 
+with another. Data was missing from:
+06/08/02	14:30:00 - 06/10/02	09:00:00
+
+SK
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time	
+06/10/2002	14:30:00 - 06/10/2002	18:00:00
+06/10/2002	20:00:00
+06/11/2002	11:00:00 - 06/11/2002	12:00:00
+06/11/2002	14:30:00
+06/11/2002	15:00:00
+06/11/2002	19:30:00
+06/12/2002	10:00:00 - 06/12/2002	11:30:00
+06/12/2002	14:30:00
+06/12/2002	16:30:00
+
+TN
+
+The instrument was deployed, but it was not collecting data during the time 
+period below. The instrument was not exchanged before it was programmed to stop 
+recording on 6/9/02 9:30. The data are missing for the following:
+06/09/2002	09:30:00 - 06/11/2002	08:00:00
+
+TS
+
+Depth readings were flagged as outliers, but the other parameters were 
+unaffected and the depth readings were considered near zero. The following data 
+were left in:
+06/21/2002	17:00:00
+06/22/2002	18:00:00
+06/23/2002	19:00:00
+
+The probes were above water and exposed to the air at low tide. All the 
+following data were removed:
+Date	Time
+06/24/2002	19:00:00
+06/24/2002	19:30:00
+06/24/2002	20:00:00	
+
+Turbidity spikes were flagged as outliers. The spikes continued throughout the 
+use of a specific turbidity probe, and therefore the probe may have been 
+malfunctioning. The following data were left in,  but considered suspect: 
+Date	Time	Turb
+06/13/2002	04:30:00	1240
+06/13/2002	05:00:00	1130
+06/14/2002	05:00:00	1860
+06/14/2002	05:30:00	1859
+06/14/2002	06:00:00	1857
+06/14/2002	06:30:00	1418
+06/14/2002	07:00:00	1190
+06/14/2002	07:30:00	1334
+06/19/2002	20:00:00	1724
+06/19/2002	20:30:00	1463
+06/20/2002	04:30:00	1297
+06/20/2002	15:30:00	1959
+06/20/2002	23:30:00	1408
+06/21/2002	00:30:00	1110
+06/21/2002	01:00:00	1881
+06/22/2002	03:30:00	1891
+06/24/2002	16:00:00	1923
+06/24/2002	16:30:00	1717
+06/24/2002	21:00:00	1361
+06/25/2002	15:00:00	1916
+06/25/2002	15:30:00	1847
+06/26/2002	05:30:00	1903
+06/27/2002	18:00:00	1228
+06/29/2002	18:00:00	1104
+06/30/2002	00:30:00	1954
+06/30/2002	09:00:00	1504
+06/30/2002	10:30:00	1542
+06/30/2002	11:00:00	1955
+06/30/2002	11:30:00	1639
+06/30/2002	16:00:00	1946
+06/30/2002	22:00:00	1953
+
+July
+
+SC
+
+The probes appear to be out of the water and exposed to the air. All the 
+following data were removed:
+07/07/2002	21:00:00 - 07/14/2002	12:30:00
+07/27/2002  15:00:00 - 07/31/2002   23:30:00
+
+Negative and/or zero depth readings were recorded during the following times, 
+however the probes were not exposed to air. These negative measurements were 
+likely due to changes in atmospheric pressure, since the depth sensor is not 
+vented. The following data were left in:
+07/01/2002	12:30:00 - 07/06/2002	20:00:00	
+07/14/2002	12:30:00 - 07/15/2002	23:00:00	
+07/17/2002	15:30:00 - 07/19/2002	23:30:00
+07/28/2002	14:30:00 - 07/31/2002	19:00:00
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time
+07/01/2002	14:30:00 - 07/01/2002	15:30:00
+07/01/2002	17:30:00 - 07/01/2002	20:30:00
+07/01/2002	21:30:00
+07/01/2002	22:30:00
+07/02/2002	17:00:00 - 07/03/2002	04:30:00
+07/03/2002	05:30:00 - 07/04/2002	02:00:00
+07/04/2002	04:00:00
+07/04/2002	04:30:00
+07/04/2002	05:30:00 - 07/04/2002	09:00:00
+07/04/2002	10:00:00 - 07/05/2002	00:30:00
+07/05/2002	01:30:00
+07/05/2002	11:00:00 - 07/05/2002	13:00:00
+07/05/2002	18:00:00
+07/07/2002	07:30:00
+07/07/2002	10:30:00
+07/07/2002	11:30:00 - 07/07/2002	19:30:00
+07/07/2002	20:30:00
+07/14/2002	13:00:00 - 07/23/2002	17:00:00
+07/24/2002	07:00:00 - 07/24/2002	09:30:00
+07/24/2002	14:30:00	
+07/24/2002	16:00:00 - 07/24/2002	21:30:00	
+07/24/2002	22:30:00	
+07/25/2002	01:00:00	
+07/25/2002	06:30:00 - 07/25/2002	09:00:00
+07/25/2002	13:30:00
+07/25/2002	14:00:00 - 07/25/2002	15:00:00
+07/25/2002	16:00:00
+07/26/2002	06:00:00 - 07/26/2002	23:30:00	
+07/27/2002	01:00:00 - 07/31/2002	23:30:00
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data were deleted:
+Date		Time		Turb
+07/07/2002	05:00:00	1594
+
+
+SK
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time	Turb	
+07/02/2002	15:00:00 - 07/03/2002	02:30:00	
+07/03/2002	03:30:00		
+07/03/2002	04:30:00 - 07/03/2002	18:00:00	
+07/03/2002	19:00:00 - 07/04/2002	02:00:00		
+07/04/2002	03:00:00		
+07/04/2002	04:00:00 - 07/04/2002	05:00:00	
+07/04/2002	06:00:00 - 07/05/2002	23:30:00	
+07/06/2002	02:00:00		
+07/06/2002	03:00:00		
+07/06/2002	04:00:00	
+07/06/2002	05:30:00 - 07/07/2002	07:00:00	
+07/07/2002	08:00:00 - 07/09/2002	20:30:00	
+07/09/2002	21:30:00 - 07/10/2002	01:30:00		
+07/10/2002	02:30:00 - 07/10/2002	20:00:00		
+07/10/2002	21:00:00		
+07/10/2002	21:30:00		
+07/10/2002	22:30:00		
+07/11/2002	07:00:00		
+07/11/2002	08:30:00		
+07/11/2002	09:00:00 - 07/11/2002	10:00:00	
+07/11/2002	11:00:00 - 07/11/2002	18:30:00		
+07/12/2002	09:00:00 - 07/12/2002	22:00:00	
+07/12/2002	23:00:00 - 07/14/2002	07:00:00		
+07/14/2002	08:00:00 - 07/15/2002	16:30:00	
+07/15/2002	17:30:00 - 07/18/2002	08:30:00		
+07/18/2002	09:30:00 - 07/19/2002	17:00:00	
+07/19/2002	19:00:00 - 07/22/2002	07:00:00	
+07/22/2002	08:00:00 - 07/23/2002	08:30:00		
+07/23/2002	09:30:00 - 07/23/2002	13:30:00		
+07/23/2002	17:00:00 - 07/23/2002	18:00:00		
+07/23/2002	20:00:00 - 07/24/2002	05:00:00
+07/24/2002	06:30:00 - 07/24/2002	18:30:00
+07/24/2002	19:30:00		
+07/24/2002	20:30:00 - 07/25/2002	06:00:00	
+07/25/2002	07:00:00 - 07/25/2002	15:00:00	
+07/25/2002	16:00:00 - 07/25/2002	21:30:00	
+07/25/2002	22:30:00 - 07/31/2002	19:30:00		
+07/31/2002	20:30:00 - 07/31/2002	23:30:00	
+
+
+TN
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data was deleted:
+Date	Time	Turb
+7/26/02	1:00:00	2082
+
+TS
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time	Turb	
+07/02/2002	06:30:00	-0001	
+07/02/2002	14:30:00	-0001	
+07/02/2002	15:00:00	0000	
+07/03/2002	14:00:00	-0001	
+07/03/2002	15:00:00	-0001	
+07/03/2002	15:30:00	-0001	
+07/04/2002	15:30:00	0000	
+07/04/2002	16:00:00	0000	
+07/17/2002	00:00:00	-0001	
+07/17/2002	07:00:00	0000	
+07/17/2002	14:30:00	-0001	
+07/17/2002	15:30:00	0000	
+07/17/2002	20:00:00	0000	
+07/18/2002	00:00:00	0000	
+07/18/2002	01:30:00	-0001	
+07/18/2002	02:00:00	0000	
+07/18/2002	02:30:00	0000	
+07/18/2002	03:00:00	0000	
+07/18/2002	08:00:00	-0001	
+07/18/2002	10:30:00	0000	
+07/18/2002	11:00:00	0000	
+07/18/2002	11:30:00	0000	
+07/18/2002	13:00:00	-0001	
+07/18/2002	13:30:00	-0001	
+07/18/2002	14:00:00	-0001	
+07/18/2002	15:00:00	-0001	
+07/18/2002	15:30:00	-0001	
+07/18/2002	16:30:00	-0001	
+07/18/2002	17:00:00	0000	
+07/18/2002	21:00:00	0000	
+07/18/2002	23:30:00	0000	
+07/19/2002	01:00:00	0000	
+07/19/2002	02:00:00	0000	
+07/19/2002	02:30:00	-0001	
+07/19/2002	03:00:00	-0001	
+07/19/2002	03:30:00	-0001	
+07/19/2002	04:00:00	-0001	
+07/19/2002	04:30:00	0000	
+07/19/2002	09:00:00	-0001	
+07/19/2002	14:30:00	0000	
+07/19/2002	15:00:00	-0001	
+07/19/2002	15:30:00	-0001	
+07/19/2002	16:00:00	-0001	
+07/19/2002	16:30:00	-0001	
+07/19/2002	17:00:00	-0001	
+07/20/2002	00:30:00	0000	
+07/20/2002	01:00:00	-0001	
+07/20/2002	01:30:00	-0001	
+07/20/2002	02:00:00	-0001	
+07/20/2002	02:30:00	0000	
+07/20/2002	03:00:00	-0001	
+07/20/2002	03:30:00	-0001	
+07/20/2002	04:00:00	-0001	
+07/20/2002	04:30:00	-0001	
+07/20/2002	05:00:00	-0001	
+07/20/2002	06:30:00	-0001	
+07/20/2002	09:30:00	-0001	
+07/20/2002	10:00:00	0000	
+07/20/2002	12:00:00	0000	
+07/20/2002	13:00:00	-0001	
+07/20/2002	13:30:00	0000	
+07/20/2002	14:00:00	0000	
+07/20/2002	14:30:00	-0001	
+07/20/2002	15:30:00	-0001	
+07/20/2002	16:00:00	-0001	
+07/20/2002	16:30:00	0000	
+07/20/2002	17:00:00	0000	
+07/20/2002	17:30:00	-0001	
+07/20/2002	18:00:00	0000	
+07/20/2002	23:00:00	0000	
+07/21/2002	03:00:00	0000	
+07/21/2002	03:30:00	0000	
+07/21/2002	04:00:00	-0001	
+07/21/2002	04:30:00	-0001	
+07/21/2002	05:00:00	0000	
+07/21/2002	05:30:00	0000	
+07/21/2002	06:00:00	0000	
+07/21/2002	06:30:00	-0001	
+07/21/2002	07:30:00	0000	
+07/21/2002	11:00:00	-0001	
+07/21/2002	11:30:00	-0001	
+07/21/2002	12:00:00	-0001	
+07/21/2002	12:30:00	0000	
+07/21/2002	13:30:00	0000	
+07/21/2002	14:00:00	0000	
+07/21/2002	14:30:00	0000	
+07/21/2002	15:30:00	0000	
+07/21/2002	16:00:00	0000	
+07/21/2002	16:30:00	0000	
+07/21/2002	18:00:00	0000	
+07/21/2002	23:30:00	0000	
+07/22/2002	13:00:00	0000	
+07/22/2002	18:00:00	0000	
+07/22/2002	19:00:00	0000	
+07/23/2002	05:30:00	0000	
+07/23/2002	19:00:00	-0001	
+07/23/2002	19:30:00	0000	
+07/23/2002	20:00:00	0000	
+07/23/2002	20:30:00	0000	
+07/24/2002	04:30:00	0000	
+07/24/2002	05:00:00	0000	
+07/24/2002	05:30:00	0000	
+07/24/2002	07:00:00	0000	
+07/24/2002	14:00:00	0000	
+07/25/2002	21:00:00	0000	
+07/25/2002	21:30:00	0000	
+07/26/2002	03:00:00	0000	
+07/26/2002	10:30:00	0000	
+07/27/2002	16:00:00	-0001	
+07/27/2002	16:30:00	-0001	
+07/28/2002	17:00:00	0000	
+07/29/2002	05:00:00	-0001	
+07/29/2002	12:00:00	0000	
+07/29/2002	17:00:00	-0001	
+07/29/2002	18:00:00	0000	
+07/29/2002	21:00:00	0000	
+07/30/2002	11:00:00	0000	
+07/30/2002	11:30:00	-0001	
+07/30/2002	12:00:00	-0001	
+07/30/2002	12:30:00	-0001	
+07/30/2002	13:30:00	-0001	
+07/30/2002	18:00:00	-0001	
+07/31/2002	00:30:00	0000	
+07/31/2002	01:00:00	-0001	
+07/31/2002	12:00:00	0000	
+07/31/2002	13:30:00	0000	
+
+Turbidity spikes were flagged as outliers. The spikes continued throughout the 
+use of a specific turbidity probe, and therefore the probe may have been 
+malfunctioning. The following data were left in,  but considered suspect: 
+07/02/2002	20:00:00	1036	
+07/03/2002	06:00:00	1054	
+07/04/2002	22:00:00	1979	
+07/04/2002	22:30:00	1581	
+07/04/2002	23:00:00	1976	
+07/04/2002	23:30:00	1445	
+07/05/2002	00:00:00	1132	
+07/10/2002	05:00:00	1180	
+07/10/2002	07:30:00	1100	
+07/12/2002	09:00:00	1878	
+07/12/2002	10:00:00	1108	
+07/14/2002	07:00:00	1918	
+07/24/2002	17:30:00	1039	
+07/25/2002	05:30:00	1661	
+07/26/2002	04:00:00	1581	
+07/26/2002	06:30:00	1934	
+07/26/2002	18:30:00	1931	
+07/26/2002	19:00:00	1928
+07/30/2002	01:30:00	1959	
+07/31/2002	09:00:00	1380
+07/31/2002	16:00:00	1541	
+	
+August
+
+SC
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data was deleted:
+Date		Time		Turb
+08/08/2002	18:00:00	0564
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date Time
+08/01/2002	14:30:00 - 08/18/2002	10:30:00
+
+The probes appear to be out of the water and exposed to the air. All the 
+following data were removed:
+Date	Time
+08/01/02	00:00:00 - 08/01/02 	14:30:00
+08/18/02	11:00:00 - 08/30/02	23:30:00
+
+SK
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time	Turb	
+08/01/2002	00:00:00 - 08/02/2002	17:00:00	
+08/03/2002	05:00:00 - 08/04/2002	04:00:00		
+08/04/2002	05:00:00 - 08/04/2002	20:00:00	
+08/04/2002	21:00:00 - 08/05/2002	04:00:00		
+08/05/2002	10:30:00 - 08/06/2002	03:00:00	
+08/06/2002	04:00:00 - 08/06/2002	20:30:00	
+08/06/2002	21:30:00 - 08/09/2002	04:00:00	
+08/09/2002	05:00:00 - 08/09/2002	07:30:00		
+08/09/2002	08:30:00 - 08/10/2002	21:00:00	
+08/10/2002	22:00:00		
+08/10/2002	23:00:00		
+08/10/2002	23:30:00		
+08/11/2002	01:00:00 - 08/13/2002	21:30:00		
+08/13/2002	22:30:00 - 08/15/2002	06:30:00	
+08/15/2002	08:00:00 - 08/16/2002	17:00:00		
+08/16/2002	18:30:00 - 08/17/2002	07:30:00		
+08/17/2002	08:30:00 - 08/20/2002	01:30:00	
+08/20/2002	09:00:00		
+08/20/2002	09:30:00		
+08/20/2002	10:30:00 - 08/21/2002	06:00:00		
+08/21/2002	08:00:00 - 08/23/2002	07:30:00		
+08/23/2002	09:30:00 - 08/24/2002	06:30:00		
+08/24/2002	08:30:00 - 08/25/2002	08:30:00		
+08/25/2002	10:30:00 - 08/26/2002	03:30:00	
+08/26/2002	04:30:00 - 08/26/2002	08:30:00	
+08/26/2002	10:30:00 - 08/29/2002	07:30:00		
+08/31/2002	09:30:00		
+08/31/2002	10:30:00		
+08/31/2002	11:00:00		
+08/31/2002	12:00:00 - 08/31/2002	19:00:00		
+08/31/2002	20:00:00 - 08/31/2002	23:30:00	
+
+TN
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data were deleted:
+Date	Time	Turb
+08/13/2002	02:30:00	2047
+08/15/2002	20:30:00	2060
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time	Turb
+08/02/2002	14:00:00	0000
+08/04/2002	09:00:00	0000
+08/04/2002	09:30:00	-0001
+08/14/2002	19:00:00	-0001
+08/15/2002	07:00:00	0000
+08/16/2002	08:00:00	0000
+08/17/2002	22:00:00	0000
+08/18/2002	10:00:00	-0001
+08/18/2002	10:30:00	0000
+08/18/2002	17:00:00	-0001
+08/19/2002	11:00:00	-0001
+08/19/2002	11:30:00	0000
+08/19/2002	18:00:00	-0001
+08/20/2002	12:00:00	-0001
+08/21/2002	13:00:00	-0001
+08/22/2002	13:30:00	0000
+08/22/2002	14:00:00	-0001
+08/30/2002	06:30:00	-0001
+08/30/2002	19:00:00	0000
+
+TS
+
+Depth readings were flagged as outliers, but the other parameters were 
+unaffected and the depth readings were considered near zero. The following data 
+were left in:
+Date	Time	Depth
+08/06/2002	17:30:00	0.00
+08/06/2002	18:00:00	0.00
+
+Turbidity spikes were flagged as outliers. The spikes continued throughout the 
+use of a specific turbidity probe, and therefore the probe may have been 
+malfunctioning. The following data were left in,  but considered suspect: 
+Date	Time	Turb
+08/01/2002	07:00:00	1954
+08/01/2002	07:30:00	1954
+08/01/2002	08:00:00	1955
+08/01/2002	08:30:00	1959
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time	Turb
+08/03/2002	21:30:00
+08/04/2002	05:00:00
+08/04/2002	22:00:00
+08/05/2002	16:30:00
+08/05/2002	17:00:00
+08/05/2002	23:00:00
+08/08/2002	00:30:00
+08/09/2002	01:30:00
+08/09/2002	14:00:00
+08/11/2002	03:00:00
+08/12/2002	11:30:00
+08/12/2002	12:30:00
+08/12/2002	14:30:00
+08/12/2002	15:30:00 - 08/12/2002	18:00:00
+08/12/2002	19:00:00
+08/12/2002	22:00:00 - 08/13/2002	00:30:00
+08/13/2002	05:00:00
+08/13/2002	05:30:00
+08/13/2002	10:00:00
+08/13/2002	11:00:00 - 08/13/2002	13:30:00
+08/13/2002	14:30:00
+08/13/2002	16:30:00 - 08/13/2002	19:30:00
+08/13/2002	22:30:00 - 08/14/2002	01:30:00
+08/14/2002	05:30:00 - 08/14/2002	06:30:00
+08/14/2002	08:00:00
+08/14/2002	08:30:00
+08/14/2002	12:00:00 - 08/14/2002	14:00:00
+08/14/2002	17:30:00
+08/14/2002	18:30:00
+08/14/2002	19:30:00 - 08/14/2002	21:30:00
+08/14/2002	23:30:00
+08/15/2002	00:30:00 - 08/15/2002	02:30:00
+08/15/2002	06:30:00
+08/15/2002	07:00:00
+08/15/2002	12:30:00 - 08/15/2002	15:00:00
+08/15/2002	19:00:00 - 08/15/2002	23:00:00
+08/16/2002	02:30:00 - 08/16/2002	04:00:00
+08/16/2002	08:30:00
+08/16/2002	16:00:00
+08/16/2002	20:00:00 - 08/16/2002	21:00:00
+08/16/2002	23:00:00
+08/16/2002	23:30:00
+08/17/2002	00:30:00
+08/17/2002	01:00:00
+08/17/2002	02:00:00 - 08/17/2002	05:00:00
+08/17/2002	09:00:00
+08/17/2002	10:00:00
+08/17/2002	11:30:00
+08/17/2002	12:30:00
+08/17/2002	14:00:00 - 08/17/2002	17:00:00
+08/17/2002	21:00:00 - 08/18/2002	01:00:00
+08/18/2002	02:30:00 - 08/18/2002	05:00:00
+08/18/2002	06:00:00
+08/18/2002	09:00:00 - 08/18/2002	13:30:00
+08/18/2002	16:00:00 - 08/18/2002	17:30:00
+08/18/2002	18:00:00
+08/18/2002	22:30:00 - 08/19/2002	03:00:00
+08/19/2002	04:00:00 - 08/19/2002	08:00:00
+08/19/2002	10:00:00 - 08/19/2002	13:30:00
+08/19/2002	14:30:00
+08/19/2002	15:00:00
+08/19/2002	17:00:00 - 08/19/2002	19:00:00
+08/19/2002	23:30:00
+08/20/2002	00:00:00
+08/20/2002	02:00:00 - 08/20/2002	09:00:00
+08/20/2002	11:30:00 - 08/20/2002	16:00:00
+08/20/2002	17:00:00 - 08/20/2002	19:30:00
+08/21/2002	00:30:00 - 08/21/2002	02:00:00
+08/21/2002	04:00:00 - 08/21/2002	06:30:00
+08/21/2002	08:00:00 - 08/21/2002	09:30:00
+08/21/2002	12:30:00 - 08/21/2002	16:30:00
+08/21/2002	19:00:00 - 08/21/2002	20:00:00
+08/22/2002	01:00:00
+08/22/2002	01:30:00
+08/22/2002	03:30:00 - 08/22/2002	05:30:00
+08/22/2002	13:30:00
+08/22/2002	14:30:00
+08/22/2002	20:30:00
+08/23/2002	01:00:00
+08/23/2002	05:00:00
+08/23/2002	09:30:00
+08/23/2002	14:30:00
+08/23/2002	15:00:00
+08/23/2002	17:00:00
+08/23/2002	20:30:00
+08/23/2002	21:00:00
+08/24/2002	02:30:00
+08/24/2002	03:00:00
+08/24/2002	04:30:00
+08/24/2002	14:30:00 - 08/24/2002	15:30:00
+08/24/2002	22:00:00
+08/25/2002	03:00:00
+08/25/2002	15:30:00
+08/25/2002	16:00:00
+08/25/2002	22:30:00
+08/26/2002	03:30:00
+08/26/2002	04:00:00
+08/26/2002	16:30:00
+08/26/2002	23:00:00
+08/26/2002	23:30:00
+08/27/2002	11:00:00
+08/27/2002	16:30:00
+08/27/2002	17:00:00
+08/28/2002	18:30:00
+08/29/2002	05:30:00
+08/31/2002	20:30:00
+
+September
+
+SC
+
+The readings indicate the probes were exposed to the air and the instrument may 
+have been above water. All the following data were removed:
+09/01/02	00:00:00 - 09/11/02	14:00:00
+09/28/02	03:00:00 - 09/30/02	23:30:00
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data was deleted:
+Date		Time		Turb
+09/28/2002	01:30:00	1411
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+09/11/2002	14:30:00 - 09/15/2002	21:30:00
+09/19/2002	07:30:00 - 09/26/2002	23:30:00
+09/28/2002	01:30:00 - 09/28/2002	02:30:00
+
+SK
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time	Turb	
+09/01/2002	00:00:00 - 09/01/2002	15:30:00	
+09/01/2002	16:30:00 - 09/03/2002	08:30:00		
+09/03/2002	10:00:00 - 09/03/2002	15:00:00		
+09/03/2002	16:00:00	
+09/03/2002	17:00:00 - 09/04/2002	04:00:00	
+09/04/2002	07:00:00 - 09/04/2002	18:30:00	
+09/04/2002	19:30:00 - 09/05/2002	07:00:00	
+09/05/2002	08:00:00 - 09/09/2002	08:30:00	
+09/09/2002	09:30:00 - 09/10/2002	07:30:00	
+09/10/2002	09:00:00 - 09/12/2002	07:30:00		
+09/12/2002	09:00:00 - 09/13/2002	09:00:00		
+09/13/2002	13:30:00 - 09/15/2002	22:30:00
+09/16/2002	08:30:00 - 09/19/2002	06:30:00	
+09/19/2002	08:00:00 - 09/20/2002	18:30:00	
+09/20/2002	19:30:00 - 09/27/2002	01:00:00		
+09/27/2002	14:00:00 - 09/27/2002	18:30:00	
+09/27/2002	20:00:00		
+09/27/2002	20:30:00		
+09/28/2002	12:00:00 - 09/28/2002	14:30:00	
+09/28/2002	15:30:00 - 09/28/2002	20:30:00	
+09/29/2002	04:00:00	
+09/29/2002	04:30:00		
+09/29/2002	05:30:00 - 09/29/2002	07:00:00		
+09/29/2002	08:30:00 - 09/29/2002	15:00:00		
+09/29/2002	16:00:00 - 09/30/2002	02:30:00	
+09/30/2002	03:30:00		
+09/30/2002	04:00:00		
+09/30/2002	05:00:00 - 09/30/2002	07:30:00	
+09/30/2002	09:00:00 - 09/30/2002	23:30:00		
+
+TN
+
+Sonde was deployed but the program stopped before the instrument was exchanged 
+with another. Data was missing from:
+09/11/2002	11:00:00 - 09/13/2002	13:30:00
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data was deleted:
+Date	Time	Turb
+09/10/2002	06:30:00	1991
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time
+09/01/2002	14:30:00
+09/01/2002	15:00:00
+09/02/2002	09:30:00
+09/02/2002	10:00:00
+09/02/2002	16:00:00
+09/10/2002	10:30:00
+09/10/2002	11:00:00
+09/13/2002	19:30:00
+09/13/2002	20:00:00
+09/14/2002	02:30:00
+09/14/2002	07:00:00
+09/14/2002	07:30:00
+09/14/2002	13:30:00 - 09/14/2002	15:30:00
+09/14/2002	21:30:00
+09/15/2002	08:30:00
+09/15/2002	15:30:00
+09/15/2002	16:00:00
+09/16/2002	09:30:00
+09/16/2002	16:30:00
+09/16/2002	17:00:00
+09/16/2002	17:30:00
+09/16/2002	22:30:00
+09/17/2002	10:30:00
+09/17/2002	11:00:00
+09/17/2002	12:00:00
+09/17/2002	17:30:00
+09/17/2002	18:00:00
+09/17/2002	23:30:00
+09/18/2002	06:30:00
+09/18/2002	11:30:00
+09/18/2002	18:30:00
+09/18/2002	19:00:00
+09/19/2002	12:30:00
+09/19/2002	19:00:00
+09/19/2002	19:30:00
+09/20/2002	07:30:00
+09/20/2002	08:00:00
+09/20/2002	20:00:00
+09/21/2002	08:30:00
+09/21/2002	14:00:00
+09/21/2002	20:30:00
+09/22/2002	02:00:00
+09/22/2002	09:00:00
+09/22/2002	09:30:00
+09/22/2002	14:30:00
+09/22/2002	21:00:00
+09/23/2002	02:30:00
+09/23/2002	09:30:00
+09/23/2002	20:00:00
+09/23/2002	20:30:00
+09/23/2002	21:00:00
+09/23/2002	21:30:00
+09/23/2002	22:30:00
+09/24/2002	03:00:00
+09/24/2002	09:00:00
+09/24/2002	10:00:00
+09/24/2002	10:30:00
+09/24/2002	15:30:00
+09/25/2002	03:30:00
+09/25/2002	10:30:00
+09/25/2002	11:00:00
+09/25/2002	16:00:00
+09/26/2002	04:30:00
+09/26/2002	11:00:00
+09/26/2002	16:30:00
+09/26/2002	17:00:00
+09/26/2002	23:30:00
+09/27/2002	11:00:00
+09/27/2002	17:00:00
+09/27/2002	17:30:00
+09/28/2002	00:30:00
+09/28/2002	18:30:00
+09/29/2002	02:00:00
+09/29/2002	06:30:00
+09/29/2002	12:30:00
+09/29/2002	13:00:00
+09/29/2002	19:00:00
+09/30/2002	02:30:00
+09/30/2002	07:00:00
+09/30/2002	07:30:00
+09/30/2002	14:00:00
+09/30/2002	14:30:00
+09/30/2002	20:00:00
+
+TS
+
+Depth readings were flagged as outliers, but the other parameters were 
+unaffected and the depth readings were considered near zero. The following data 
+were left in:
+Date	Time
+09/11/2002	23:00:00	
+09/11/2002	23:30:00	
+09/12/2002	00:30:00	
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time
+09/03/2002	22:30:00	
+09/05/2002	02:30:00	
+09/10/2002	15:30:00 - 09/10/2002	17:00:00	
+09/10/2002	23:30:00	
+09/11/2002	03:00:00 - 09/11/2002	06:00:00
+09/11/2002	08:00:00 - 09/11/2002	09:30:00	
+09/11/2002	10:30:00	
+09/11/2002	15:00:00 - 09/11/2002	18:00:00	
+09/11/2002	20:00:00 - 09/12/2002	01:00:00	
+09/12/2002	04:00:00 - 09/12/2002	11:00:00	
+09/12/2002	12:00:00 - 09/12/2002	14:00:00	
+09/12/2002	15:00:00 - 09/13/2002	00:00:00	
+09/13/2002	01:30:00	
+09/13/2002	02:30:00	
+09/13/2002	04:00:00 - 09/13/2002	11:00:00	
+09/13/2002	12:00:00	
+09/13/2002	14:30:00	
+09/13/2002	15:00:00 - 09/14/2002	04:00:00	
+09/14/2002	05:00:00 - 09/14/2002	11:00:00	
+09/14/2002	12:00:00 - 09/14/2002	13:00:00	
+09/14/2002	15:00:00	
+09/14/2002	15:30:00	
+09/14/2002	18:30:00 - 09/15/2002	02:00:00	
+09/15/2002	04:30:00	
+09/15/2002	09:00:00	
+09/15/2002	18:00:00	
+09/15/2002	20:00:00 - 09/16/2002	00:00:00	
+09/16/2002	01:00:00 - 09/16/2002	04:00:00	
+09/16/2002	05:00:00	
+09/16/2002	05:30:00	
+09/16/2002	06:00:00
+09/16/2002	07:00:00
+09/16/2002	08:00:00	
+09/16/2002	09:00:00 - 09/16/2002	13:00:00	
+09/16/2002	14:00:00 - 09/16/2002	17:00:00	
+09/16/2002	18:30:00 - 09/17/2002	02:30:00	
+09/17/2002	04:00:00 - 09/17/2002	12:30:00	
+09/17/2002	14:00:00 - 09/17/2002	18:00:00	
+09/17/2002	19:00:00 - 09/18/2002	05:30:00	
+09/18/2002	07:30:00 - 09/18/2002	18:30:00	
+09/18/2002	19:30:00	
+09/18/2002	21:30:00 - 09/19/2002	05:30:00	
+09/19/2002	07:30:00	
+09/19/2002	09:00:00 - 09/19/2002	11:00:00	
+09/19/2002	12:00:00 - 09/19/2002	18:00:00	
+09/19/2002	19:00:00	
+09/19/2002	19:30:00	
+09/19/2002	20:00:00	
+09/19/2002	22:00:00 - 09/20/2002	06:00:00	
+09/20/2002	08:00:00	
+09/20/2002	09:00:00	
+09/20/2002	13:30:00 - 09/20/2002	18:30:00	
+09/20/2002	23:30:00 - 09/21/2002	03:30:00	
+09/21/2002	12:00:00	
+09/21/2002	13:00:00	
+09/21/2002	14:00:00 - 09/21/2002	18:30:00
+09/21/2002	21:30:00	
+09/21/2002	23:30:00 - 09/22/2002	03:30:00	
+09/22/2002	04:30:00	
+09/22/2002	05:00:00	
+09/22/2002	05:30:00	
+09/22/2002	06:30:00	
+09/22/2002	07:30:00	
+09/22/2002	08:00:00	
+09/22/2002	08:30:00	
+09/22/2002	13:00:00 - 09/22/2002	17:30:00	
+09/22/2002	21:00:00
+09/23/2002	01:30:00 - 09/23/2002	04:30:00	
+09/23/2002	09:00:00	
+09/23/2002	14:00:00 - 09/23/2002	15:00:00	
+
+October
+
+SC
+
+The readings indicate the probes were exposed to the air during deployment and the instrument may have been above water. All the following data were removed:
+10/01/2002	00:00:00 - 10/03/2002 	14:30:00
+10/15/02 15:30:00
+
+Turbidity readings were zero during the following times but were within the 
+detection limit of the probe. The following data were left in:
+10/05/2002	16:30:00 - 10/05/2002	17:30:00
+10/06/2002	07:00:00 - 10/06/2002	21:00:00
+10/06/2002	23:00:00
+10/07/2002	00:00:00
+10/07/2002	01:00:00
+10/07/2002	02:30:00 - 10/07/2002	05:00:00
+10/07/2002	06:00:00 - 10/07/2002	08:30:00
+10/07/2002	09:30:00 - 10/08/2002	23:30:00
+10/09/2002	01:00:00
+10/09/2002	01:30:00
+10/09/2002	02:30:00
+10/09/2002	04:00:00
+10/09/2002	06:30:00
+10/09/2002	07:00:00
+10/09/2002	08:00:00
+10/09/2002	09:00:00 - 10/09/2002	10:00:00
+10/09/2002	22:30:00
+10/10/2002	10:00:00
+10/10/2002	10:30:00
+10/10/2002	12:30:00
+10/10/2002	19:30:00
+10/11/2002	07:30:00
+10/11/2002	08:00:00
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data was deleted:
+Date		Time		Turb
+10/12/2002	00:00:00	1603
+
+The following turbidity data were outliers, but an event appears to have 
+occurred during this time. The data were left in:
+Date		Time		Turb
+10/15/2002	04:30:00	1047
+10/15/2002	05:00:00	1188
+10/15/2002	05:30:00	1205
+10/15/2002	06:30:00	1554
+10/15/2002	07:00:00	1553
+10/15/2002	13:00:00	1546
+10/15/2002	13:30:00	1089
+
+SK
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time	Turb	
+10/01/2002	00:00:00 - 10/11/2002	13:00:00		
+10/14/2002	08:00:00 - 10/16/2002	09:00:00		
+10/18/2002	07:30:00 - 10/31/2002	23:30:00
+
+All pH data for deployment 10/7/2002 14:30:00 - 10/16/2002 10:30:00 was deleted due to probe failure. 
+
+TN
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time
+10/01/2002	04:00:00
+10/01/2002	08:00:00
+10/01/2002	08:30:00
+10/01/2002	15:00:00
+10/01/2002	15:30:00
+10/01/2002	16:00:00
+10/01/2002	20:30:00
+10/01/2002	21:00:00
+10/02/2002	04:30:00
+10/02/2002	09:30:00
+10/02/2002	16:00:00 - 10/02/2002	17:30:00
+10/02/2002	22:00:00
+10/02/2002	22:30:00
+10/03/2002	05:30:00
+10/03/2002	06:00:00
+10/03/2002	10:30:00
+10/03/2002	16:00:00 - 10/03/2002	18:30:00
+10/04/2002	05:30:00
+10/04/2002	06:30:00
+10/04/2002	19:00:00
+10/05/2002	07:00:00
+10/05/2002	07:30:00
+10/06/2002	20:00:00
+10/06/2002	20:30:00
+10/07/2002	08:30:00
+10/07/2002	09:00:00
+10/30/2002	03:30:00
+
+TS
+
+Depth reading was flagged as an outlier, but the other parameters were 
+unaffected and the depth reading was considered zero. The following data were 
+left in:
+Date	Time	Depth
+10/18/2002	08:30:00	-0.01
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time	Turb
+10/03/2002	23:00:00
+10/04/2002	10:00:00 - 10/04/2002	13:00:00
+10/04/2002	23:00:00 - 10/05/2002	00:00:00
+10/05/2002	10:30:00 - 10/05/2002	13:00:00
+10/06/2002	08:00:00
+10/06/2002	11:00:00
+10/06/2002	12:00:00 - 10/06/2002	13:00:00
+10/06/2002	14:00:00 - 10/06/2002	15:00:00
+10/06/2002	20:30:00
+10/07/2002	13:30:00 - 10/07/2002	15:00:00
+10/08/2002	02:00:00 - 10/08/2002	03:00:00
+10/08/2002	09:30:00 - 10/08/2002	16:30:00
+10/09/2002	02:30:00 - 10/09/2002	03:30:00
+10/09/2002	14:30:00 - 10/09/2002	16:30:00
+10/10/2002	03:00:00 - 10/10/2002	04:30:00
+10/10/2002	13:30:00 - 10/10/2002	17:30:00
+10/11/2002	03:30:00 - 10/11/2002	06:00:00
+10/11/2002	12:00:00
+10/11/2002	15:00:00 - 10/11/2002	18:30:00
+10/12/2002	00:30:00
+10/12/2002	01:00:00
+10/12/2002	06:00:00
+10/12/2002	06:30:00
+10/12/2002	07:30:00
+10/12/2002	09:30:00
+10/12/2002	10:00:00
+10/12/2002	12:30:00
+10/12/2002	17:00:00 - 10/12/2002	19:30:00
+10/13/2002	06:00:00 - 10/13/2002	07:30:00
+10/13/2002	10:00:00 - 10/13/2002	11:00:00
+10/13/2002	19:00:00
+10/13/2002	19:30:00
+10/13/2002	20:30:00
+10/14/2002	09:00:00
+10/14/2002	09:30:00
+10/15/2002	09:30:00
+10/15/2002	21:00:00
+10/16/2002	10:30:00
+10/17/2002	11:00:00
+10/17/2002	23:30:00
+
+November
+
+SC
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time
+11/09/2002	08:00:00 - 11/12/2002	17:30:00
+11/15/2002	09:00:00 - 11/15/2002	10:30:00
+11/15/2002	12:30:00
+11/15/2002	16:00:00
+11/15/2002	16:30:00
+11/15/2002	17:30:00 - 11/16/2002	05:00:00
+11/16/2002	06:00:00
+11/16/2002	07:00:00 - 11/16/2002	09:00:00
+11/16/2002	10:00:00 - 11/16/2002	11:00:00
+11/16/2002	13:30:00 - 11/16/2002	14:30:00
+11/16/2002	15:30:00 - 11/16/2002	19:30:00
+
+SK
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time	Turb	
+11/01/2002	00:00:00 - 11/21/2002	16:30:00	
+11/22/2002	15:00:00	
+11/25/2002	10:00:00	
+11/25/2002	11:30:00 - 11/25/2002	15:00:00	
+11/25/2002	16:30:00
+11/25/2002	18:00:00	
+11/26/2002	09:30:00
+11/26/2002	10:30:00 - 11/26/2002	12:30:00	
+11/26/2002	13:30:00 - 11/26/2002	16:30:00	
+11/26/2002	18:00:00	
+11/26/2002	19:00:00	
+11/26/2002	20:00:00 - 11/26/2002	21:00:00	
+11/27/2002	11:00:00 - 11/27/2002	12:00:00	
+11/27/2002	15:00:00	
+11/27/2002	15:30:00	
+11/28/2002	05:00:00	
+11/28/2002	11:00:00	
+11/28/2002	15:30:00	
+11/28/2002	18:00:00	
+11/28/2002	19:00:00	
+11/29/2002	00:30:00	
+11/29/2002	05:00:00
+11/29/2002	08:00:00
+11/29/2002	12:00:00
+11/30/2002	12:00:00
+11/30/2002	15:30:00	
+11/30/2002	18:30:00	
+11/30/2002	19:00:00	
+11/30/2002	20:30:00
+
+TN
+
+None
+
+TS
+
+Depth readings were flagged as outliers, but the other parameters were 
+unaffected and the depth readings were considered near zero. The following data 
+were left in:
+Date		Time		Depth
+11/02/2002	05:00:00	-0.02
+11/02/2002	05:30:00	-0.02
+11/02/2002	06:00:00	-0.03
+11/02/2002	06:30:00	0.00
+11/03/2002	06:30:00	-0.02
+11/03/2002	07:00:00	-0.01
+11/06/2002	10:00:00	-0.01
+11/18/2002	20:00:00	-0.03
+11/18/2002	20:30:00	-0.03
+11/18/2002	21:00:00	-0.02
+11/19/2002	05:30:00	-0.03
+11/19/2002	06:00:00	-0.03
+11/19/2002	06:30:00	-0.04
+11/19/2002	07:00:00	-0.04
+11/19/2002	07:30:00	-0.04
+11/19/2002	08:00:00	-0.04
+11/23/2002	21:30:00	-0.01
+11/23/2002	22:00:00	-0.01
+11/23/2002	22:30:00	-0.01
+11/23/2002	23:00:00	-0.01
+11/23/2002	23:30:00	-0.01
+11/24/2002	23:30:00	-0.01
+11/25/2002	00:00:00	-0.01
+
+Data began to shift, possibly due to ice crystals forming. All the following 
+data were left in, but considered suspect, including large turbidity spikes:
+11/26/2002	12:30:00 - 11/30/02	23:30:00
+
+The probes appear to be out of the water and exposed to the air. All the following data were removed:
+11/19/2002 06:00:00 - 07:30:00
+
+December
+
+SC
+
+Turbidity readings were zero during the following times but were within the 
+detection limit of the probe. The following data were left in:
+12/04/2002	16:30:00 - 12/05/2002	04:00:00
+12/05/2002	07:30:00 - 12/05/2002	10:00:00
+12/05/2002	17:30:00 - 12/06/2002	05:00:00
+12/06/2002	15:00:00 - 12/07/2002	05:00:00
+12/07/2002	15:00:00 - 12/08/2002	03:30:00
+12/08/2002	10:00:00 - 12/08/2002	11:30:00
+12/08/2002	14:30:00 - 12/09/2002	03:30:00
+12/09/2002	06:30:00
+12/09/2002	07:00:00
+12/09/2002	12:30:00
+12/09/2002	13:00:00
+
+The datalogger was pulled from the water for the rest of the year on 12/20/2002 
+14:00:00 due to winter conditions.
+
+SK
+
+Turbidity readings were very low including values of zero and negative numbers, 
+but the negative numbers were within the detection limit of the probe. The 
+following data were left in:
+Date	Time	Turb	
+12/01/2002	11:00:00	
+12/01/2002	15:30:00	
+12/01/2002	18:30:00	
+12/01/2002	19:00:00	
+12/01/2002	20:00:00	
+12/01/2002	20:30:00	
+12/01/2002	22:00:00	
+12/01/2002	22:30:00	
+12/02/2002	07:00:00	
+12/02/2002	10:00:00	
+12/02/2002	14:30:00	
+12/02/2002	15:00:00	
+12/02/2002	16:00:00	
+12/02/2002	16:30:00	
+12/02/2002	18:00:00	
+12/02/2002	19:00:00	
+12/02/2002	22:30:00	
+12/02/2002	23:00:00	
+12/03/2002	00:30:00	
+12/04/2002	22:00:00	
+12/05/2002	06:00:00	
+12/05/2002	23:00:00	
+12/06/2002	04:00:00	
+12/06/2002	13:00:00 - 12/06/2002	14:30:00	
+12/06/2002	20:00:00	
+12/07/2002	06:30:00
+12/07/2002	16:00:00	
+12/07/2002	16:30:00	
+12/07/2002	18:30:00	
+12/07/2002	23:00:00	
+12/08/2002	01:00:00 - 12/08/2002	03:00:00	
+12/08/2002	04:00:00 - 12/08/2002	07:30:00	
+12/08/2002	08:30:00	
+12/08/2002	09:00:00	
+12/08/2002	10:00:00	
+12/08/2002	10:30:00	
+12/08/2002	11:30:00	
+12/08/2002	12:00:00	
+12/08/2002	13:00:00 - 12/08/2002	14:00:00	
+12/08/2002	15:00:00	
+12/08/2002	16:00:00	
+12/08/2002	17:30:00	
+12/08/2002	18:30:00	
+12/08/2002	19:30:00	
+12/08/2002	20:30:00	
+12/08/2002	21:00:00	
+12/08/2002	22:00:00	
+12/08/2002	22:30:00	
+12/09/2002	00:00:00	
+12/09/2002	00:30:00
+12/09/2002	01:00:00	
+12/09/2002	02:00:00	
+12/09/2002	04:00:00	
+12/09/2002	04:30:00	
+12/09/2002	05:00:00	
+12/09/2002	06:00:00	
+12/09/2002	08:00:00 - 12/09/2002	10:30:00	
+12/09/2002	11:30:00	
+12/09/2002	12:30:00	
+12/09/2002	13:00:00
+12/09/2002	15:00:00 - 12/12/2002	03:00:00	
+12/13/2002	06:00:00 - 12/13/2002	20:30:00
+
+The datalogger was pulled from the water for the rest of the year on 12/20/2002 
+14:00:00 due to winter conditions. 
+
+TN
+
+The datalogger was pulled from the water for the rest of the year on 12/20/2002 
+09:00:00 due to winter conditions. 
+
+TS
+
+Data began to shift, possibly due to ice crystals forming. All the following 
+data were removed:
+12/01/02	00:00:00 - 12/10/02	13:30:00
+
+The datalogger was pulled from the water for the rest of the year on 12/10/2002 
+14:00:00 due to winter conditions. 
+
+12.  Missing Data 
+
+	Missing data are denoted by a period in the data set. Data are missing due 
+to equipment failure where no probes deployed, maintenance/calibration of 
+equipment, elimination of obvious outliers or elimination of data due to 
+calibration (both pre and post) problems. For more details on deleted data, see 
+the Anomalous Data (Section 10). To find out more details about missing data, 
+contact the Research Coordinator at the site submitting the data.
+
+13. Post Deployment Information
+
+End of Deployment Post-calibration Readings in Standard Solutions, un-cleaned 
+probes:
+[standards used: Specific conductivity = 1.0; DO = 100%; pH = 7.00; Turbidity = 
+0.0]
+
+SC
+
+Date; DO(%Sat.); pH 7; Conductivity 1.0; Turbidity 0
+
+04/08/02; 99.6; 7.14; 1.009; 0.6
+04/19/02; 98.4; 7.07; 1.020; 0.4
+05/09/02; 99.4; 7.06; 0.999; 0.1
+06/10/02; 98.5; 7.10; 0.969; 0.2
+07/02/02; 96.2; 7.06; 1.037; -0.7
+07/15/02; 103.1; 7.15; 0.991; -0.6
+08/01/02; 101.1; 7.08; 0.994; 0.7
+08/13/02; 95.0; 7.12; 0.988; -0.8
+09/11/02; 105.6; 7.16; 0.887; -0.2
+10/03/02; 99.2; 7.03; 0.846; 0.5
+10/30/02; 96.7; 7.17; 1.046; 1.4
+11/06/02; 94.2; 7.11; 0.902; 2.0
+
+Site SK 
+
+Date; DO(%Sat.); pH 7; Conductivity 1.0; Turbidity 0
+
+04/05/02; 111.6; 7.08; 0.992; 1.0
+04/19/02; 100.8; 7.14; 1.120; 0.1
+05/09/02; 103.1; 7.12; 0.977; 1.2
+06/10/02; 105.7; 7.07; 0.987; 0.0
+07/02/02; 101.4; 7.08; 0.989; 1.0
+07/12/02; 104.0; 7.14; 0.998; 0.5
+08/02/02; 98.8; 7.13; 0.933; 0.1
+08/14/02; 103.3; 7.10; 0.980; 0.5
+09/13/02; 104.3; 7.06; 0.943; 0.9
+10/07/02; 100.5; 7.21; 0.963; 0.7
+10/16/02; 97.4; 7.20; 0.881; -0.3
+11/06/02; 104.3; 6.95; 0.927; -0.6
+
+Site TN
+
+Date; DO(%Sat.); pH 7; Conductivity 1.0; Turbidity 0
+
+04/04/02; 100.7; 6.99; 0.998; -0.9
+04/19/02; 102.1; 7.02; 1.018; 0.5
+05/10/02; 98.1; 6.99; 0.991; 0.8
+06/11/02; 100.4; 7.11; 0.926; 0.8
+07/01/02; 98.7; 7.03; 1.003; -0.2
+07/15/02; 103.6; 7.06; 1.020; 0.8
+08/01/02; 99.5; 7.00; 0.991; 0.1
+08/12/02; 97.2; 7.15; 0.974; 0.9
+09/11/02; 108.3; 6.99; 0.946; 0.3
+10/07/02; 97.9; 6.98; 1.001; 1.4
+10/18/02; 105.5; 7.09; 0.856; -0.2
+11/06/02; 102.9; 6.95; 0.928; 2.1
+
+Site TS
+
+Date; DO(%Sat.); pH 7; Conductivity 1.0; Turbidity 0
+
+04/04/02; 99.3; 7.06; 0.993; 1.0
+04/18/02; 100.5; 7.08; 1.058; 0.6
+05/10/02; 99.8; 7.06; 0.905; 1.2
+06/12/02; 98.6; 7.00; 0.985; -0.5
+07/01/02; 99.6; 7.04; 1.023; 0.4
+07/16/02; 102.4; 7.01; 0.976; 1.2
+08/01/02; 102.1; 7.17; 0.967; 0.1
+08/12/02; 111.7; 7.20; 0.947; 0.9
+09/11/02; 103.6; 7.12; 0.923; 0.9
+10/03/02; 98.2; 7.04; 1.046; 0.3
+10/18/02; 101.8; 7.14; 0.894; 0.7
+11/6/02; 99.3; 6.96; 1.011; 0.3
+
+14. Other Remarks
+
+On 06/30/2021 this dataset was updated to include embedded QAQC flags for 
+anomalous/suspect data.  System-wide monitoring data beginning in 2007 were 
+processed to allow for QAQC flags and codes to be embedded in the data files 
+rather than detailed in the metadata alone (as in the anomalous/suspect, 
+deleted, and missing data sections above).  Prior to 2006, rejected data 
+were deleted from the dataset so they are unavailable to be used at all, 
+but suspect data were only noted in the metadata document.  Suspect data 
+flags <1> were embedded retroactively in order to allow suspect data to be 
+easily identified and filtered from the dataset if desired for analysis and 
+reporting purposes.  No other flags or codes were embedded in the dataset 
+and users should still refer to the detailed explanations above for more 
+information.
+
+	Any reference made to depth data being negative and/or zero, it was 
+recorded as a negative in the raw data file and a zero in the edited data file 
+due to the formatting of Excel. The technician edited none of these data points 
+by hand nor did the technician delete any of them. 

@@ -1,0 +1,6 @@
+---
+title: "Data Exploration" 
+subtitle: "Stony Creek, and Field Station"
+author: "Ilianna Ditren, Joy Terentiev, Natalie Novoseltseva"
+format: pdf
+---
