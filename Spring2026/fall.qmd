@@ -145,9 +145,10 @@ ggplot(noRain_highCond, aes(x = date, y = mSpCond)) +
 temp<- dAverage|> select(mTemp)
 mTempSd<- sd(unlist(temp), na.rm = TRUE)       #sd is 5.1318, zcrit=1.65
 #Isolating the top %5 of Turbidity values
+summary(dAverage)
 highTemp<- dAverage|> 
   filter(mTemp > (mean(mTemp, na.rm=TRUE)+1.65*mTempSd))
-#summary(highTemp)  warmest days?
+#summary(highTemp)  #warmest days
 ```
 
 ```{r}
@@ -159,11 +160,25 @@ ggplot(highTemp, aes(x = date, y = mTemp)) +
 ```
 
 ```{r}
-#High temp (by year)
+#Extreme high temp (by year)
 ggplot(highTemp, aes(x = date, y = mTemp)) +
    geom_point() +
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank())+
  facet_grid(~year)
 ```
+
+
+```{r}
+#High conductivity and high turbidity
+
+highTurbCond<- dAverage|> 
+  filter(mSpCond > (mean(mSpCond, na.rm=TRUE)+1.65*mCondSd) & 
+           mTurb >(mean(mTurb, na.rm=TRUE)+1.65*mTurbSd))
+```
+
+
+
+
+
 
