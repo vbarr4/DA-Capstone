@@ -112,6 +112,7 @@ Summary statistics (all years)
 
 ```{r}
 #compute summary statistics for selected variables, reshape, and display as a formatted table
+
 stony_creek %>%
   summarise(
     Temp_mean = mean(Temp, na.rm = TRUE),

@@ -4,19 +4,27 @@ author: "Ilianna Ditren, Natalie Novoseltseva, Mikhal"
 format: revealjs
 
 ---
-```{r, result = FALSE, eval=FALSE}
+```{r}
 #libraries
 library(tidyverse)
 library(readr)
-
+library(dplyr)
+library(lubridate)
+library(janitor)
+library(stringr)
+library(reshape2)
+library(gt)
+library(here)
 
 
 ```
 
-```{r, result = FALSE, eval=FALSE}
+```{r}
 #data
+stony_creek <- read_csv("data/stony_creek.csv")
 
 ```
+
 
 ## {.center background-image="pictures/stony_creek_picture.jpeg"}
 
@@ -108,6 +116,94 @@ Data and Methods
 ">
 Initial Exploratory Analysis
 </div>
+
+
+## Summary Statistics
+
+```{r}
+summary_tbl <- stony_creek %>%
+  summarise(
+    Temp_mean = mean(Temp, na.rm = TRUE),
+    Temp_sd   = sd(Temp, na.rm = TRUE),
+    Temp_min  = min(Temp, na.rm = TRUE),
+    Temp_max  = max(Temp, na.rm = TRUE),
+
+    DO_mean   = mean(DO_mgl, na.rm = TRUE),
+    DO_sd     = sd(DO_mgl, na.rm = TRUE),
+    DO_min    = min(DO_mgl, na.rm = TRUE),
+    DO_max    = max(DO_mgl, na.rm = TRUE),
+
+    pH_mean   = mean(pH, na.rm = TRUE),
+    pH_sd     = sd(pH, na.rm = TRUE),
+    pH_min    = min(pH, na.rm = TRUE),
+    pH_max    = max(pH, na.rm = TRUE),
+
+    Sal_mean  = mean(Sal, na.rm = TRUE),
+    Sal_sd    = sd(Sal, na.rm = TRUE),
+    Sal_min   = min(Sal, na.rm = TRUE),
+    Sal_max   = max(Sal, na.rm = TRUE),
+
+    Turb_mean = mean(Turb, na.rm = TRUE),
+    Turb_sd   = sd(Turb, na.rm = TRUE),
+    Turb_min  = min(Turb, na.rm = TRUE),
+    Turb_max  = max(Turb, na.rm = TRUE),
+
+    ChlFluor_mean = mean(ChlFluor, na.rm = TRUE),
+    ChlFluor_sd   = sd(ChlFluor, na.rm = TRUE),
+    ChlFluor_min  = min(ChlFluor, na.rm = TRUE),
+    ChlFluor_max  = max(ChlFluor, na.rm = TRUE),
+
+    SpCond_mean = mean(SpCond, na.rm = TRUE),
+    SpCond_sd   = sd(SpCond, na.rm = TRUE),
+    SpCond_min  = min(SpCond, na.rm = TRUE),
+    SpCond_max  = max(SpCond, na.rm = TRUE)
+  ) %>%
+  pivot_longer(
+    everything(),
+    names_to = c("Variable", "Statistic"),
+    names_sep = "_",
+    values_to = "Value"
+  ) %>%
+  mutate(
+    Variable = recode(
+      Variable,
+      Temp = "Temperature",
+      DO = "Dissolved Oxygen",
+      pH = "pH",
+      Sal = "Salinity",
+      Turb = "Turbidity",
+      ChlFluor = "Chlorophyll",
+      SpCond = "Conductivity"
+    )
+  ) %>%
+  pivot_wider(
+    names_from = Variable,
+    values_from = Value
+  )
+```
+
+## Summary Statistics
+
+- The table summarizes the key statistics for the main water quality variables in the Stony Creek dataset from 2002 to 2021.
+
+```{r}
+summary_tbl %>%
+  gt() %>%
+  fmt_number(decimals = 2) %>%
+  tab_options(
+    table.width = pct(100),
+    table.font.size = px(22),
+    heading.title.font.size = px(28),
+    data_row.padding = px(6)
+  ) %>% 
+  tab_source_note(
+    source_note = "Data Source: Centralized Data Management Office (CDMO), https://cdmo.baruch.sc.edu"
+  )
+```
+
+
+
+
 
 
 ## {.center background-image="pictures/stony_creek_picture.jpeg"}
