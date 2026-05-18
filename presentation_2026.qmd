@@ -1,19 +1,169 @@
 ---
 title: "This is my title"
-author: "Ilianna Ditren, Natalie, Mikhal"
-format: pdf
+author: "Ilianna Ditren, Natalie Novoseltseva, Mikhal"
+format: revealjs
+
 ---
+```{r, result = FALSE, eval=FALSE}
+#libraries
+library(tidyverse)
+library(readr)
 
-## Introduction
 
--   
-## Preparing Data
+
+```
+
+```{r, result = FALSE, eval=FALSE}
+#data
+
+```
+
+## {.center background-image="pictures/stony_creek_picture.jpeg"}
+
+<div style="
+  background: rgba(255,255,255,0.85);
+  padding: 20px 50px;
+  border-radius: 6px;
+  font-size: 2.5em;
+  font-weight: 600;
+  display: inline-block;
+">
+Introduction
+</div>
+
+
+## Project Background
+
+- Focus area: Stony Creek, NY
+- Initial analysis covered 2020–2021 data
+- Original project analyzed:
+  - Temperature
+  - pH
+  - Salinity
+
+## Our Contributions
+
+- Expanded analysis to all available years (2002-2021)
+- Combined water quality data with weather data
+- Explored:
+  - Long-term trends
+  - Weather–water relationships
+  - Seasonal patterns
+  - Anomalies and possible data errors
+  
+## Research Question
+
+**How did water quality indicators change over time, and were these changes associated with weather conditions?**
+
+- Exploratory analysis only
+- First step toward studying climate-related environmental change
+
+## What the Report Includes
+
+- Data cleaning and preparation
+- Exploratory analysis
+- Visualizations
+- Seasonal analysis
+
+## {.center background-image="pictures/stony_creek_picture.jpeg"}
+
+<div style="
+  background: rgba(255,255,255,0.85);
+  padding: 20px 50px;
+  border-radius: 6px;
+  font-size: 2.5em;
+  font-weight: 600;
+  display: inline-block;
+">
+Data and Methods
+</div>
+
+## Data Sources
+
+- Stony Creek water quality data (2002–2021)
+- Hudson Field Station weather data (2001–2026)
+
+- Data source: Centralized Data Management Office (CDMO)
+  https://cdmo.baruch.sc.edu
+
+
+## Data Cleaning
 
 -  
 
-## Missing Values
+## Final Dataset
 
 -   
+
+
+## {.center background-image="pictures/stony_creek_picture.jpeg"}
+
+<div style="
+  background: rgba(255,255,255,0.85);
+  padding: 20px 50px;
+  border-radius: 6px;
+  font-size: 2.5em;
+  font-weight: 600;
+  display: inline-block;
+">
+Initial Exploratory Analysis
+</div>
+
+
+## {.center background-image="pictures/stony_creek_picture.jpeg"}
+
+<div style="
+  background: rgba(255,255,255,0.85);
+  padding: 20px 50px;
+  border-radius: 6px;
+  font-size: 2.5em;
+  font-weight: 600;
+  display: inline-block;
+">
+Joined Dataset Analysis
+</div>
+
+
+## {.center background-image="pictures/stony_creek_picture.jpeg"}
+
+<div style="
+  background: rgba(255,255,255,0.85);
+  padding: 20px 50px;
+  border-radius: 6px;
+  font-size: 2.5em;
+  font-weight: 600;
+  display: inline-block;
+">
+Seasonal Analysis
+</div>
+
+
+## {.center background-image="pictures/stony_creek_picture.jpeg"}
+
+<div style="
+  background: rgba(255,255,255,0.85);
+  padding: 20px 50px;
+  border-radius: 6px;
+  font-size: 2.5em;
+  font-weight: 600;
+  display: inline-block;
+">
+Discussion
+</div>
+
+## {.center background-image="pictures/stony_creek_picture.jpeg"}
+
+<div style="
+  background: rgba(255,255,255,0.85);
+  padding: 20px 50px;
+  border-radius: 6px;
+  font-size: 2.5em;
+  font-weight: 600;
+  display: inline-block;
+">
+Next Steps
+</div>
+
 
 ## Summary Statistics
 
