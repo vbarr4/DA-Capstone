@@ -141,3 +141,170 @@ for (lst in list_seasons) {
 }
 
 ```
+
+
+##### Boxplots:
+
+###### Avg Air Temperature (Year-round)
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+
+#average temperature by year
+
+box_season_atemp <- atemp |> ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature (Year-round)") +
+  xlim(-25, 40)
+
+box_season_atemp
+
+```
+
+###### Avg Air Temperature (Winter)
+
+```{r, echo = FALSE, message = FALSE}
+
+#average temperature by year
+
+box_winter_atemp <- filter(atemp, season == "Winter") |> 
+  ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature in the Winter (C)") +
+  xlim(-25, 40)
+
+box_winter_atemp
+
+```
+
+###### Avg Air Temperature (Spring)
+
+```{r, echo = FALSE, message = FALSE}
+
+#average temperature by year
+
+box_spring_atemp <- filter(atemp, season == "Spring") |> 
+  ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature in the Spring (C)") +
+  xlim(-25, 40)
+
+box_spring_atemp
+
+```
+
+###### Avg Air Temperature (Summer)
+
+```{r, echo = FALSE, message = FALSE}
+
+#average temperature by year
+
+box_summer_atemp <- filter(atemp, season == "Summer") |> 
+  ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature in the Summer (C)") +
+  xlim(-25, 40)
+
+box_summer_atemp
+
+```
+
+###### Avg Air Temperature (Fall)
+
+```{r, echo = FALSE, message = FALSE}
+
+#average temperature by year
+
+box_fall_atemp <- filter(atemp, season == "Fall") |> 
+  ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature in the Fall (C)") +
+  xlim(-25, 40)
+
+box_fall_atemp
+
+```
+
+---
+title: "Exploring Water Turbidity in Stony Creek"
+author: "Ilianna Ditren"
+format: html
+---
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+
+#libraries
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(stringr)
+library(janitor)
+library(reshape2)
+library(ggplot2)
+library(wqD375)
+library(rlang)
+
+combined <- read_csv("data/joined_dataset.csv")
+weekly_combined <- read_csv("data/weekly_combined.csv")
+daily_combined <- read_csv("data/daily_combined.csv")
+
+```
+
+Water turbidity is the measure of suspended particles in the water. It is measured in Nephelometric Turbidity Units (NTU). It measures water cloudiness by detecting how suspended particles scatter  light in the water. Cloudier water has a higher NTU number and can be considered polluted or unsafe to drink. The standard NTU for drinking water is 1 NTU. For water bodies these values might change as rain, winds, and currents can disturb the sediments in the water. 
+
+ measures water cloudiness by detecting how suspended particles scatter light at a 90-degree angle, with higher numbers indicating murkier water
+
+Water turbidity affects water temperature, as higher turbidity makes water cloudier. Because of this, the water absorbs and scatters sunlight (Paaijmans et. al., 2008). 
+
+Initially, I look at turbidity and water temperature and noticed that the trend line was very steep. This trend was suspicious and therefore I was advised to readjust the time frame and discard the unsual values in order to have a more reliable look at the data.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+combined |> 
+  wq_scatterplot(Turb, Temp)
+```
+
+Daily averages of water turbidity plotted against daily averages of water temperature.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+daily_combined |> 
+  wq_scatterplot(Turb, Temp)
+```
+
+Turbidity is then filtered to only include NTU levels that are less than a hundred in order to see the clustered data better.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+daily_combined |> 
+  filter(Turb < 100) |>
+  wq_scatterplot(Turb, Temp)
+
+```
+
+Weekly averages of water turbidity plotted against weekly averages of water temperature.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+weekly_combined |>
+  wq_scatterplot(Turb, Temp)
+```
+
+The following plot only shows values where turbidity is less than 100 so we can see the data closer.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+
+weekly_combined |> 
+  filter(Turb < 100) |>
+  wq_scatterplot(Turb, Temp)
+
+```
+
+We notice that water turbidity tends to be less than 20 NTU. We also notice that the trend line becomes less step when we look at the data excluding unusual values.
+
+

@@ -15,19 +15,19 @@ Ultimately, there are 5 main datasets:
 
 - `stony_creek`: Water quality data from Stony Creek recorded every 15 minutes
 
-- `field_station`: Weather data from Field Station recorded every 15 minutes
+- `fs_weather_01_26`: Weather data from Field Station recorded every 15 minutes
 
-- `combined`: Water quality from the `stony_creek` dataset and weather data from the `field_station` dataset in a single dataset
+- `combined`: Water quality from the `stony_creek` dataset and weather data from the `fs_weather_01_26` dataset in a single dataset
 
-- `daily_combined`: Water quality from the `stony_creek` dataset and weather data from the `field_station` dataset in a single dataset summarized by daily averages
+- `daily_combined`: Water quality from the `stony_creek` dataset and weather data from the `fs_weather_01_26` dataset in a single dataset summarized by daily averages
 
-- `weekly_combined`: Water quality from the `stony_creek` dataset and weather data from the `field_station` dataset in a single dataset summairzed by weekly averages
+- `weekly_combined`: Water quality from the `stony_creek` dataset and weather data from the `fs_weather_01_26` dataset in a single dataset summairzed by weekly averages
 
 # Project Set Up
 
 ## Downloading libraries
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE}
 
 library(readr)
 library(tidyverse)
@@ -36,6 +36,8 @@ library(lubridate)
 library(janitor)
 library(stringr)
 library(reshape2)
+
+view(read_csv("data/stony_creek.csv"))
 
 ```
 
@@ -102,7 +104,7 @@ unzip(zip_sc, exdir = "data/stony_creek")
 
 ```
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 
 #read in the files for all the years as a one data file using regex (regular expressions)
 files <- list.files(
@@ -125,7 +127,7 @@ stony_creek_raw <- do.call(
 
 ## Data Cleaning
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 
 flagged_data <- "<-3>|<-2>|<1>"
 
@@ -172,7 +174,7 @@ stony_creek <- stony_creek %>% select(-all_of(flags))
 
 ## Cleaning Date and Time Columns
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 #separate the date and time column
 stony_creek <- stony_creek %>%
   mutate(
@@ -200,7 +202,7 @@ stony_creek <- stony_creek %>%
 
 ```
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 
 #the code to write out the dataset
 write_csv(stony_creek, "data/stony_creek.csv")
@@ -230,7 +232,7 @@ unzip(zip_tn, exdir = "data/tivoli_north")
 
 ```
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 
 #read in the files for all the years as a one data file
 files <- list.files(
@@ -257,7 +259,7 @@ tn_96_25 <- do.call(
 ```{r, warning=FALSE, message=FALSE, eval=FALSE}
 
 #creates a data folder
-dir.create("Spring2026/data/field_station_weather", recursive = TRUE, showWarnings = FALSE) 
+dir.create("data/fs_weather_01_26", recursive = TRUE, showWarnings = FALSE) 
 
 #using tempfile() to create a tempoary storage
 zip <- tempfile(fileext = ".zip")
@@ -266,11 +268,15 @@ zip <- tempfile(fileext = ".zip")
 download.file("http://cdmo.baruch.sc.edu/aqs/output/334470.zip", zip, mode = "wb")
 
 #unzipping data from and placing it the created folder
-unzip(zip, exdir = "Spring2026/data/field_station_weather")
+unzip(zip, exdir = "Spring2026/data/fs_weather_01_26")
+
+```
+
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 
 #read in the files for all the years as a one data file hudfsmet-p
 files <- list.files(
-  "Spring2026/data/field_station_weather",
+  "Spring2026/data/fs_weather_01_26",
   pattern = "^hudfsmet[0-9]{4}\\.csv$", # ^ -starts a string
                                        # hudfsmet - the exact name in the file (constant)
                                        # any digits from 0-9 might follow
@@ -281,7 +287,7 @@ files <- list.files(
   full.names = TRUE
 )
 
-field_station_raw <- do.call(
+fs_weather_01_26_raw <- do.call(
   rbind,
   lapply(files, function(f) {
     df <- read.csv(f, fileEncoding = "Latin1")
@@ -293,10 +299,10 @@ field_station_raw <- do.call(
 
 ## Data Cleaning
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 
 # Removing empty columns and other irrelevant columns
-field_station <- field_station_raw |>
+fs_weather_01_26 <- fs_weather_01_26_raw |>
   remove_empty("cols")|>
   select(-StationCode,
         -isSWMP, #historical and provisional Plus columns indicate the status of QAQC
@@ -306,7 +312,7 @@ field_station <- field_station_raw |>
 
 ```
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 
 #creating a vector with all the weather flags
 flags_weather <- c(
@@ -324,7 +330,7 @@ flags_weather <- c(
 
 #creating a vector with all the weather flags that are to be removed from the dataset
 
-field_station <- field_station |>
+fs_weather_01_26 <- fs_weather_01_26 |>
   mutate(ATemp = if_else(str_detect(F_ATemp, flagged_data), NA_real_, ATemp),
          RH = if_else(str_detect(F_RH, flagged_data), NA_real_, RH),
          BP = if_else(str_detect(F_BP, flagged_data), NA_real_, BP),
@@ -337,15 +343,15 @@ field_station <- field_station |>
   )
 
 #removing flag columns 
-field_station <- field_station |> 
+fs_weather_01_26 <- fs_weather_01_26 |> 
   select(-all_of(flags_weather))
 
 ```
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 
 #separate the data and time column
-field_station <- field_station %>%
+fs_weather_01_26 <- fs_weather_01_26 %>%
   mutate(
     DatetimeStamp = as.POSIXct(DatetimeStamp, format = "%m/%d/%Y %H:%M"), #converts the variable into standard POSIXct format
     date = as.Date(DatetimeStamp),
@@ -353,13 +359,13 @@ field_station <- field_station %>%
   )
 
 #create a month column
-field_station <- field_station %>%
+fs_weather_01_26 <- fs_weather_01_26 %>%
   mutate(
     month = month(DatetimeStamp)          
   )
 
 #create a season column
-field_station <- field_station %>%
+fs_weather_01_26 <- fs_weather_01_26 %>%
   mutate(
     season = case_when(
       month %in% c(12, 1, 2) ~ "Winter",
@@ -370,25 +376,25 @@ field_station <- field_station %>%
   )
 ```
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 #the code to write out the dataset
 
-# write_csv(field_station, "data/field_station.csv")
+write_csv(fs_weather_01_26, "data/fs_weather_01_26.csv")
 
 #uncomment the code to write out the new/updated version of the dataset.
 ```
 
 # Joining Water Quality and Weather Data
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 # reading main datasets
 water <- read_csv("data/stony_creek.csv")
-weather <- read_csv("data/field_station.csv")
+weather <- read_csv("data/fs_weather_01_26.csv")
 ```
 
 ## Exploring the structure of the data
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 str(weather)
 str(water)
 
@@ -396,19 +402,19 @@ names(weather)
 names(water)
 ```
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 #rename the column in the water dataset to easier join the datasets
 weather <- weather %>%
   rename(DateTimeStamp = DatetimeStamp)
 ```
 
 ## Joining the water quality and weather datasets
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 #join water and weather data with inner join
 combined <- inner_join(water, weather, by = "DateTimeStamp")
 ```
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 #get rid of the duplicate columns and 
 combined <- combined %>%
   select(-year.y, -date.y, -time.y, -month.y, -season.y) %>%
@@ -421,14 +427,14 @@ combined <- combined %>%
   )
 ```
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 #the code to write out the dataset
 write_csv(combined, "data/combined.csv")
 ```
 
 The combined dataset contained variables measured every 15-30 minutes. In this section, the data will be summarized to contain daily averages only. 
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 
 # computing the daily mean values for all variables in the combined_names object
 daily_combined <- combined |>
@@ -446,11 +452,11 @@ daily_combined <- combined |>
 
 
 #writing new csv
-# write_csv(daily_combined, "data/daily_combined.csv")
+write_csv(daily_combined, "data/daily_combined.csv")
    
 ```
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=TRUE}
 
 # recode the seasons:
 
@@ -477,6 +483,6 @@ weekly_combined <- combined %>% #create a new dataset
   )
 
 #writing new csv
-# write_csv(weekly_combined, "data/weekly_combined.csv")
+write_csv(weekly_combined, "data/weekly_combined.csv")
  
 ```

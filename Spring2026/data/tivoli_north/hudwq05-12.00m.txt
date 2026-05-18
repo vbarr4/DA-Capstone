@@ -1,0 +1,713 @@
+               Hudson River (HUD) NERR Water Quality Metadata 
+                    (Jan. - Dec. 2000)
+               Latest Update: June 30, 2021
+
+               I. Data Set & Research Descriptors
+
+1.   Principal Investigator: William C. Nieder, Research Coordinator
+
+     Contact Person: William C. Nieder
+                    Hudson River NERR
+                    c/o Bard College Field Station
+                    Annandale, NY 12504
+                    wcnieder@gw.dec.state.ny.us
+
+2.   Entry Verification:
+
+	Data are analyzed for outliers and anomalies using the outlier macro for 
+Excel 2000 developed by the CDMO.  These macros discover outlier values which 
+fall outside the range that the instrument is designed to measure (see section 
+II.8 of this document). After outliers and anomalous data are identified, all 
+data are graphed in Excel using the CDMO graphing macro to help identify 
+anomalous data that fall within the range of the probes and also anomalous 
+trends. Missing data are identified using the CDMO Excel Date, Hour Count macro.  
+All columns are formatted using the CDMO Excel Column Reformat macro.  All data 
+was FTPed to the CDMO via the CDMO dial-up access.  All raw data files are 
+archived at the CDMO and at the reserve on on 3.5" disks, ditto tapes, and CD-
+ROM. Questionable data are either deleted or identified in section II.10.
+
+Person responsible for data verification:
+Research Coordinator and Research Assistant, Erik Bedan.
+
+3.   Research Objectives:
+
+	Measurements are taken every 30 minutes over a two to four week period 
+from May 1 through the end of December of each year at three locations within 
+the Tivoli Bays component of the Hudson River NERR.  One datalogger monitors 
+tributary water (Saw Kill, SK) entering one bay and two dataloggers monitor the 
+Hudson River water flooding and ebbing to and from both bays (Tivoli South Bay, 
+TS and Tivoli North Bay, TN).  The objective of this study is to monitor the 
+quality of the surface water entering (via stream flow and tidal exchange) and 
+leaving (via tidal exchange) Tivoli South Bay and Tivoli North Bay.  This will 
+help us understand the relative importance on each source of water in Tivoli 
+Bays.  The Reserve staff have identified urban and residential land use 
+practices as having a major influence on the water chemistry of the Saw Kill.  
+Since residential coverage continues to increase, we hope that the intensive 
+monitoring of the surface waters in this watershed will identify trends caused 
+by this rapid development.
+
+4.   Research Methods:  
+
+	Three YSI 6-series dataloggers have been placed at the Tivoli Bays 
+component site of the Reserve.  The SK and TS instruments are deployed at 0.5 
+and 0.6 meters respectively off the bottom in vertically mounted perforated PVC 
+tubes.  The TN instrument is deployed in a rectangular 24"x13"x13" cage with 1/2 
+inch plastic coated mesh and weighed down with 4 bricks zip tied to the cage.  
+The sonde is placed horizontally in the cage, strapped in with bungee cords and 
+rests .25 meters from the bottom of the cage.  The cage is tied to a wood pile 
+and rests on the bottom, also a cable is attached to the top of the cage and the 
+other end is anchored to the sediment.  Instruments are deployed for a two to 
+four week duration from April through December of each year.  Data are collected 
+at 30 min. intervals. After instruments are retrieved, instrument calibration is 
+checked against standards, data are uploaded, and instrument probes are 
+serviced.  Before each YSI 6-series datalogger is deployed, calibration and 
+maintenance is performed following the manufacturer's instructions (YSI Manual, 
+sections 3,4, and 7 as well as the YSI 6-series operations manual). Data are 
+uploaded via a cable to a laptop computer. Calibration standards are required 
+for pH, turbidity, and conductivity; all other parameters are calibrated as 
+described in the manual.  pH buffer solutions for 2 point calibration (pH 7 and 
+10), conductivity and turbidity standards are purchased pre-made from a 
+scientific supply house. The dissolved oxygen membranes are replaced before 
+deployment, and are allowed to equilibrate for at least 24 hrs prior to 
+deployment. 
+
+5.   Site Location and Character:
+
+	The Hudson River National Estuarine Research Reserve (HUDNERR) is a 
+multicomponent site composed of approximately 5,000 acres of tidal wetland, open 
+water, and adjacent upland buffer habitat.  The four component sites of the 
+Reserve are located on the Hudson River in New York State by river miles (RM) 
+proceeding north from the southern tip of Manhattan.  These include: Stockport 
+Flats (RM 124)(42o02'30"N 73o46'00"W), Columbia County; Tivoli Bays (RM 
+98)(42o02'15"N 73o55'10"W), Dutchess County; and Iona Island (RM 45)(41o18'15"N 
+73o58'45"W) and Piermont Marsh (RM 24)(41o02'30"N 73o54'15"W), Rockland County.  
+These four components are located along 100 river miles of the Hudson and are 
+representative of the diverse plant and animal communities that occupy the 
+salinity gradient within the Hudson River estuary.  Development within the 
+watersheds of Hudson River NERR component sites ranges from predominantly 
+urban/suburban to forested/agricultural.
+	The three YSI 6-series dataloggers are placed at the Tivoli Bays component 
+site.  These are freshwater sites (0.0 ppt salinity).  The Saw Kill Creek (SK) 
+(latitude 42 01' 01.543" N, longitude 73 54' 53.589" W) drains a 26.6 square 
+mile (6886.5 hectares) watershed that is characterized as a highly mixed land 
+use watershed.  Water depth ranges from 1.0 to 1.5m at SK, and the bottom type 
+is soft silt/clay.  Tivoli South Bay (TS) (latitude 42 01' 37.336" N, longitude 
+73 55' 33.445" W), the receiving body for the Saw Kill Creek, is a tidal 
+freshwater wetland with a tidal range of 1.19m (3.9 ft.).   Bottom type at TS is 
+rocky, while the water depth ranges from 0.0 to 2.0m.  The dominant land uses 
+within this watershed include: forested (51.1%), agriculture (25.8%), and urban 
+(16.5%) areas.  Tivoli North Bay (TN) (latitude 42 02' 11.56464" N, longitude 73 
+55' 31.16645" W) is a freshwater tidal marsh dominated by Typha angustifolia.  
+Water depth ranges from 1.0 to 2.5m, and the bottom type is rock/silt at TN.  
+The primary watershed to TN is 23 square miles in size and is dominated by 
+agricultural lands.  The Stony Creek is the principle tributary to Tivoli North 
+Bay.
+
+
+6.   Data collection period:
+
+	YSI 6-series datalogger sampling at the Saw Kill (SK) and Tivoli South Bay 
+(TS) began during May, 1995.  Sampling at Tivoli North Bay (TN) began during 
+July,1996, however ceased in 1997-1998 because at low tide the instrument was 
+exposed.  In 1999 an alternate site was established and sampling began in July 
+of 1999 .  All sampling is ongoing, however, we cannot sample from approximately 
+mid December through April 31 due to winter storms and ice on the Hudson River 
+and the tributaries.  The YSI6600 datalogger was deployed at the Tivoli South 
+Bay site replacing the YSI6000 starting on July 1, 1999 @ 15:30:00.
+
+Dates and times for site deployments and retrievals:
+
+   Deployment Date   Deployment Time    Retrieval Date  Retrieval Time 
+Site		
+	mm/dd/yy		hh:mm			mm/dd/yy		hh:mm	
+SK	05/12/00		12:05			05/31/00		10:04	
+SK	05/31/00		10:48			06/14/00		14:47	
+SK	06/14/00		14:47			06/30/00		10:15	
+SK	06/30/00		10:15			07/11/00		15:10	
+SK	07/11/00		15:10			07/17/00		13:45	
+SK	07/17/00		13:49			07/27/00		7:17	
+SK	07/27/00		13:45			08/10/00		7:27	
+SK	08/10/00		14:40			08/25/00		9:23	
+SK	08/25/00		9:23			09/07/00		14:09	
+SK	09/07/00		14:09			09/18/00		14:40	
+SK	09/18/00		14:43			10/04/00		13:05	
+SK	10/04/00		13:08			10/24/00		13:15	
+SK	10/24/00		13:16			11/15/00		15:05	
+SK	11/15/00		15:05			12/07/00		12:45	
+SK	12/07/00		12:45			12/13/00		8:15	
+							
+TN	05/12/00		13:20			05/26/00		12:30	
+TN	05/26/00		12:30			06/08/00		14:00	
+TN	06/08/00		14:00			06/22/00		9:35	
+TN	06/22/00		9:35			07/07/00		13:06	
+TN	07/07/00		13:06			07/19/00		13:35	
+TN	07/19/00		13:25			08/02/00		8:02	
+TN	08/02/00		12:35			08/15/00		8:28	
+TN	08/15/00		8:28			08/31/00		9:25	
+TN	08/31/00		10:10			09/15/00		9:25	
+TN	09/15/00		9:25			09/29/00		9:30	
+TN	09/29/00		9:30			10/05/00		13:40	
+TN	10/05/00		13:40			10/27/00		8:16	
+TN	10/27/00		8:16			11/01/00		11:20	
+TN	11/01/00		11:20			11/15/00		10:45	
+TN	11/15/00		10:45			12/01/00		12:40	
+TN	12/01/00		12:40			12/04/00		12:20	
+							
+TS	05/24/00		12:30			06/08/00		9:30	
+TS	06/08/00		14:15			06/21/00		7:47	
+TS	06/21/00		12:08			07/07/00		8:21	
+TS	07/07/00		13:19			07/19/00		8:17	
+TS	07/19/00		13:45			08/02/00		7:50	
+TS	08/02/00		12:50			08/15/00		8:42	
+TS	08/15/00		11:36			08/31/00		10:23	
+TS	08/31/00		13:15			09/14/00		7:45	
+TS	09/14/00		10:05			09/28/00		8:40	
+TS	09/29/00		9:57			10/05/00		11:04	
+TS	10/05/00		13:48			10/24/00		14:25	
+TS	10/24/00		4:25			11/14/00		9:54	
+TS	11/14/00		9:54			12/01/00		9:25	
+TS	12/01/00		12:55			12/04/00		11:50	
+
+
+7.   Associated researchers and projects:
+
+	Hudson River NERR Water Quality Monitoring: Physical and chemical 
+constituents of the tributary waters discharging into HUDNERR marshes and marsh 
+waters during ebb tides are measured monthly and during storm events.  
+Concentrations of nitrate, phosphate, sulphate, dissolved oxygen (DO), and 
+chloride are measured, as well as, seston, alkalinity, pH, temperature, 
+salinity, and conductivity.
+	Saw Kill Water Quality Monitoring:  The surface water draining from five 
+subcatchments representing five dominant land use practices within the Saw Kill 
+have been monitored during several storm events.  These five land use practices 
+include: row crop agriculture, orchard, residential, solid waste landfill, and 
+forested.  All of the above constituents have been monitored during this 
+project.
+	Associated researchers with the work at Tivoli Bays include:  scientists 
+from the Institute of Ecosystem Studies, Millbrook, NY; Yale School of Forestry 
+and Environmental Studies, New Haven, CT; and Rensselaer Polytechnic Institute, 
+Troy, NY.
+
+               II. Physical Structure Descriptors
+
+8. Variable sequence, range of measurements, units, resolution, and accuracy:
+
+YSI 6000 datalogger
+
+Variable      Range of Measurements          Resolution           Accuracy
+Date          1-12, 1-31, 00-99 (Mo,Day,Yr)  1 mo, 1 day, 1 yr    NA
+Time          0-24, 0-60, 0-60 (Hr,Min,Sec)  1 hr, 1 min, 1 s     NA
+Temp               -5 to 45 (c)              0.01  C              +/-0.15C
+Sp COND            0-100(mS/cm)              0.01mS/cm            +/-0.5% Of 
+reading + 0.001mS/Cm
+Salinity      0-70 Parts per thousand (ppt)  0.01 ppt             +/- 1% of 
+Reading or 0.1 ppt, (whichever is greater)
+DO            0-200 (% air saturation)       0.1% @air sat        +/-2% @air 
+Saturation
+DO            200-500 (% air saturation      0.1% @ air sat       +/- 6% @ 
+Saturation
+DO                 0-20 (mg/l)               0.01 mg/l            +/- 0.2mg/l
+DO                 20-50 (mg/l)              0.01 mg/l            +/- 0.6mg/l
+Depth (shallow)    0-9.1 (m)                 0.001m               +/- 0.018m
+PH                 2-14 units                0.01 units           +/- 0.2units
+Turb               0-1000 NTU                0.1 NTU              +/- 5% of 
+Reading or 2 NTU (whichever is greater)
+
+Data columns are separated by tabs.  Each file contains a two line
+column header at the top of the page which identifies measurements and 
+units for each column.
+
+
+9.  Coded variable indicator and variable code definitions
+
+     Site definitions: 
+
+     SK = Saw Kill 
+     TS = Tivoli South Bay
+     TN = Tivoli North Bay
+
+10.  Data anomalies
+
+May
+
+TN:
+
+Negative turbidity readings occurred and they are probably due to a blocked 
+probe.  The following turbidity data were removed:
+
+Date		Time		Turb
+MM/DD/YY	hh:mm:ss	 NTU 
+05/24/2000     12:00:00  -0015
+05/24/2000     13:30:00  -0003
+
+Sonde batteries failed during deployment on 05/31/00 13:30-23:30. No data during 
+this time. 
+
+
+TS:
+
+Negative depth readings were recorded on 05/31/00 between 18:00 and 18:30. The 
+cause was either an atmospheric pressure change or the pressure transducer was 
+out of the water, but the data were left in because no other parameters 
+correlated as outliers.
+
+June
+
+SK:
+
+Negative turbidity readings occurred and they are probably due to a blocked 
+probe.  The following turbidity data were removed:
+
+06/02/2000	17:00:00 - 18:00:00	
+06/03/2000	05:00:00	
+06/03/2000	07:30:00 - 08:00:00	
+06/03/2000	09:30:00	
+06/03/2000	10:30:00	
+06/03/2000	12:00:00	
+06/03/2000	13:00:00	
+06/03/2000	14:00:00	
+06/03/2000	17:00:00	
+
+Sonde batteries failed during deployment from 06/09/00 7:30-06/14/00 14:30. No 
+data at this time.
+
+TN:
+
+Sonde batteries failed during deployment from 06/01/00 0:00-06/08/00 13:30.
+
+DO probe failed during deployment period.  The following DO data were removed:
+
+6/22/00     10:00:00 - 23:30:00  
+6/23/00     00:00:00 - 23:30:00   
+6/24/00     00:00:00 - 23:30:00   
+6/25/00     00:00:00 - 23:30:00
+6/26/00     00:00:00 - 12:30:00 
+6/27/00	00:00:00 - 12:30:00
+6/28/00	00:00:00 - 12:30:00
+6/29/00	00:00:00 - 12:30:00
+6/30/00 	00:00:00 - 12:30:00
+
+Depth measurements did not conform to a tidal signal.  Depth average was 0.54 
+meters deeper than other deployments. The deployment cage became loose from pile 
+and moved into deeper water. The following depth data were removed:
+
+6/22/00     10:00:00 - 23:30:00  
+6/23/00     00:00:00 - 23:30:00 
+6/24/00     00:00:00 - 23:30:00  
+6/25/00     00:00:00 - 23:30:00  
+6/26/00     00:00:00 - 23:30:00 
+6/27/00     00:00:00 - 23:30:00
+6/28/00     00:00:00 - 23:30:00 
+6/29/00     00:00:00 - 23:30:00 
+6/30/00     00:00:00 - 21:30:00 
+
+TS:
+
+The following negative and zero depth readings were found as outliers. The cause 
+was either an atmospheric pressure change or the pressure transducer was out of 
+the water, but the data were left in because no other parameters correlated as 
+outliers.
+
+06/01/2000	18:30:00 - 19:30:00	
+06/02/2000	08:00:00	
+06/03/2000	09:00:00 - 09:30:00	
+06/03/2000	19:30:00 - 20:00:00	
+6/03/2000	21:30:00	
+06/04/2000	09:30:00 - 10:00:00
+06/04/2000	21:30:00	
+06/05/2000	10:30:00 - 11:00:00	
+06/18/2000	09:00:00 - 09:30:00	
+06/27/2000	15:30:00 - 16:30:00	
+06/28/2000	05:00:00	
+06/28/2000	16:30:00 - 17:00:00	
+06/30/2000	18:00:00 - 19:00:00	 
+
+The probes were out of the water and exposed to the air at low tide. The 
+following data were deleted:
+
+Date		Time		Temp	SpCond	Sal	DO	DO	Depth	pH	Turb
+MM/DD/YY	hh:mm:ss	 C	 mS/cm	 ppt	 %	 mg/L	 m	  	 NTU
+06/03/2000	20:30:00	17.3	000.00	00.0	099.6	09.6	-0.01	08.1	0047
+06/03/2000	21:00:00	15.9	000.00	00.0	101.3	10.0	-0.02	08.1	0039
+
+July
+
+SK:
+
+The following anomalous data records occurred during the deployment due to 
+unknown causes. The following data were removed:
+
+07/11/2000	15:30:00 - 16:00:00	
+07/11/2000	18:00:00 - 19:00:00	
+07/12/2000	08:00:00	
+07/12/2000	09:00:00	
+07/12/2000	11:30:00 - 13:30	
+
+TN:
+
+DO probe failed during deployment.  The following DO data were removed:
+07/01/2000	00:00:00 - 23:30:00		
+07/02/2000	00:00:00 - 23:30:00		
+07/03/2000	00:00:00 - 23:30:00	
+07/04/2000	00:00:00 - 23:30:00		
+07/05/2000	00:00:00 - 23:30:00		
+07/06/2000	00:00:00 - 23:30:00		
+07/07/2000	00:00:00 - 12:30:00
+
+Depth measurements did not conform to a tidal signal.  Depth average was 0.54 
+meters deeper than other deployments.  The deployment cage became loose from 
+pile and moved into deeper water. The following depth data were removed:
+
+07/01/2000     00:00:00 - 23:30:00  
+07/02/2000     00:00:00 - 23:30:00 
+07/03/2000     00:00:00 - 23:30:00  
+07/04/2000     00:00:00 - 23:30:00  
+07/05/2000     00:00:00 - 23:30:00 
+07/06/2000     00:00:00 - 23:30:00
+07/07/2000     00:00:00 - 12:30:00 
+
+
+TS:
+
+The following negative and zero depth readings were found as outliers. The cause 
+was either an atmospheric pressure change or the pressure transducer was out of 
+the water, but the data were left in because no other parameters correlated as 
+outliers.
+
+07/01/2000	07:30:00 - 08:00:00	
+07/01/2000	19:00:00 - 20:00:00	
+07/02/2000	08:30:00 - 09:00:00	
+07/02/2000	20:00:00 - 20:30:00	
+07/03/2000	09:30:00 - 10:00:00	
+07/03/2000	21:00:00 - 21:30:00	
+07/04/2000	10:30:00	
+07/04/2000	22:00:00 - 22:30:00	
+07/05/2000	11:00:00 - 11:30:00	
+07/06/2000	12:00:00 - 12:30:00	
+07/08/2000	13:00:00 - 13:30:00	
+07/08/2000	14:30:00	
+07/09/2000	14:30:00	
+07/23/2000	12:30:00 - 13:00:00
+07/24/2000	13:00:00 - 14:00:00
+07/30/2000	19:00:00 - 19:30:00	
+
+The probes were out of the water and exposed to the air at low tide. The 
+following data were removed:
+
+07/08/2000	14:00:00	
+
+
+High turbidity readings occurred and they are probably due to a blocked probe. 
+The following turbidity data were removed:
+ 
+07/03/2000	22:00:00	
+07/26/2000	01:30:00
+	
+August
+
+TN:
+
+Sonde batteries failed during deployment from 08/07/00 6:30-08/15/00 8:30.
+
+High turbidity reading occurred and it is probably due to a blocked probe. The 
+following turbidity data were deleted:
+
+08/25/2000	21:00:00	
+
+A negative DO reading was recorded probably due to a blocked probe. The 
+following DO data were removed:
+
+8/31/00	11:00:00	
+
+The following anomalous data record occurred during the deployment due to an 
+unknown cause. The following data were removed:
+8/31/00	17:00:00	
+
+TS:
+
+The following negative and zero depth readings were found as outliers. The cause 
+was either an atmospheric pressure change or the pressure transducer was out of 
+the water, but the data were left in because no other parameters correlated as 
+outliers. 
+
+08/05/2000	12:30:00	
+08/20/2000	11:30:00 - 12:30:00	
+08/21/2000	11:30:00 - 12:30:00	
+08/22/2000	12:00:00 - 13:30:00	
+08/24/2000	14:30:00 - 15:30:00	
+08/25/2000	15:30:00 - 16:30:00	
+08/26/2000	05:30:00	
+08/26/2000	16:30:00 - 17:30:00	
+08/27/2000	18:00:00 - 18:30:00	
+08/28/2000	07:00:00 - 07:30:00	
+08/28/2000	18:30:00 - 19:30:00	
+08/29/2000	08:00:00	
+08/30/2000	20:30:00 - 21:30:00	
+08/31/2000	09:30:00 - 10:00:00	 
+
+High turbidity readings occurred and they are probably due to a blocked probe. 
+The following turbidity data were deleted:
+
+08/07/2000	10:00:00	
+08/07/2000	10:30:00	
+08/07/2000	12:30:00	
+08/07/2000	14:00:00	
+
+September
+
+SK:
+
+Dissolved oxygen data from 09/21/2000 20:30 through 09/26/2000 13:30 are all 
+considered suspect. The readings may have resulted from a blocked probe, but the 
+real cause is unknown.
+
+TN:
+
+A negative DO reading was recorded probably due to a blocked probe. The 
+following DO data were deleted:
+
+09/05/2000	06:30:00		
+
+The following anomalous data records occurred during the deployment due to an 
+unknown cause. The following data were removed:
+09/01/2000	09:30:00	
+09/01/2000	11:00:00	
+09/01/2000	13:30:00	
+09/02/2000	02:00:00	
+09/02/2000	03:00:00	
+09/02/2000	15:30:00	
+09/04/2000	11:00:00	
+
+TS:
+
+The probes were out of the water and exposed to the air at low tide. The 
+following data were deleted:
+ 
+09/18/2000	11:00:00	
+09/25/2000	06:00:00	
+
+The following negative and zero depth readings were found as outliers. The cause 
+was either an atmospheric pressure change or the pressure transducer was out of 
+the water, but the data were left in because no other parameters correlated as 
+outliers.
+
+09/01/2000	10:00:00 -	10:30:00	
+09/05/2000	01:00:00 -	02:30:00	
+09/13/2000	20:00:00	
+09/18/2000	10:00:00 - 11:30:00	
+09/19/2000	11:00:00 - 11:30:00	
+09/20/2000	12:00:00 - 13:00:00	
+09/22/2000	02:30:00 - 04:00:00	
+09/22/2000	13:30:00 - 15:00:00	
+09/23/2000	03:30:00 - 04:30:00	
+09/24/2000	17:00:00 - 17:30:00	
+09/25/2000	05:00:00 - 07:00:00
+09/25/2000	17:30:00 - 18:30:00	
+09/28/2000	08:30:00	
+
+High turbidity readings occurred and they are probably due to a blocked probe. 
+The following data were deleted:
+09/23/2000	05:30:00	
+09/26/2000	09:00:00	
+
+October
+
+SK:
+
+Negative turbidity readings occurred and they are probably due to a blocked 
+probe. The following data were deleted:
+10/06/2000	02:00:00	
+10/18/2000	15:30:00	
+
+The pH readings from 10/24/2000 17:00 through 10/26/2000 03:30 are all 
+considered suspect. The cause is unknown and the data were left in.
+
+TS:
+
+The probes were out of the water and exposed to the air at low tide. The 
+following data were deleted:
+
+ 
+10/11/2000	07:00:00 - 07:30:00	
+10/11/2000	17:30:00 - 20:00:00	
+10/12/2000	06:30:00 - 07:30:00	
+10/13/2000	08:00:00	
+10/14/2000	08:00:00 - 08:30:00	
+10/23/2000	04:30:00 - 05:00:00	
+10/25/2000	06:30:00	
+10/28/2000	20:30:00 - 21:30:00	
+10/30/2000	22:00:00 - 22:30:00	
+10/31/2000	10:30:00	
+
+The following negative and zero depth readings were found as outliers. The cause 
+was either an atmospheric pressure change or the pressure transducer was out of 
+the water, but the data were left in because no other parameters correlated as 
+outliers.
+
+10/01/2000	10:30:00	
+10/11/2000	06:30:00	
+10/11/2000	08:00:00	
+10/11/2000	17:00:00	
+10/12/2000	06:00:00	
+10/12/2000	08:00:00	
+10/12/2000	19:00:00 - 20:00:00	
+10/13/2000	07:00:00 - 07:30:00	
+10/13/2000	08:30:00	
+10/13/2000	20:00:00 - 21:00:00	
+10/14/2000	07:30:00	
+10/14/2000	09:00:00	
+10/14/2000	21:00:00	
+10/15/2000	08:30:00 - 09:30:00	
+10/15/2000	21:00:00 - 22:00:00	
+10/16/2000	09:00:00 - 09:30:00	
+10/22/2000	03:30:00 - 04:30:00	
+10/22/2000	14:30:00 - 16:30:00	
+10/23/2000	04:00:00	
+10/23/2000	05:30:00	
+10/24/2000	18:00:00 - 18:30:00	
+10/25/2000	05:30:00 - 06:00:00	
+10/25/2000	07:00:00	
+10/25/2000	18:30:00 - 19:00	
+10/26/2000	07:00:00 - 09:00:00	 
+10/28/2000	19:30:00 - 20:00:00	
+10/28/2000	22:00:00	
+10/29/2000	08:30:00 - 10:00	
+10/29/2000	21:00:00 - 22:30:00	
+10/30/2000	09:30:00 - 10:00:00	
+10/30/2000	21:30:00	
+10/30/2000	23:00:00 - 23:30:00
+10/31/2000	09:30:00 - 10:00:00	
+10/31/2000	11:00:00	
+
+High turbidity readings occurred and they are probably due to a blocked probe. 
+The following turbidity data were deleted:
+ 
+10/04/2000	01:00:00	
+10/04/2000	08:00:00	
+10/11/2000	03:00:00	
+10/11/2000	15:00:00	
+10/15/2000	06:00:00	
+
+November
+
+SK:
+
+The following anomalous data record occurred during the deployment due to an 
+unknown cause. The following data were removed:
+11/19/2000	12:00:00	
+
+The pH readings from 11/10/2000 00:30 through 11/15/2000 07:00 are all 
+considered suspect. The cause is unknown and the data were left in.
+
+
+TN:
+
+From 11/03/00 02:30 through 11/05/00 13:30 DO concentrations dropped near 
+hypoxic levels.  Likely an instrument error but since the data were not 
+outliers, we left them in.
+
+The following anomalous data record occurred during the deployment, the data 
+were removed: 
+11/08/2000	21:30:00		
+
+TS:
+
+The probes were out of the water and exposed to the air at low tide. The 
+following data were removed:
+11/18/2000	01:00:00 - 02:30:00	
+11/18/2000	13:00:00 - 13:30:00	
+11/22/2000	04:30:00 - 06:00:00	
+11/22/2000	16:30:00 - 18:30:00	
+11/23/2000	04:30:00 - 07:00:00 
+11/23/2000	18:00:00 - 19:00:00 
+11/24/2000	06:00:00 - 07:00:00	
+11/25/2000	06:30:00 - 08:00:00	
+11/28/2000	09:30:00	
+11/30/2000	23:30:00	
+
+The following negative and zero depth readings were found as outliers. The cause 
+was either an atmospheric pressure change or the pressure transducer was out of 
+the water, but the data were left in because no other parameters correlated as 
+outliers.
+
+11/06/2000	03:30:00	
+11/15/2000	23:00:00 - 23:30:00	
+11/16/2000	00:00:00	
+11/16/2000	10:00:00 - 11:30:00	
+11/17/2000	12:00:00 - 12:30:00	
+11/18/2000	00:00:00 - 00:30:00	
+11/18/2000	02:30:00	
+11/18/2000	12:30:00	
+11/18/2000	14:00:00	
+11/19/2000	02:00:00 - 03:00:00	 
+11/19/2000	14:00:00 - 15:00:00	
+11/20/2000	03:00:00 - 04:00:00
+11/21/2000	04:30:00 - 05:00:00	
+11/21/2000	16:30:00 - 17:30:00	
+11/22/2000	03:30:00 - 04:00:00	
+11/22/2000	06:30:00	 
+11/22/2000	16:00:00	
+11/22/2000	19:00:00	
+11/23/2000	04:00:00	
+11/23/2000	17:30:00	
+11/23/2000	19:30:00	
+11/24/2000	05:30:00	
+11/24/2000	07:30:00	
+11/24/2000	19:00:00 - 20:30:00	
+11/25/2000	06:00:00 - 06:30:00	
+11/25/2000	19:30:00 - 20:30:00	
+11/28/2000	08:30:00 - 10:00:00	
+11/28/2000	22:00:00 - 22:30:00	
+11/29/2000	09:30:00 - 10:30:00	
+11/30/2000	22:30:00 - 23:30:00	
+
+Anomalous depth readings were found and the cause was likely a blocked probe.  
+The following data were removed:
+
+11/23/2000	07:30:00-08:00:00
+
+
+December
+TS:  
+
+The following negative and zero depth readings were found as outliers. The cause 
+was either an atmospheric pressure change or the pressure transducer was out of 
+the water, but the data were left in because no other parameters correlated as 
+outliers.
+12/01/2000	00:00:00 - 01:00:00	
+12/03/2000	00:30:00 - 02:00:00	
+12/04/2000	02:30:00	
+
+
+11.  Missing Data 
+
+Missing data are denoted by a period in the data set. Data are missing due to 
+equipment failure where no probes deployed, maintenance/calibration of 
+equipment, elimination of obvious outliers or elimination of data due to 
+calibration (both pre and post) problems. For more details on deleted data, see 
+the Anomalous Data (Section 10). To find out more details about missing data, 
+contact the Research Coordinator at the site submitting the data.
+
+12. Other Remarks
+
+On 06/30/2021 this dataset was updated to include embedded QAQC flags for 
+anomalous/suspect data.  System-wide monitoring data beginning in 2007 were 
+processed to allow for QAQC flags and codes to be embedded in the data files 
+rather than detailed in the metadata alone (as in the anomalous/suspect, 
+deleted, and missing data sections above).  Prior to 2006, rejected data 
+were deleted from the dataset so they are unavailable to be used at all, 
+but suspect data were only noted in the metadata document.  Suspect data 
+flags <1> were embedded retroactively in order to allow suspect data to be 
+easily identified and filtered from the dataset if desired for analysis and 
+reporting purposes.  No other flags or codes were embedded in the dataset and 
+users should still refer to the detailed explanations above for more 
+information.
+
+Any time a reference is made to depth data being negative and/or zero, it was 
+recorded as a negative in the raw data file and a zero in the edited data file 
+due to the formatting of Excel. The technician edited none of these data points 
+by hand nor did he/she delete any of them. 
+
+
+
+

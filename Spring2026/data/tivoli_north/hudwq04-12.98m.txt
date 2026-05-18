@@ -1,0 +1,490 @@
+                 Hudson River NERR (HUD) Water Quality Metadata Form
+                       (Jan. - Dec. 1998)
+                Latest Update: November 13, 2001
+                                
+               I. Data Set & Research Descriptors
+                                
+1.   Principal Investigator: William C. Nieder, Research
+     Coordinator
+
+     Contact Person: William C. Nieder
+                     Hudson River NERR
+                     c/o Bard College Field Station
+                     Annandale, NY 12504
+                     cnieder@ocean.nos.noaa.gov
+
+2.   Entry Verification:
+
+     Data are analyzed for outliers and anomalies using the outlier macro for 
+Excel 5.0 developed by the CDMO.  These macros discover outlier values which 
+fall outside the range that the instrument is designed to measure (see section 
+II.8 of this document). After outliers and anomalous data are identified using 
+the CDMO Find Variable Outliers macro, all data are graphed in Excel to help 
+identify outliers that fall within the range of the probes and also anomalous 
+trends. Missing data are identified using the CDMO Excel Date, Hour Count macro.  
+All columns are formatted using the CDMO Excel Column Reformat macro.  All data 
+was FTPed to the CDMO via the CDMO dial-up access.  
+All raw data files are archived at the CDMO and on 3.5" disks. Questionable data 
+are either deleted or identified in section II.10.  All missing data and deleted 
+data will be identified in section II.11.
+
+Person responsible for data verification:    Research
+Coordinator.
+
+3.   Research Objectives:
+
+     Measurements are taken every 30 minutes over a two to four week period from 
+April 1 through the end of November of each year at two locations within the 
+Tivoli Bays component of the Hudson River NERR.  One datalogger monitors 
+tributary water (Saw Kill, SK) entering the bay and the other monitors the 
+Hudson River water flooding and ebbing to and from the bay (TS).  The objective 
+of this study is to monitor the quality of the surface water entering (via 
+stream flow and tidal exchange) and leaving (via tidal exchange) Tivoli South 
+Bay.  This will help us understand the relative importance on each source of 
+water on Tivoli South Bay.  The Reserve staff have identified urban and 
+residential land use practices as having a major influence on the water 
+chemistry of the Saw Kill.  Since residential coverage continues to increase, we 
+hope that the intensive monitoring of the surface waters in this watershed will 
+identify trends caused by this rapid development.  
+
+4.   Research Methods:  
+
+     Two YSI6000 dataloggers have been placed at the Tivoli Bays component site 
+of the Reserve.  The instruments are deployed 0.5 meters off the bottom in 
+vertically mounted perforated PVC tubes.  Instruments are deployed for a two to 
+four week duration from April through November each year.  Data are collected at 
+30 min. intervals. After instruments are retrieved, instrument calibration is 
+checked against standards, data are uploaded, and instrument probes are 
+serviced. Before each YSI 6000 is deployed, calibration and maintenance is 
+performed following the manufacturer's instructions (YSI Manual addendum 7/94, 
+sections 3,4, and 7). Data are uploaded via a cable to a laptop computer. 
+Calibration standards are required for pH, turbidity, and salinity; all other 
+parameters are done as described in the manual. Buffer solutions for 2 point 
+calibration (pH 7 and 10), salinity and turbidity standards are purchased 
+premade from a scientific supply house. The dissolved oxygen membranes are 
+replaced before deployment and are allowed to sit at least 24 hrs prior to 
+deployment. 
+
+5.   Site Location and Character:
+
+     The Hudson River National Estuarine Research Reserve (HUDNERR) is a 
+multicomponent site composed of approximately 5,000 acres of tidal wetland, open 
+water, and adjacent upland buffer habitat.  The four component sites of the 
+Reserve are located on the Hudson River in New York State by river miles (RM) 
+proceeding north from the southern tip of Manhattan.  These include: Stockport 
+Flats (RM 124)(42o02'30"N 73o46'00"W), Columbia County; Tivoli Bays (RM 
+98)(42o02'15"N 73o55'10"W), Dutchess County; and Iona Island (RM 45)(41o18'15"N 
+73o58'45"W) and Piermont Marsh (RM 24)(41o02'30"N 73o54'15"W), Rockland County.  
+These four components are located along 100 river miles of the Hudson and are 
+representative of the diverse plant and animal communities that occupy the 
+salinity gradient within the Hudson estuary.  Development within the watersheds 
+of Hudson River NERR component sites ranges from predominantly urban/suburban to 
+forested/agricultural.
+     The two YSI6000 dataloggers are placed at Tivoli Bays component site. The 
+Saw Kill (SK) 42? 01’ 01.543”N, 73? 54’ 53.589”W drains a 26.6 square mile 
+(6886.5 hectares) watershed that is characterized as a highly mixed land use 
+watershed.  These are both freshwater sites (0.0 ppt salinity).  Water depth at 
+ranges from 0.0 to 2.0m at TS and 1.0 to 2.0 at SK.  Bottom type at TS is rocky 
+and at SK is soft silt/clay.  The dominant land uses within this watershed 
+include: forested (51.1%), agriculture (25.8%), and urban (16.5%).  Tivoli South 
+Bay (TS) 42? 01’ 37.336”W, 73? 55’ 33.445”W, the receiving body for the Saw 
+Kill, is a tidal freshwater wetland with a tidal range of 3.9 ft. (1.19 m).
+
+6.   Data collection period:
+
+     YSI6000 datalogger sampling at the Saw Kill (SK) and Tivoli South Bay (TS) 
+began during May, 1995.  Sampling at Tivoli North Bay (TN) began during July, 
+1996.  All sampling is ongoing, however, we cannot sample from approximately 
+December 1 through March 31 due to winter storms and ice on the Hudson River and 
+tributaries.  During a tropical storm during mid-July the SK deployment site was 
+damaged and we were unable to repair it during 1996.  This site should be 
+operational by April 1997.
+
+7.   Associated researchers and projects:
+
+     Hudson River NERR Water Quality Monitoring: Physical and chemical 
+constituents of the tributary waters discharging into HUDNERR marshes and marsh 
+waters during ebb tides are measured monthly and during storm events.  
+Concentrations of nitrate, phosphate, sulphate, dissolved oxygen (DO), and 
+chloride are measured, as well as, seston, alkalinity, pH, temperature, 
+salinity, and conductivity. 
+     Saw Kill Water Quality Monitoring:  The surface water draining from five 
+subcatchments representing five dominant land use practices within the Saw Kill 
+have been monitored during several storm events.  These five land use practices 
+include: row crop agriculture, orchard, residential, solid waste landfill, and 
+forested.  All of the above constituents have been monitored during this 
+project.
+     Associated researchers with the work at Tivoli Bays include: scientists 
+from the Institute of Ecosystem Studies, Millbrook, NY; Yale School of Forestry 
+and Environmental Studies, New Haven, CT; and Rensselaer Polytechnic Institute, 
+Troy, NY.
+
+                II. Physical Structure Descriptors
+
+8. Variable sequence, range of measurements, units, resolution, and accuracy:
+
+Variable Name   Range of Measurements (Units)     Resolution          Accuracy
+DATE            1-12, 1-31, 00-99 (mo,day,yr)     1mo, 1da, 1yr         NA
+HOUR            0-24, 0-60,0-60(hr,min,sec)       1hr, 1min, 1sec       NA 
+WTEMP           -5 to 45oC                        0.01 C             +/- 0.15C  
+SPCOND          0 to 100 mS/cm                    0.01mS/cm          +/- 0.5% of 
+reading+
+                                                                        
+0.001mS/cm
+SALINITY        0-70 parts per thousand(ppt)      0.01ppt            +/- 1.0% of 
+reading
+                                                           or 0.1ppt (whichever 
+is greater)    
+DOSAT           0-200% air saturation(air sat.)   0.1%@ air sat.     +/- 2% @ 
+air sat.
+DOSAT           200-500% air saturation(air sat.) 0.1%@ air sat.     +/- 6% @ 
+air sat.
+DOMG            0-20 mg/l                         0.01 mg/l          +/- 0.2 
+mg/l
+DOMG            20-50 mg/l                        0.01 mg/l          +/- 0.6 
+mg/l
+SHALLOW DEPTH   0 to 9.1 m                        0.001 m            +/- 0.018 m
+pH              2 to 14                           0.01 units         +/- 0.2 
+units
+TURB   0 to 1000 NTU                 0.1 NTU          +/- 5% or reading or 2 NTU 
+(whichever is
+greater)
+
+9.  Coded variable indicator and variable code definitions
+
+     Site definitions: 
+
+     SK = Saw Kill 
+     TS = Tivoli South Bay
+      TN = Tivoli North Bay
+
+
+10.  Data anomalies
+
+April
+
+     SK:  None to report
+
+  TS: Turbidity spike occurred on 4/1/98@20:30 (1358NTU), this value was deleted 
+since it was erratic.
+
+May
+
+     SK:  Turbidity measurements on 05/02/98 at 20:00:00 (-0136NTU) and at 
+20:30:00 (-0053NTU) were erratic and likely caused by probe blockage.  These values 
+were deleted.
+
+  TS: Negative turbidity spike occurred on 5/31/98@14:30 (-0011NTU).  Data point 
+erratic and was deleted. 
+
+June
+
+     SK:  Turbidity measurements from 06/20/98 @ 08:30:00 through 06/22/98 @ 
+10:00:00 were erratic.  Post calibration check of the probe on 0.0NTU measured 24.6NTU.  
+After cleaning, the probe measured 0.0NTU.  During the deployment period, the 
+probe became fouled.  These readings were left in but are suspect.
+
+    TS:   DO (mg/L and %sat) from 6/22/98@15:30 to end of month were negative 
+due to faulty probe.  Turbidity data from 6/25/98@19:30 to end of month were high 
+because wiper fell off after deployment.
+
+July
+
+     SK:  None to report
+
+     TS: DO (mg/L and %sat) from 7/1/98@00:00 to 7/4/98@20:30 and 7/7/98@00:00 -
+7/22/98@10:30 were negative and were deleted.  This was caused first by a faulty 
+probe and then by a punctured membrane on a replacement probe.  Turbidity from 7/1/98@00:00 to
+7/4/98@20:30 were high because wiper fell off during deployment, all data was 
+deleted. 
+Turbidity spike occurred on 7/30/98@10:00 (1063NTU) measurement is erratic and 
+was likely caused by probe blockage, this number was deleted.
+
+August:
+
+     SK:  Turbidity readings on 08/28/98 @ 21:00:00 and 21:30:00 were 0201NTU 
+and 0332 NTU respectively.  Cause unknown, possibly probe blockage.  Values suspect but 
+left in.
+
+    TS: Post calibration check on DO was low (89.8%) for deployment that covered
+  8/27/98@12:00 to end of month.  Therefore, recorded DO levels could be lower 
+than what actually occurred.
+          
+September:
+
+     SK:  Turbidity values of -0.1NTU recorded on 09/02/98 17:00; 09/09/98 
+14:30; 09/10/98 15:00 & 16:00; 09/11/98 12:00, 12:30, 14:30, 15:00, & 15:30. These values 
+were likely reading 0.0NTU and are well within the range of variability of the 
+instrument.  All numbers changed to 0.0NTU.
+
+    TS: Slightly negative depths were recorded on 9/7/98@9:00 (-0.01m) and 
+9/7/98@21:00 (- 0.02m).  Probes were not exposed so these values are likely due to pressure 
+changes and the values deviate from 0.0m.  Values replaced with 0.0m since they are within the 
+acceptable range of the instrument.  Many negative turbidity values were recorded from 
+9/1/98 00:00 to 9/10/98 11:00 due to gear box failure.  All negative numbers were deleted.  
+These included:
+
+Date     Time        Turb
+mm/dd/yy hh:mm:ss   NTU
+
+09/04/98 11:30:00   -1126
+09/07/98 01:00:00   -1016
+09/07/98 02:00:00   -0113
+09/07/98 20:30:00   -0140
+09/07/98 21:00:00   -0124
+09/08/98 02:30:00   -0360
+09/08/98 03:00:00   -1122
+
+    Post calibration check on turbidity for deployment from 9/1/98 00:00 to 
+9/10/98 11:00 was slightly negative (-0000.1NTU).  Several slightly negative (-0000.1 to -
+0000.6 NTU) occured during deployment and are being treated as 0000NTU since this range is 
+acceptable variation for the instrument.  Note that the CDMO column reformat macro replaced and 
+negative decimal value with 0000NTU.
+
+October:
+
+     SK:  Several negative turbidity values were logged from 10/08/98 - 
+10/10/98. These occurred during a real turbidity event, however, I do not know why the instrument 
+logged negative values.  Values are suspect but left in.  These included the following:
+
+Date      Time      Turbidity
+mm/dd/yy  hh:mm:ss  NTU
+10/08/98  12:00:00  -0031
+10/08/98  12:30:00  -0074
+10/08/98  13:00:00  -0190
+10/08/98  13:30:00  -0033
+10/08/98  14:00:00  -0179
+10/08/98  14:30:00  -0091
+10/10/98  09:30:00  -0017
+10/10/98  12:30:00  -0082
+10/10/98  13:00:00  -0015
+10/10/98  15:00:00  -0051
+10/10/98  15:30:00  -0086
+
+    TS: Slightly negative depth values changed to 0.0m since probes were not 
+exposed on 10/31/98 4:00 (-0.04m), 4:30 (-0.04m), 5:00 (-0.02m).  Likely caused by 
+changes in atmospheric pressure.
+
+All values appear to be out of the water from 10/02/98 04:30:00 to 05:00:00 due to low tide
+where depth was low and salinity was zero.  Values removed.  
+ 
+November
+
+     SK:  Post deployment calibration checks of percent saturation of DO during 
+two deployments (affecting data collected from 11/05 - 11/30) was high (104.6 and 106.0%).  
+Drift is likely the cause.  All DO% data collected during this period could therefore be 4-
+6% higher than actually existed.  Data were left in but are suspect. 
+
+    TS:  Slightly negative depth values changed to 0.0m since probes were not 
+exposed on 11/28/98 01:30 (-0.03m), 02:00 (-0.07m); 11/29/98 14:00 (-0.03m), 14:30 (-
+0.06m), 15:00 (- 0.03m).  Likely caused by changes in atmospheric pressure. Negative depth on
+  11/28/98@2:30 (-0.07m) did result in exposing the probes so all data for this 
+time was deleted.
+
+  Post calibration check on 11/25/98 @ 15:00 - end of month deployment for DO% was 
+117%. All DO data from 11/25/98 15:00:00 through 11/30/98 23:30:00 were deleted.  
+
+
+December:
+
+     SK:  None to report
+    TS: Probes exposed on following dates so all data were removed: 
+12/2/98@6:00-6:30, 12/3/98@7:30, 12/22/98@22:30-12/23/98@00:00.
+
+Several negative turbidity values were recorded and the cause could be due to 
+exposure of the probes on several occasions. These have all been deleted and included 
+the following:
+
+Date     Time    Turb
+mm/dd/yy hh:mm:ss  NTU
+12/01/98 02:00:00   -0013
+12/01/98 02:30:00   -0063
+12/01/98 03:00:00   -0008
+12/02/98 12:30:00   -0002
+12/02/98 13:00:00   -0018
+12/02/98 13:30:00   -0042
+12/02/98 14:00:00   -0063
+12/02/98 14:30:00   -0085
+12/02/98 15:00:00   -0127
+12/02/98 15:30:00   -0082
+12/02/98 16:00:00   -0126
+12/02/98 16:30:00   -0019
+12/02/98 17:00:00   -0002
+12/02/98 20:30:00   -0008
+12/07/98 07:00:00   -0070
+12/07/98 07:30:00   -0119
+12/07/98 08:00:00   -0163
+12/07/98 08:30:00   -0203
+12/07/98 09:00:00   -0064
+12/07/98 10:00:00   -0014
+ 
+    The following negative depth values were recorded during this month.  These 
+were fairly large but did not result in probe exposure so they were left in.  I did not 
+convert them to 0.0m due to the size and the artificial truncation of the tidal curve that would 
+result if I replaced them with 0.0m.  They are a result of changes in atmospheric pressure.
+
+Date        Time    Depth
+mm/dd/yy   hh:mm:ss m
+12/02/98    07:00:00   -0.01
+12/02/98    19:30:00   -0.02
+12/03/98    06:30:00   -0.06
+12/03/98    07:00:00   -0.09
+12/03/98    08:00:00   -0.07
+12/03/98    20:00:00   -0.02
+12/03/98    20:30:00   -0.02
+12/11/98    02:30:00   -0.01
+12/11/98    03:00:00   -0.02
+12/14/98    04:30:00   -0.01
+12/14/98    05:00:00   -0.01
+12/16/98    05:30:00   -0.04
+12/16/98    06:00:00   -0.12
+12/16/98    06:30:00   -0.14
+12/16/98    07:00:00   -0.09
+12/16/98    18:30:00   -0.05
+12/16/98    19:00:00   -0.07
+12/18/98    20:30:00   -0.02
+12/18/98    21:00:00   -0.01
+12/22/98    22:00:00   -0.01
+
+
+11.  Missing Data 
+
+     TN:  April - December.  Note that no instruments were deployed at this site 
+during 1998. 
+     Review of the 1996 data indicated that the deployment site was exposed 
+during daily low tides.  A new site has been identified and we hope to deploy instruments at 
+TN in 1999.
+
+April:
+
+     SK:  No data 04/20/98 15:00:00 - 15:30:00.  Instrument retrieved and newly 
+calibrated one deployed.
+
+     TS: No data 4/1/98 00:00 - 4/1/98 10:30.  Instrument not deployed yet.  No 
+data 4/13/98 8:30 - 10:00 and 4/30/98 11:00 - 15:30 for instrument swap.  Turbidity data for 4/1/98 @ 20:30 
+was abnormally high and was deleted.
+
+May
+
+     SK:  Turbidity measurements on 05/02/98 at 20:00:00 (-0136NTU) and at 
+20:30:00 (-0053NTU) were erratic and likely caused by probe blockage.  These values 
+were deleted.
+
+          No data were collected 05/05/98 @ 11:00:00 and 11:30:00; 05/18/98 
+14:30:00. Instrument retrieved and newly calibrated one deployed.
+  
+     TS:   No data collected 5/17/98 13:30 - 15:30 for instrument swap. Negative 
+turbidity spike occurred on 5/31/98@14:30 (-0011NTU), data point erratic and was deleted.
+
+June
+
+     SK:  No data were collected 06/22/98 @ 10:30:00. Instrument retrieved and 
+newly calibrated one deployed.
+
+      TS: No data for the following times due to instrument swap: 6/2/98@16:00, 
+6/22/98@15:00
+
+  No DO (mg/L and %sat) from 6/22/98@15:30 to end of month (faulty probe).  No 
+turbidity data from 6/25/98@19:30 to end of month (wiper fell off, many high turb. Values 
+recorded).
+
+July:
+
+     SK:  None to report
+
+      TS: No data 7/4/98@21:00 to 7/7/98@15:00 due to probe problems, instrument 
+not deployed.  No data 7/22/98@11:00 to 7/28/98@13:00 due to probe problems, 
+instrument not deployed.  DO (mg/L and %sat) from 7/1/98@00:00 to 7/4/98@20:30 and 7/7/98@00:00 
+-7/22/98@10:30 were negative and were deleted.  This was caused first by a faulty 
+probe and then by a punctured membrane on a replacement probe.  Turbidity from 7/1/98@00:00 to
+7/4/98@20:30 were high because wiper fell off during deployment, all data was 
+deleted.
+Turbidity spike occurred on 7/30/98@10:00 (1063NTU) measurement is erratic and 
+was likely caused by probe blockage, this number was deleted.
+
+August:
+
+     SK:  No data 08/11/98 @ 15:00:00-16:00:00. Instrument retrieved and newly 
+calibrated one deployed.
+
+  TS: No data 8/12/98@ 11:30-12:00 and 8/27/98@11:30 for instrument swap.
+
+September:
+
+     SK:  No data 09/11/98 16:30 - 17:00.  Instrument retrieved and newly 
+calibrated one deployed.
+
+  TS:   No data 9/10/98@11:30 due to instrument swap. 
+
+    Many large negative turbidity values were recorded from 9/1/98 00:00 to 
+9/10/98 11:00 due to gear box failure.  All large negative numbers were deleted.  These 
+included:
+
+Date     Time        Turb
+mm/dd/yy hh:mm:ss   NTU
+
+09/04/98 11:30:00   -1126
+09/07/98 01:00:00   -1016
+09/07/98 02:00:00   -0113
+09/07/98 20:30:00   -0140
+09/07/98 21:00:00   -0124
+09/08/98 02:30:00   -0360
+09/08/98 03:00:00   -1122
+
+October:
+
+     SK:  No data 10/01/98 14:30 - 18:30 due to instrument swap.
+    TS: No data 10/1/98@16:00 and 10/29/98@14:00-14:30 due to instrument swap.
+
+All values appear to be out of the water from 10/02/98 04:30:00 to 05:00:00 due to low tide
+where depth was low and salinity was zero.  Values removed.
+
+November:
+
+     SK:  None to report
+    TS: No data 11/28/98@02:30, probes exposed
+
+ Post calibration check on 11/25/98 @ 15:00 - end of month deployment for DO% was 
+117%. All DO data from 11/25/98 15:00:00 through 11/30/98 23:30:00 were deleted.  
+
+December:
+
+     SK:  No data collected 12/23/98 12:00:00 though 12/31/98 23:30:00.  
+Instruments pulled for year due to ice and freezing temperatures.
+
+    TS:  All DO data from 12/01/98 00:00:00 through 12/10/98 11:30:00 were deleted due to
+suspect deployment where DO values were >100%.  
+
+No data 12/10/98@11:00-11:30 due to instrument swap.  No data 12/23/98@11:30 
+to end of month, instruments pulled for the year due to ice and winter weather.
+
+    Probes exposed on following dates so all data were removed: 12/2/98@6:00-
+6:30, 12/3/98@7:30, 12/22/98@22:30-12/23/98@00:00.
+
+    Several negative turbidity values were recorded and the cause could be due 
+to exposure of the probes on several occasions. These have all been deleted and included the 
+following:
+
+Date     Time    Turb
+mm/dd/yy hh:mm:ss  NTU
+12/01/98 02:00:00   -0013
+12/01/98 02:30:00   -0063
+12/01/98 03:00:00   -0008
+12/02/98 12:30:00   -0002
+12/02/98 13:00:00   -0018
+12/02/98 13:30:00   -0042
+12/02/98 14:00:00   -0063
+12/02/98 14:30:00   -0085
+12/02/98 15:00:00   -0127
+12/02/98 15:30:00   -0082
+12/02/98 16:00:00   -0126
+12/02/98 16:30:00   -0019
+12/02/98 17:00:00   -0002
+12/02/98 20:30:00   -0008
+12/07/98 07:00:00   -0070
+12/07/98 07:30:00   -0119
+12/07/98 08:00:00   -0163
+12/07/98 08:30:00   -0203
+12/07/98 09:00:00   -0064
+12/07/98 10:00:00   -0014
+ 

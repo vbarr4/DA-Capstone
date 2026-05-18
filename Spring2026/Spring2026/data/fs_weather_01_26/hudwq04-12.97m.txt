@@ -1,0 +1,1122 @@
+                 Hudson River NERR Water Quality Metadata Form
+                       (Jan. - Dec. 1997)  
+			Latest Update: November 13, 2001
+                                
+               I. Data Set & Research Descriptors
+                                
+1.   Principal Investigator: William C. Nieder, Research
+     Coordinator
+
+     Contact Person: William C. Nieder
+                     Hudson River NERR
+                     c/o Bard College Field Station
+                     Annandale, NY 12504
+	         phone: (914) 758-7010	
+                     cnieder@ocean.nos.noaa.gov
+
+2.   Entry Verification:
+
+Data are uploaded in .dat and comma delimited format via a cable to a laptop 
+computer. Data are analyzed for outliers and anomalies using the outlier macro 
+for Excel 5.0 developed by the CDMO.  These macros discover outlier values which 
+fall outside the range that the instrument is designed to measure (see section 
+II.8 of this document). After outliers and anomalous data are identified, all 
+data are graphed in Excel to help identify outliers that fall within the range 
+of the probes and also anomalous trends. Missing data are identified using the 
+CDMO Excel Date, Hour Count macro.  All columns are formatted using the CDMO 
+Excel Column Reformat macro.  All data was FTPed to the CDMO via the CDMO dial-up 
+access.  All raw data files are archived at the CDMO and on 3.5" disks. 
+Questionable data are either deleted or identified in section II.10.  All 
+missing data and deleted data will be identified in section II.11.
+
+Person responsible for data verification:    Research Coordinator.
+
+3.   Research Objectives:
+
+     Measurements are taken every 30 minutes over a two to four week period from 
+April 1 through the end of November of each year at two locations within the 
+Tivoli Bays component of the Hudson River NERR.  One datalogger monitors 
+tributary water (Saw Kill, SK) entering the bay and the other monitors the 
+Hudson River water flooding and ebbing to and from the bay (TS).  The objective 
+of this study is to monitor the quality of the surface water entering (via 
+stream flow and tidal exchange) and leaving (via tidal exchange) Tivoli South 
+Bay.  This will help us understand the relative importance on each source of 
+water on Tivoli South Bay.  The Reserve staff have identified urban and 
+residential land use practices as having a major influence on the water 
+chemistry of the Saw Kill.  Since residential coverage continues to increase, we 
+hope that the intensive monitoring of the surface waters in this watershed will 
+identify trends caused by this rapid development.  
+
+4.   Research Methods:  
+
+     Two YSI6000 dataloggers have been placed at the Tivoli Bays  component site 
+of the Reserve.  The instruments are deployed 0.5 meters off the bottom in 
+vertically mounted perforated PVC tubes.  Instruments are deployed for a two to 
+four week duration from April through November each year.  Data are collected at 
+30 min. intervals. After instruments are retrieved, instrument calibration is 
+checked against standards, data are uploaded, and instrument probes are 
+serviced. Before each YSI 6000 is deployed, calibration and maintenance is 
+performed following the manufacturer's instructions (YSI Manual addendum 7/94, 
+sections 3,4, and 7). Calibration standards are required for pH, turbidity, and 
+salinity; all other parameters are done as described in the manual. Buffer 
+solutions for 2 point calibration (pH 7 and 10), salinity and turbidity 
+standards are purchased premade from a scientific supply house. The dissolved 
+oxygen membranes are replaced before deployment and are allowed to sit at least 
+24 hrs prior to deployment. 
+
+5.   Site Location and Character:
+
+     The Hudson River National Estuarine Research Reserve (HUDNERR) is a 
+multicomponent site composed of approximately 5,000 acres of tidal wetland, open 
+water, and adjacent upland buffer habitat.  The four component sites of the 
+Reserve are located on the Hudson River in New York State by river miles (RM) 
+proceeding north from the southern tip of Manhattan.  These include: Stockport 
+Flats (RM 124)(42o02'30"N 73o46'00"W), Columbia County; Tivoli Bays (RM 
+98)(42o02'15"N 73o55'10"W), Dutchess County; and Iona Island (RM 45)(41o18'15"N 
+73o58'45"W) and Piermont Marsh (RM 24)(41o02'30"N 73o54'15"W), Rockland County.  
+These four components are located along 100 river miles of the Hudson and are 
+representative of the diverse plant and animal communities that occupy the 
+salinity gradient within the Hudson estuary.  Development within the watersheds 
+of Hudson River NERR component sites ranges from predominantly urban/suburban to 
+forested/agricultural. 
+     The two YSI6000 dataloggers are placed at Tivoli Bays component site. The 
+Saw Kill (SK) 42? 01’ 01.543”N, 73? 54’ 53.589”W drains a 26.6 square mile 
+(6886.5 hectares) watershed that is characterized as a highly mixed land use 
+watershed.  These are both freshwater sites (0.0 ppt salinity).  Water depth at 
+ranges from 0.0 to 2.0m at TS and 1.0 to 2.0 at SK.  Bottom type at TS is rocky 
+and at SK  is soft silt/clay.  The dominant land uses within this watershed 
+include: forested (51.1%), agriculture (25.8%), and urban (16.5%).  Tivoli South 
+Bay (TS) 42? 01’ 37.336”W, 73? 55’ 33.445”W, the receiving body for the Saw 
+Kill, is a tidal freshwater wetland with a tidal range of 3.9 ft. (1.19 m).
+
+6.   Data collection period:
+
+     YSI6000 datalogger sampling at the Saw Kill (SK) and Tivoli South Bay (TS) 
+began during May, 1995.  Sampling at Tivoli North Bay (TN) began during July, 
+1996.  All sampling is ongoing, however, we cannot sample from approximately 
+December 1 through March 31 due to winter storms and ice on the Hudson River and 
+tributaries.  During a tropical storm during mid-July the SK deployment site was 
+damaged and we were unable to repair it during 1996.  This site should be 
+operational by April 1997. 
+
+7.   Associated researchers and projects:
+
+     Hudson River NERR Water Quality Monitoring: Physical and chemical 
+constituents of the tributary waters discharging into HUDNERR marshes and marsh 
+waters during ebb tides are measured monthly and during storm events.  
+Concentrations of nitrate, phosphate, sulphate, dissolved oxygen (DO), and 
+chloride are measured, as well as, seston, alkalinity, pH, temperature, 
+salinity, and conductivity. 
+     Saw Kill Water Quality Monitoring:  The surface water draining from five 
+subcatchments representing five dominant land use practices within the Saw Kill 
+have been monitored during several storm events.  These five land use practices 
+include: row crop agriculture, orchard, residential, solid waste landfill, and 
+forested.  All of the above constituents have been monitored during this 
+project.
+     Associated researchers with the work at Tivoli Bays include: scientists 
+from the Institute of Ecosystem Studies, Millbrook, NY; Yale School of Forestry 
+and Environmental Studies, New Haven, CT; and Rensselaer Polytechnic Institute, 
+Troy, NY.
+
+                II. Physical Structure Descriptors
+
+8. Variable sequence, range of measurements, units, resolution, and accuracy:
+
+Variable Name   Range of Measurements (Units)     Resolution          Accuracy
+DATE            1-12, 1-31, 00-99 (mo,day,yr)     1mo, 1da, 1yr         NA
+HOUR            0-24, 0-60,0-60(hr,min,sec)       1hr, 1min, 1sec       NA 
+WTEMP           -5 to 45oC                        0.01 C             +/- 0.15C  
+SPCOND          0 to 100 mS/cm                    0.01mS/cm          +/- 0.5% of 
+reading+
+                                                                        
+0.001mS/cm
+SALINITY        0-70 parts per thousand(ppt)      0.01ppt            +/- 1.0% of 
+reading
+                                                           or 0.1ppt (whichever 
+is greater)    
+DOSAT           0-200% air saturation(air sat.)   0.1%@ air sat.     +/- 2% @ 
+air sat.
+DOSAT           200-500% air saturation(air sat.) 0.1%@ air sat.     +/- 6% @ 
+air sat.
+DOMG            0-20 mg/l                         0.01 mg/l          +/- 0.2 
+mg/l
+DOMG            20-50 mg/l                        0.01 mg/l          +/- 0.6 
+mg/l
+SHALLOW DEPTH   0 to 9.1 m                        0.001 m            +/- 0.018 m
+pH              2 to 14                           0.01 units         +/- 0.2 
+units
+TURB   0 to 1000 NTU                 0.1 NTU          +/- 5% or reading or 2 NTU 
+(whichever is
+greater)
+
+Columns are separated by tabs.
+
+
+9.  Coded variable indicator and variable code definitions
+
+     Site definitions: 
+
+     SK = Saw Kill 
+     TS = Tivoli South Bay
+     TN = Tivoli North Bay
+
+10.  Data anomalies
+
+April
+
+TS: No anomalies to report, instrument not yet deployed (see next section for 
+explanation).
+
+SK: Dissolved oxygen and percent saturation data were too high.  Post deployment 
+calibration check indicated the dissolved oxygen sensor was bad or needed cleaning (high 
+charge error indicated during next calibration attempt).  All oxygen data collected from 
+04/23/97 at 10:30:00 through end of month have been removed.
+
+May
+
+TS: Many negative turbidity data were collected (range: -0001 to -0762 NTU). 
+Negative values from -0000.2 to -0002 are within the sensitivity of the instrument and are most 
+likely 0000 NTU. Small negative values less than -0002 NTU (-0003 to -0008) are likely due to 
+calibration errors. The cause of the larger negative values (<-0005) is not known but many of them 
+do occur on an out going tide and may be caused by a plume of resuspended sediments.  The 
+following negative turbidity data were collected but left in the data set (note that any values 
+represented as 0000 NTU have been rounded up from -0000.2 NTU by the CDMO Excel macros):
+
+Date                Time Turb
+MM/DD/YY  hh:mm:ss   NTU
+05/09/97  21:00:00  -0002
+05/09/97  21:30:00  -0032
+05/12/97  10:30:00  -0039
+05/12/97  11:00:00  -0188
+05/12/97  11:30:00  -0171
+05/12/97  12:00:00  -0231
+05/12/97  12:30:00  -0267
+05/12/97  13:00:00  -0362
+05/12/97  13:30:00  -0358
+05/12/97  14:00:00  -0245
+05/12/97  14:30:00  -0039
+05/12/97  22:30:00  -0001
+05/12/97  23:00:00  -0022
+05/12/97  23:30:00  -0010
+05/13/97  00:00:00  -0037
+05/13/97  01:00:00  -0006
+05/14/97  12:00:00  -0037
+05/14/97  12:30:00  -0051
+05/14/97  13:00:00  -0069
+05/14/97  13:30:00  -0100
+05/14/97  14:00:00  -0208
+05/14/97  14:30:00  -0166
+05/14/97  15:30:00  -0023
+05/15/97  14:30:00  -0015
+05/16/97  13:00:00  -0002
+05/16/97  13:30:00  -0053
+05/16/97  14:00:00  -0083
+05/16/97  14:30:00  -0061
+05/16/97  15:00:00  -0087
+05/16/97  15:30:00  -0018
+05/16/97  16:00:00  -0038
+05/16/97  16:30:00  -0023
+05/16/97  17:30:00  -0014
+05/17/97  04:30:00  -0009
+05/17/97  05:00:00  -0002
+05/17/97  12:00:00  -0022
+05/17/97  13:00:00  -0024
+05/17/97  13:30:00  -0029
+05/17/97  14:00:00  -0026
+05/19/97  04:00:00  -0036
+05/19/97  04:30:00  -0066
+05/19/97  05:00:00  -0005
+05/20/97  05:00:00  -0006
+05/20/97  05:30:00  -0030
+05/20/97  06:00:00  -0169
+05/20/97  06:30:00  -0310
+05/20/97  07:00:00  -0096
+05/20/97  08:00:00  -0038
+05/20/97  18:30:00  -0032
+05/20/97  19:00:00  -0013
+05/21/97  18:30:00  -0013
+05/21/97  19:00:00  -0005
+05/22/97  07:30:00  -0004
+05/22/97  18:00:00  -0067
+05/22/97  18:30:00  -0021
+05/29/97  00:00:00  -0100
+05/30/97  00:30:00  -0056
+05/30/97  01:00:00  -0082
+05/30/97  01:30:00  -0042
+05/30/97  02:00:00  -0060
+05/30/97  02:30:00  -0011
+          
+Dissolved oxygen or oxygen saturation from 05/09/97 11:30:00 through end of 
+month deleted. All were too high (over 140% saturation) due to faulty probe.  
+
+SK: Dissolved oxygen and percent saturation values were too high from 05/01/97 
+00:00:00 through 05/08/97 14:00:00 and were removed from the dataset.  Post deployment 
+check indicated the sensor went bad.
+
+05/19/97 @ 22:00 Negative turbidity was recorder (-267NTU)
+
+June
+
+TS: The following depth data were slightly negative.  These were likely caused 
+by a change in atmospheric pressure between calibration/deployment and the time these 
+measurements were taken.  Values were left in the data set in order to allow for a clean tidal 
+curve:
+
+Date           Time         Depth     
+dd/mm/yy  hh:mm:ss   m   
+06/11/97  12:30:00  -0.04     
+06/11/97  13:00:00  -0.03     
+06/19/97  19:00:00  -0.02     
+06/22/97  21:00:00  -0.02     
+06/22/97  21:30:00  -0.03     
+06/23/97  10:00:00  -0.03     
+06/23/97  10:30:00  -0.02     
+06/23/97  21:30:00  -0.01     
+06/23/97  22:00:00  -0.05     
+06/23/97  22:30:00  -0.02     
+06/24/97  11:00:00  -0.01     
+
+All dissolved oxygen and percent saturation values from 06/01/97 00:00:00 
+through 06/05/97 10:30:00 were too high (all over 100%) due to a faulty probe.  All values were 
+deleted.
+
+All dissolved oxygen and percent saturation values from 06/26/97 10:00:00 
+through 06/30/97 23:30:00 were questionable due to a faulty probe.  All values were 
+deleted.
+
+SK: Nothing to report.
+
+July
+
+TS: Many negative turbidity data were collected (range: -0000.2  to -0782 NTU).  
+Negative values greater than -0001 are within the sensitivity of the instrument and are 
+most likely 0000 NTU (these values appear as 0000 NTU in the dataset.  Small negative values less 
+than -0002 NTU (-0003 to -0008) are likely due to calibration errors.  The cause of the 
+larger negative values (<-0008) is not known but most of them do occur on an out going tide and 
+may be caused by a plume of resuspended sediments exceeding the maximum range of the 
+instrument.  The following negative turbidity data were collected but left in the data set (note 
+that values represented as 0000 NTU have been rounded up from -0000.2 NTU by the CDMO Excel
+macros):
+
+Date      Time      Turb
+mm/dd/yy  hh:mm:ss   NTU
+07/16/97  21:30:00  -0001
+07/16/97  22:00:00  -0002
+07/16/97  22:30:00  -0001
+07/16/97  23:00:00  -0001
+07/17/97  10:00:00  -0001
+07/17/97  11:00:00  0000
+07/17/97  11:30:00  0000
+07/17/97  17:30:00  0000
+07/17/97  22:00:00  0000
+07/17/97  22:30:00  -0001
+07/17/97  23:00:00  -0002
+07/17/97  23:30:00  -0002
+07/18/97  00:00:00  -0001
+07/18/97  10:30:00  -0001
+07/18/97  11:00:00  -0001
+07/18/97  11:30:00  0000
+07/18/97  12:00:00  -0001
+07/18/97  12:30:00  0000
+07/18/97  13:00:00  0000
+07/18/97  16:30:00  0000
+07/18/97  18:00:00  0000
+07/18/97  23:00:00  -0001
+07/18/97  23:30:00  -0001
+07/19/97  00:00:00  -0002
+07/19/97  00:30:00  -0001
+07/19/97  09:30:00  0000
+07/19/97  11:00:00  0000
+07/19/97  11:30:00  0000
+07/19/97  12:30:00  -0001
+07/20/97  00:00:00  -0001
+07/20/97  00:30:00  -0002
+07/20/97  01:00:00  -0002
+07/20/97  12:00:00  0000
+07/20/97  12:30:00  -0001
+07/20/97  13:00:00  0000
+07/20/97  13:30:00  0000
+07/21/97  14:30:00  0000
+07/22/97  01:30:00  0000
+07/22/97  02:00:00  0000
+07/22/97  14:00:00  -0001
+07/22/97  14:30:00  -0001
+07/22/97  15:00:00  -0001
+07/22/97  15:30:00  -0001
+07/23/97  02:00:00  0000
+07/23/97  02:30:00  -0001
+07/23/97  03:00:00  -0001
+07/23/97  03:30:00  -0002
+07/23/97  04:00:00  -0001
+07/23/97  04:30:00  0000
+07/23/97  14:30:00  0000
+07/23/97  15:00:00  -0001
+07/23/97  15:30:00  -0001
+07/23/97  16:00:00  -0001
+07/24/97  03:00:00  -0001
+07/24/97  03:30:00  -0001
+07/24/97  04:00:00  -0001
+07/24/97  05:00:00  -0001
+07/24/97  12:30:00  -0722
+07/24/97  13:30:00  -0489
+07/24/97  14:00:00  -0306
+07/24/97  20:30:00  0000
+07/24/97  21:30:00  -0086
+07/24/97  23:00:00  -0062
+07/24/97  23:30:00  -0025
+07/25/97  00:00:00  -0112
+07/25/97  01:00:00  -0044
+07/25/97  16:30:00  -0001
+07/25/97  17:00:00  -0001
+07/25/97  18:30:00  0000
+07/26/97  01:30:00  -0001
+07/26/97  04:00:00  0000
+07/26/97  04:30:00  -0001
+07/26/97  05:00:00  -0001
+07/26/97  05:30:00  -0001
+07/26/97  06:00:00  -0002
+07/26/97  16:30:00  0000
+07/26/97  17:00:00  -0001
+07/26/97  17:30:00  -0001
+07/26/97  18:00:00  -0002
+07/26/97  18:30:00  -0001
+07/26/97  19:30:00  -0001
+07/26/97  20:00:00  0000
+07/26/97  20:30:00  0000
+07/27/97  01:30:00  -0001
+07/27/97  02:00:00  -0001
+07/27/97  03:00:00  -0001
+07/27/97  05:00:00  0000
+07/27/97  05:30:00  -0001
+07/27/97  06:00:00  -0001
+07/27/97  06:30:00  -0002
+07/27/97  07:00:00  -0002
+07/27/97  07:30:00  -0002
+07/27/97  08:00:00  -0001
+07/27/97  08:30:00  0000
+07/27/97  17:30:00  0000
+07/27/97  18:00:00  0000
+07/27/97  19:00:00  -0001
+07/27/97  19:30:00  0000
+07/27/97  20:00:00  0000
+07/27/97  20:30:00  -0001
+07/27/97  21:00:00  0000
+07/28/97  03:30:00  0000
+07/28/97  06:30:00  0000
+07/28/97  07:00:00  -0001
+07/28/97  07:30:00  -0001
+07/28/97  08:00:00  -0001
+07/28/97  08:30:00  -0001
+07/28/97  09:00:00  0000
+07/28/97  15:00:00  0000
+07/28/97  19:00:00  -0001
+07/28/97  19:30:00  -0001
+07/28/97  20:00:00  0000
+07/28/97  20:30:00  0000
+07/28/97  21:00:00  -0001
+07/28/97  21:30:00  -0001
+07/30/97  08:00:00  -0011
+07/30/97  16:00:00  -0074
+07/30/97  16:30:00  -0029
+07/30/97  17:00:00  -0074
+07/30/97  18:00:00  -0046
+07/30/97  18:30:00  -0044
+07/30/97  20:00:00  -0087
+07/30/97  20:30:00  -0107
+07/30/97  21:30:00  -0112
+07/30/97  22:00:00  -0003
+07/30/97  22:30:00  -0048
+07/30/97  23:00:00  -0112
+07/30/97  23:30:00  -0782
+07/31/97  00:00:00  -0107
+07/31/97  00:30:00  -0354
+07/31/97  01:00:00  -0145
+07/31/97  20:00:00  -0037
+07/31/97  20:30:00  -0032
+07/31/97  22:30:00  0000
+07/31/97  23:00:00  0000
+
+All dissolved oxygen and percent saturation values from 07/01/97 00:00:00 
+through 07/16/97 17:00:00 were questionable due to a faulty probe.  All values were 
+deleted.
+
+SK: Nothing to report
+          
+August:
+
+TS: Several turbidity values collected were slightly negative but are within the 
+range of sensitivity of the probe (+/- 0002 NTU).  All were left in the data set and are 
+likely 0000 NTU.  The following negative turbidity data were collected but left in the data set 
+(note that values represented as 0000 NTU have been rounded up from -0000.2 NTU by the CDMO Excel 
+macros):
+
+Date                Time Turb
+mm/dd/yy  hh:mm:ss   NTU
+08/02/97  23:00:00  0000
+08/02/97  23:30:00  -0001
+08/03/97  00:00:00  -0001
+08/03/97  00:30:00  -0001
+08/05/97  13:30:00  0000
+08/05/97  14:00:00  0000
+08/05/97  15:00:00  -0001
+08/05/97  15:30:00  0000
+08/06/97  01:30:00  0000
+08/06/97  15:00:00  0000
+08/07/97  02:30:00  0000
+08/07/97  03:00:00  0000
+08/09/97  04:30:00  0000
+08/11/97  19:00:00  0000
+
+During a deployment starting on 08/06/97 at 09:00:00, the dissolved oxygen and 
+percent saturation values began to drift to high values.  Post deployment check of the 
+instrument indicated the DO sensor on this probe had gone bad during deployment.  Since we 
+could not determine which values were good and which were affected, all values from 
+08/06/97 09:00:00 through the end of the month were deleted.
+          
+SK: The following turbidity values ranged from -0000.3 to -0000.1 NTU.  All were 
+replaced with 0000 NTU (the slight negative values are well within the detection range of the 
+instrument of +/- 0002 NTU).  Also, all of these values are rounded to the nearest whole number 
+(hence all appear as 0000 NTU below) as per CDMO data management protocol.
+
+Date      Time 		Turb
+mm/dd/yy  hh:mm:ss   NTU
+08/24/97  12:00:00  0000
+08/25/97  12:00:00  0000
+08/25/97  13:30:00  0000
+08/25/97  14:00:00  0000
+08/25/97  14:30:00  0000
+08/25/97  15:00:00  0000
+08/25/97  15:30:00  0000
+08/25/97  17:00:00  0000
+08/25/97  17:30:00  0000
+08/25/97  18:00:00  0000
+08/26/97  12:00:00  0000
+08/26/97  13:00:00  0000
+08/26/97  13:30:00  0000
+08/26/97  14:00:00  0000
+08/26/97  14:30:00  0000
+08/26/97  15:00:00  0000
+08/26/97  16:00:00  0000
+08/26/97  17:00:00  0000
+08/26/97  18:00:00  0000
+08/26/97  18:30:00  0000
+08/28/97  13:30:00  0000
+08/28/97  14:00:00  0000
+08/28/97  14:30:00  0000
+08/28/97  15:30:00  0000
+08/28/97  17:00:00  0000
+08/28/97  17:30:00  0000
+08/28/97  18:00:00  0000
+08/28/97  19:30:00  0000
+08/29/97  12:00:00  0000
+08/29/97  13:00:00  0000
+08/29/97  13:30:00  0000
+08/29/97  14:30:00  0000
+08/29/97  16:00:00  0000
+08/29/97  16:30:00  0000
+08/29/97  17:00:00  0000
+08/29/97  18:30:00  0000
+08/30/97  12:30:00  0000
+08/30/97  13:30:00  0000
+08/30/97  14:00:00  0000
+08/30/97  15:30:00  0000
+08/30/97  16:00:00  0000
+08/30/97  16:30:00  0000
+08/30/97  17:00:00  0000
+08/30/97  17:30:00  0000
+08/30/97  18:00:00  0000
+08/30/97  18:30:00  0000
+08/31/97  12:30:00  0000
+08/31/97  14:00:00  0000
+08/31/97  15:00:00  0000
+08/31/97  16:00:00  0000
+08/31/97  16:30:00  0000
+08/31/97  17:00:00  0000
+08/31/97  18:30:00  0000
+08/31/97  19:00:00  0000
+
+DO and DO% data from 08/23/97 13:30:00 through 08/31/97 23:30:00 were too high 
+and eratic. Likely the membrane was punctured.  These data were removed.
+          
+September:
+
+TS:  During the deployment period starting on 08/06/97 at 09:00:00 through 
+09/05/97 at 08:00:00, the dissolved oxygen and percent saturation values began to drift to 
+high values.  Post deployment check of the instrument indicated the DO sensor on this probe had 
+gone bad during deployment.  Since we could not determine which values were good and which were 
+affected, all values from 09/01/97 00:00:00 through 09/05/97 @ 08:00:00 were deleted.
+
+SK: DO and DO% data 09/01/97 00:00:00 through 09/19/97 12: 00:00 were too high 
+and eratic. Likely the membrane was punctured.  These data were removed.
+
+The following turbidity values ranged from -0000.3 to -0000.1 NTU.  All were 
+replaced with 0000NTU (the slight negative values are well within the detection range of the 
+instrument of +/- 0002 NTU and are treated as 0000NTU).  Also, all of these values are rounded to 
+the nearest whole number (hence all appear as 0000 NTU below) by the CDMO Excel macros.
+
+Date                Time Turb
+mm/dd/yy  hh:mm:ss   NTU
+09/01/97  13:00:00  0000
+09/01/97  14:30:00  0000
+09/01/97  17:00:00  0000
+09/02/97  12:30:00  0000
+09/02/97  13:30:00  0000
+09/02/97  14:00:00  0000
+09/02/97  14:30:00  0000
+09/02/97  15:00:00  0000
+09/02/97  15:30:00  0000
+09/02/97  16:00:00  0000
+09/02/97  17:00:00  0000
+09/02/97  18:00:00  0000
+09/02/97  18:30:00  0000
+09/03/97  14:00:00  0000
+09/03/97  14:30:00  0000
+09/03/97  16:00:00  0000
+09/03/97  16:30:00  0000
+09/03/97  17:00:00  0000
+09/03/97  17:30:00  0000
+09/03/97  18:00:00  0000
+09/04/97  14:30:00  0000
+09/04/97  15:00:00  0000
+09/04/97  15:30:00  0000
+09/04/97  16:00:00  0000
+09/04/97  16:30:00  0000
+09/04/97  17:30:00  0000
+09/04/97  19:00:00  0000
+09/05/97  11:00:00  0000
+09/05/97  12:00:00  0000
+09/05/97  12:30:00  0000
+09/05/97  13:00:00  0000
+09/05/97  13:30:00  0000
+09/05/97  14:00:00  0000
+09/05/97  14:30:00  0000
+09/05/97  15:00:00  0000
+09/05/97  15:30:00  0000
+09/05/97  16:00:00  0000
+09/05/97  16:30:00  0000
+09/05/97  17:00:00  0000
+09/05/97  18:00:00  0000
+09/05/97  18:30:00  0000
+09/05/97  19:00:00  0000
+09/05/97  19:30:00  0000
+09/06/97  13:00:00  0000
+09/06/97  13:30:00  0000
+09/06/97  14:00:00  0000
+09/06/97  15:00:00  0000
+09/06/97  15:30:00  0000
+09/06/97  16:00:00  0000
+09/06/97  16:30:00  0000
+09/06/97  17:00:00  0000
+09/06/97  17:30:00  0000
+09/06/97  18:30:00  0000
+09/06/97  19:30:00  0000
+09/06/97  21:00:00  0000
+09/06/97  21:30:00  0000
+09/06/97  22:00:00  0000
+09/07/97  10:30:00  0000
+09/07/97  11:30:00  0000
+09/07/97  12:30:00  0000
+09/07/97  13:00:00  0000
+09/07/97  13:30:00  0000
+09/07/97  14:00:00  0000
+09/07/97  16:30:00  0000
+09/07/97  17:00:00  0000
+09/07/97  17:30:00  0000
+09/07/97  18:00:00  0000
+09/07/97  18:30:00  0000
+09/07/97  19:00:00  0000
+09/07/97  19:30:00  0000
+09/07/97  20:00:00  0000
+09/07/97  20:30:00  0000
+09/08/97  01:00:00  0000
+09/08/97  11:00:00  0000
+09/08/97  12:00:00  0000
+09/08/97  13:00:00  0000
+09/08/97  13:30:00  0000
+09/08/97  14:00:00  0000
+09/08/97  14:30:00  0000
+09/08/97  15:30:00  0000
+09/08/97  16:00:00  0000
+09/08/97  16:30:00  0000
+09/08/97  17:00:00  0000
+09/08/97  18:00:00  0000
+09/08/97  18:30:00  0000
+09/08/97  19:30:00  0000
+09/08/97  20:00:00  0000
+09/08/97  20:30:00  0000
+09/08/97  21:00:00  0000
+09/09/97  10:30:00  0000
+09/09/97  11:00:00  0000
+09/09/97  11:30:00  0000
+09/09/97  12:00:00  0000
+09/09/97  12:30:00  0000
+09/09/97  13:00:00  0000
+09/09/97  13:30:00  0000
+09/09/97  14:00:00  0000
+09/09/97  14:30:00  0000
+09/09/97  15:00:00  0000
+09/09/97  16:00:00  0000
+09/09/97  16:30:00  0000
+09/09/97  17:30:00  0000
+09/09/97  18:00:00  0000
+09/09/97  18:30:00  0000
+09/09/97  19:00:00  0000
+09/09/97  19:30:00  0000
+09/09/97  20:00:00  0000
+09/09/97  20:30:00  0000
+09/09/97  21:30:00  0000
+09/10/97  11:30:00  0000
+09/10/97  12:00:00  0000
+09/10/97  12:30:00  0000
+09/10/97  13:00:00  0000
+09/10/97  13:30:00  0000
+09/10/97  14:30:00  0000
+09/10/97  15:00:00  0000
+09/10/97  16:30:00  0000
+09/10/97  17:00:00  0000
+09/10/97  17:30:00  0000
+09/10/97  18:00:00  0000
+09/10/97  19:00:00  0000
+09/10/97  19:30:00  0000
+09/10/97  20:00:00  0000
+09/10/97  20:30:00  0000
+09/10/97  21:00:00  0000
+09/10/97  21:30:00  0000
+09/14/97  13:30:00  0000
+09/14/97  16:00:00  0000
+09/14/97  17:00:00  0000
+09/15/97  12:30:00  0000
+09/15/97  13:00:00  0000
+09/15/97  16:00:00  0000
+09/15/97  16:30:00  0000
+09/15/97  18:30:00  0000
+09/15/97  19:00:00  0000
+09/15/97  19:30:00  0000
+09/16/97  14:30:00  0000
+09/16/97  15:00:00  0000
+09/16/97  17:30:00  0000
+09/16/97  18:00:00  0000
+09/16/97  19:00:00  0000
+09/16/97  19:30:00  0000
+09/16/97  20:00:00  0000
+09/17/97  12:30:00  0000
+09/17/97  13:00:00  0000
+09/17/97  13:30:00  0000
+09/17/97  14:00:00  0000
+09/17/97  14:30:00  0000
+09/17/97  15:30:00  0000
+09/17/97  16:00:00  0000
+09/17/97  16:30:00  0000
+09/17/97  17:00:00  0000
+09/17/97  18:00:00  0000
+09/17/97  18:30:00  0000
+09/17/97  19:00:00  0000
+09/17/97  19:30:00  0000
+09/17/97  20:00:00  0000
+09/17/97  20:30:00  0000
+09/18/97  13:00:00  0000
+09/18/97  13:30:00  0000
+09/18/97  14:00:00  0000
+09/18/97  14:30:00  0000
+09/18/97  15:00:00  0000
+09/18/97  15:30:00  0000
+09/18/97  16:00:00  0000
+09/18/97  16:30:00  0000
+09/18/97  17:00:00  0000
+09/18/97  17:30:00  0000
+09/18/97  18:00:00  0000
+09/18/97  18:30:00  0000
+09/18/97  19:00:00  0000
+09/18/97  19:30:00  0000
+09/18/97  20:00:00  0000
+09/18/97  20:30:00  0000
+09/26/97  13:30:00  0000
+09/26/97  14:00:00  0000
+09/27/97  15:00:00  0000
+09/28/97  13:30:00  0000
+
+October:
+
+TS: Two turbidity values were negative. One on 10/06/97 @ 13:00:00 (-0086 NTU) 
+was a single anomalous data point and was deleted (YSI attributes cause as an object passing 
+in front of the probe).  The other was slightly negative (-0000.1 NTU) and
+occurred on 10/12/97 @ 17:00:00.  This point is well within the detection range 
+of the instrument (+/- 0002 NTU) and was treated as 0000 NTU in the data set. 
+
+The following depth values were negative, were likely caused by changes in 
+atmospheric pressure (the probes were not exposed), and were left in the data set:
+
+Date      Time      Depth
+mm/dd/yy  hh:mm:ss   m
+10/28/97  05:30:00  -0.06
+10/28/97  06:00:00  -0.10
+10/28/97  06:30:00  -0.09
+10/28/97  07:00:00  -0.02
+
+All values deleted because probes were exposed at low tide due to the zero salinity and 
+low depth from 10/28/97 18:30:00 through 19:00:00.
+
+SK: The following negative dissolved oxygen and saturation values were recorded 
+(likely caused by probe failure).  The following were removed from the data set:
+
+Date      Time      DO   DO
+mm/dd/yy  hh:mm:ss  mg/L %
+10/28/97  12:00:00  -10.3     -087.5
+10/28/97  12:30:00  -11.8     -099.9
+10/28/97  13:00:00  -11.7     -099.9
+10/28/97  13:30:00  -11.5     -098.0
+10/28/97  14:00:00  -10.6     -090.8
+10/28/97  14:30:00  -09.2     -078.8
+10/28/97  15:00:00  -08.0     -068.5
+10/28/97  15:30:00  -07.0     -059.8
+10/28/97  16:00:00  -06.5     -055.5
+10/28/97  16:30:00  -06.5     -055.2
+10/28/97  17:00:00  -05.9     -050.0
+10/28/97  17:30:00  -05.3     -045.7
+10/28/97  18:00:00  -04.8     -041.0
+10/28/97  18:30:00  -04.2     -035.7
+10/28/97  19:00:00  -04.1     -035.0
+10/28/97  19:30:00  -03.5     -030.0
+10/28/97  20:00:00  -03.2     -027.6
+10/28/97  20:30:00  -03.0     -025.1
+10/28/97  21:00:00  -02.6     -022.3
+10/28/97  21:30:00  -02.6     -021.9
+10/28/97  22:00:00  -02.5     -021.3
+10/28/97  22:30:00  -02.6     -021.9
+10/28/97  23:00:00  -02.5     -021.1
+10/28/97  23:30:00  -01.7     -014.6
+10/29/97  00:00:00  -01.8     -014.8
+10/29/97  00:30:00  -01.4     -011.3
+10/29/97  01:00:00  -01.6     -013.0
+10/29/97  01:30:00  -01.6     -013.3
+10/29/97  02:00:00  -01.1     -008.8
+10/29/97  02:30:00  -00.8     -006.7
+10/29/97  03:00:00  -00.7     -006.0
+10/29/97  03:30:00  -00.3     -002.7
+10/29/97  04:00:00  -00.4     -003.4
+10/29/97  04:30:00  -00.6     -005.0
+10/29/97  05:00:00  -00.3     -002.6
+10/29/97  05:30:00  -00.2     -001.7
+10/29/97  06:00:00  00.0 -000.1
+10/29/97  06:30:00  -00.2     -002.0
+10/29/97  07:00:00  -00.8     -006.2
+
+The remaining DO and %sat values for the month (10/29/97 7:30:00 thru 10/31/97 
+23:30:00) were positive but are suspect because of the failing probes.  These data were 
+also removed from the set.
+
+The following turbidity values were slightly negative (-0000.1NTU)(appear as 
+0000NTU since these are rounded to nearest whole number by CDMO Excel macros).  Theses values 
+were left in dataset and treated as 0000 NTU since they are well within the detection limit 
+of +/- 0002NTU of the instrument.
+ 
+Date      Time      Turb
+mm/dd/yy  hh:mm:ss   NTU
+10/18/97  14:00:00  0000
+10/18/97  14:30:00  0000
+10/18/97  15:30:00  0000
+10/18/97  16:00:00  0000
+10/18/97  17:00:00  0000
+10/18/97  17:30:00  0000
+10/20/97  15:00:00  0000
+10/22/97  12:30:00  0000
+10/22/97  14:30:00  0000
+10/22/97  15:00:00  0000
+10/23/97  12:30:00  0000
+10/23/97  14:30:00  0000
+10/23/97  15:00:00  0000
+10/23/97  15:30:00  0000
+10/24/97  14:00:00  0000
+10/24/97  15:30:00  0000
+10/24/97  16:00:00  0000
+10/24/97  16:30:00  0000
+
+November
+
+TS: The following turbidity values were negative but were left in the data set 
+since I could not determine if they were erroneous:
+
+Date                Time      Turb
+mm/dd/yy   hh:mm:ss   NTU
+11/26/97     13:30:00    -0016
+11/26/97     14:00:00    -0024
+11/26/97     14:30:00    -0019
+
+All values deleted because probes were exposed at low tide due to the zero salinity and 
+low depth from 11/27/97 16:00:00 through 20:30:00.
+
+SK: During the deployment of an instrument (10/28/97 12:00:00 - 11/12/97 
+13:00:00) the dissolved oxygen sensor recorded many negative values for percent saturation and 
+concentration of oxygen.  The values collected from 11/01/97 00:00:00 through 11/12/97 
+13:00:00 were unusually low, are not reliable, and have been removed from the dataset.
+
+December:
+
+TS: The following data are missing (removed) because the probes were exposed at 
+low tide: 12/02/97 09:30:00; 12/02/97 21:30:00 - 22:30:00; 12/03/07 09:00:00 - 11:00:00; 
+12/14/97 20:30:00 - 21:30:00
+
+All values deleted because probes were exposed at low tide due to the zero salinity and 
+low depth from 12/15/97 07:30:00 through 09:30:00.
+
+TS: The following negative depth values were recorded, all were likely caused by 
+changed in atmospheric pressure (no evidence that the probes were exposed to air) and were 
+left in the data set (note that 0.00 values were slightly negative but were rounded up to 0.00 by 
+the CDMO Excel macros):
+
+Date      Time      Depth
+mm/dd/yy  hh:mm:ss   m
+12/01/97  21:30:00  -0.02
+12/01/97  22:00:00  -0.02
+12/02/97  08:30:00  -0.01
+12/02/97  09:00:00  -0.01
+12/02/97  10:00:00  -0.01
+12/03/97  22:00:00  -0.02
+12/03/97  22:30:00  -0.02
+12/07/97  02:00:00  -0.03
+12/07/97  13:30:00  -0.01
+12/07/97  14:00:00  -0.02
+12/08/97  01:30:00  -0.01
+12/08/97  02:00:00  -0.03
+12/08/97  02:30:00  -0.04
+12/08/97  03:00:00  -0.03
+12/14/97  07:30:00  -0.02
+12/14/97  08:00:00  -0.04
+
+The following negative turbidity values were collected but were unexplainable so 
+were left in the dataset:
+Date       Time          Turb (NTU)
+12/06/97  21:30:00     -0064
+12/0697   22:00:00      -0037
+12/06/97 22:30:00       -0037
+12/15/97 19:30:00       -0021
+
+A negative turbidity spike occurred on 12/14/97 @ 22:00:00 and was removed since 
+it was likely caused by the turbidity probe being exposed for the previous hour.
+
+SK: Negative depth occurred on 12/29/97 10:00:00 because instrument was 
+retrieved prior to this sample being taken.  All data for this date/time were removed.
+
+Shortly after the 12/14/97 17:00:00 deployment, all DO and DO% values dropped 
+rapidly to below 5.0%.  Post deployment calibration check indicated very low DO% (39.3%).  
+All DO and DO% data from 12/14/97 17:00:00 to end of deployment (12/29/97 09:30:00) were 
+removed. Cause is unknown but likely caused by faulty DO sensor.
+
+11.  Missing Data 
+
+TN: April - December.  Note that no instruments were deployed at this site 
+during 1997.  Review of the 1996 data indicated that the deployment site was exposed during daily low 
+tides.  A new site has been identified and we hope to deploy instruments at TN in 1998.
+
+April:
+
+TS:  No data collected for entire month.  Delay caused by snow and ice storm on 
+04/01/97 that downed trees and prevented access to deployment site.
+
+SK: No data collected from 04/01/97 00:00:00 through 04/23/97 10:00:00.  
+Instrument not deployed.  Delay caused by snow and ice storm on 04/01/97 that downed trees and 
+prevented access to deployment site.
+
+No salinity data collected from 04/23/97 10:30:00 through end of
+month (site is freshwater, so salinity range is 0.0 to 0.2 ppt).
+
+Dissolved oxygen and percent saturation data were too high.  Post deployment 
+calibration check indicated the dissolved oxygen sensor was bad.  All oxygen data collected from 
+04/23/97 at 10:30:00 through end of month have been removed.
+
+May
+
+TS:  No data collected from 05/01/97 00:00:00 through 05/09/97 11:00:00.  
+Instrument not deployed.  Delay caused by snow and ice storm on 04/01/97 that downed trees and 
+prevented access to deployment site.
+
+No salinity data collected from 05/09/97 11:30:00 through end of
+month (site is freshwater, so salinity range is 0.0 to 0.01 ppt).
+
+Dissolved oxygen or oxygen saturation from 05/09/97 11:30:00 through end of 
+month deleted. All were too high (over 140% saturation) due to faulty probe.
+
+SK: Dissolved oxygen and percent saturation values were too high from 05/01/97 
+00:00:00 through 05/08/97 14:00:00 and were removed from the dataset.  Post deployment 
+check indicated the sensor went bad.
+
+No salinity data collected from 05/01/97 00:00:00 - 05/08/97 14:00:00, program 
+error (freshwater site, salinity range 00.0 to 00.2 ppt).
+
+No data collected 05/08/97 14:30:00 due to instruments being swapped (retrieval 
+with new deployment).
+
+June
+
+TS: All dissolved oxygen and percent saturation values from 06/01/97 00:00:0 
+through 06/05/97 10:30:00 were too high (all over 100%) due to a faulty probe.  All values were 
+deleted.
+
+All dissolved oxygen and percent saturation values from 06/26/97 10:00:00 
+through 06/30/97 23:30:00 were questionable due to a faulty probe.  All values were 
+deleted.
+
+No salinity data were collected from 06/01/97 00:00:00 through 06/05/97 10:30:00 
+due to programming error (site is tidal freshwater so salinity ranges from 0.00 to 0.2 
+ppt).
+
+No temp., salin., cond., DO, or %DO from 06/05/97 11:00:00 through 06/26/97 
+09:30:00 was collected because probe was not deployed for this sampling period.  Probe was 
+sent to YSI for servicing or replacement.  Probe was replaced and data collection resumed on 
+06/26/97 at 10:00:00.  
+
+SK: No data collected 06/05/97 12:30:00, instruments were being swapped.
+
+No salinity, conductivity, temp., or oxygen data collected from 06/05/97 
+13:00:00 - 06/26/97 14:00:00.  Probe was not deployed for this sampling period, it was removed and 
+sent to YSI for servicing or replacement.
+
+No data were collected 06/26/97 14:30:00 - 15:30:00, instruments were being 
+swapped.
+
+No salinity data collected from 06/26/97 16:00:00 - 06/30/97 23:30:00, program 
+error (freshwater site, salinity range 00.0 to 00.2 ppt).
+
+July:
+
+TS: All dissolved oxygen and percent saturation values from 07/01/97 00:00:00 
+through 07/16/97 17:00:00 were questionable due to a faulty probe.  All values were 
+deleted.
+
+SK: No salinity data collected from 07/01/97 00:00:00 - 07/16/97 18:00:00 and 
+again from 07/25/97 14:00:00 - 07/31/97 23:30:00, program error (freshwater site, salinity 
+range 00.0 to 00.2 ppt).
+
+No data collected from 07/16/97 18:30:00 - 07/19/97 16:30:00 (waiting for 
+salin., cond., temp., oxygen probe).
+
+No salin., cond., temp., oxygen data from 07/19/97 17:00:00 - 07/25/97 13:30:00 
+(new or serviced probe not arrived, deployed instrument without this probe).
+
+August:
+
+TS: During a deployment starting on 08/06/97 at 09:00:00, the dissolved oxygen 
+and percent saturation values began to drift to high values.  Post deployment check of the 
+instrument indicated the DO sensor on this probe had gone bad during deployment.  Since we 
+could not determine which values were good and which were affected, all values from 
+08/06/97 09:00:00 through the end of the month were deleted.
+
+SK:  No salinity data collected from 08/01/97 00:00:00 - 08/23/97 13:00:00, 
+program error (freshwater site, salinity range 00.0 to 00.2 ppt).
+No DO or DO% data 08/23/97 13:30:00 through 08/31/97 23:30:00.  Most values too 
+high (over 150%) and very erratic.  Likely membrane was punctured.  These data were 
+removed.
+
+September:
+
+TS:  During the deployment period starting on 08/06/97 at 09:00:00 through 
+09/05/97 at 08:00:00, the dissolved oxygen and percent saturation values began to drift to 
+high values.  
+Post deployment check of the instrument indicated the DO sensor on this probe had 
+gone bad during deployment. Since we could not determine which values were good and which were 
+affected, all values from 09/01/97 00:00:00 through 09/05/97 @ 08:00:00 were deleted.
+
+No data were collected from 09/05/97 @ 08:30:00 through 09/17/97 @ 08:00:00.  
+Instrument not deployed.
+
+No salinity data were collected from 09/17/97 08:30:00 through end of month due 
+to programming error (site is tidal freshwater so salinity ranges from 00.0 to 00.2 
+ppt).
+
+SK:
+
+No DO or DO% data 09/01/97 00:00:00 through 09/19/97 12: 00:00.  Most values too 
+high (over 150%) and very erratic.  Likely membrane was punctured.  These data were 
+removed.
+
+No data collected 09/19/97 12:30 - 13:30.  Instrument not deployed.
+
+October
+
+TS:  One turbidity value recorded on 10/06/97 @ 13:00:00 (-0086 NTU) was a 
+single anomalous data point and was deleted.  Cause was likely probe blockage.
+
+No salinity data were collected from 10/01/97 00:00:00 through 10/08/97 09:30:00 
+due to programming error (site is tidal freshwater so salinity ranges from 00.0 to 00.2 
+ppt).
+
+No data were collected on 10/08/97 10:00:00, instruments were being swapped.
+
+No data were collected on 10/28/97 14:00:00 and 14:30:00, instruments were being 
+swapped (one retrieved and a new instrument deployed) at this site.
+
+All values deleted because probes were exposed at low tide due to the zero salinity and 
+low depth from 10/28/97 18:30:00 through 19:00:00.
+
+SK: No data collected 10/07/97 17:00:00 - 10/09/97 15:30:00 and 10/27/97 
+17:00:00 - 10/28/97 11:30:00.  Instrument was being cleaned and calibrated.
+
+No salinity data  10/28/97 12:00:00 through 10/31/97 23:30:00 due to
+programming error (site is tidal freshwater so salinity ranges from 00.0 to 00.2 
+ppt).
+
+All dissolved oxygen and percent saturation data from 10/28/97 12:00:00 through 
+10/31/97 23:30:00 were removed because of the negative values collected during this 
+deployment period.
+
+November:
+
+TS: No data were collected from 11/12/97 05:00:00 through 08:00:00.  The 
+instrument failed to turn on and collect data.  This was likely caused by the cold water (6.9 degrees 
+C at 04:30:00) which dropped the battery voltage to 6.1 at 04:30:00.  The instrument resumed 
+data collection at 08:30:00 (battery voltage @ 6.0, water temperature @ 8.6 degrees C).  
+
+No data were collected from 11/12/97 15:30:00 through 11/26/97 09:30:00.  
+Instrument data storage module filled during deployment, and all data for this collection period 
+were lost automatically.
+
+All values deleted because probes were exposed at low tide due to the zero salinity and 
+low depth from 11/27/97 16:00:00 through 20:30:00.
+
+SK: During the deployment of an instrument (10/28/97 12:00:00 - 11/12/97 
+13:00:00) the dissolved oxygen sensor recorded many negative values for percent saturation and 
+concentration of oxygen.  Because of this all dissolve oxygen and percent saturation from 
+11/01/97 00:00:00 through 11/12/97 13:00:00 have been removed from the dataset.
+
+No salinity data were collected from 11/01/97 00:00:00 through 11/12/97 13:00:00 
+due to programming error (site is tidal freshwater so salinity ranges from 0.0 to 0.2 
+ppt).
+
+No data 11/25/97 14:00:00 - 14:30:00.  Instruments swapped in the field.
+
+No data 11/26/97 @ 11:00:00.  Instrument was checked in the field for memory 
+space.
+
+December:
+
+TS: The following data are missing because the probes were exposed at low tide:
+12/02/97 09:30:00; 12/02/97 21:30:00 - 22:30:00; 12/03/07 09:00:00 - 11:00:00; 
+12/14/97 20:30:00 - 21:30:00
+
+A negative turbidity spike occurred on 12/14/97 @ 22:00:00 and was removed since 
+it was  likely caused by the turbidity probe being exposed for the previous hour.
+
+The instrument was retrieved for the year on 12/19/97 @ 11:30:00 due to ice, 
+snow, and cold water temperatures.  No data were collected from 12/19/97 11:30:00 through end 
+of month.
+
+All values deleted because probes were exposed at low tide due to the zero salinity and 
+low depth from 12/15/97 07:30:00 through 09:30:00.
+
+SK: No data 12/09/97 13:30:00 to 12/14/97 16:30:00.  No data, instrument not 
+deployed due to weather.
+
+ Negative depth occurred on 12/29/97 10:00:00 because instrument was retrieved 
+prior to this sample being taken.  All data for this date/time were removed.
+
+Shortly after the 12/14/97 17:00:00 deployment, all DO and DO% values dropped 
+rapidly to below 5.0%.  Post deployment calibration check indicated very low DO% (39.3%).  
+All DO and DO% data from 12/14/97 17:00:00 to end of deployment (12/29/97 09:30:00) were 
+removed. Cause is unknown but likely caused by faulty DO sensor.
+
+No salinity data were collected from 12/14/97 17:00:00 through 12/29/97 09:30:00 
+due to programming error (site is tidal freshwater so salinity ranges from 0.00 to 0.2 
+ppt).
+
+No data was collected 12/29/97 10:00 thru 12/31/97 23:30; instruments retrieved 
+for the  year.

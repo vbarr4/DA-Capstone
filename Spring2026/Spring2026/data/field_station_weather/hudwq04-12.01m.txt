@@ -1,0 +1,849 @@
+Hudson River (HUD) NERR Water Quality Metadata 
+(April - Dec. 2001)
+Latest Update: June 30, 2021
+
+I. Data Set & Research Descriptors
+
+1.   Principal Investigator: William C. Nieder, Research Coordinator
+
+Contact Persons:
+William C. Nieder, Research Coordinator, email: cnieder@gw.dec.state.ny.us
+Erik Bedan, Research Assistant, email: esbedan@gw.dec.state.ny.us
+
+Hudson River NERR
+c/o Bard College Field Station
+Annandale, NY 12504
+Phone: 845-758-7010
+Fax: 845-758-7033
+
+2.   Entry Verification:
+
+	The CDMO cdmomac3.xls macro will allow the user to automatically format 
+column widths to the correct number of decimal places based on YSI sensor 
+specifications.  It also allows the user to QA/QC each data logger generated 
+file for missing data points, fill all cells that do not contain data with 
+periods, and find all data points that fall outside the range of what the data 
+logger is designed to measure (outliers).  The CDMO import.xls macro will allow 
+PC users with 30-minute data to automatically create a monthly Excel file from a 
+two-week deployment and insert periods for missing data.  In addition, in 
+November 1999 a graphing capability was added to this macro allowing users to 
+produce single parameter and missing data point graphs on a monthly basis.  
+Questionable data are either deleted or identified in section II.10.	Persons 
+responsible for data verification are theResearch Coordinator and Research 
+Assistant, Erik Bedan.
+
+3.   Research Objectives:
+
+	Measurements are taken every 30 minutes over a two to four week period 
+from April 1 through the end of December of each year at three locations within 
+the Tivoli Bays component of the Hudson River NERR.  One datalogger monitors 
+tributary water (Saw Kill Creek) entering one bay and two dataloggers monitor 
+the Hudson River water flooding and ebbing to and from both bays (Tivoli South 
+Bay and Tivoli North Bay).  The objective of this study is to monitor the 
+quality of the surface water entering (via stream flow and tidal exchange) and 
+leaving (via tidal exchange) Tivoli South Bay and Tivoli North Bay.  This will 
+help us understand the relative importance on each source of water in Tivoli 
+Bays.  The Reserve staff has identified urban and residential land use practices 
+as having a major influence on the water chemistry of the Saw Kill Creek.  Since 
+residential coverage continues to increase, we hope that the intensive 
+monitoring of the surface waters in this watershed will identify trends caused 
+by this rapid development.
+
+4.   Research Methods:  
+
+	Three YSI 6-series dataloggers have been placed at the Tivoli Bays 
+component site of the Reserve.  The Saw Kill Creek and Tivoli South instruments 
+are deployed at 0.5 and 0.5 meters respectively off the bottom in vertically 
+mounted perforated PVC tubes.  The Tivoli North instrument is deployed in a 
+rectangular 24"x13"x13" cage with 1/2 inch plastic coated mesh and weighed down 
+with 4 bricks zip tied to the cage.  The sonde is placed horizontally in the 
+cage, strapped in with bungee cords and rests .25 meters from the bottom of the 
+cage.  The cage is tied to a woodpile and rests on the bottom, also a cable is 
+attached to the top of the cage and the other end is anchored to the sediment.  
+Instruments are deployed for two to four week duration from April through 
+December of each year.  Data are collected at 30 min. intervals. After 
+instruments are retrieved, instrument calibration is checked against standards, 
+data are uploaded, and instrument probes are serviced.  Before each YSI 6-series 
+datalogger is deployed, calibration and maintenance is performed following the 
+manufacturer's instructions (YSI Manual, sections 3,4, and 7 as well as the YSI 
+6-series operations manual). Data are uploaded via a cable to a desktop 
+computer. Calibration standards are required for pH, turbidity, and 
+conductivity; all other parameters are calibrated as described in the manual.  
+pH buffer solutions for 2 point calibration (pH 7 and 10), conductivity and 
+turbidity standards are purchased pre-made from a scientific supply company. The 
+dissolved oxygen membranes are replaced before deployment, and are allowed to 
+equilibrate for at least 24 hrs prior to deployment. 
+
+5.   Site Location and Character:
+
+	The Hudson River National Estuarine Research Reserve (HUDNERR) is a 
+multicomponent site composed of approximately 5,000 acres of tidal wetland, open 
+water, and adjacent upland buffer habitat.  The four component sites of the 
+Reserve are located on the Hudson River in New York State by river miles (RM) 
+proceeding north from the southern tip of Manhattan.  These include: Stockport 
+Flats (RM 124)(42º 02'30"N 73º 46'00"W), Columbia County; Tivoli Bays (RM 
+98)(42º 02'15"N 73(55'10"W), Dutchess County; and Iona Island (RM 45)(41º 
+18'15"N 73(58'45"W) and Piermont Marsh (RM 24)(41º 02'30"N 73º 54'15"W), 
+Rockland County.  These four components are located along 100 miles of the 
+Hudson River and are representative of the diverse plant and animal communities 
+that occupy the salinity gradient within the Hudson estuary.  Development within 
+the watersheds of Hudson River NERR component sites ranges from predominantly 
+urban/suburban to forested/agricultural.  The three YSI 6-series dataloggers are 
+placed at the Tivoli Bays component site.  The Saw Kill (SK) (latitude 42? 01' 
+01.543" N, longitude 73º 54' 53.589" W) drains a 26.6 square mile (6886.5 
+hectares) is the main tributary flowing into Tivoli South Bay.  Some 
+characteristics of the Saw kill include a rocky bottom type, and a watershed 
+that is characterized as a highly mixed land use watershed.  Tivoli South Bay 
+(TS) (latitude 42? 01' 37.336" N, longitude 73? 55' 33.445" W) is the receiving 
+body for the Saw Kill.  This bay is a tidal freshwater wetland with a tidal 
+range of 3.9 ft. (1.19 m).  The bottom type at Tivoli South Bay is soft, 
+silt/clay.  The dominant land uses within this watershed include: forested 
+(51.1%), agriculture (25.8%), and urban (16.5%) areas.  Tivoli North Bay (TN) 
+(latitude 42? 02' 11.56464" N, longitude 73? 55' 31.16645" W) is a freshwater 
+tidal marsh dominated by Typha angustifolia.  The primary watershed to TN is 23 
+square miles in size and is dominated by agricultural lands.  Tivoli North Bay 
+has a tidal range of 3.9 ft (1.19 m) as well.  The Stony Creek is the principle 
+tributary flowing into Tivoli North Bay. SK, TS, and TN are all freshwater sites 
+(0.0 ppt salinity) with water depth ranges from 0.0 to 2.0m at TS and TN, while 
+water depth is 1.0 to 2.0m at SK.
+
+6.   Data collection period:
+	YSI 6-series datalogger sampling at the Saw Kill (SK) and Tivoli South Bay 
+(TS) began during May, 1995.  Sampling at Tivoli North Bay (TN) began during 
+July,1996, however ceased in 1997-1998 because at low tide the instrument was 
+exposed.  In 1999 an alternate site was established for Tivoli North and 
+sampling began in July of 1999 .  All sampling is ongoing, however, we cannot 
+sample from approximately mid December through March 31 due to winter storms and 
+ice on the Hudson River and the tributaries.  The YSI6600 datalogger was 
+deployed at the Tivoli South Bay site replacing the YSI6000 starting on July 1, 
+1999 @ 15:30:00. 
+
+Dates and times for site deployments and retrievals:
+
+Site	Deployment Date	Deployment Time	Retireval Date	Retrieval Time
+	mm/dd/yy		hh:mm			mm/dd/yy		hh:mm		
+SK	04/10/01		12:30			05/02/01		11:45	
+SK	05/02/01		15:00			05/15/01		11:25	
+SK	05/15/01		15:30			06/01/01		10:06	
+SK	06/01/01		15:00			06/28/01		12:45	
+SK	06/28/01		13:00			07/16/01		12:10	
+SK	07/16/01		12:30			07/31/01		11:10	
+SK	07/31/01		12:00			08/16/01		12:15	
+SK	08/16/01		13:00			09/06/01		13:35	
+SK	09/06/01		14:00			09/28/01		12:10	
+SK	09/28/01		12:30			10/24/01		11:45	
+SK	10/24/01		12:00			11/14/01		15:05	
+SK	11/14/01		15:30			12/07/01		14:55	
+SK	12/07/01		15:30			12/21/01		9:15	
+										
+TN	04/23/01		9:00			05/03/01		14:51	
+TN	05/03/01		15:00			05/30/01		13:58	
+TN	05/30/01		14:00			06/26/01		11:15	
+TN	06/26/01		11:30			07/13/01		12:20	
+TN	07/13/01		12:30			07/31/01		14:15	
+TN	07/31/01		15:00			08/15/01		13:35	
+TN	08/15/01		14:00			09/05/01		7:45	
+TN	09/05/01		8:00			09/20/01		11:35	
+TN	09/20/01		11:30			10/04/01		10:20	
+TN	10/04/01		10:30			10/18/01		11:15	
+TN	10/18/01		10:30			11/02/01		8:40	
+TN	11/02/01		9:00			11/16/01		8:35	
+TN	11/16/01		9:00			11/30/01		8:45	
+TN	11/30/01		9:00			12/21/01		10:50	
+										
+TS	04/10/01		10:00			05/03/01		13:28	
+TS	05/04/02		9:00			05/23/01		8:40	
+TS	05/23/01		12:30			06/08/01		11:02	
+TS	06/08/01		14:30			06/25/01		8:37	
+TS	06/25/01		11:30			07/13/01		12:00	
+TS	07/13/01		12:30			07/26/01		12:40	
+TS	07/26/01		13:00			08/25/01		13:25	
+TS	08/28/01		13:30			09/18/01		11:45	
+TS	09/18/01		11:45			10/04/01		10:00	
+TS	10/04/01		10:00			10/19/01		10:35	
+TS	10/19/01		11:00			11/01/01		10:20	
+TS	11/01/01		10:20			11/16/01		8:45	
+TS	11/16/01		9:00			11/29/01		14:15	
+TS	11/29/01		14:30			12/21/01		11:00		
+										
+7. Distribution
+
+According to the Ocean and Coastal Resource Management Data Dissemination Policy 
+for the NERRS System-wide Monitoring Program, is as follows.
+
+NOAA/ERD retains the right to analyze, synthesize and publish summaries of the 
+NERRS System-wide Monitoring Program data.  The PI retains the right to be fully 
+credited for having collected and processed the data.  Following academic 
+courtesy standards, the PI and NERR site where the data were collected will be 
+contacted and fully acknowledged in any subsequent publications in which any 
+part of the data are used.  Manuscripts resulting from the NOAA/OCRM supported 
+research that are produced for publication in open literature, including 
+refereed scientific journals. Will acknowledge that the research was conducted 
+under an award from the Estuarine Reserves Division, Office of Ocean and Coastal 
+Resource Management, National Ocean Service, National Oceanic and Atmospheric 
+Administration.  The data set enclosed within this package/transmission is only 
+as good as the quality assurance and quality control procedures outlined by the 
+enclosed metadata reporting statement.  The user bears all responsibility for 
+its subsequent use/misuse in any further analyses or comparisons.  The Federal 
+government does not assume liability to the Recipient or third persons, nor will 
+the Federal government reimburse or indemnify the Recipient for its liability 
+due to any losses resulting in any way from the use of this data.  
+
+NERR water quality data and metadata can be obtained from the Research 
+Coordinator at the individual NERR site (please see Section 1 Principal 
+investigators and contact persons), from the Data Manager at the Centralized 
+Data Management Office (please see personnel directory under the general 
+information link on the CDMO home page) and online at the CDMO home page 
+http://cdmo.baruch.sc.edu.  Data are available in text tab-
+delimited format, Microsoft Excel spreadsheet format and comma-delimited format.
+
+
+8.   Associated researchers and projects:
+
+	Hudson River NERR Water Quality Monitoring: Physical and chemical 
+constituents of the tributary waters discharging into HUDNERR marshes and marsh 
+waters during ebb tides are measured monthly and during storm events. 
+Concentrations of nitrate, phosphate, sulphate, dissolved oxygen (DO), and 
+chloride are measured, as well as, seston, alkalinity, pH, temperature, 
+salinity, and conductivity.	Saw Kill Water Quality Monitoring:  The surface 
+water draining from five subcatchments representing five dominant land use 
+practices within the Saw Kill have been monitored during several storm events. 
+These five land use practices include: row crop agriculture, orchard, 
+residential, solid waste landfill, and forested. All of the above constituents 
+have been monitored during this project.	
+	Associated researchers with the work at Tivoli Bays include:  scientists 
+from the Institute of Ecosystem Studies, Millbrook, NY; Yale School of Forestry 
+and Environmental Studies, New Haven, CT; and Rensselaer Polytechnic Institute, 
+Troy, NY.
+
+II. Physical Structure Descriptors
+
+9. Variable sequence, range of measurements, units, resolution, and accuracy:
+
+YSI 6000/6600 datalogger
+
+Variable      Range of Measurements          Resolution           Accuracy
+Date          1-12, 1-31, 00-99 (Mo,Day,Yr)  1 mo, 1 day, 1 yr    NA
+Time          0-24, 0-60, 0-60 (Hr,Min,Sec)  1 hr, 1 min, 1 s     NA
+Temp               -5 to 45 (c)              0.01  C              +/-0.15C
+Sp COND            0-100(mS/cm)              0.01mS/cm            +/-0.5% Of 
+reading + 0.001mS/Cm
+Salinity      0-70 Parts per thousand (ppt)  0.01 ppt             +/- 1% of 
+reading or 0.1 ppt, (whichever is greater)
+DO            0-200 (% air saturation)       0.1% @air sat        +/-2% @air 
+saturation
+DO            200-500 (% air saturation      0.1% @ air sat       +/- 6% @ 
+saturation
+DO                 0-20 (mg/l)               0.01 mg/l            +/- 0.2mg/l
+DO                 20-50 (mg/l)              0.01 mg/l            +/- 0.6mg/l
+Depth (shallow)    0-9.1 (m)                 0.001m               +/- 0.018m
+PH                 2-14 units                0.01 units           +/- 0.2units
+Turb               0-1000 NTU                0.1 NTU              +/- 5% of 
+reading or 2 NTU (whichever is greater)
+
+Data columns are separated by tabs.  Each file contains a two line column header 
+at the top of the page which identifies measurements and units for each column.
+
+10.  Coded variable indicator and variable code definitions
+
+     Site definitions: 
+
+     SK = Saw Kill Creek
+     TN = Tivoli North Bay 
+     TS = Tivoli South Bay
+     
+
+11.  Data anomalies
+
+April
+
+SK
+The following anomalous DO data records occurred during the deployment due to an 
+unknown cause.  The following data were removed:
+Date		Time		DO	DO
+MM/DD/YY	hh:mm:ss	 % 	mg/L
+4/28/01		16:00:00	99.4	10.1	
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data were deleted:
+Date		Time		Turb
+MM/DD/YY	hh:mm:ss	 NTU 
+4/26/01		11:30:00	112
+
+TN
+No anomalous/deleted data to report.
+
+TS
+The probes were out of the water and exposed to the air at low tide. The 
+following data were deleted:
+Date		Time		Temp	SpCond	Sal	DO	DO	Depth	pH	
+	Turb
+MM/DD/YY	hh:mm:ss	 C	 mS/cm	ppt	%	mg/L	m		
+	NTU
+4/22/01	19:00:00	16.6	0.2		0.1	100.6	9.8	0	7.7	
+	130
+4/22/01	19:30:00	16.2	0.21		0.1	99.6	9.8	-0.01	7.8	
+	112
+4/22/01	20:00:00	15.9	0.21		0.1	98.9	9.8	-0.01	7.7		92
+4/23/01	8:00:00	11.9	0.22		0.1	99	10.7	-0.01	7.7		44
+4/23/01	8:30:00	12.9	0.25		0.1	100.8	10.6	0	7.8		41
+4/30/01	14:00:00	18.2	0.19		0.1	128.8	12.1	-0.01	8		45
+
+May
+
+SK
+No anomalous/deleted data to report.
+
+TN
+DO data was considered suspect during one deployment because the readings were 
+extraordinarily high. DO data were removed from the following:
+05/03/01 15:00 - 05/30/01 13:30
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data were deleted:
+Date		Time		Turb
+MM/DD/YY	hh:mm:ss	 NTU
+05/30/01	16:00:00	1603
+
+Negative turbidity readings occurred due to an unknown cause.  The following 
+turbidity data were removed:
+Date		Time		Turb
+05/06/2001	18:00:00	-932.0
+05/07/2001	08:30:00	-918.0
+05/07/2001	21:30:00	-928.0
+05/08/2001	08:00:00	-918.0
+05/08/2001	10:30:00	-921.0
+05/10/2001	12:30:00	-931.0
+05/11/2001	00:00:00	-932.0
+05/11/2001	12:30:00	-933.0
+05/13/2001	12:30:00	-30.0
+05/13/2001	15:00:00	-936.0
+05/13/2001	16:30:00	-935.0
+05/15/2001	03:00:00	-927.0
+05/15/2001	16:30:00	-560.0
+05/20/2001	06:30:00	-182.0
+05/20/2001	17:30:00	-941.0
+05/22/2001	07:30:00	-66.0
+05/22/2001	09:30:00	-931.0
+05/28/2001	14:30:00	-489.0
+
+TS
+The probes were out of the water and exposed to the air at low tide. The 
+following data were deleted:
+Date		Time		Temp	SpCond	Sal	DO	DO	Depth	pH	
+	Turb
+MM/DD/YY	hh:mm:ss	 C	 mS/cm	ppt	%	mg/L	m		
+	NTU
+5/1/01	14:30:00	19.5	0.2		0.1	114.7	10.5	0	7.8		57
+5/1/01	15:00:00	20.4	0.23		0.1	118.4	10.7	-0.01	7.9		53
+5/4/01	17:30:00	20.5	0.2		0.1	102.6	9.2	0	7.7		44
+5/4/01	18:00:00	20.8	0.22		0.1	101.4	9.1	0	7.8		43
+5/5/01	06:30:00	13.5	0.16		0.1	91.9	9.6	-0.01	7.4		99
+5/5/01	18:00:00	16.6	0.16		0.1	97.1	9.5	-0.01	7.5	
+	123
+5/5/01	18:30:00	16.5	0.06		0	96.1	9.4	-0.01	7.5	
+	112
+5/5/01	19:00:00	15.4	0.14		0.1	100.1	10	-0.01	7.6		51
+5/13/01	12:00:00	19	0.22		0.1	108.2	10	0	7.9		98
+5/13/01	12:30:00	19.4	0.23		0.1	109.2	10	-0.01	8		90
+5/13/01	13:00:00	19	0.21		0.1	108	10	-0.01	7.8		78
+5/31/01	15:30:00	19.6	0.24		0.1	119.7	11	-0.01	8.1		43
+5/31/01	16:00:00	19.6	0.25		0.1	117.4	10.8	-0.02	8.1		31
+5/31/01	16:30:00	18.9	0.22		0.1	115.7	10.7	-0.01	8		47
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data were deleted:
+Date		Time		Turb
+05/17/2001	11:30:00	1381.0
+
+June
+
+SK
+
+The following turbidity data recorded high readings due to a rain event which 
+occurred during this time. The data were left in.
+Date		Time		Turb (NTU)
+06/03/2001	08:30:00	1046
+06/03/2001	09:00:00	838
+
+The following anomalous DO data records occurred during the deployment due to an 
+unknown cause.  The following data were removed:
+Date		Time		DO	DO
+MM/DD/YY	hh:mm:ss	 % 	mg/L
+6/22/01		04:30:00	99.7	9.2	
+6/22/01		05:00:00	100	9.2	
+6/22/01		05:30:00	87.2	8.1	
+
+TN
+
+The following turbidity data were outliers, but a rain event occurred during 
+this time. The data were left in.
+Date		Time		Turb
+06/03/2001	14:30:00	1214.0
+06/03/2001	15:00:00	1124.0
+
+TS
+
+The probes were out of the water and exposed to the air at low tide. The 
+following data were deleted:
+Date		Time		Temp	SpCond	Sal	DO	DO	Depth	pH	Turb
+MM/DD/YY	hh:mm:ss	 C	 mS/cm	ppt	%	mg/L	m		NTU
+6/21/01	20:00:00	22.6	0.25		0.1	81.7	7.1	-0.01	7.4	36
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data were deleted:
+Date		Time		Turb
+MM/DD/YY	hh:mm:ss	 NTU 
+06/11/2001	00:00:00	399
+06/15/2001	07:30:00	1105.0
+06/15/2001	22:00:00	1443.0
+06/24/2001	19:00:00	714
+
+Low DO readings, and it is probably due to a blocked probe. The following data 
+were removed:
+Date		Time		DO	DO	
+MM/DD/YY	hh:mm:ss	%	mg/L
+6/29/01		04:00:00	2.9	0.2
+6/29/01		04:30:00	1.1	0.1
+6/29/01		07:30:00	1.2	0.1
+6/29/01		08:00:00	1.1	0.1
+6/29/01		08:30:00	1	0.1
+
+July
+
+SK
+Depth data fluctuated anomalously, but precipitation does not necessarily 
+correlate and so the cause is unknown. The following depth data are suspect, but 
+all data were left in:
+07/02/01 06:30 - 07/16/01 12:00
+
+Negative turbidity readings occurred due to an unknown cause.  The following 
+turbidity data were removed:
+07/31/01 12:00:00 - 07/31/01 23:30:00	
+
+TN
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data were deleted:
+Date		Time		Turb
+MM/DD/YY	hh:mm:ss	 NTU 
+07/26/01	10:00:00	452
+07/26/01	17:30:00	279
+07/28/01	00:00:00	523
+
+TS
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data were deleted:
+Date		Time		Turb
+MM/DD/YY	hh:mm:ss	 NTU 
+07/03/2001	08:00:00	1476
+
+The probes were out of the water and exposed to the air at low tide. The 
+following data were deleted:
+Date		Time		Temp	SpCond	Sal	DO	DO	Depth	pH	Turb
+MM/DD/YY	hh:mm:ss	 C	 mS/cm	ppt	%	mg/L	m		NTU
+7/2/01	17:00:00	24	0.23		0.1	131	11	-0.01	8.7	28
+7/2/01	17:30:00	23.8	0.25		0.1	130.1	11	-0.01	8.7	36
+7/2/01	18:00:00	23.5	0.01		0	125.8	10.7	-0.01	8.7	31
+7/2/01	18:30:00	23.7	0.25		0.1	126.1	10.7	-0.01	8.6	34
+7/13/01	12:00:00	22.2	0		0	80.6	7	0	7.4	11
+7/26/01	12:30:00	23.3	0.19		0.1	59.1	5	-0.01	7.1	58	
+
+Low DO readings, and it is probably due to a blocked probe. The following data 
+were removed:
+Date		Time		DO	DO	
+MM/DD/YY	hh:mm:ss	%	mg/L
+7/5/01	5:00:00	7.6	0.7
+7/5/01	7:00:00	3.1	0.3
+7/9/01	15:00:00	3.1	0.3
+7/9/01	15:30:00	1.2	0.1
+
+August
+
+SK
+Negative turbidity readings occurred possibly due to an unknown cause. The 
+following turbidity data were removed:
+8/1/01 0:00:00 - 8/16/01 12:00:00
+
+The following anomalous DO data during the deployment, possibly due to blocked 
+probe.  The following data were removed:
+Date		Time		DO	DO
+MM/DD/YY	hh:mm:ss	% 	mg/L
+8/7/01	21:30:00	79.4	6.5	
+
+TN
+
+Negative turbidity readings occurred possibly due to an unknown cause. The 
+following turbidity data were removed:
+Date		Time		Turb
+08/19/2001	18:30:00	-31.0
+08/21/2001	05:00:00	-135.0
+08/29/2001	22:00:00	-06.0
+08/29/2001	22:30:00	-672.0
+08/29/2001	23:00:00	-923.0
+08/31/2001	11:00:00	-925.0
+08/31/2001	13:30:00	-29.0
+
+TS
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data were deleted:
+Date		Time		Turb
+MM/DD/YY	hh:mm:ss	 NTU 
+08/15/01	2:00:00	670
+08/22/2001	18:00:00	1490
+
+September
+
+SK
+
+High DO readings, and it is probably due to a blocked probe. The following data 
+were removed:
+Date		Time		DO	DO	
+MM/DD/YY	hh:mm:ss	%	mg/L
+09/2/01	12:00:00	173.7	16
+09/2/01	12:30:00	179.3	16.4
+
+
+Negative turbidity readings occurred due to an unknown cause.  The following 
+turbidity data were removed:
+09/28/2001 	12:30:00 - 09/28/2001	17:00:00	
+09/28/2001	21:00:00
+09/29/2001	03:00:00 - 09/29/2001	03:30:00
+09/29/2001	04:30:00
+09/29/2001	06:00:00 - 09/29/2001	06:30:00
+09/29/2001	07:30:00 - 09/29/2001	08:00:00
+09/29/2001 	09:00:00 - 09/30/2001	23:30:00
+
+TN
+All data missing 09/05/01 08:00:00 - 09/20/01 11:30:00 due to programming error. 
+
+
+TS
+
+The probes were out of the water and exposed to the air at low tide. The 
+following data were deleted:
+Date		Time		Temp	SpCond	Sal	DO	DO	Depth	pH	Turb
+MM/DD/YY	hh:mm:ss	 C	 mS/cm	ppt	%	mg/L	m		NTU
+9/18/01	12:00:00	29.9	0.02		0	99.2	7.5	-0.28	7.8	50
+9/18/01	12:30:00	24.9	0.01		0	91.5	7.6	-0.31	7.8	64
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data were deleted:
+Date		Time		Turb
+MM/DD/YY	hh:mm:ss	 NTU 
+09/22/01	04:00:00	343
+09/28/01	19:00:00	399
+
+October
+
+SK
+Negative turbidity readings occurred due to an unknown cause.  The following 
+turbidity data were removed:
+10/01/2001	00:00:00 - 10/01/2001	00:30:00
+10/01/2001	01:30:00 - 10/01/2001	04:00:00 
+10/01/2001	05:00:00 - 10/01/2001	21:30:00
+10/01/2001	22:30:00 - 10/02/2001	03:30:00
+10/02/2001	04:30:00 - 10/02/2001	13:30:00
+10/02/2001	14:30:00 - 10/03/2001	03:00:00
+10/03/2001	04:00:00 - 10/03/2001	06:00:00
+10/03/2001	07:30:00 - 10/04/2001	01:00:00
+10/04/2001	02:00:00 - 10/04/2001	03:30:00
+10/04/2001	04:30:00 - 10/04/2001   05:00:00
+10/04/2001	06:00:00 - 10/04/2001	09:00:00
+10/04/2001	10:00:00 - 10/04/2001	12:30:00
+10/04/2001	13:30:00 - 10/04/2001	16:00:00
+10/04/2001	17:00:00 - 10/04/2001	20:30:00
+10/04/2001	21:30:00 - 10/05/2001	03:30:00
+10/05/2001	04:30:00 - 10/05/2001	05:00:00
+10/05/2001	06:00:00 - 10/05/2001	07:00:00
+10/05/2001	08:00:00 - 10/06/2001	00:00:00
+10/06/2001	01:00:00 - 10/06/2001	04:00:00
+10/06/2001	05:30:00 - 10/07/2001	05:00:00
+10/07/2001	06:00:00 - 10/07/2001	06:30:00
+10/07/2001	07:30:00
+10/07/2001	08:30:00 - 10/07/2001	09:00:00
+10/07/2001	10:00:00 - 10/08/2001	02:00:00
+10/08/2001	03:00:00 - 10/08/2001	06:00:00
+10/08/2001	07:30:00 - 10/10/2001	08:00:00
+10/10/2001	09:00:00 - 10/11/2001	04:30:00
+10/11/2001	08:00:00 - 10/11/2001	17:30:00
+10/11/2001	18:30:00 - 10/12/2001	00:30:00
+10/12/2001	01:30:00 - 10/12/2001	02:30:00
+10/12/2001	03:30:00 - 10/12/2001	04:30:00
+10/12/2001	05:30:00
+10/12/2001	06:30:00 - 10/12/2001	07:30:00
+10/12/2001	08:30:00 - 10/12/2001	21:00:00
+10/12/2001	22:00:00 - 10/13/2001	00:30:00
+10/13/2001	01:30:00 - 10/13/2001	02:30:00
+10/13/2001	03:30:00 - 10/13/2001	04:30:00
+10/13/2001	06:00:00 - 10/13/2001	22:00:00
+10/13/2001	23:00:00 - 10/14/2001	12:00:00
+10/14/2001	13:00:00 - 10/14/2001	21:00:00
+10/14/2001	22:00:00 - 10/14/2001	23:00:00
+10/15/2001	00:30:00 - 10/15/2001	01:30:00
+10/15/2001	17:00:00
+10/15/2001	18:00:00
+10/15/2001	20:00:00 - 10/15/2001	20:30:00
+10/16/2001	02:00:00
+10/16/2001	05:30:00
+10/16/2001	08:30:00 - 10/17/2001	01:30:00
+10/17/2001	02:30:00 - 10/17/2001	04:30:00
+10/17/2001	06:00:00
+10/17/2001	09:30:00 - 10/17/2001	11:00:00
+10/17/2001	12:00:00 - 10/18/2001	22:30:00
+10/18/2001	22:30:00 - 10/19/2001 	02:30:00	
+10/19/2001	05:00:00 - 10/19/2001	06:00:00
+10/19/2001	07:00:00 - 10/19/2001	07:30:00
+10/19/2001	09:30:00 - 10/19/2001	10:00:00
+10/19/2001	11:00:00 - 10/20/2001	05:00:00
+10/20/2001	06:30:00
+10/20/2001	09:00:00
+10/20/2001	10:00:00
+10/20/2001	12:30:00 - 10/20/2001	14:30:00
+10/20/2001	17:00:00 - 10/20/2001	18:30:00
+10/20/2001	19:30:00 - 10/20/2001	20:00:00
+10/20/2001	22:00:00 - 10/20/2001	22:30:00
+10/21/2001	00:00:00 - 10/21/2001	00:30:00
+10/21/2001	01:30:00 - 10/21/2001	03:00:00
+10/21/2001	04:00:00 - 10/21/2001	05:30:00
+10/21/2001	06:30:00 - 10/21/2001	07:30:00
+10/21/2001	08:30:00 - 10/22/2001	13:00:00
+10/22/2001	14:00:00 - 10/22/2001	14:30:00
+10/22/2001	15:30:00 - 10/22/2001	23:30:00
+10/23/2001	00:30:00	
+10/23/2001	04:00:00 - 10/23/2001	06:00:00
+10/23/2001	09:00:00 - 10/23/2001	09:30:00
+10/23/2001	11:00:00 - 10/24/2001	11:30:00
+
+TN
+No anomalous/deleted data to report.
+
+TS
+
+The probes were out of the water and exposed to the air at low tide. The 
+following data were deleted:
+Date		Time		Temp	SpCond	Sal	DO	DO	Depth	pH	Turb
+MM/DD/YY	hh:mm:ss	 C	 mS/cm	ppt	%	mg/L	m		NTU
+10/7/01	23:30:00	12.9	0.26		0.1	79.9	8.4	-0.02	7.2	6
+10/8/01	0:00:00	12.9	0.26		0.1	78	8.2	-0.02	7.2	4
+10/8/01	10:30:00	11.5	0.26		0.1	86.2	9.4	-0.03	7.3	7
+10/8/01	11:00:00	11.6	0.18		0.1	87.3	9.5	-0.03	7.3	7
+10/8/01	11:30:00	10.7	0		0	91.4	10.1	-0.03	7.6	9
+10/8/01	12:00:00	10.1	0		0	91.2	10.3	-0.03	7.8	4
+10/8/01	12:30:00	12.4	0.27		0.1	91.1	9.7	-0.03	7.4	5
+10/9/01	0:00:00	12.3	0.26		0.1	82.9	8.9	-0.03	7.2	6
+10/9/01	0:30:00	12.3	0.26		0.1	80.8	8.6	-0.02	7.2	3
+10/10/01	13:30:00	16.1	0.27		0.1	101	9.9	-0.02	7.4	11
+10/10/01	14:00:00	16.4	0.27		0.1	95.1	9.3	-0.02	7.3	7
+10/18/01	7:00:00	10.8	0.25		0.1	79.5	8.8	-0.03	7.2	11
+10/18/01	7:30:00	10.3	0.25		0.1	77.1	8.6	-0.03	7.1	8
+10/18/01	8:00:00	8.3	0.01		0	96.4	11.3	-0.03	7.6	18
+10/18/01	8:30:00	7.6	0.01		0	103.2	12.3	-0.03	7.6	1
+10/18/01	9:00:00	8.3	0.01		0	102.9	12.1	-0.03	7.6	1
+10/18/01	9:30:00	10.2	0.01		0	103.4	11.6	-0.03	7.7	1
+10/18/01	10:00:00	9.5	0.01		0	105	12	-0.03	7.7	10
+10/18/01	20:30:00	13.8	0.25		0.1	85.9	8.9	-0.02	7.3	9
+10/18/01	21:00:00	13.6	0.01		0	83	8.6	-0.03	7.2	6
+10/18/01	21:30:00	8.3	0.01		0	106.9	12.6	-0.03	7.5	4
+10/18/01	22:00:00	7.1	0.01		0	107.2	13	-0.03	7.5	5
+10/18/01	22:30:00	13.8	0.25		0.1	87.6	9.1	-0.03	7.4	8
+10/19/01	9:00:00	11.2	0.25		0.1	84.8	9.3	-0.01	7.3	11
+10/19/01	9:30:00	11.2	0.25		0.1	84.9	9.3	-0.02	7.3	12
+10/19/01	10:00:00	11.2	0.25		0.1	85.9	9.4	-0.01	7.2	11
+10/28/01	5:00:00	8.6	0.25		0.1	90	10.5	-0.01	7.7	26
+10/28/01	5:30:00	9.3	0.25		0.1	88.4	10.2	-0.01	7.7	15
+
+High turbidity readings are suspect, but the cause is unknown.  The following 
+turbidity data were left in:
+Date		Time		Turb
+MM/DD/YY	hh:mm:ss	 NTU 
+10/2/01	15:00:00	553
+10/2/01	15:30:00	279
+10/2/01	16:00:00	352
+10/2/01	16:30:00	948
+
+November
+
+SK
+No anomalous/deleted data to report.
+
+TN
+No anomalous/deleted data to report.
+
+TS
+The probes were out of the water and exposed to the air at low tide. The 
+following data were deleted:
+Date		Time		Temp	SpCond	Sal	DO	DO	Depth	pH	Turb
+MM/DD/YY	hh:mm:ss	 C	 mS/cm	ppt	%	mg/L	m		NTU
+11/5/01	22:00:00	8.5	0.24		0.1	92.3	10.8	-0.02	7.4	83
+11/5/01	22:30:00	8.4	0.25		0.1	91.7	10.7	-0.03	7.4	56
+11/5/01	23:00:00	8.5	0		0	90.9	10.6	-0.03	7.5	68
+11/5/01	23:30:00	6.3	0		0	101.8	12.6	-0.02	7.8	63
+11/6/01	0:00:00	6.7	0		0	96.4	11.8	-0.02	7.9	41
+11/6/01	0:30:00	8.8	0.25		0.1	92.2	10.7	-0.02	7.5	43
+11/8/01	0:30:00	10.1	0.25		0.1	81.5	9.2	-0.01	7.2	18
+11/8/01	1:00:00	10	0.25		0.1	80.7	9.1	-0.03	7.2	8
+11/8/01	1:30:00	10	0.25		0.1	77.8	8.8	-0.03	7.2	5
+11/8/01	2:00:00	10.6	0.25		0.1	86.9	9.7	-0.01	7.4	9
+11/9/01	14:00:00	11.1	0.24		0.1	98.6	10.9	-0.03	7.5	50
+11/9/01	14:30:00	11	0.24		0.1	97.1	10.7	-0.02	7.4	25
+11/9/01	15:00:00	11.3	0.25		0.1	93.5	10.2	-0.02	7.4	15
+11/11/01	15:30:00	9.6	0.24		0.1	101.4	11.6	-0.02	7.5	36
+11/11/01	16:00:00	9.5	0.25		0.1	100.9	11.5	-0.03	7.5	31
+11/11/01	16:30:00	8.1	0		0	100.3	11.8	-0.02	7.6	23
+11/11/01	17:00:00	6.4	0		0	98.4	12.1	-0.02	7.7	21
+11/11/01	17:30:00	9.1	0.24		0.1	100.1	11.5	-0.03	7.6	16
+11/12/01	5:00:00	6.1	0.25		0.1	89.6	11.1	-0.03	7.4	12
+11/12/01	5:30:00	6.6	0.25		0.1	87.4	10.7	-0.03	7.4	8
+11/12/01	17:30:00	7.6	0.24		0.1	99.3	11.9	-0.01	7.5	17
+11/12/01	18:00:00	7.3	0.25		0.1	98.7	11.9	-0.03	7.5	14
+11/12/01	18:30:00	8	0.25		0.1	94.7	11.2	-0.02	7.5	6
+11/13/01	5:00:00	5.6	0.24		0.1	89.8	11.3	-0.01	7.4	11
+11/13/01	5:30:00	5.5	0.24		0.1	89.2	11.2	-0.03	7.4	6
+11/13/01	6:00:00	5.4	0.24		0.1	88.5	11.2	-0.03	7.4	4
+11/13/01	6:30:00	6.4	0.25		0.1	87.4	10.8	-0.03	7.4	4
+11/14/01	7:00:00	6.7	0.24		0.1	97.9	12	-0.01	7.5	53
+11/15/01	7:00:00	8.3	0.24		0.1	94.9	11.2	-0.02	7.4	16
+11/15/01	7:30:00	8	0.25		0.1	90.8	10.7	-0.03	7.4	15
+11/15/01	8:00:00	8.3	0.25		0.1	88.2	10.4	-0.03	7.3	8
+11/17/01	8:00:00	5.7	0.26		0.1	85.9	10.8	-0.01	7.4	34
+11/17/01	8:30:00	5.7	0.26		0.1	85.7	10.7	-0.03	7.3	30
+11/17/01	9:00:00	6.7	0.26		0.1	85.7	10.5	-0.03	7.3	28
+11/17/01	9:30:00	7.4	0.25		0.1	87.9	10.6	-0.03	7.4	16
+11/21/01	0:00:00	6.6	0.25		0.1	87.6	10.7	-0.02	7.3	45
+11/21/01	0:30:00	7.2	0.25		0.1	84.5	10.2	-0.03	7.3	34
+
+December
+
+SK
+Deployment for the year ended on 12/21/2001 09:00:00 due to ice.
+
+TN
+
+High turbidity reading occurred and it is probably due to a blocked probe.  The 
+following turbidity data were deleted:
+Date		Time		Turb
+MM/DD/YY	hh:mm:ss	 NTU 
+12/15/01	07:00:00	396
+
+Deployment for the year ended on 12/21/2001 10:30:00 due to ice.
+
+TS
+The probes were out of the water and exposed to the air at low tide. The 
+following data were deleted:
+Date		Time		Temp	SpCond	Sal	DO	DO	Depth	pH	Turb
+MM/DD/YY	hh:mm:ss	 C	 mS/cm	ppt	%	mg/L	m		NTU
+12/8/01	2:00:00	7.7	0.26		0.1	87.9	10.5	-0.01	7.4	16
+12/12/01	5:00:00	4	0.25		0.1	90	11.8	-0.01	7.5	8
+12/12/01	5:30:00	4.1	0.26		0.1	89.5	11.7	-0.02	7.5	5
+12/12/01	6:00:00	4.8	0.25		0.1	86.9	11.1	-0.02	7.5	5
+12/15/01	19:30:00	5.2	0.25		0.1	96.1	12.2	-0.02	7.5	24
+12/15/01	20:00:00	5.4	0.24		0.1	96	12.1	-0.02	7.5	14
+12/15/01	20:30:00	5.3	0.19		0.1	95.2	12.1	-0.02	7.5	8
+12/15/01	21:00:00	6.1	0.26		0.1	91.8	11.4	-0.02	7.5	6
+12/15/01	21:30:00	5.9	0.24		0.1	96.5	12.1	-0.01	7.6	8
+
+Deployment for the year ended on 12/21/2001 11:00:00 due to ice.
+
+
+12.  Missing Data 
+
+Missing data are denoted by a period in the data set. Data are missing due to 
+equipment failure where no probes deployed, maintenance/calibration of 
+equipment, elimination of obvious outliers or elimination of data due to 
+calibration (both pre and post) problems. For more details on deleted data, see 
+the Anomalous Data (Section 10). To find out more details about missing data, 
+contact the Research Coordinator at the site submitting the data.
+
+
+13. Post Deployment Information
+
+End of Deployment Post-calibration Readings in Standard Solutions, un-cleaned 
+probes:
+[standards used: Specific conductivity = 1.0; DO = 100%; pH = 7.00; Turbidity = 
+0.0]
+
+Site SK 
+
+Date; DO(%Sat.); pH 7; Conductivity 1.0; Turbidity 0
+
+04/10/01; 93.2; 6.95; 1.006; 0.3
+05/02/01; 98.9; 7.17; 1.000; 0.3
+05/15/01; 99.4; 7.11; 1.004; 1.2
+06/01/01; 99.8; 7.04; 1.004; 0.8
+06/28/01; 98.0; 7.07; 0.998; 0.0
+07/16/01; 98.4; 7.20; 0.993; 0.7
+07/31/01; 105.5; 7.05; 1.000; 0.0
+08/16/01; 99.6; 7.20; 1.020; 0.0
+09/06/01; 100.3; 7.00; 1.000; 1.0
+09/28/01; 103.8; 7.04; 1.006; 0.0
+10/24/01; 104.3; 7.14; 1.001; 0.0
+11/14/01; 113.3; 7.11; 0.985; 0.4
+12/07/01; 105.7; 7.06; 0.964; 1.4
+
+Site TN
+
+Date; DO(%Sat.); pH 7; Conductivity 1.0; Turbidity 0
+
+04/23/01; 98.8; 6.96; 0.993; 0.5
+05/03/01; 103.3; 7.00; 0.990; 0.3
+05/30/01; 102.1; 7.09; 1.000; -0.1
+06/26/01; 98.8; 6.95; 1.000; 0.8
+07/13/01; 98.7; 7.22; 0.971; 0.6
+07/31/01; 95.8; 7.05; 1.028; 0.0
+08/15/01; 101.1; 6.90; 1.020; 0.0
+09/04/01; 100.9; 7.10; 0.992; 0.1
+09/20/01; 95.7; 6.98; 0.984; 0.5
+10/04/01; 101.3; 6.99; 1.006; 0.0
+10/18/01; 98.7; 7.00; 0.995; 0.6
+11/01/01; 104.1; 7.08; 0.999; 0.2
+11/15/01; 99.1; 6.90; 1.001; n/a
+11/29/01; 107.5; 7.04; 0.997; 0.0 
+
+Site TS
+
+Date; DO(%Sat.); pH 7; Conductivity 1.0; Turbidity 0
+
+04/10/01; 96.3; 7.10; 0.990; 0.3
+05/04/01; 99.1; 7.10; 0.980; 0.6
+05/23/01; 99.1; 7.12; 0.999; 0.4
+06/08/01; 98.2; 7.07; 1.000; 0.0
+06/25/02; 94.3; 7.05; 0.994; 0.5
+07/13/01; 96.7; 7.12; 0.986; 0.0
+07/26/01; 96.2; 7.20; 0.996; 0.1
+08/28/01; 100.5; 7.10; 0.980; -3.0
+09/17/01; 103.2; 7.00; 0.980; 0.8
+10/04/01; 100.3; 7.1; 0.991; 0.2
+10/19/01; 102.8; 7.0; 1.001; 0.2
+11/01/01; 107.1; 7.05; 0.988; 0.0
+11/15/01; 104.3; 7.05; 0.996; 1.6
+11/29/01; 100.9; 7.07; 0.991; 0.0
+
+
+14. Other Remarks
+
+On 06/30/2021 this dataset was updated to include embedded QAQC flags for 
+anomalous/suspect data.  System-wide monitoring data beginning in 2007 were 
+processed to allow for QAQC flags and codes to be embedded in the data files 
+rather than detailed in the metadata alone (as in the anomalous/suspect, 
+deleted, and missing data sections above).  Prior to 2006, rejected data were 
+deleted from the dataset so they are unavailable to be used at all, but suspect 
+data were only noted in the metadata document.  Suspect data flags <1> were 
+embedded retroactively in order to allow suspect data to be easily identified 
+and filtered from the dataset if desired for analysis and reporting purposes.  
+No other flags or codes were embedded in the dataset and users should still 
+refer to the detailed explanations above for more information.
+
+Any reference made to depth data being negative and/or zero, it was 
+recorded as a negative in the raw data file and a zero in the edited data file 
+due to the formatting of Excel. The technician edited none of these data points 
+by hand nor did the technician delete any of them. 
+
+HUDSKWQ:
+
+There was significant rainfall on between June 1 and June 3. This event caused a 
+noticeable drop in the specific conductivity for several days. The data were left 
+in.
+6/2/01	1:30:00 - 06/6/01	6:00:00
+
+
+
