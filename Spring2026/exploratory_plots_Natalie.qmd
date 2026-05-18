@@ -1,0 +1,923 @@
+---
+title: "Exploratory Plots"
+author: Natalie Novoseltseva
+format: 
+  html:
+    theme: cosmo       
+    code-fold: true    
+    toc: true         
+    toc-depth: 2
+    number-sections: true
+---
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+#libraries
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(gt)
+library(ggplot2)
+library(stringr)
+library(janitor)
+library(reshape2)
+library(ggpubr)
+library(patchwork)
+```
+
+Data
+
+```{r}
+combined <- read_csv("Spring2026/data/joined_dataset.csv")
+
+combined <-combined %>% 
+  mutate(
+  season_astro = case_when(
+    date >= as.Date(paste0(year, "-12-21")) | date < as.Date(paste0(year, "-03-20")) ~ "Winter",
+    date >= as.Date(paste0(year, "-03-20")) & date < as.Date(paste0(year, "-06-21")) ~ "Spring",
+    date >= as.Date(paste0(year, "-06-21")) & date < as.Date(paste0(year, "-09-22")) ~ "Summer",
+    TRUE ~ "Fall"
+  )
+)
+
+combined <-combined %>%
+  mutate(
+    season_shift = case_when(
+      month %in% 7:9  ~ "Summer",
+      month %in% 10:12  ~ "Fall",
+      month %in% 1:3 ~ "Winter",
+      month %in% 4:6  ~ "Spring"
+    )
+  )
+```
+
+### Plots
+
+#### Correlation matrix
+
+```{r}
+#select meaningful numeric variables
+cor_vars <- combined %>%
+  select(
+    ATemp, RH, BP, WSpd, MaxWSpd, Wdir, SDWDir, TotPAR, TotPrcp,  #weather
+    Temp, DO_mgl, DO_Pct, Sal, SpCond, pH, Turb, ChlFluor, Depth   #water
+  ) %>%
+  select(where(~sum(!is.na(.)) > 0))#remove NA columns
+
+#compute correlation matrix
+cor_matrix <- cor(cor_vars, use = "pairwise.complete.obs")
+
+#remove the upper triangle of the matrix
+cor_matrix[upper.tri(cor_matrix)] <- NA
+
+#melt for ggplot
+cor_long <- melt(cor_matrix, na.rm = TRUE)
+names(cor_long) <- c("Variable1", "Variable2", "Correlation")
+
+
+#plot lower-triangle matrix
+ggplot(cor_long, aes(x = Variable1, y = Variable2, fill = Correlation)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient2(low = "#a6cee3", mid = "#f7f7f7", high = "#fb9a99", midpoint = 0) +
+  geom_text(aes(label = round(Correlation, 2)), size = 3) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid = element_blank()
+  ) +
+  labs(title = "Correlation Matrix", fill = "r")
+```
+
+#### Relationship between the variables
+
+##### Dissolved Oxygen mgl (DO_mgl)
+
+```{r}
+# Water Temperature and Dissolved Oxygen
+
+combined %>%
+  filter(!is.na(DO_mgl), !is.na(Temp), !is.na(season)) %>%
+  ggplot(aes(x = Temp, y = DO_mgl)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between Water Temperature and DO by Season",
+    x = "Water Temperature",
+    y = "Dissolved Oxygen"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r}
+test <- combined %>% 
+  filter(year == 2009)
+```
+
+```{r}
+# Water Temperature and Dissolved Oxygen (2009)
+
+test %>%
+  filter(!is.na(DO_mgl), !is.na(Temp), !is.na(season)) %>%
+  ggplot(aes(x = Temp, y = DO_mgl)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between Water Temperature and DO by Season (2009)",
+    x = "Water Temperature",
+    y = "Dissolved Oxygen"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r}
+test_1 <- combined %>% 
+  filter(year == 2009 & month == 5)
+```
+
+```{r}
+# Water Temperature and Dissolved Oxygen (May, 2009)
+
+test_1 %>%
+  filter(!is.na(DO_mgl), !is.na(Temp), !is.na(season)) %>%
+  ggplot(aes(x = Temp, y = DO_mgl)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between Water Temperature and DO by Season (2009)",
+    x = "Water Temperature",
+    y = "Dissolved Oxygen"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+##### Total Precipitation (Totprc)
+
+```{r}
+#turbidity
+ggplot(combined %>% filter(!is.na(TotPrcp), !is.na(Turb)),
+       aes(x = TotPrcp, y = Turb)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm") +
+  facet_wrap(~season) +
+  labs(title = "Total Precipitation vs Turbidity by Season",
+       x = "Total Precipitation (mm)", y = "Turbidity")
+```
+
+```{r}
+#salinity
+ggplot(combined %>% filter(!is.na(TotPrcp), !is.na(Sal)),
+       aes(x = TotPrcp, y = Sal)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm") +
+  facet_wrap(~season) +
+  labs(title = "Total Precipitation vs Salinity by Season",
+       x = "Total Precipitation (mm)", y = "Salinity")
+```
+
+```{r}
+#specific conductivity
+ggplot(combined %>% filter(!is.na(TotPrcp), !is.na(SpCond)),
+       aes(x = TotPrcp, y = SpCond)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm") +
+  facet_wrap(~season) +
+  labs(title = "Total Precipitation vs Specific Conductivity by Season",
+       x = "Total Precipitation (mm)", y = "Specific Conductivity")
+```
+
+```{r}
+#dissolved oxygen
+ggplot(combined %>% filter(!is.na(TotPrcp), !is.na(DO_mgl)),
+       aes(x = TotPrcp, y = DO_mgl)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm") +
+  facet_wrap(~season) +
+  labs(title = "Total Precipitation vs Dissolved Oxygen by Season",
+       x = "Total Precipitation (mm)", y = "Dissolved Oxygen (mg/L)")
+```
+
+```{r}
+#ChlFluor
+ggplot(combined %>% filter(!is.na(TotPrcp), !is.na(ChlFluor)),
+       aes(x = TotPrcp, y = ChlFluor)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm") +
+  facet_wrap(~season) +
+  labs(title = "Total Precipitation vs Chlorophyll Fluorescence by Season",
+       x = "Total Precipitation (mm)", y = "ChlFluor")
+```
+
+```{r}
+#Depth
+ggplot(combined %>% filter(!is.na(TotPrcp), !is.na(Depth)),
+       aes(x = TotPrcp, y = Depth)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm") +
+  facet_wrap(~season) +
+  labs(title = "Total Precipitation vs Water Depth by Season",
+       x = "Total Precipitation (mm)", y = "Depth")
+```
+
+```{r}
+#Temperature
+ggplot(combined %>% filter(!is.na(TotPrcp), !is.na(Temp)),
+       aes(x = TotPrcp, y = Temp)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm") +
+  facet_wrap(~season) +
+  labs(title = "Total Precipitation vs Water Temperature by Season",
+       x = "Total Precipitation (mm)", y = "Temperature")
+```
+
+
+##### Salinity (sal)
+
+```{r}
+#Temp
+
+combined %>%
+  filter(!is.na(Temp), !is.na(Sal), !is.na(season)) %>%
+  ggplot(aes(x = Temp, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between Temperature and Salinity by Season",
+    x = "Water Temperature (°C)",
+    y = "Salinity"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r}
+#Depth
+
+combined %>%
+  filter(!is.na(Depth), !is.na(Sal), !is.na(season)) %>%
+  ggplot(aes(x = Depth, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between Depth and Salinity by Season",
+    x = "Depth",
+    y = "Salinity"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r}
+#Turbidity
+
+combined %>%
+  filter(!is.na(Turb), !is.na(Sal), !is.na(season)) %>%
+  ggplot(aes(x = Turb, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between Turbidity and Salinity by Season",
+    x = "Turbidity",
+    y = "Salinity"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r}
+#Dissolved Oxygen
+
+combined %>%
+  filter(!is.na(DO_mgl), !is.na(Sal), !is.na(season)) %>%
+  ggplot(aes(x = DO_mgl, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between Dissolved Oxygen and Salinity by Season",
+    x = "Dissolved Oxygen",
+    y = "Salinity"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r}
+#ChlFluor
+
+combined %>%
+  filter(!is.na(Sal), !is.na(ChlFluor), !is.na(season)) %>%
+  ggplot(aes(x = ChlFluor, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between ChlFluor and Salinity by Season",
+    x = "ChlFluor",
+    y = "Salinity"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+##### Air Temperature (Atemp)
+
+```{r}
+#Temp
+combined %>%
+  filter(!is.na(Temp), !is.na(ATemp), !is.na(season)) %>%
+  ggplot(aes(x = ATemp, y = Temp)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between Water and Air Temperature by Season",
+    x = "Air Temperature",
+    y = "Water Temperature"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r}
+#Salinity
+
+combined %>%
+  filter(!is.na(Sal), !is.na(ATemp), !is.na(season)) %>%
+  ggplot(aes(x = ATemp, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between Salinity and Air Temperature by Season",
+    x = "Air Temperature",
+    y = "Salinity"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r}
+#Dissolved Oxygen
+
+combined %>%
+  filter(!is.na(DO_mgl), !is.na(ATemp), !is.na(season)) %>%
+  ggplot(aes(x = ATemp, y = DO_mgl)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between Dissolved Oxygen and Air Temperature by Season",
+    x = "Air Temperature",
+    y = "Dissolved Oxygen"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r}
+#Total Precipitation
+
+combined %>%
+  filter(!is.na(TotPrcp), !is.na(ATemp), !is.na(season)) %>%
+  ggplot(aes(x = ATemp, y = TotPrcp)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between Air Temperature and Total Precipitation by Season",
+    x = "Air Temperature",
+    y = "Dissolved Oxygen"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+
+##### PH (ph)
+
+```{r}
+#Chlorophyll
+
+combined %>%
+  filter(!is.na(pH), !is.na(ChlFluor), !is.na(season)) %>%
+  ggplot(aes(x = ChlFluor, y = pH)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between PH and Chlorophyll by Season",
+    x = "Chlorophyll",
+    y = "ph"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r}
+#Dissolved Oxygen
+
+combined %>%
+  filter(!is.na(pH), !is.na(DO_mgl), !is.na(season)) %>%
+  ggplot(aes(x = DO_mgl, y = pH)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Relationship Between PH and Dissolved Oxygen by Season",
+    x = "Dissolved Oxygen",
+    y = "ph"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+####Trends over time (STILL WORK IN PROGRESS!!!)
+
+```{r}
+#create the day of the year columns to try to proxy for time
+combined <- combined %>%
+  mutate(
+    year = year(DateTimeStamp),
+    doy = yday(DateTimeStamp),
+    decimal_year = year + (doy - 1)/365
+  )
+```
+
+```{r}
+#detect daily temperature changes 
+daily <- combined %>%
+  group_by(date) %>%
+  summarise(
+    mean_ATemp = mean(ATemp, na.rm = TRUE),
+    mean_Temp = mean(Temp, na.rm = TRUE),
+    total_Prcp = sum(TotPrcp, na.rm = TRUE)
+  ) %>%
+  mutate(decimal_year = year(date) + (yday(date)-1)/365)
+
+daily <- daily %>%
+  arrange(date) %>%
+  mutate(
+    temp_change = abs(mean_ATemp - lag(mean_ATemp)),
+    extreme_temp_change = temp_change > quantile(temp_change, 0.95, na.rm = TRUE)
+  )
+```
+
+```{r}
+#count the extreme temperature changes per month of each year
+temp_extremes <- daily %>%
+  mutate(
+    year = year(date),
+    month = month(date)
+  ) %>%
+  group_by(year, month) %>%
+  summarise(
+    extreme_changes = sum(extreme_temp_change, na.rm = TRUE),
+    n_days = n(),
+    rate = extreme_changes / n_days,
+    .groups = "drop"
+  )
+```
+
+```{r}
+#plot
+temp_extremes <- temp_extremes %>%
+  mutate(year_month = as.Date(paste(year, month, "01", sep = "-")))
+
+ggplot(temp_extremes, aes(x = year_month, y = rate)) +
+  geom_line() +
+  geom_smooth(method = "loess", color = "red") +
+  labs(title = "Monthly Rate of Extreme Temperature Changes",
+       x = "Time", y = "Proportion of Extreme Days")
+
+temp_extremes <- temp_extremes %>%
+  mutate(year_month = as.Date(paste(year, month, "01", sep = "-")))
+
+ggplot(temp_extremes, aes(x = year_month, y = rate)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "loess", color = "red") +
+  labs(title = "Monthly Rate of Extreme Temperature Changes",
+       x = "Time", y = "Proportion of Extreme Days")
+```
+
+```{r}
+temp_extremes <- temp_extremes %>%
+  mutate(
+    season = case_when(
+      month %in% c(12, 1, 2) ~ "Winter",
+      month %in% c(3, 4, 5) ~ "Spring",
+      month %in% c(6, 7, 8) ~ "Summer",
+      TRUE ~ "Fall"
+    ),
+    year_month = as.Date(paste(year, month, "01", sep = "-"))
+  )
+
+ggplot(temp_extremes, aes(x = year_month, y = rate)) +
+   geom_point(alpha = 0.6) +
+  #geom_line() +
+  geom_smooth(method = "loess", color = "red") +
+  facet_wrap(~season) +
+  labs(title = "Monthly Rate of Extreme Temperature Changes by Season",
+       x = "Time", y = "Proportion of Extreme Days") #change the title, violin plots for salinity (maybe recalculate salinity), affect of lagged percipitation on special conductivity
+```
+
+
+New Plots
+```{r}
+names(combined)
+```
+
+Recalculate the Salinity
+
+```{r}
+# Install if needed
+
+
+library(gsw)
+
+# Step 1: Convert specific conductance (25°C) → in-situ conductivity
+combined$Cond_insitu <- combined$SpCond / (1 + 0.0191 * (combined$Temp - 25))
+
+# Step 2: Recalculate salinity using PSS-78
+combined$Sal_recalc <- gsw_SP_from_C(combined$Cond_insitu, combined$Temp, p = 0)
+
+# Optional: remove intermediate column if you don’t need it
+combined$Cond_insitu <- NULL
+```
+
+```{r}
+#quality check
+summary(combined$Sal)
+summary(combined$Sal_recalc)
+
+plot(combined$Sal, combined$Sal_recalc,
+     xlab = "Original Salinity",
+     ylab = "Recalculated Salinity",
+     main = "Salinity Comparison")
+
+abline(0, 1, col = "red", lwd = 2)
+```
+
+Salinity Plots with recalculated Salinity
+
+Temperature
+
+```{r}
+# Original salinity plot
+p1 <- combined %>%
+  filter(!is.na(Temp), !is.na(Sal), !is.na(season)) %>%
+  ggplot(aes(x = Temp, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Original Salinity",
+    x = "Water Temperature (°C)",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Recalculated salinity plot
+p2 <- combined %>%
+  filter(!is.na(Temp), !is.na(Sal_recalc), !is.na(season)) %>%
+  ggplot(aes(x = Temp, y = Sal_recalc)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Recalculated Salinity ",
+    x = "Water Temperature (°C)",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Combine plots side by side
+p1 + p2
+```
+
+Dissolved Oxygen
+
+```{r}
+# Original salinity plot
+p1 <- combined %>%
+  filter(!is.na(DO_mgl), !is.na(Sal), !is.na(season)) %>%
+  ggplot(aes(x = DO_mgl, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Original Salinity",
+    x = "Dissolved Oxygen",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Recalculated salinity plot
+p2 <- combined %>%
+  filter(!is.na(DO_mgl), !is.na(Sal_recalc), !is.na(season)) %>%
+  ggplot(aes(x = DO_mgl, y = Sal_recalc)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Recalculated Salinity ",
+    x = "Dissolved Oxygen",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Combine plots side by side
+p1 + p2
+```
+
+Turbidity
+
+```{r}
+# Original salinity plot
+p1 <- combined %>%
+  filter(!is.na(Turb), !is.na(Sal), !is.na(season)) %>%
+  ggplot(aes(x = Turb, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Original Salinity",
+    x = "Turbidity",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Recalculated salinity plot
+p2 <- combined %>%
+  filter(!is.na(Turb), !is.na(Sal_recalc), !is.na(season)) %>%
+  ggplot(aes(x = Turb, y = Sal_recalc)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Recalculated Salinity ",
+    x = "Turbidity",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Combine plots side by side
+p1 + p2
+```
+
+
+
+```{r}
+# Original salinity plot
+p1 <- combined %>%
+  filter(!is.na(ChlFluor), !is.na(Sal), !is.na(season)) %>%
+  ggplot(aes(x = ChlFluor, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Original Salinity",
+    x = "ChlFluor",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Recalculated salinity plot
+p2 <- combined %>%
+  filter(!is.na(ChlFluor), !is.na(Sal_recalc), !is.na(season)) %>%
+  ggplot(aes(x = ChlFluor, y = Sal_recalc)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Recalculated Salinity ",
+    x = "ChlFluor",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Combine plots side by side
+p1 + p2
+```
+
+
+New plots
+```{r}
+library(dplyr)
+library(tidyr)
+
+season_long <- combined %>%
+  select(Temp, ATemp, season, season_astro, season_shift) %>%
+  pivot_longer(
+    cols = c(season, season_astro, season_shift),
+    names_to = "season_type",
+    values_to = "season_label"
+  )
+```
+
+```{r}
+season_long %>%
+  group_by(season_type, season_label) %>%
+  summarize(
+    avg_water_temp = mean(Temp, na.rm = TRUE),
+    avg_air_temp   = mean(ATemp, na.rm = TRUE),
+    n = n(),
+    .groups = "drop"
+  )
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(season_long, aes(x = ATemp, y = Temp)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  facet_grid(season_label ~ season_type) +
+  labs(
+    x = "Air Temperature",
+    y = "Water Temperature",
+    title = "Air vs Water Temperature by Season Definition"
+  )
+```
+
+```{r}
+season_long_clean <- season_long %>%
+  filter(!is.na(Temp), !is.na(season_label))
+
+ggplot(season_long_clean, aes(x = season_label, y = Temp, fill = season_type)) +
+  stat_summary(fun = mean, geom = "bar", position = "dodge") +
+  coord_flip() +
+  labs(
+    title = "Average Water Temperature by Season Definition",
+    x = "Season",
+    y = "Average Water Temp"
+  )
+```
+
+```{r}
+ggplot(season_long_clean, aes(x = season_label, y = ATemp, fill = season_type)) +
+  stat_summary(fun = mean, geom = "bar", position = "dodge") +
+  coord_flip() +
+  labs(title = "Average Air Temperature by Season Definition")
+```
+
+```{r}
+season_long <- combined %>%
+  select(Temp, ATemp, DO_mgl, pH, Turb,
+         season, season_astro, season_shift) %>%
+  pivot_longer(
+    cols = c(season, season_astro, season_shift),
+    names_to = "season_type",
+    values_to = "season_label"
+  )
+```
+
+```{r}
+season_long %>%
+  group_by(season_type, season_label) %>%
+  summarize(
+    avg_temp = mean(Temp, na.rm = TRUE),
+    avg_air  = mean(ATemp, na.rm = TRUE),
+    avg_DO   = mean(DO_mgl, na.rm = TRUE),
+    avg_pH   = mean(pH, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+
+```{r}
+multi_long <- season_long %>%
+  pivot_longer(
+    cols = c(Temp, ATemp, DO_mgl, pH),
+    names_to = "variable",
+    values_to = "value"
+  ) %>%
+  filter(!is.na(value), !is.na(season_label))
+
+ggplot(multi_long, aes(x = season_label, y = value, fill = season_type)) +
+  stat_summary(fun = mean, geom = "bar", position = "dodge") +
+  coord_flip() +
+  facet_wrap(~variable, scales = "free") +
+  labs(title = "Average Values by Season Definition")
+```
+
+
+
+
+
+

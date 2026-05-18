@@ -16,13 +16,21 @@ library(reshape2)
 library(ggpubr)
 ```
 
+
+
 ## Data
 
+
+
 ```{r}
-combined <- read_csv("Spring2026/data/joined_dataset.csv")
+combined <- read_csv("data/joined_dataset.csv")
 ```
 
+
+
 ## EDA
+
+
 
 ```{r}
 #overview of variables and NAs
@@ -32,9 +40,13 @@ glimpse(combined)
 summary(combined) 
 ```
 
+
+
 ### Plots
 
 #### Correlation matrix
+
+
 
 ```{r}
 #select meaningful numeric variables
@@ -69,7 +81,11 @@ ggplot(cor_long, aes(x = Variable1, y = Variable2, fill = Correlation)) +
   labs(title = "Correlation Matrix", fill = "r")
 ```
 
+
+
 #### Relationship between the variables
+
+
 
 ```{r}
 #wind can affect oxygen mixing???
@@ -95,7 +111,11 @@ ggplot(combined, aes(x = TotPAR, y = ChlFluor)) +
   labs(x = "Total PAR", y = "Chlorophyll Fluorescence")
 ```
 
+
+
 This looks crazy!
+
+
 
 ```{r}
 #warmer air => dissolved oxygen decreases
@@ -147,9 +167,13 @@ ggplot(combined, aes(x = TotPrcp, y = Sal)) +
   labs(x = "Total Precipitation (mm)", y = "Salinity (ppt)")
 ```
 
+
+
 #### Total Precipitation (Totprc)
 
 What can explain the precipitation?
+
+
 
 ```{r}
 #RH
@@ -173,8 +197,6 @@ combined %>%
     panel.grid.minor = element_blank()
   )
 ```
-
-
 
 ```{r}
 #relative humidity
@@ -218,7 +240,11 @@ ggplot(combined, aes(x = WSpd, y = TotPrcp)) +
   labs(x = "Wind Speed", y = "Total Precipitation (mm)")
 ```
 
+
+
 Effects of precipitation:
+
+
 
 ```{r}
 #turbidity (obvious one)
@@ -295,7 +321,11 @@ ggplot(combined, aes(x = log1p(TotPrcp), y = Turb)) +
   geom_point(alpha = 0.4)
 ```
 
+
+
 #### Salinity (sal)
+
+
 
 ```{r}
 #Temp
@@ -412,14 +442,15 @@ combined %>%
   )
 ```
 
-
-
-
 ```{r}
 names(combined)
 ```
 
+
+
 #### Air Temperature (Atemp)
+
+
 
 ```{r}
 #Temp
@@ -514,7 +545,11 @@ combined %>%
 ```
 
 
+
+
 #### PH (ph)
+
+
 
 ```{r}
 #Chlorophyll - !!!!!
@@ -550,7 +585,7 @@ combined %>%
   facet_wrap(~ season) +
   labs(
     title = "Relationship Between PH and Dissolved Oxygen by Season",
-    x = "Dissolved Oxygen",
+    x = "Chlorophyll",
     y = "ph"
   ) +
   theme_minimal(base_size = 13) +
@@ -562,6 +597,8 @@ combined %>%
   )
 ```
 
+
+
 #### % Dissolved Oxygen (DO_pct)
 
 #### Dissolved Oxygen mgl (DO_mgl)
@@ -569,6 +606,8 @@ combined %>%
 #### 
 
 Trends over time (STILL WORK IN PROGRESS!!!)
+
+
 
 ```{r}
 #new column to proxy for time
@@ -580,7 +619,11 @@ combined <- combined %>%
   )
 ```
 
+
+
 Increase of air temperature
+
+
 
 ```{r}
 daily <- combined %>%
@@ -602,7 +645,11 @@ ggplot(daily, aes(x = decimal_year, y = mean_ATemp)) +
        x = "Year", y = "Mean Air Temp")
 ```
 
+
+
 Temperature Outliers/Anomalies
+
+
 
 ```{r}
 daily <- daily %>%
@@ -623,7 +670,11 @@ ggplot(daily, aes(x = decimal_year, y = anomaly_ATemp)) +
   labs(title = "Air Temperature Anomalies Over Time")
 ```
 
+
+
 Extreme rainfall events
+
+
 
 ```{r}
 #define what is considered extreme
@@ -645,7 +696,11 @@ ggplot(rain_extremes, aes(x = `year(date)`, y = extreme_days)) +
 
 ```
 
+
+
 Extreme temperature changes
+
+
 
 ```{r}
 daily <- daily %>%
@@ -670,7 +725,11 @@ ggplot(temp_extremes, aes(x = `year(date)`, y = extreme_changes)) +
   labs(title = "Extreme temperature changes per Year")
 ```
 
+
+
 Heat events
+
+
 
 ```{r}
 heat_threshold <- quantile(daily$mean_ATemp, 0.95, na.rm = TRUE)
@@ -700,7 +759,11 @@ ggplot(heat_yearly, aes(x = year, y = heat_days)) +
        y = "Number of Heat Days")
 ```
 
+
+
 Monthly changes
+
+
 
 ```{r}
 monthly_heat <- daily %>%
@@ -725,3 +788,4 @@ ggplot(monthly_heat, aes(x = year + (month-1)/12, y = heat_days)) +
     y = "Number of Heat Days"
   )
 ```
+

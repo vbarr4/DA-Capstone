@@ -1,0 +1,361 @@
+---
+title: "Exploratory Plots"
+author: Natalie Novoseltseva
+format: 
+  html:
+    theme: cosmo       
+    code-fold: true    
+    toc: true         
+    toc-depth: 2
+    number-sections: true
+---
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+#libraries
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(gt)
+library(ggplot2)
+library(stringr)
+library(janitor)
+library(reshape2)
+library(ggpubr)
+library(patchwork)
+library(gsw)
+```
+
+Data
+
+```{r}
+combined <- read_csv("data/joined_dataset.csv")
+```
+
+New Plots
+```{r}
+names(combined)
+```
+
+Recalculate the Salinity
+
+```{r}
+#convert specific conductance to in-situ conductivity
+#combined$Cond_insitu <- combined$SpCond /(1 + 0.0191 * (combined$Temp - 25))
+
+#recalculate salinity (PSS-78)
+#combined$Sal_recalc <- gsw_SP_from_C(combined$Cond_insitu, combined$Temp, p = 0)
+
+#remove intermediate column if you don’t need it
+#combined$Cond_insitu <- NULL
+```
+
+```{r}
+combined$Sal_recalc <- 0.00065 * combined$SpCond
+```
+
+
+```{r}
+#quality check
+summary(combined$Sal)
+summary(combined$Sal_recalc)
+```
+
+Salinity Plots with recalculated Salinity
+
+Temperature
+
+```{r}
+# Original salinity plot
+p1 <- combined %>%
+  filter(!is.na(Temp), !is.na(Sal), !is.na(season)) %>%
+  ggplot(aes(x = Temp, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Original Salinity",
+    x = "Water Temperature (°C)",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Recalculated salinity plot
+p2 <- combined %>%
+  filter(!is.na(Temp), !is.na(Sal_recalc), !is.na(season)) %>%
+  ggplot(aes(x = Temp, y = Sal_recalc)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Recalculated Salinity ",
+    x = "Water Temperature (°C)",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Combine plots side by side
+p1 + p2
+```
+
+Dissolved Oxygen
+
+```{r}
+# Original salinity plot
+p1 <- combined %>%
+  filter(!is.na(DO_mgl), !is.na(Sal), !is.na(season)) %>%
+  ggplot(aes(x = DO_mgl, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Original Salinity",
+    x = "Dissolved Oxygen",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Recalculated salinity plot
+p2 <- combined %>%
+  filter(!is.na(DO_mgl), !is.na(Sal_recalc), !is.na(season)) %>%
+  ggplot(aes(x = DO_mgl, y = Sal_recalc)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Recalculated Salinity ",
+    x = "Dissolved Oxygen",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Combine plots side by side
+p1 + p2
+```
+
+Turbidity
+
+```{r}
+# Original salinity plot
+p1 <- combined %>%
+  filter(!is.na(Turb), !is.na(Sal), !is.na(season)) %>%
+  ggplot(aes(x = Turb, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Original Salinity",
+    x = "Turbidity",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Recalculated salinity plot
+p2 <- combined %>%
+  filter(!is.na(Turb), !is.na(Sal_recalc), !is.na(season)) %>%
+  ggplot(aes(x = Turb, y = Sal_recalc)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Recalculated Salinity ",
+    x = "Turbidity",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Combine plots side by side
+p1 + p2
+```
+
+
+
+```{r}
+# Original salinity plot
+p1 <- combined %>%
+  filter(!is.na(ChlFluor), !is.na(Sal), !is.na(season)) %>%
+  ggplot(aes(x = ChlFluor, y = Sal)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Original Salinity",
+    x = "ChlFluor",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Recalculated salinity plot
+p2 <- combined %>%
+  filter(!is.na(ChlFluor), !is.na(Sal_recalc), !is.na(season)) %>%
+  ggplot(aes(x = ChlFluor, y = Sal_recalc)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Recalculated Salinity ",
+    x = "ChlFluor",
+    y = "Salinity (PSU)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+# Combine plots side by side
+p1 + p2
+```
+
+How past precipitation influences current and lagged specific conductivity (SpCond)
+
+```{r}
+#Total Precipitation (mm) and Specific Conductivity by Season
+
+combined %>%
+  filter(!is.na(TotPrcp), !is.na(SpCond), !is.na(season)) %>%
+  ggplot(aes(x = TotPrcp, y = SpCond)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Total Precipitation (mm) and Specific Conductivity by Season",
+    x = "Total Precipitation (mm)",
+    y = "Specific Conductivity"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r}
+#filter the data to have equal breaks
+combined_1 <- combined %>%
+  filter(year>2006)
+
+#create lags
+combined_1 <- combined %>%
+  arrange(DateTimeStamp) %>%
+  mutate(
+    prcp_1hr  = lag(TotPrcp, 4),
+    prcp_3hr  = lag(TotPrcp, 12),
+    prcp_6hr  = lag(TotPrcp, 24),
+    prcp_12hr = lag(TotPrcp, 48),
+    prcp_24hr = lag(TotPrcp, 96)
+  )
+```
+
+```{r}
+combined_1 <- combined_1 %>%
+  mutate(
+    prcp_3hr_cum = lag(TotPrcp,1) + lag(TotPrcp,2) + lag(TotPrcp,3) + lag(TotPrcp,4) +
+                   lag(TotPrcp,5) + lag(TotPrcp,6) + lag(TotPrcp,7) + lag(TotPrcp,8) +
+                   lag(TotPrcp,9) + lag(TotPrcp,10) + lag(TotPrcp,11) + lag(TotPrcp,12),
+
+    prcp_24hr_cum = rowSums(sapply(1:96, function(x) lag(TotPrcp, x)), na.rm = FALSE)
+  )
+```
+
+
+
+```{r}
+combined_1 %>%
+  select(SpCond, prcp_1hr, prcp_3hr, prcp_6hr, prcp_12hr, prcp_24hr) %>%
+  pivot_longer(cols = starts_with("prcp_"),
+               names_to = "lag",
+               values_to = "precip") %>%
+  filter(!is.na(SpCond), !is.na(precip)) %>%
+  ggplot(aes(x = precip, y = SpCond)) +
+  geom_point(alpha = 0.25, color = "#2C7BB6") +
+  geom_smooth(method = "lm", color = "#D7191C", se = TRUE) +
+  facet_wrap(~ lag, scales = "free_x") +
+  labs(
+    title = "Effect of Lagged Precipitation on Specific Conductivity",
+    x = "Lagged Precipitation",
+    y = "Specific Conductivity (mS/cm)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    strip.text = element_text(face = "bold")
+  )
+```
+
+Precipitation over the previous 24 hours
+
+```{r}
+ggplot(combined_1 %>% filter(!is.na(prcp_24hr_cum)),
+       aes(x = prcp_24hr_cum, y = SpCond)) +
+  geom_point(alpha = 0.3, color = "#2C7BB6") +
+  geom_smooth(method = "lm", color = "#D7191C", linewidth = 1.2) +
+  labs(
+    title = "24-hour cumulative precipitation vs. specific conductivity",
+    x = "24-hour Cumulative Precipitation",
+    y = "Specific Conductivity (mS/cm)"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+
+```{r}
+#create the dataset with daily or even weekly data
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

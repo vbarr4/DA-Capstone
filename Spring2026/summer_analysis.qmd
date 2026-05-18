@@ -1,0 +1,398 @@
+---
+title: "summer_analysis"
+author: Natalie Novoseltseva
+format: 
+  html:
+    theme: cosmo       
+    code-fold: true    
+    toc: true         
+    toc-depth: 2
+    number-sections: true
+---
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+#libraries
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(gt)
+library(ggplot2)
+library(stringr)
+library(janitor)
+library(reshape2)
+library(ggpubr)
+library(patchwork)
+```
+
+Data
+
+
+```{r}
+combined <- read_csv("Spring2026/data/joined_dataset.csv")
+
+combined <-combined %>% 
+  mutate(
+  season_astro = case_when(
+    date >= as.Date(paste0(year, "-12-21")) | date < as.Date(paste0(year, "-03-20")) ~ "Winter",
+    date >= as.Date(paste0(year, "-03-20")) & date < as.Date(paste0(year, "-06-21")) ~ "Spring",
+    date >= as.Date(paste0(year, "-06-21")) & date < as.Date(paste0(year, "-09-22")) ~ "Summer",
+    TRUE ~ "Fall"
+  )
+)
+```
+
+Summer Data Sets
+
+```{r}
+#original dataset, but filtered to summer observations
+combined_summer <- combined %>%
+  filter(season_astro == "Summer")
+
+names(combined_summer)
+
+
+#summer dataset by day
+summer_daily_avg <- combined_summer %>%
+  group_by(date) %>%
+  summarise(
+    across(
+      where(is.numeric),
+      ~ mean(.x, na.rm = TRUE)
+    ),
+    .groups = "drop"
+  )
+
+#summer dataset by week
+summer_weekly_avg <- combined_summer %>%
+  mutate(week = floor_date(date, unit = "week")) %>%
+  group_by(week) %>%
+  summarise(
+    across(
+      where(is.numeric),
+      ~ mean(.x, na.rm = TRUE)
+    ),
+    .groups = "drop"
+  )
+names(summer_weekly_avg)
+```
+
+Summer dataset by day
+
+Turbidity
+
+```{r}
+
+ggplot(summer_daily_avg, aes(x = date, y = Turb)) +
+  geom_line(color = "#1D91C0", linewidth = 0.9) +
+  geom_point(color = "#1D91C0", size = 1, alpha = 0.6) +
+  
+  # optional smooth trend per panel
+  geom_smooth(method = "loess", se = FALSE, color = "#E34A33", linewidth = 0.8) +
+  
+  facet_wrap(~ year, scales = "free_x") +
+  
+  labs(
+    title = "Daily Average Turbidity by Year (Summer)",
+    x = "Date",
+    y = "Turbidity (NTU)"
+  ) +
+  
+  scale_x_date(date_labels = "%b %d") +
+  
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title = element_text(face = "bold"),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+Total Precipitation 
+
+```{r}
+
+ggplot(summer_daily_avg, aes(x = date, y = TotPrcp)) +
+  geom_col(fill = "#2CA25F", alpha = 0.8) +  # bars work better for precipitation
+  
+  facet_wrap(~ year, scales = "free_x") +
+  
+  labs(
+    title = "Daily Total Precipitation by Year (Summer)",
+    x = "Date",
+    y = "Precipitation"
+  ) +
+  
+  scale_x_date(date_labels = "%b %d") +
+  
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title = element_text(face = "bold"),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+Specific Conductivity
+
+```{r}
+ggplot(summer_daily_avg, aes(x = date, y = SpCond)) +
+  geom_line(color = "#2C7FB8", linewidth = 0.8) +
+  facet_wrap(~ year, scales = "free_x") +
+  labs(
+    title = "Daily Mean Specific Conductivity by Year (Summer)",
+    x = "Date",
+    y = "Specific Conductivity (µS/cm or appropriate units)"
+  ) +
+  scale_x_date(date_labels = "%b %d") +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title = element_text(face = "bold"),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+
+Total Precipitation and Turbidity
+
+```{r}
+scale_factor <- max(summer_daily_avg$Turb, na.rm = TRUE) / 
+                max(summer_daily_avg$TotPrcp, na.rm = TRUE)
+
+ggplot(summer_daily_avg, aes(x = date)) +
+  
+  # Precipitation (bars)
+  geom_col(
+    aes(y = TotPrcp * scale_factor, fill = "Precipitation"),
+    alpha = 0.6
+  ) +
+  
+  # Turbidity (line)
+  geom_line(
+    aes(y = Turb, color = "Turbidity"),
+    linewidth = 1.1
+  ) +
+  
+  facet_wrap(~ year, scales = "free_x") +
+  
+  scale_y_continuous(
+    name = "Turbidity",
+    sec.axis = sec_axis(~ . / scale_factor, name = "Precipitation")
+  ) +
+  
+  # Custom legend colors
+  scale_color_manual(
+    values = c("Turbidity" = "#2C7FB8")
+  ) +
+  
+  scale_fill_manual(
+    values = c("Precipitation" = "#F03B20")
+  ) +
+  
+  labs(
+    title = "Turbidity and Precipitation Over Time",
+    x = "Date",
+    color = "",
+    fill = ""
+  ) +
+  
+  scale_x_date(date_labels = "%b %d") +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    legend.position = "top"
+  )
+```
+
+Year of 2006
+```{r}
+
+summer_2006 <- summer_daily_avg %>%
+  filter(year == 2006)
+
+scale_factor <- max(summer_2006$Turb, na.rm = TRUE) / 
+                max(summer_2006$TotPrcp, na.rm = TRUE)
+
+ggplot(summer_2006, aes(x = date)) +
+  
+  # Precipitation (bars)
+  geom_col(
+    aes(y = TotPrcp * scale_factor, fill = "Precipitation"),
+    alpha = 0.6
+  ) +
+  
+  # Turbidity (line)
+  geom_line(
+    aes(y = Turb, color = "Turbidity"),
+    linewidth = 1.1
+  ) +
+  
+  scale_y_continuous(
+    name = "Turbidity",
+    sec.axis = sec_axis(~ . / scale_factor, name = "Precipitation")
+  ) +
+  
+  scale_color_manual(
+    values = c("Turbidity" = "#2C7FB8")
+  ) +
+  
+  scale_fill_manual(
+    values = c("Precipitation" = "#F03B20")
+  ) +
+  
+  labs(
+    title = "Turbidity and Precipitation Over Time (2006)",
+    x = "Date",
+    color = "",
+    fill = ""
+  ) +
+  
+  scale_x_date(date_labels = "%b %d") +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    panel.grid.minor = element_blank(),
+    legend.position = "top"
+  )
+```
+
+```{r}
+ggplot(summer_2006, aes(x = TotPrcp, y = Turb)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  theme_minimal()
+```
+
+
+Specific Conductivity and Total precipitation
+
+```{r}
+scale_factor <- max(summer_daily_avg$SpCond, na.rm = TRUE) / 
+                max(summer_daily_avg$TotPrcp, na.rm = TRUE)
+
+ggplot(summer_daily_avg, aes(x = date)) +
+  
+  # Precipitation (bars, scaled)
+  geom_col(
+    aes(y = TotPrcp * scale_factor, fill = "Precipitation"),
+    alpha = 0.6
+  ) +
+  
+  # Specific Conductivity (line)
+  geom_line(
+    aes(y = SpCond, color = "Specific Conductivity"),
+    linewidth = 1.1
+  ) +
+  
+  facet_wrap(~ year, scales = "free_x") +
+  
+  scale_y_continuous(
+    name = "Specific Conductivity",
+    sec.axis = sec_axis(~ . / scale_factor, name = "Precipitation")
+  ) +
+  
+  scale_color_manual(
+    values = c("Specific Conductivity" = "#2C7FB8")
+  ) +
+  
+  scale_fill_manual(
+    values = c("Precipitation" = "#F03B20")
+  ) +
+  
+  labs(
+    title = "Specific Conductivity and Precipitation Over Time",
+    x = "Date",
+    color = "",
+    fill = ""
+  ) +
+  
+  scale_x_date(date_labels = "%b %d") +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    legend.position = "top"
+  )
+```
+
+Weekly Dataset
+
+```{r}
+ggplot(summer_weekly_avg, aes(x = week, y = TotPrcp)) +
+  
+  geom_col(fill = "#F03B20", alpha = 0.7) +
+  
+  labs(
+    title = "Weekly Total Precipitation (Summer)",
+    x = "Week",
+    y = "Precipitation"
+  ) +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    legend.position = "none"
+  )
+```
+
+```{r}
+ggplot(summer_weekly_avg, aes(x = week, y = SpCond)) +
+  
+  geom_col(fill = "#F03B20", alpha = 0.7) +
+  
+  labs(
+    title = "Weekly Specific Conductivity (Summer)",
+    x = "Week",
+    y = "Specific Conductivity"
+  ) +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    legend.position = "none"
+  )
+```
+
+```{r}
+ggplot(summer_weekly_avg, aes(x = week, y = SpCond)) +
+  
+  geom_line(color = "#2C7FB8", linewidth = 1) +
+  geom_point(color = "#2C7FB8", size = 1.8) +
+  
+  labs(
+    title = "Weekly Specific Conductivity (Summer)",
+    x = "Week",
+    y = "Specific Conductivity"
+  ) +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+
+
+
+

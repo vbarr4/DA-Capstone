@@ -15,47 +15,19 @@ library(gt)
 library(ggplot2)
 library(stringr)
 library(janitor)
+library(reshape2)
+library(ggpubr)
+library(patchwork)
+library(gsw)
 ```
 
 ## Data
 
 
 ```{r}
-#stony creek data 2002-2021
 
-#creates a data folder for the specific site
-dir.create("data/stony_creek", recursive = TRUE, showWarnings = FALSE) 
+stony_creek <- read_csv("Spring2026/data/stony_creek.csv")
 
-#using tempfile() to create a tempary storage
-zip <- tempfile(fileext = ".zip")
-
-#downlod the file from the url
-download.file("http://cdmo.baruch.sc.edu/aqs/output/60521.zip", zip, mode = "wb")
-
-unzip(zip, exdir = "data/stony_creek")
-
-#read in the files for all the years as a one data file
-files <- list.files(
-  "data/stony_creek",
-  pattern = "^hudscwq[0-9]{4}\\.csv$", # ^ -starts a string
-                                       # hudscwq - the exact name in the file (constant)
-                                       # any digits from 0-9 might follow
-                                       # {4} - we are looking for 4 digits pattern
-                                       # \\. - there should be a dot
-                                       # csv - it should end with "csv"
-                                       # end a string
-  full.names = TRUE
-)
-
-#combines all data files into one dataset
-sc_02_21_raw <- do.call(
-  rbind,
-  lapply(files, function(f) {
-    df <- read.csv(f, fileEncoding = "Latin1")
-    df$year <- as.integer(gsub(".*([0-9]{4})\\.csv$", "\\1", f))
-    df
-  })
-)
 ```
 
 ## Data Cleaning
@@ -119,11 +91,11 @@ Number of observations
 
 ```{r}
 #extract observations with missing season values
-sc_02_21_NAs <- sc_02_21 %>%
+stony_creek_NA <- stony_creek %>%
   filter(is.na(season))
 
 #count observations by year and season and display as a formatted table
-sc_02_21 %>%
+stony_creek %>%
   count(year, season) %>%
   gt(groupname_col = "season") %>%
   tab_header(
@@ -140,7 +112,7 @@ Summary statistics (all years)
 
 ```{r}
 #compute summary statistics for selected variables, reshape, and display as a formatted table
-sc_02_21 %>%
+stony_creek %>%
   summarise(
     Temp_mean = mean(Temp, na.rm = TRUE),
     Temp_sd   = sd(Temp, na.rm = TRUE),
@@ -165,7 +137,7 @@ sc_02_21 %>%
 Averages by season
 
 ```{r}
-sc_02_21 %>%
+stony_creek %>%
   group_by(season) %>%
   summarise(
     avg_temp = mean(Temp, na.rm = TRUE),
@@ -184,7 +156,7 @@ Average temperatures by year
 
 ```{r}
 #calculate average water quality measures by season and display as a formatted table
-avg_temp_by_year <- sc_02_21 %>%
+avg_temp_by_year <- stony_creek %>%
   group_by(year) %>%
   summarise(
     avg_temp = mean(Temp, na.rm = TRUE),
@@ -212,7 +184,7 @@ Average temperature by year and season (one table)
 
 ```{r}
 #calculate average temperature and number of observations by season and year
-avg_temp_by_year_season <- sc_02_21 %>%
+avg_temp_by_year_season <- stony_creek %>%
   group_by(season, year) %>%
   summarise(
     avg_temp = mean(Temp, na.rm = TRUE),
@@ -281,7 +253,7 @@ Seasonal extremes
 
 ```{r}
 #calculate seasonal temperature extremes and display as a formatted table
-sc_02_21 %>%
+stony_creek %>%
   group_by(season) %>%
   summarise(
     min_temp = min(Temp, na.rm = TRUE), #lowest observed temperature
@@ -300,7 +272,7 @@ Changes in the magnitude of temperature changes
 
 ```{r}
 #calculate yearly average air temperature and its deviation from the overall mean
-avg_air_temp_by_year <- sc_02_21 %>%
+avg_air_temp_by_year <- stony_creek %>%
   group_by(year) %>%
   summarise(
     avg_air_temp = mean(Temp, na.rm = TRUE),
@@ -332,7 +304,7 @@ Plot of the of the magnitude of temperature changes
 
 ```{r}
 #calculate yearly average air temperature and deviation from overall mean
-avg_air_temp_by_year <- sc_02_21 %>%
+avg_air_temp_by_year <- stony_creek %>%
   group_by(year) %>%
   summarise(
     avg_air_temp = mean(Temp, na.rm = TRUE), #yearly average temperature
@@ -365,8 +337,7 @@ Changes in the magnitude of temperature changes
 
 ```{r}
 #calculate yearly average temperature and year-to-year changes
-sc_02_21 %>%
-sc_02_21 %>%
+stony_creek %>%
   group_by(year) %>%
   summarise(
     avg_temp = mean(Temp, na.rm = TRUE),
@@ -387,7 +358,7 @@ Plot of the of the magnitude of temperature changes
 
 ```{r}
 #calculate yearly average temperature and year-to-year changes
-yearly_temp_change <- sc_02_21 %>%
+yearly_temp_change <- stony_creek %>%
   group_by(year) %>%
   summarise(
     avg_temp = mean(Temp, na.rm = TRUE),
