@@ -306,5 +306,3 @@ weekly_combined |>
 ```
 
 We notice that water turbidity tends to be less than 20 NTU. We also notice that the trend line becomes less step when we look at the data excluding unusual values.
-
-

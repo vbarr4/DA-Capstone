@@ -1,5 +1,6 @@
 ---
-title: "data_dictionary"
+title: "Data Dictionary"
+subtitle: "Stony Creek Water Quality and Field Station Meteorological Data"
 format: html
 editor: visual
 ---
@@ -30,7 +31,7 @@ To access, run read_csv line. \*Tidyverse must be installed and added to the lib
 
 ## Terms
 
-| Term | Description |
+| Variables | Description |
 |------------|------------------------------------------------------------|
 | SpCond | Specific conductivity measured in milli-Siemens per centimeter (mS/cm) |
 | DO_pct | Dissolved oxygen measured in percent saturation (%) |
