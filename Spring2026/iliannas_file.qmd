@@ -1,0 +1,310 @@
+---
+title: "Exploratory Data Analysis"
+author: Ilianna Ditren
+---
+
+# Project Set Up
+
+```{r, message=FALSE, warning=FALSE}
+
+#Downloading libraries
+library(readr)
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(janitor)
+library(rlang)
+library(glue)
+
+```
+
+```{r, message=FALSE, warning=FALSE}
+
+# Importing stony creek data
+stony_creek <- read_csv("data/stony_creek.csv")
+
+```
+
+```{r, message=FALSE, warning=FALSE}
+
+wq_clean_names <- c(
+  Temp = "Water Temperature (C)",
+  SpCond = "Specific Conductivity (mS/cm)",
+  Sal = "Salinity (ppt)",
+  DO_Pct = "Dissolved Oxygen (% Saturation)",
+  DO_mgl = "Dissolved Oxygen (mg/L)",
+  Depth = "Sonde Depth (m)",
+  pH = "pH",
+  ChlFluor = "Chlorophyll Fluorescence (ug/L)", # include foot note
+  Turb = "Turbidity (NTU)",
+  ATemp = "Average Air Temperature (C)",
+  RH = "Average Relative Humidity (% Saturation)",
+  BP = "Average Barometric Pressure (mb)",
+  WSpd = "Average Wind Speed (m/s)",
+  MaxWSpd = "Max Wind Speed (m/s)",
+  MaxWSpdT = "Time of Max Wind Speed Measured (hh:mm)",
+  Wdir = "Average Wind Direction", # include foot note
+  SDWDir = "Wind Direction (sd)",
+  TotPAR = "Total Photosynthetically Active Radiation",
+  TotPrcp = "Total Precipitation (mm)",
+  year = "Year",
+  time = "Time",
+  month = "Month",
+  season = "Season",
+  date = "Date",
+  week_n = "Week")
+```
+
+# Climate Change Effects of Water Quality (20-years change)
+
+## Exploratory Data Analysis
+
+The first step in our exploratory data was to assess the descriptive statistics of each variable in the dataset. Our first presentation showed tables and line graphs of the mean values by season by year. The feedback we received revealed that linegraphs were not the best strategy to present the data because once we calculated the mean, the data stopped being continuous, instead, a scatterplot was a better visualization. In addition, we decided to removed the flagged data recommended by the client to have better results with the data. That process was done in the processing document
+
+The following code creates a function to average the data by year and place it in a scatterplot. This function can also be found in the package called wqD375. The package was created in attempts to support data analysis of this project. The second chunk of code is a for loop to make efficient the creation of 5 plots (one for each of the seasons and one for all seasons) for each of the variables. 
+The purpose of this tasks was to investigate whether or not there were major changes in water quality across the 20 years. 
+
+```{r, echo = FALSE, message = FALSE}
+
+scatterplot_mean <- function(df, 
+                             var1, 
+                             var2, 
+                             season, 
+                             aes_color = NULL, 
+                             ymin = NULL, 
+                             ymax = NULL) {
+  
+  # creating
+  var1_name <- as_name(ensym(var1))
+  var2_name <- as_name(ensym(var2))
+
+# accessing the variable name from the wq_clean_names object and assigning it to the x and y labels
+  x_label <- wq_clean_names[[var1_name]]
+  y_label <- wq_clean_names[[var2_name]]
+
+  df |>
+    filter(!is.na({{var2}}) & season %in% {{season}}) |>
+    group_by(year, season) |>
+    summarize(mean = mean({{var2}})) |>
+    ggplot() +
+    geom_point(aes(x = {{var1}}, y = mean, color = {{aes_color}})) +
+    labs(
+      title = glue("Mean {season} {y_label} by Year"),
+      x = x_label,
+      y = y_label) +
+    theme_minimal() +
+    ylim({{ymin}}, {{ymax}}) +
+    scale_color_viridis_d()
+}
+
+seasons = c("Spring", "Summer", "Fall", "Winter")
+list_seasons <- list("Spring", "Summer", "Fall", "Winter", seasons)
+
+```
+
+```{r, warning = FALSE, message = FALSE}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, Temp, lst, season, 0, 23))
+}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, SpCond, lst, season, 0, 1))
+}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, Sal, lst, season, 0, 1))
+}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, DO_Pct, lst, season, 0, 155))
+}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, DO_mgl, lst, season, 0, 23))
+}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, Depth, lst, season, 0, 1))
+}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, pH, lst, season, 1, 14))
+}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, Turb, lst, season, 0, 50))
+}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, ChlFluor, lst, season, 0, 5))
+}
+
+```
+
+
+##### Boxplots:
+
+###### Avg Air Temperature (Year-round)
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+
+#average temperature by year
+
+box_season_atemp <- atemp |> ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature (Year-round)") +
+  xlim(-25, 40)
+
+box_season_atemp
+
+```
+
+###### Avg Air Temperature (Winter)
+
+```{r, echo = FALSE, message = FALSE}
+
+#average temperature by year
+
+box_winter_atemp <- filter(atemp, season == "Winter") |> 
+  ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature in the Winter (C)") +
+  xlim(-25, 40)
+
+box_winter_atemp
+
+```
+
+###### Avg Air Temperature (Spring)
+
+```{r, echo = FALSE, message = FALSE}
+
+#average temperature by year
+
+box_spring_atemp <- filter(atemp, season == "Spring") |> 
+  ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature in the Spring (C)") +
+  xlim(-25, 40)
+
+box_spring_atemp
+
+```
+
+###### Avg Air Temperature (Summer)
+
+```{r, echo = FALSE, message = FALSE}
+
+#average temperature by year
+
+box_summer_atemp <- filter(atemp, season == "Summer") |> 
+  ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature in the Summer (C)") +
+  xlim(-25, 40)
+
+box_summer_atemp
+
+```
+
+###### Avg Air Temperature (Fall)
+
+```{r, echo = FALSE, message = FALSE}
+
+#average temperature by year
+
+box_fall_atemp <- filter(atemp, season == "Fall") |> 
+  ggplot()+
+  geom_boxplot(aes(ATemp, year, group = year))+
+  labs(x = "Avg Air Temperature",
+       y = "Year",
+       title = "Avg Air Temperature in the Fall (C)") +
+  xlim(-25, 40)
+
+box_fall_atemp
+
+```
+
+---
+title: "Exploring Water Turbidity in Stony Creek"
+author: "Ilianna Ditren"
+format: html
+---
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+
+#libraries
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(stringr)
+library(janitor)
+library(reshape2)
+library(ggplot2)
+library(wqD375)
+library(rlang)
+
+combined <- read_csv("data/joined_dataset.csv")
+weekly_combined <- read_csv("data/weekly_combined.csv")
+daily_combined <- read_csv("data/daily_combined.csv")
+
+```
+
+Water turbidity is the measure of suspended particles in the water. It is measured in Nephelometric Turbidity Units (NTU). It measures water cloudiness by detecting how suspended particles scatter  light in the water. Cloudier water has a higher NTU number and can be considered polluted or unsafe to drink. The standard NTU for drinking water is 1 NTU. For water bodies these values might change as rain, winds, and currents can disturb the sediments in the water. 
+
+ measures water cloudiness by detecting how suspended particles scatter light at a 90-degree angle, with higher numbers indicating murkier water
+
+Water turbidity affects water temperature, as higher turbidity makes water cloudier. Because of this, the water absorbs and scatters sunlight (Paaijmans et. al., 2008). 
+
+Initially, I look at turbidity and water temperature and noticed that the trend line was very steep. This trend was suspicious and therefore I was advised to readjust the time frame and discard the unsual values in order to have a more reliable look at the data.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+combined |> 
+  wq_scatterplot(Turb, Temp)
+```
+
+Daily averages of water turbidity plotted against daily averages of water temperature.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+daily_combined |> 
+  wq_scatterplot(Turb, Temp)
+```
+
+Turbidity is then filtered to only include NTU levels that are less than a hundred in order to see the clustered data better.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+daily_combined |> 
+  filter(Turb < 100) |>
+  wq_scatterplot(Turb, Temp)
+
+```
+
+Weekly averages of water turbidity plotted against weekly averages of water temperature.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+weekly_combined |>
+  wq_scatterplot(Turb, Temp)
+```
+
+The following plot only shows values where turbidity is less than 100 so we can see the data closer.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+
+weekly_combined |> 
+  filter(Turb < 100) |>
+  wq_scatterplot(Turb, Temp)
+
+```
+
+We notice that water turbidity tends to be less than 20 NTU. We also notice that the trend line becomes less step when we look at the data excluding unusual values.
+
+
