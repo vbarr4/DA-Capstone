@@ -179,10 +179,8 @@ summary_tbl <- stony_creek %>%
   pivot_wider(
     names_from = Variable,
     values_from = Value
-  )
+  ) 
 ```
-
-## Summary Statistics
 
 - The table summarizes the key statistics for the main water quality variables in the Stony Creek dataset from 2002 to 2021.
 
@@ -202,8 +200,118 @@ summary_tbl %>%
 ```
 
 
+## 
 
+- Examining seasonal means shows that water temperature and temperature-dependent variables such as dissolved oxygen, turbidity, and conductivity vary significantly across seasons. Among these, it is notable that the summer–fall and winter–spring values are relatively similar for some variables.
 
+```{r}
+stony_creek %>%
+  filter(!is.na(season)) %>%
+  group_by(season) %>%
+  summarise(
+    Temperature        = mean(Temp, na.rm = TRUE),
+    `Dissolved Oxygen` = mean(DO_mgl, na.rm = TRUE),
+    pH                 = mean(pH, na.rm = TRUE),
+    Salinity           = mean(Sal, na.rm = TRUE),
+    Turbidity          = mean(Turb, na.rm = TRUE),
+    Chlorophyll        = mean(ChlFluor, na.rm = TRUE),
+    Conductivity       = mean(SpCond, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(season = str_to_title(season)) %>%
+  gt() %>%
+  tab_header(
+    title = "Average Water Quality Measures by Season"
+  ) %>%
+  fmt_number(decimals = 2) %>%
+  tab_options(
+    table.width = pct(100),
+    table.font.size = px(22),
+    heading.title.font.size = px(28),
+    data_row.padding = px(6)
+  ) %>% 
+  tab_source_note(
+    source_note = "Data Source: Centralized Data Management Office (CDMO), https://cdmo.baruch.sc.edu"
+  )
+```
+
+## {.stretch}
+
+```{r, fig.width=14, fig.height=7}
+avg_temp_by_year <- stony_creek %>%
+  group_by(year) %>%
+  summarise(
+    avg_temp = mean(Temp, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    delta_overall = avg_temp - mean(avg_temp, na.rm = TRUE)
+  )
+
+overall_mean <- mean(avg_temp_by_year$avg_temp)
+
+ggplot(avg_temp_by_year, aes(x = factor(year), y = avg_temp, fill = delta_overall > 0)) +
+  geom_col(show.legend = FALSE) +
+  geom_hline(yintercept = overall_mean, color = "red", linetype = "dashed", linewidth = 1) +
+  labs(
+    title = "Average Water Temperature by Year",
+    subtitle = "Yearly averages relative to the overall mean (2001–2021)",
+    x = "Year",
+    y = "Average Water Temperature (°C)"
+  ) +
+  scale_fill_manual(values = c("TRUE" = "steelblue", "FALSE" = "lightgray")) +
+  theme_minimal(base_size = 18) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+- The plot shows yearly average water temperature from 2001–2021, the red dashed line represents the mean temperature, blue bars indicate above-average years, gray below-average years.
+
+##
+
+```{r}
+avg_temp_by_year_season <- stony_creek %>%
+  filter(!is.na(season)) %>%
+  group_by(year, season) %>%
+  summarise(
+    avg_temp = mean(Temp, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  group_by(season) %>%
+  mutate(
+    delta_overall = avg_temp - mean(avg_temp, na.rm = TRUE)
+  ) %>%
+  ungroup()
+
+ggplot(avg_temp_by_year_season,
+       aes(x = factor(year), y = avg_temp, fill = delta_overall > 0)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ season, ncol = 2) +
+  geom_hline(
+    data = avg_temp_by_year_season %>%
+      group_by(season) %>%
+      summarise(overall_mean = mean(avg_temp)),
+    aes(yintercept = overall_mean),
+    color = "red",
+    linetype = "dashed",
+    linewidth = 1
+  ) +
+  labs(
+    title = "Average Water Temperature by Year and Season",
+    subtitle = "Yearly seasonal averages relative to seasonal means (2001–2021)",
+    x = "Year",
+    y = "Water Temperature (°C)"
+  ) +
+  scale_fill_manual(values = c("TRUE" = "steelblue", "FALSE" = "lightgray")) +
+  theme_minimal(base_size = 16) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.spacing = unit(2, "lines")  
+  )
+```
+
+<span style="font-size: 0.5em;">
+*Data source: Centralized Data Management Office (CDMO), NOAA NERRS (https://cdmo.baruch.sc.edu)*
+</span>
 
 
 ## {.center background-image="pictures/stony_creek_picture.jpeg"}
