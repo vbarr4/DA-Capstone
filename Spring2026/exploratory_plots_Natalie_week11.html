@@ -109,10 +109,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/joined_dataset.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/combined.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 598810 Columns: 27
+<pre><code>Rows: 599074 Columns: 27
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr   (1): season
@@ -169,7 +169,7 @@ time  (2): time, MaxWSpdT
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-  0.000   0.200   0.200   0.206   0.200   0.700  178421 </code></pre>
+  0.000   0.200   0.200   0.206   0.200   0.700  178012 </code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
@@ -177,7 +177,7 @@ time  (2): time, MaxWSpdT
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-  0.000   0.000   0.000   0.000   0.000   0.001  178796 </code></pre>
+  0.000   0.000   0.000   0.000   0.000   0.001  178387 </code></pre>
 </div>
 </div>
 <p>Salinity Plots with recalculated Salinity</p>
@@ -530,11 +530,11 @@ time  (2): time, MaxWSpdT
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 155050 rows containing non-finite outside the scale range
+<pre><code>Warning: Removed 154401 rows containing non-finite outside the scale range
 (`stat_smooth()`).</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 155050 rows containing missing values or values outside the scale range
+<pre><code>Warning: Removed 154401 rows containing missing values or values outside the scale range
 (`geom_point()`).</code></pre>
 </div>
 <div class="cell-output-display">
@@ -544,6 +544,12 @@ time  (2): time, MaxWSpdT
 </figure>
 </div>
 </div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create the dataset with daily or even weekly data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 
 </main>

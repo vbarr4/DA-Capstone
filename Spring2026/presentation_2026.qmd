@@ -22,6 +22,7 @@ library(here)
 ```{r}
 #data
 stony_creek <- read_csv("data/stony_creek.csv")
+combined <- read_csv("data/combined.csv")
 
 ```
 
@@ -326,6 +327,76 @@ ggplot(avg_temp_by_year_season,
 ">
 Joined Dataset Analysis
 </div>
+
+## Precipitation vs Specific Conductivity {.stretch}
+
+```{r, fig.width=12, fig.height=7}
+combined %>%
+  filter(!is.na(TotPrcp), !is.na(SpCond), !is.na(season)) %>%
+  ggplot(aes(x = TotPrcp, y = SpCond)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Precipitation and Specific Conductivity by Season",
+    x = "Total Precipitation (mm)",
+    y = "Specific Conductivity (mS/cm)"
+  ) +
+  theme_minimal(base_size = 16) +
+  theme(
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+<span style="font-size: 0.5em;">
+*Data source: Centralized Data Management Office (CDMO), NOAA NERRS (https://cdmo.baruch.sc.edu)*
+</span>*
+
+- some text
+
+## Lagged Effects of Precipitation on Conductivity {.stretch}
+
+```{r, fig.width=12, fig.height=7}
+#filter the data to have equal breaks
+combined_1 <- combined %>%
+  filter(year>2006)
+
+#create lags
+combined_1 <- combined %>%
+  arrange(DateTimeStamp) %>%
+  mutate(
+    prcp_1hr  = lag(TotPrcp, 4),
+    prcp_3hr  = lag(TotPrcp, 12),
+    prcp_6hr  = lag(TotPrcp, 24),
+    prcp_12hr = lag(TotPrcp, 48),
+    prcp_24hr = lag(TotPrcp, 96)
+  )
+
+combined_1 %>%
+  select(SpCond, prcp_1hr, prcp_3hr, prcp_6hr, prcp_12hr, prcp_24hr) %>%
+  pivot_longer(cols = starts_with("prcp_"),
+               names_to = "lag",
+               values_to = "precip") %>%
+  filter(!is.na(SpCond), !is.na(precip)) %>%
+  ggplot(aes(x = precip, y = SpCond)) +
+  geom_point(alpha = 0.25, color = "#2C7BB6") +
+  geom_smooth(method = "lm", color = "#D7191C", se = TRUE) +
+  facet_wrap(~ lag, scales = "free_x") +
+  labs(
+    title = "Lagged Precipitation vs Specific Conductivity",
+    x = "Precipitation (lagged)",
+    y = "Specific Conductivity (mS/cm)"
+  ) +
+  theme_minimal(base_size = 16) +
+  theme(strip.text = element_text(face = "bold"))
+```
+
+<span style="font-size: 0.5em;">
+*Data source: Centralized Data Management Office (CDMO), NOAA NERRS (https://cdmo.baruch.sc.edu)*
+</span>
+
+- some text
 
 
 ## {.center background-image="pictures/stony_creek_picture.jpeg"}

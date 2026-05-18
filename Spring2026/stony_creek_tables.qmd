@@ -26,7 +26,7 @@ library(gsw)
 
 ```{r}
 
-stony_creek <- read_csv("Spring2026/data/stony_creek.csv")
+stony_creek <- read_csv("data/stony_creek.csv")
 
 ```
 
