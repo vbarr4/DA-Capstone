@@ -1,9 +1,10 @@
 ---
 title: "This is my title"
-author: "Ilianna Ditren, Natalie Novoseltseva, Joy Terentiev"
+author: "Ilianna Ditren, Natalie Novoseltseva, Mikhal"
 format: revealjs
 
 ---
+
 ```{r}
 #libraries
 library(tidyverse)
@@ -25,6 +26,8 @@ stony_creek <- read_csv("data/stony_creek.csv")
 combined <- read_csv("data/combined.csv")
 
 ```
+
+
 
 
 ## {.center background-image="pictures/stony_creek_picture.jpeg"}
@@ -132,6 +135,8 @@ Initial Exploratory Analysis
 
 ## Summary Statistics
 
+
+
 ```{r}
 summary_tbl <- stony_creek %>%
   summarise(
@@ -194,7 +199,11 @@ summary_tbl <- stony_creek %>%
   ) 
 ```
 
+
+
 - The table summarizes the key statistics for the main water quality variables in the Stony Creek dataset from 2002 to 2021.
+
+
 
 ```{r}
 summary_tbl %>%
@@ -212,9 +221,13 @@ summary_tbl %>%
 ```
 
 
+
+
 ## 
 
 - Examining seasonal means shows that water temperature and temperature-dependent variables such as dissolved oxygen, turbidity, and conductivity vary significantly across seasons. Among these, it is notable that the summer–fall and winter–spring values are relatively similar for some variables.
+
+
 
 ```{r}
 stony_creek %>%
@@ -247,7 +260,11 @@ stony_creek %>%
   )
 ```
 
+
+
 ## {.stretch}
+
+
 
 ```{r, fig.width=14, fig.height=7}
 avg_temp_by_year <- stony_creek %>%
@@ -276,9 +293,13 @@ ggplot(avg_temp_by_year, aes(x = factor(year), y = avg_temp, fill = delta_overal
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
+
+
 - The plot shows yearly average water temperature from 2001–2021, the red dashed line represents the mean temperature, blue bars indicate above-average years, gray below-average years.
 
 ##
+
+
 
 ```{r}
 avg_temp_by_year_season <- stony_creek %>%
@@ -321,6 +342,8 @@ ggplot(avg_temp_by_year_season,
   )
 ```
 
+
+
 ## {.center background-image="pictures/stony_creek_picture.jpeg"}
 
 <div style="
@@ -335,6 +358,8 @@ Joined Dataset Analysis
 </div>
 
 ## Precipitation vs Specific Conductivity {.stretch}
+
+
 
 ```{r, fig.width=12, fig.height=7}
 combined %>%
@@ -355,7 +380,11 @@ combined %>%
   )
 ```
 
+
+
 ## Lagged Effects of Precipitation on Conductivity {.stretch}
+
+
 
 ```{r, fig.width=12, fig.height=7}
 #filter the data to have equal breaks
@@ -410,7 +439,11 @@ combined_1 %>%
 
 ```
 
+
+
 ## Precipitation vs Turbidity {.stretch}
+
+
 
 ```{r, fig.width=12, fig.height=7}
 
@@ -432,7 +465,11 @@ combined |>
   )
 ```
 
+
+
 ## Lagged Effects of Precipitation on Water Turbidity {.stretch}
+
+
 
 ```{r, fig.width=12, fig.height=7}
 #filter the data to have equal breaks
@@ -451,7 +488,11 @@ combined_1 %>%
   theme(strip.text = element_text(face = "bold"))
 ```
 
+
+
 ## Precipitation vs Water Temperature {.stretch}
+
+
 
 ```{r, fig.width=12, fig.height=7}
 
@@ -473,7 +514,11 @@ combined |>
   )
 ```
 
+
+
 ## Lagged Effects of Precipitation on Water Temperature {.stretch}
+
+
 
 ```{r, fig.width=12, fig.height=7}
 #filter the data to have equal breaks
@@ -491,6 +536,21 @@ combined_1 %>%
   theme_minimal(base_size = 16) +
   theme(strip.text = element_text(face = "bold"))
 ```
+
+
+
+## {.center background-image="pictures/stony_creek_picture.jpeg"}
+
+<div style="
+  background: rgba(255,255,255,0.85);
+  padding: 20px 50px;
+  border-radius: 6px;
+  font-size: 2.5em;
+  font-weight: 600;
+  display: inline-block;
+">
+Seasonal Analysis
+</div>
 
 
 ## {.center background-image="pictures/stony_creek_picture.jpeg"}
@@ -518,6 +578,5 @@ Conclusion
 ">
 Next Steps
 </div>
-
 
 
