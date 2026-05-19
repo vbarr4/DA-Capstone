@@ -334,6 +334,72 @@ ggplot(avg_temp_by_year_season,
 Joined Dataset Analysis
 </div>
 
+##
+
+```{r}
+
+#select + rename variables
+cor_vars <- combined %>%
+  select(
+    AirTemperature      = ATemp,
+    RelativeHumidity    = RH,
+    BarometricPressure  = BP,
+    WindSpeed           = WSpd,
+    MaxWindSpeed        = MaxWSpd,
+    WindDirection       = Wdir,
+    WindDirectionSD     = SDWDir,
+    PAR                 = TotPAR,
+    Precipitation       = TotPrcp,
+
+    WaterTemperature    = Temp,
+    DissolvedOxygen     = DO_mgl,
+    OxygenPercent       = DO_Pct,
+    Salinity            = Sal,
+    Conductivity        = SpCond,
+    pH                  = pH,
+    Turbidity           = Turb,
+    Chlorophyll         = ChlFluor,
+    Depth               = Depth
+  ) %>%
+  select(where(~ sum(!is.na(.)) > 0))
+
+#correlation matrix
+cor_matrix <- cor(cor_vars, use = "pairwise.complete.obs")
+
+# keep only lower triangle
+cor_matrix[upper.tri(cor_matrix)] <- NA
+
+#convert to long format
+cor_long <- reshape2::melt(cor_matrix, na.rm = TRUE)
+names(cor_long) <- c("Variable1", "Variable2", "Correlation")
+
+#plot
+
+ggplot(cor_long, aes(x = Variable1, y = Variable2, fill = Correlation)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = round(Correlation, 2)), size = 3) +
+  scale_fill_gradient2(
+    low = "#2b83ba",
+    mid = "white",
+    high = "#d7191c",
+    midpoint = 0,
+    name = "Correlation (r)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid = element_blank()
+  ) +
+  labs(
+    title = "Relationships Between Weather and Water Quality Variables",
+    x = NULL,
+    y = NULL
+  )
+```
+
+
+
+
 ## Precipitation vs Specific Conductivity {.stretch}
 
 ```{r, fig.width=12, fig.height=7}
@@ -506,6 +572,13 @@ combined_1 %>%
 Conclusion
 </div>
 
+## 
+
+- Several data quality issues were identified, including missing values and possible sensor errors.
+- Some plots suggest higher temperatures in recent years, especially during summer, but no clear long-term warming trend was confirmed.
+- Interesting relationships were observed, particularly between precipitation and water temperature.
+- Improved approaches were identified, including averaging data by day or week and analyzing seasons separately.
+
 ## {.center background-image="pictures/stony_creek_picture.jpeg"}
 
 <div style="
@@ -518,6 +591,14 @@ Conclusion
 ">
 Next Steps
 </div>
+
+##
+
+- Extend the analysis beyond exploratory methods by applying statistical modeling and time-series analysis.
+- Analyze extreme weather events separately to better understand their environmental impacts and associated water quality changes.
+- Improve data quality assessment by identifying sensor anomalies and patterns of missing data.
+- Develop predictive models to better understand how water quality responds to precipitation and seasonal weather conditions.
+
 
 
 
