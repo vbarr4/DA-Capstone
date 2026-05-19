@@ -5,6 +5,27 @@ author: "Natalie Novoseltseva, Ilianna Ditren, Joy Terentiev"
 format: pdf
 ---
 
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+#libraries
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(gt)
+library(ggplot2)
+library(stringr)
+library(janitor)
+library(reshape2)
+library(ggpubr)
+library(patchwork)
+```
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+#data
+stony_creek <- read_csv("Spring2026/data/stony_creek.csv")
+combined <- read_csv("Spring2026/data/combined.csv")
+
+```
+
 ## Introduction
 
 Water and water quality data have remained important topics for researchers from many disciplines, ranging from chemistry to sociology, for decades. We are no exception to this trend and as part of the Data Analytics Capstone project, we contributed to the ongoing exploration of water quality data collected from Stony Creek, NY. 
@@ -56,7 +77,7 @@ Each dataset must be requested separately, as the website generates one download
 
 12\. Run the code. After execution, all files will be downloaded into a subfolder named after the site within your data folder.
 
-### Data Cleaning
+### Data Cleaning 
 
 ### Final Dataset
 
@@ -68,8 +89,6 @@ Each dataset must be requested separately, as the website generates one download
 
 #### Package (Ilianna)
 
-#### Any other resource (Everybody)
-
 #### Initial EDA
 
 ### Water Quality Data
@@ -78,19 +97,83 @@ Each dataset must be requested separately, as the website generates one download
 
 ## Final Dataset EDA
 
-### Correlation matrix (Natalie)
+### Correlation matrix 
+
+```{r}
+
+#select + rename variables
+cor_vars <- combined %>%
+  select(
+    AirTemperature      = ATemp,
+    RelativeHumidity    = RH,
+    BarometricPressure  = BP,
+    WindSpeed           = WSpd,
+    MaxWindSpeed        = MaxWSpd,
+    WindDirection       = Wdir,
+    WindDirectionSD     = SDWDir,
+    PAR                 = TotPAR,
+    Precipitation       = TotPrcp,
+
+    WaterTemperature    = Temp,
+    DissolvedOxygen     = DO_mgl,
+    OxygenPercent       = DO_Pct,
+    Salinity            = Sal,
+    Conductivity        = SpCond,
+    pH                  = pH,
+    Turbidity           = Turb,
+    Chlorophyll         = ChlFluor,
+    Depth               = Depth
+  ) %>%
+  select(where(~ sum(!is.na(.)) > 0))
+
+#correlation matrix
+cor_matrix <- cor(cor_vars, use = "pairwise.complete.obs")
+
+# keep only lower triangle
+cor_matrix[upper.tri(cor_matrix)] <- NA
+
+#convert to long format
+cor_long <- reshape2::melt(cor_matrix, na.rm = TRUE)
+names(cor_long) <- c("Variable1", "Variable2", "Correlation")
+
+#plot
+
+ggplot(cor_long, aes(x = Variable1, y = Variable2, fill = Correlation)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = round(Correlation, 2)), size = 3) +
+  scale_fill_gradient2(
+    low = "#2b83ba",
+    mid = "white",
+    high = "#d7191c",
+    midpoint = 0,
+    name = "Correlation (r)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid = element_blank()
+  ) +
+  labs(
+    title = "Relationships Between Weather and Water Quality Variables",
+    subtitle = "Pearson correlation matrix (lower triangle)",
+    x = NULL,
+    y = NULL
+  )
+```
 
 ### General scatterplot (over all years and seasons) (Based on variable we had: Natalie, Joy, Ilianna)
 
-### Analysis by season (Spring - Ilianna, Summer - Natalie, Fall - Joy)
+### 
+
+## Conclusion
 
 ## Next Steps
 
-## **Discussion**
+## 
 
 \
 
-## **References**
+## 
 
 \
 
