@@ -25,6 +25,10 @@ library(wqD375)
 
 # Importing stony creek data
 stony_creek <- read_csv("data/stony_creek.csv")
+combined <- read_csv("data/combined.csv")
+daily_combined <- read_csv("data/daily_combined.csv")
+weekly_combined <- read_csv("data/weekly_combined.csv")
+
 
 ```
 
@@ -146,6 +150,56 @@ for (lst in list_seasons) {
 ```
 
 
+Water turbidity is the measure of suspended particles in the water. It is measured in Nephelometric Turbidity Units (NTU). It measures water cloudiness by detecting how suspended particles scatter  light in the water. Cloudier water has a higher NTU number and can be considered polluted or unsafe to drink. The standard NTU for drinking water is 1 NTU. For water bodies these values might change as rain, winds, and currents can disturb the sediments in the water. 
+
+NTU measures water cloudiness by detecting how suspended particles scatter light at a 90-degree angle, with higher numbers indicating murkier water
+
+Water turbidity affects water temperature, as higher turbidity makes water cloudier. Because of this, the water absorbs and scatters sunlight (Paaijmans et. al., 2008). 
+
+Initially, I look at turbidity and water temperature and noticed that the trend line was very steep. This trend was suspicious and therefore I was advised to readjust the time frame and discard the unsual values in order to have a more reliable look at the data.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+combined |> 
+  wq_scatterplot(Turb, Temp)
+```
+
+Daily averages of water turbidity plotted against daily averages of water temperature.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+daily_combined |> 
+  wq_scatterplot(Turb, Temp)
+```
+
+Turbidity is then filtered to only include NTU levels that are less than a hundred in order to see the clustered data better.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+daily_combined |> 
+  filter(Turb < 100) |>
+  wq_scatterplot(Turb, Temp)
+
+```
+
+Weekly averages of water turbidity plotted against weekly averages of water temperature.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+weekly_combined |>
+  wq_scatterplot(Turb, Temp)
+```
+
+The following plot only shows values where turbidity is less than 100 so we can see the data closer.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+
+weekly_combined |> 
+  filter(Turb < 100) |>
+  wq_scatterplot(Turb, Temp)
+
+```
+
+We notice that water turbidity tends to be less than 20 NTU. We also notice that the trend line becomes less step when we look at the data excluding unusual values.
+
+
+
 ##### Boxplots:
 
 ###### Avg Air Temperature (Year-round)
@@ -153,7 +207,7 @@ for (lst in list_seasons) {
 ```{r, echo = FALSE, message = FALSE, warning=FALSE}
 
 #average temperature by year
-
+wq_boxplot()
 box_season_atemp <- atemp |> ggplot()+
   geom_boxplot(aes(ATemp, year, group = year))+
   labs(x = "Avg Air Temperature",
@@ -236,58 +290,3 @@ box_fall_atemp <- filter(atemp, season == "Fall") |>
 box_fall_atemp
 
 ```
-
-
-combined <- read_csv("data/joined_dataset.csv")
-weekly_combined <- read_csv("data/weekly_combined.csv")
-daily_combined <- read_csv("data/daily_combined.csv")
-
-```
-
-Water turbidity is the measure of suspended particles in the water. It is measured in Nephelometric Turbidity Units (NTU). It measures water cloudiness by detecting how suspended particles scatter  light in the water. Cloudier water has a higher NTU number and can be considered polluted or unsafe to drink. The standard NTU for drinking water is 1 NTU. For water bodies these values might change as rain, winds, and currents can disturb the sediments in the water. 
-
- measures water cloudiness by detecting how suspended particles scatter light at a 90-degree angle, with higher numbers indicating murkier water
-
-Water turbidity affects water temperature, as higher turbidity makes water cloudier. Because of this, the water absorbs and scatters sunlight (Paaijmans et. al., 2008). 
-
-Initially, I look at turbidity and water temperature and noticed that the trend line was very steep. This trend was suspicious and therefore I was advised to readjust the time frame and discard the unsual values in order to have a more reliable look at the data.
-
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
-combined |> 
-  wq_scatterplot(Turb, Temp)
-```
-
-Daily averages of water turbidity plotted against daily averages of water temperature.
-
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
-daily_combined |> 
-  wq_scatterplot(Turb, Temp)
-```
-
-Turbidity is then filtered to only include NTU levels that are less than a hundred in order to see the clustered data better.
-
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
-daily_combined |> 
-  filter(Turb < 100) |>
-  wq_scatterplot(Turb, Temp)
-
-```
-
-Weekly averages of water turbidity plotted against weekly averages of water temperature.
-
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
-weekly_combined |>
-  wq_scatterplot(Turb, Temp)
-```
-
-The following plot only shows values where turbidity is less than 100 so we can see the data closer.
-
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
-
-weekly_combined |> 
-  filter(Turb < 100) |>
-  wq_scatterplot(Turb, Temp)
-
-```
-
-We notice that water turbidity tends to be less than 20 NTU. We also notice that the trend line becomes less step when we look at the data excluding unusual values.
