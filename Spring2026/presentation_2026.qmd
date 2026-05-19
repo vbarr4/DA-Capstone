@@ -1,5 +1,5 @@
 ---
-title: "This is my title"
+title: "Stony Creek Water Quality Analysis (2002–2021)"
 author: "Ilianna Ditren, Natalie Novoseltseva, Joy Terentiev"
 format: revealjs
 
@@ -571,6 +571,7 @@ combined_1 %>%
 Conclusion
 </div>
 
+##
 ## 
 
 - Several data quality issues were identified, including missing values and possible sensor errors.
