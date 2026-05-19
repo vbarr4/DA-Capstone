@@ -1,6 +1,7 @@
 ---
 title: "Data Dictionary"
 subtitle: "Stony Creek Water Quality and Field Station Meteorological Data"
+author: "Ilianna Ditren, Natalie"
 format: html
 editor: visual
 ---
@@ -22,7 +23,7 @@ To access, run read_csv line. \*Tidyverse must be installed and added to the lib
 ## New Columns
 
 | Column | Description | Type |
-|------------|------------------------------------------------|------------|
+|---------------|-------------------------------------------|---------------|
 | date_clean | Cleaned date, created by extracting the calendar day from time stamp | Numeric variable |
 | time | Time extracted from the original timestamp | Character variable |
 | month | Month extracted from date_clean | Integer |
@@ -32,7 +33,7 @@ To access, run read_csv line. \*Tidyverse must be installed and added to the lib
 ## Terms
 
 | Variables | Description |
-|------------|------------------------------------------------------------|
+|----------------|--------------------------------------------------------|
 | SpCond | Specific conductivity measured in milli-Siemens per centimeter (mS/cm) |
 | DO_pct | Dissolved oxygen measured in percent saturation (%) |
 | DO_mgl | Dissolved oxygen concentration measured in milligrams per Liter (mg/L) |
@@ -48,7 +49,7 @@ To access, run read_csv line. \*Tidyverse must be installed and added to the lib
 ## Parameters
 
 | Parameter | Description |
-|---------------|---------------------------------------------------------|
+|-----------------|-------------------------------------------------------|
 | DateTimeStamp | Date and time for the reading or end of interval where reading was taken. |
 | F_Record | Flag column pertaining to all data parameters, may contain specific codes defined in metadata. |
 | F_Parameter | Flag column pertaining to given parameter, may contain relevant flags or codes defined in metadata. |

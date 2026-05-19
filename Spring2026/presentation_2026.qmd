@@ -97,13 +97,11 @@ Data and Methods
 
 ## Data Cleaning
 
-- Remove empty rows and columns 
+- Removed empty rows and columns 
 
-- Separate data and time column. 
+- Separated data and time column and added a year, month and season column
 
-- Add a year, month and season column.
-
-- Remove flagged columns
+- Removed flagged data and then removed columns
 
 ## Final Dataset
 
@@ -323,11 +321,6 @@ ggplot(avg_temp_by_year_season,
   )
 ```
 
-<span style="font-size: 0.5em;">
-*Data source: Centralized Data Management Office (CDMO), NOAA NERRS (https://cdmo.baruch.sc.edu)*
-</span>
-
-
 ## {.center background-image="pictures/stony_creek_picture.jpeg"}
 
 <div style="
@@ -362,20 +355,6 @@ combined %>%
   )
 ```
 
-<span style="font-size: 0.5em;">
-*Data source: Centralized Data Management Office (CDMO), NOAA NERRS (https://cdmo.baruch.sc.edu)*
-</span>*
-
-<<<<<<< Updated upstream
-- some text
-
-=======
-<<<<<<< HEAD
-=======
-- some text
-
->>>>>>> 88ce668b58a24bad9ab70badedeafcd8ee334f11
->>>>>>> Stashed changes
 ## Lagged Effects of Precipitation on Conductivity {.stretch}
 
 ```{r, fig.width=12, fig.height=7}
@@ -383,8 +362,8 @@ combined %>%
 combined_1 <- combined %>%
   filter(year>2006)
 
-#create lags
-combined_1 <- combined %>%
+#create lags 
+combined_1 <- combined_1 %>%
   arrange(DateTimeStamp) %>%
   mutate(
     prcp_1hr  = lag(TotPrcp, 4),
@@ -392,13 +371,30 @@ combined_1 <- combined %>%
     prcp_6hr  = lag(TotPrcp, 24),
     prcp_12hr = lag(TotPrcp, 48),
     prcp_24hr = lag(TotPrcp, 96)
-  )
-
-combined_1 %>%
-  select(SpCond, prcp_1hr, prcp_3hr, prcp_6hr, prcp_12hr, prcp_24hr) %>%
+  ) %>%
+  select(SpCond, Turb, Temp, prcp_1hr, prcp_3hr, prcp_6hr, prcp_12hr, prcp_24hr) %>%
   pivot_longer(cols = starts_with("prcp_"),
                names_to = "lag",
-               values_to = "precip") %>%
+               values_to = "precip")
+
+#renaming columns to prepare for plots and releveling to keep order
+combined_1 <- combined_1 %>%
+  mutate(lag = case_when(lag == "prcp_1hr" ~ "1hr after rain",
+                         lag == "prcp_3hr" ~ "3hr after rain",
+                         lag == "prcp_6hr" ~ "6hr after rain",
+                         lag == "prcp_12hr" ~ "12hr after rain",
+                         lag == "prcp_24hr" ~ "24hr after rain"))
+
+combined_1 <- combined_1 %>%
+  mutate(lag = fct_relevel(lag,
+                           "1hr after rain",
+                           "3hr after rain",
+                           "6hr after rain",
+                           "12hr after rain",
+                           "24hr after rain"))
+                           
+
+combined_1 %>%
   filter(!is.na(SpCond), !is.na(precip)) %>%
   ggplot(aes(x = precip, y = SpCond)) +
   geom_point(alpha = 0.25, color = "#2C7BB6") +
@@ -411,17 +407,9 @@ combined_1 %>%
   ) +
   theme_minimal(base_size = 16) +
   theme(strip.text = element_text(face = "bold"))
+
 ```
 
-<span style="font-size: 0.5em;">
-*Data source: Centralized Data Management Office (CDMO), NOAA NERRS (https://cdmo.baruch.sc.edu)*
-</span>
-
-<<<<<<< Updated upstream
-- some text
-
-=======
-<<<<<<< HEAD
 ## Precipitation vs Turbidity {.stretch}
 
 ```{r, fig.width=12, fig.height=7}
@@ -444,33 +432,11 @@ combined |>
   )
 ```
 
-<span style="font-size: 0.5em;">
-*Data source: Centralized Data Management Office (CDMO), NOAA NERRS (https://cdmo.baruch.sc.edu)*
-</span>*
-
 ## Lagged Effects of Precipitation on Water Turbidity {.stretch}
 
 ```{r, fig.width=12, fig.height=7}
 #filter the data to have equal breaks
-turb_combined <- combined |>
-  filter(year>2006)
-
-#create lags
-turb_combined <- combined |>
-  arrange(DateTimeStamp) |>
-  mutate(
-    prcp_1hr  = lag(TotPrcp, 4),
-    prcp_3hr  = lag(TotPrcp, 12),
-    prcp_6hr  = lag(TotPrcp, 24),
-    prcp_12hr = lag(TotPrcp, 48),
-    prcp_24hr = lag(TotPrcp, 96)
-  )
-
-turb_combined %>%
-  select(Turb, prcp_1hr, prcp_3hr, prcp_6hr, prcp_12hr, prcp_24hr) %>%
-  pivot_longer(cols = starts_with("prcp_"),
-               names_to = "lag",
-               values_to = "precip") %>%
+combined_1 %>%
   filter(!is.na(Turb), !is.na(precip)) %>%
   ggplot(aes(x = precip, y = Turb)) +
   geom_point(alpha = 0.25, color = "#2C7BB6") +
@@ -485,14 +451,46 @@ turb_combined %>%
   theme(strip.text = element_text(face = "bold"))
 ```
 
-<span style="font-size: 0.5em;">
-*Data source: Centralized Data Management Office (CDMO), NOAA NERRS (https://cdmo.baruch.sc.edu)*
-</span>
-=======
-- some text
+## Precipitation vs Turbidity {.stretch}
 
->>>>>>> 88ce668b58a24bad9ab70badedeafcd8ee334f11
->>>>>>> Stashed changes
+```{r, fig.width=12, fig.height=7}
+
+combined |>
+  filter(!is.na(TotPrcp), !is.na(Temp), !is.na(season)) %>%
+  ggplot(aes(x = TotPrcp, y = Turb)) +
+  geom_point(alpha = 0.4, color = "#2C7BB6", size = 1.8) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D7191C", linewidth = 1) +
+  facet_wrap(~ season) +
+  labs(
+    title = "Precipitation and Water Temperature by Season",
+    x = "Total Precipitation (mm)",
+    y = "Water Temperature (C)"
+  ) +
+  theme_minimal(base_size = 16) +
+  theme(
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+## Lagged Effects of Precipitation on Water Turbidity {.stretch}
+
+```{r, fig.width=12, fig.height=7}
+#filter the data to have equal breaks
+combined_1 %>%
+  filter(!is.na(Temp), !is.na(precip)) %>%
+  ggplot(aes(x = precip, y = Temp)) +
+  geom_point(alpha = 0.25, color = "#2C7BB6") +
+  geom_smooth(method = "lm", color = "#D7191C", se = TRUE) +
+  facet_wrap(~ lag, scales = "free_x") +
+  labs(
+    title = "Lagged Precipitation vs Water Turbidity",
+    x = "Precipitation (lagged)",
+    y = "Water Temperature"
+  ) +
+  theme_minimal(base_size = 16) +
+  theme(strip.text = element_text(face = "bold"))
+```
 
 ## {.center background-image="pictures/stony_creek_picture.jpeg"}
 
