@@ -77,7 +77,7 @@ Each dataset must be requested separately, as the website generates one download
 
 12\. Run the code. After execution, all files will be downloaded into a subfolder named after the site within your data folder.
 
-### Data Cleaning 
+### Data Cleaning
 
 ### Final Dataset
 
@@ -97,7 +97,7 @@ Each dataset must be requested separately, as the website generates one download
 
 ## Final Dataset EDA
 
-### Correlation matrix 
+### Correlation matrix
 
 ```{r}
 
