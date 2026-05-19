@@ -269,14 +269,13 @@ ggplot(avg_temp_by_year, aes(x = factor(year), y = avg_temp, fill = delta_overal
     title = "Average Water Temperature by Year",
     subtitle = "Yearly averages relative to the overall mean (2001–2021)",
     x = "Year",
-    y = "Average Water Temperature (°C)"
-  ) +
+    y = "Average Water Temperature (°C)",
+    caption = "Yearly average water temperature from 2001–2021. The red dashed line represents the mean temperature, blue bars indicate above-average years,\ngray below-average years.") +
   scale_fill_manual(values = c("TRUE" = "steelblue", "FALSE" = "lightgray")) +
   theme_minimal(base_size = 18) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        plot.caption = element_text(hjust = 0))
 ```
-
-- The plot shows yearly average water temperature from 2001–2021, the red dashed line represents the mean temperature, blue bars indicate above-average years, gray below-average years.
 
 ##
 
@@ -337,6 +336,7 @@ Joined Dataset Analysis
 ##
 
 ```{r}
+
 #select + rename variables
 cor_vars <- combined %>%
   select(
@@ -395,6 +395,8 @@ ggplot(cor_long, aes(x = Variable1, y = Variable2, fill = Correlation)) +
     y = NULL
   )
 ```
+
+
 
 
 ## Precipitation vs Specific Conductivity {.stretch}
@@ -570,6 +572,7 @@ Conclusion
 </div>
 
 ##
+## 
 
 - Several data quality issues were identified, including missing values and possible sensor errors.
 - Some plots suggest higher temperatures in recent years, especially during summer, but no clear long-term warming trend was confirmed.
@@ -595,6 +598,7 @@ Next Steps
 - Analyze extreme weather events separately to better understand their environmental impacts and associated water quality changes.
 - Improve data quality assessment by identifying sensor anomalies and patterns of missing data.
 - Develop predictive models to better understand how water quality responds to precipitation and seasonal weather conditions.
+
 
 
 
