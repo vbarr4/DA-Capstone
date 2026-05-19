@@ -15,6 +15,9 @@ library(lubridate)
 library(janitor)
 library(rlang)
 library(glue)
+library(reshape2)
+library(ggplot2)
+library(wqD375)
 
 ```
 
@@ -234,24 +237,6 @@ box_fall_atemp
 
 ```
 
----
-title: "Exploring Water Turbidity in Stony Creek"
-author: "Ilianna Ditren"
-format: html
----
-
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
-
-#libraries
-library(tidyverse)
-library(dplyr)
-library(lubridate)
-library(stringr)
-library(janitor)
-library(reshape2)
-library(ggplot2)
-library(wqD375)
-library(rlang)
 
 combined <- read_csv("data/joined_dataset.csv")
 weekly_combined <- read_csv("data/weekly_combined.csv")
