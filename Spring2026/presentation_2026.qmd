@@ -1,5 +1,6 @@
 ---
-title: "Stony Creek Water Quality Analysis (2002–2021)"
+title: "Stony Creek Water Quality Analysis"
+subtitle: "(2002–2021)"
 author: "Ilianna Ditren, Natalie Novoseltseva, Joy Terentiev"
 format: revealjs
 
@@ -67,13 +68,6 @@ Introduction
 - Exploratory analysis only
 - First step toward studying climate-related environmental change
 
-## What the Report Includes
-
-- Data cleaning and preparation
-- Exploratory analysis
-- Visualizations
-- Seasonal analysis
-
 ## {.center background-image="pictures/stony_creek_picture.jpeg"}
 
 <div style="
@@ -101,11 +95,12 @@ Data and Methods
 
 - Separated data and time column and added a year, month and season column
 
-- Removed flagged data and then removed columns
+- Removed flagged data and then removed the flags columns
 
 ## Final Dataset
 
 - `combined`: Creates one dataset by joining water quality data from Stony Creek and meteorological data from Hudson Field Station.
+
 
 ## Main Variables
 
@@ -114,6 +109,7 @@ Data and Methods
 | Turb | Turbidity measured in units referred to as FNU/NTU, depending upon sensor.|
 | TotPrcp | total precipitation measured in millimeters (mm) |
 | SpCond | Specific conductivity measured in milli-Siemens per centimeter (mS/cm) |
+| Temp | Water temperature in degrees Celsius (C) |
 
 
 ## {.center background-image="pictures/stony_creek_picture.jpeg"}
@@ -214,7 +210,7 @@ summary_tbl %>%
 
 ## 
 
-- Examining seasonal means shows that water temperature and temperature-dependent variables such as dissolved oxygen, turbidity, and conductivity vary significantly across seasons. Among these, it is notable that the summer–fall and winter–spring values are relatively similar for some variables.
+- Examining seasonal means shows that water temperature and temperature-dependent variables such as dissolved oxygen, turbidity, and conductivity vary significantly across seasons. 
 
 ```{r}
 stony_creek %>%
@@ -549,7 +545,7 @@ combined_1 %>%
   geom_smooth(method = "lm", color = "#D7191C", se = TRUE) +
   facet_wrap(~ lag, scales = "free_x") +
   labs(
-    title = "Lagged Precipitation vs Water Turbidity",
+    title = "Lagged Precipitation vs Water Temperature",
     x = "Precipitation (lagged)",
     y = "Water Temperature"
   ) +
@@ -581,7 +577,7 @@ Conclusion
 ## {.center background-image="pictures/stony_creek_picture.jpeg"}
 
 <div style="
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.85)
   padding: 20px 50px;
   border-radius: 6px;
   font-size: 2.5em;

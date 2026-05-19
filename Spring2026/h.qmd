@@ -1,0 +1,16 @@
+---
+title: "Stony Creek Water Quality Analysis"
+subtitle: "(2002–2021)"
+author: "Ilianna Ditren, Natalie Novoseltseva, Joy Terentiev"
+format: revealjs
+
+---
+
+## Main Variables
+
+| Column | Description | 
+|---------------|-------------------------------------------|---------------|
+| Turb | Turbidity measured in units referred to as FNU/NTU, depending upon sensor.|
+| TotPrcp | total precipitation measured in millimeters (mm) |
+| SpCond | Specific conductivity measured in milli-Siemens per centimeter (mS/cm) |
+| Temp | Water temperature in degrees Celsius (C) |
