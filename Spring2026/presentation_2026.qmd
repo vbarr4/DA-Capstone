@@ -571,7 +571,6 @@ combined_1 %>%
 Conclusion
 </div>
 
-##
 ## 
 
 - Several data quality issues were identified, including missing values and possible sensor errors.
@@ -592,7 +591,7 @@ Conclusion
 Next Steps
 </div>
 
-##
+## 
 
 - Extend the analysis beyond exploratory methods by applying statistical modeling and time-series analysis.
 - Analyze extreme weather events separately to better understand their environmental impacts and associated water quality changes.

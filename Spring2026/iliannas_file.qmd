@@ -18,6 +18,10 @@ library(glue)
 library(reshape2)
 library(ggplot2)
 library(wqD375)
+library(gt)
+library(stringr)
+library(ggpubr)
+library(patchwork)
 
 ```
 
@@ -148,7 +152,6 @@ for (lst in list_seasons) {
 }
 
 ```
-
 
 Water turbidity is the measure of suspended particles in the water. It is measured in Nephelometric Turbidity Units (NTU). It measures water cloudiness by detecting how suspended particles scatter  light in the water. Cloudier water has a higher NTU number and can be considered polluted or unsafe to drink. The standard NTU for drinking water is 1 NTU. For water bodies these values might change as rain, winds, and currents can disturb the sediments in the water. 
 
@@ -290,3 +293,324 @@ box_fall_atemp <- filter(atemp, season == "Fall") |>
 box_fall_atemp
 
 ```
+
+Spring dataset by day
+
+Turbidity
+
+```{r}
+
+ggplot(spring_daily_avg, aes(x = date, y = Turb)) +
+  geom_line(color = "#1D91C0", linewidth = 0.9) +
+  geom_point(color = "#1D91C0", size = 1, alpha = 0.6) +
+  
+  # optional smooth trend per panel
+  geom_smooth(method = "loess", se = FALSE, color = "#E34A33", linewidth = 0.8) +
+  
+  facet_wrap(~ year, scales = "free_x") +
+  
+  labs(
+    title = "Daily Average Turbidity by Year (Spring)",
+    x = "Date",
+    y = "Turbidity (NTU)"
+  ) +
+  
+  scale_x_date(date_labels = "%b %d") +
+  
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title = element_text(face = "bold"),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+Total Precipitation 
+
+```{r}
+
+ggplot(spring_daily_avg, aes(x = date, y = TotPrcp)) +
+  geom_col(fill = "#2CA25F", alpha = 0.8) +  # bars work better for precipitation
+  
+  facet_wrap(~ year, scales = "free_x") +
+  
+  labs(
+    title = "Daily Total Precipitation by Year (Spring)",
+    x = "Date",
+    y = "Precipitation"
+  ) +
+  
+  scale_x_date(date_labels = "%b %d") +
+  
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title = element_text(face = "bold"),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+Specific Conductivity
+
+```{r}
+ggplot(spring_daily_avg, aes(x = date, y = SpCond)) +
+  geom_line(color = "#2C7FB8", linewidth = 0.8) +
+  facet_wrap(~ year, scales = "free_x") +
+  labs(
+    title = "Daily Mean Specific Conductivity by Year (Spring)",
+    x = "Date",
+    y = "Specific Conductivity (µS/cm or appropriate units)"
+  ) +
+  scale_x_date(date_labels = "%b %d") +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title = element_text(face = "bold"),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+
+Total Precipitation and Turbidity
+
+```{r}
+scale_factor <- max(spring_daily_avg$Turb, na.rm = TRUE) / 
+                max(spring_daily_avg$TotPrcp, na.rm = TRUE)
+
+ggplot(spring_daily_avg, aes(x = date)) +
+  
+  # Precipitation (bars)
+  geom_col(
+    aes(y = TotPrcp * scale_factor, fill = "Precipitation"),
+    alpha = 0.6
+  ) +
+  
+  # Turbidity (line)
+  geom_line(
+    aes(y = Turb, color = "Turbidity"),
+    linewidth = 1.1
+  ) +
+  
+  facet_wrap(~ year, scales = "free_x") +
+  
+  scale_y_continuous(
+    name = "Turbidity",
+    sec.axis = sec_axis(~ . / scale_factor, name = "Precipitation")
+  ) +
+  
+  # Custom legend colors
+  scale_color_manual(
+    values = c("Turbidity" = "#2C7FB8")
+  ) +
+  
+  scale_fill_manual(
+    values = c("Precipitation" = "#F03B20")
+  ) +
+  
+  labs(
+    title = "Turbidity and Precipitation Over Time",
+    x = "Date",
+    color = "",
+    fill = ""
+  ) +
+  
+  scale_x_date(date_labels = "%b %d") +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    legend.position = "top"
+  )
+```
+
+Year of 2006
+```{r}
+
+spring_2006 <- spring_daily_avg %>%
+  filter(year == 2006)
+
+scale_factor <- max(spring_2006$Turb, na.rm = TRUE) / 
+                max(spring_2006$TotPrcp, na.rm = TRUE)
+
+ggplot(spring_2006, aes(x = date)) +
+  
+  # Precipitation (bars)
+  geom_col(
+    aes(y = TotPrcp * scale_factor, fill = "Precipitation"),
+    alpha = 0.6
+  ) +
+  
+  # Turbidity (line)
+  geom_line(
+    aes(y = Turb, color = "Turbidity"),
+    linewidth = 1.1
+  ) +
+  
+  scale_y_continuous(
+    name = "Turbidity",
+    sec.axis = sec_axis(~ . / scale_factor, name = "Precipitation")
+  ) +
+  
+  scale_color_manual(
+    values = c("Turbidity" = "#2C7FB8")
+  ) +
+  
+  scale_fill_manual(
+    values = c("Precipitation" = "#F03B20")
+  ) +
+  
+  labs(
+    title = "Turbidity and Precipitation Over Time (2006)",
+    x = "Date",
+    color = "",
+    fill = ""
+  ) +
+  
+  scale_x_date(date_labels = "%b %d") +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    panel.grid.minor = element_blank(),
+    legend.position = "top"
+  )
+```
+
+```{r}
+ggplot(spring_2006, aes(x = TotPrcp, y = Turb)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  theme_minimal()
+```
+
+
+Specific Conductivity and Total precipitation
+
+```{r}
+scale_factor <- max(spring_daily_avg$SpCond, na.rm = TRUE) / 
+                max(spring_daily_avg$TotPrcp, na.rm = TRUE)
+
+ggplot(spring_daily_avg, aes(x = date)) +
+  
+  # Precipitation (bars, scaled)
+  geom_col(
+    aes(y = TotPrcp * scale_factor, fill = "Precipitation"),
+    alpha = 0.6
+  ) +
+  
+  # Specific Conductivity (line)
+  geom_line(
+    aes(y = SpCond, color = "Specific Conductivity"),
+    linewidth = 1.1
+  ) +
+  
+  facet_wrap(~ year, scales = "free_x") +
+  
+  scale_y_continuous(
+    name = "Specific Conductivity",
+    sec.axis = sec_axis(~ . / scale_factor, name = "Precipitation")
+  ) +
+  
+  scale_color_manual(
+    values = c("Specific Conductivity" = "#2C7FB8")
+  ) +
+  
+  scale_fill_manual(
+    values = c("Precipitation" = "#F03B20")
+  ) +
+  
+  labs(
+    title = "Specific Conductivity and Precipitation Over Time",
+    x = "Date",
+    color = "",
+    fill = ""
+  ) +
+  
+  scale_x_date(date_labels = "%b %d") +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    legend.position = "top"
+  )
+```
+
+Weekly Dataset
+
+```{r}
+ggplot(spring_weekly_avg, aes(x = week, y = TotPrcp)) +
+  
+  geom_col(fill = "#F03B20", alpha = 0.7) +
+  
+  labs(
+    title = "Weekly Total Precipitation (Spring)",
+    x = "Week",
+    y = "Precipitation"
+  ) +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    legend.position = "none"
+  )
+```
+
+```{r}
+ggplot(spring_weekly_avg, aes(x = week, y = SpCond)) +
+  
+  geom_col(fill = "#F03B20", alpha = 0.7) +
+  
+  labs(
+    title = "Weekly Specific Conductivity (Spring)",
+    x = "Week",
+    y = "Specific Conductivity"
+  ) +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    legend.position = "none"
+  )
+```
+
+```{r}
+ggplot(spring_weekly_avg, aes(x = week, y = SpCond)) +
+  
+  geom_line(color = "#2C7FB8", linewidth = 1) +
+  geom_point(color = "#2C7FB8", size = 1.8) +
+  
+  labs(
+    title = "Weekly Specific Conductivity (Spring)",
+    x = "Week",
+    y = "Specific Conductivity"
+  ) +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    axis.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+
+
+
+
