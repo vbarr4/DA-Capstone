@@ -4,3 +4,173 @@ subtitle: "Stony Creek, and Field Station"
 author: "Ilianna Ditren, Joy Terentiev, Natalie Novoseltseva"
 format: pdf
 ---
+
+# Important <- ensure that your code does not modify the orginal dataset
+
+# Project Set Up
+
+```{r, message=FALSE, warning=FALSE}
+
+#Downloading libraries
+library(readr)
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(janitor)
+library(rlang)
+library(glue)
+library(reshape2)
+library(ggplot2)
+library(wqD375)
+library(gt)
+library(stringr)
+library(ggpubr)
+library(patchwork)
+
+```
+
+```{r, message=FALSE, warning=FALSE}
+
+# Importing data
+
+weather <- read_csv("data/stony_creek.csv")
+stony_creek <- read_csv("data/stony_creek.csv")
+combined <- read_csv("data/combined.csv")
+daily_combined <- read_csv("data/daily_combined.csv")
+weekly_combined <- read_csv("data/weekly_combined.csv")
+
+
+```
+
+# Water Quality
+
+## Exploratory Data Analysis
+
+The first step in the data exploratory analysis was to explore the descriptive statistics of each variable in the dataset. Initially, we did so with the original dataset without further cleaning. After receiving feedback in a meeting, we further cleaned the dataset by removing the data that was flagged with values -3, -2 and 1 as recommended by Dr. Emily White, our client. -3 represented data rejected due to QA/QC, -2 represented missing data, and 1 flags represented suspect data. The following data analysis does not include data that was flagged with any of the previous values.
+
+Following the removal of the flagged data, we continued our exploration of the descriptive statistics of the variables in the `stony_creek` dataset by creating tables, scatterplots and boxplots. 
+
+# Start of Natalie only
+## Tables (Natalie)
+# End of Natalie only
+
+# Start of Ilianna only
+
+# Water Quality Scatter Plots
+
+Initially, our driving question was whether the effects of climate change can be seen in the water quality indicators. For this reason, the initial focus was looking at whether the average year temperatures were higher in more recent years.
+
+I created line graphs of the mean values by season by year. The feedback we received indicated that line graphs were not the best strategy to present the data because once we calculated the mean, the data stopped being continuous, instead, a scatterplot was a more accurate way of presenting the data.
+
+Initially, these plots took about a thousand lines of code because there were 5 plots per variable. In addition, extra lines of code were added to modify visual aspects of the plot. To reduce this clutter, I created a function and stored it in a new package called wqD375. The packages gets uploaded to this document when you run the chunk containing all the libraries. Then, I used a loop to create 5 plots per variable (one for each season and one for all seasons). 
+
+While this makes the process quicker, there is a small bug in the function. The way the function is set up is that it fills in in the title for the season and the water quality indicator used. When the function loops through the 5th object in the list of seasons, it plots all seasons colored by season, but only fills in the title for the first object in `list_seasons`. 
+
+```{r, warning = FALSE, message = FALSE}
+
+# creating an object with all seasons to use in the plot that includes all seasons
+seasons = c("Spring", "Summer", "Fall", "Winter")
+
+# creating a list of seasons to iterate over
+list_seasons <- list("Spring", "Summer", "Fall", "Winter", seasons)
+
+```
+
+## Water Quality Indicators
+
+The following plots show the yearly averages of water temperature per season and finally for all seasons. 
+
+```{r, warning = FALSE, message = FALSE}
+
+# Water temperature
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, Temp, lst, season, 0, 23))
+}
+
+```
+
+This information is not surprising because the water temperature is closely related to the air temperature, which is that in the winter the water temperature is hotter, the 
+
+```{r, warning = FALSE, message = FALSE}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, SpCond, lst, season, 0, 1))
+}
+
+```
+
+```{r, warning = FALSE, message = FALSE}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, Sal, lst, season, 0, 1))
+}
+
+```
+
+```{r, warning = FALSE, message = FALSE}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, DO_Pct, lst, season, 0, 155))
+}
+
+```
+
+```{r, warning = FALSE, message = FALSE}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, DO_mgl, lst, season, 0, 23))
+}
+
+```
+
+```{r, warning = FALSE, message = FALSE}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, Depth, lst, season, 0, 1))
+}
+
+```
+
+```{r, warning = FALSE, message = FALSE}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, pH, lst, season, 0, 14))
+}
+
+```
+
+```{r, warning = FALSE, message = FALSE}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, Turb, lst, season, 0, 50))
+}
+
+```
+
+```{r, warning = FALSE, message = FALSE}
+
+for (lst in list_seasons) {
+  print(scatterplot_mean(stony_creek, year, ChlFluor, lst, season, 0, 5))
+}
+
+```
+
+# End  of Ilianna only
+
+## Scatterplots (Ilianna)
+
+# Weather
+
+## Tables (Natalie)
+
+## Boxplots (Ilianna)
+
+# Joined
+
+#### Note: try to avoid include daily or weekly(be selective on when to use full dataset because is too long)
+## Scatterplots (individial) (Natalie)
+## Scatterplots (individial) (Ilianna)
+
+## Seasonal
+
+line graphs and scatter plots

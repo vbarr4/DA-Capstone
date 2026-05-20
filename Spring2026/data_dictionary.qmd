@@ -1,39 +1,50 @@
 ---
-title: "Data Dictionary"
-subtitle: "Stony Creek Water Quality and Field Station Meteorological Data"
-author: "Ilianna Ditren, Natalie, Joy Terentiev"
+title: "Stony Creek Water Quality and Hudson Field Station Meteorological Data"
+subtitle: "Data Dictionary"
+author: "Ilianna Ditren, Natalie Novoseltseva, Joy Terentiev"
 format: html
 editor: visual
 ---
 
 ## Data Source
 
-In this data exploration, we analyze the Stony Creek tributary in the Hudson River. In particular, we will look at various variables to study water quality and conditions.
+In this data exploratory analysis, we analyzed water quality data from the Stony Creek tributary in the Hudson River and meteorological data from the Hudson River Field Station to study water quality and conditions in relation to weather.
 
-From the cdmo.baruch.sc.edu website, we can access the file "hudscwq2020.csv". File has been accessed by requesting water quality data from the Hudson River Reserve then selecting Stony Creek, which provides data from 2002-2021. From these options, the year 2020 was specified as the first year of study.
+To perform the analysis, we used Stony Creek water quality data for the years 2002-2021 and Hudson Field Station weather indicator data for the years 2001-2026. Raw water quality and weather data was obtained from the Centralized Data Management Office (CDMO) website ([https://cdmo.baruch.sc.edu](https://cdmo.baruch.sc.edu/)). 
 
-Similarly, the next year (2021) can be accessed through its location in the same data file. All the same codes can be used for the new file, but outputs should be renamed to avoid overwriting. Codes were copy and pasted and adjusted for names to allow for comparison. Additional files for proceeding years can be added the same way for even further comparison.
+Below are the detailed steps to obtain the data:
+
+1.  Navigate to the [CDMO website](https://cdmo.baruch.sc.edu/).
+
+2.  Click on the Get Data tab at the top of the page.
+
+3.  Select Advanced Query System and click Launch.
+
+4.  Locate the Zip Downloads option and click Choose ZIP Files.
+
+5.  From the list of National Estuarine Research Reserves, select Hudson River, NY.
+
+6.  Select the appropriate dataset:
+
+\- For **weather data** from the field station, select hudfsmet-p.
+
+\- For **Stony Creek water quality data**, select hudscwq-p.
+
+\- For **Tivoli North water quality data**, select hudtnwq-p.
 
 ## File Access and Location
 
-All raw data files are stored in /data folder of the directory.
 
-To access, run read_csv line. \*Tidyverse must be installed and added to the library before running any scripts.
+All raw data files containing data for all years are located in the data folder of the R-Studio Project. Inside the data folder, you can also find folders containing a csv file per year of observation of water quality data on Stony Creek and Tivoli North, and meteorological data from Field Station.
 
-## New Columns
+In that folder, you can also find the README file containing the information present in this document.
 
-| Column | Description | Type |
-|----|----|----|
-| date_clean | Cleaned date, created by extracting the calendar day from time stamp | Numeric variable |
-| time | Time extracted from the original timestamp | Character variable |
-| month | Month extracted from date_clean | Integer |
-| season | Season derived from month using case_when() | Factor |
-| mean\[variable\] | Average \[variable\] by day. Raw measurements were collected at 15 minute intervals, so mean variables were introduced to reduce noise. | Numeric variable |
+# Variables
 
-## Terms
+## Water Quality
 
 | Variables | Description |
-|----|----|
+|------------------------------------|------------------------------------|
 | SpCond | Specific conductivity measured in milli-Siemens per centimeter (mS/cm) |
 | DO_pct | Dissolved oxygen measured in percent saturation (%) |
 | DO_mgl | Dissolved oxygen concentration measured in milligrams per Liter (mg/L) |
@@ -44,12 +55,147 @@ To access, run read_csv line. \*Tidyverse must be installed and added to the lib
 | cDepth | Depth from a non-vented sensor to produce corrected changes in barometric pressure (m) |
 | Level | Sonde depth, measured in meters, (m) referenced to a standard baseline referred to as a vertical datum (NAVD88). This variable was often disregarded due to its frequent NAs |
 | Turb | Turbidity measured in units referred to as FNU/NTU, depending upon sensor. |
-| ChlFlour | Chlorophyll fluorescence measured in micrograms per Liter (ug/L) |
+| ChlFluor | Chlorophyll fluorescence measured in micrograms per Liter (ug/L) |
+
+Note: ChlFluor is now being reported and collected in RFU rather than ug/L. At the moment of the writing of this paper, if you request the dataset from the website the ChlFluor will be empty. If you need to access the data, contact cdmowebmaster@baruch.sc.edu directly.
+
+## Meteorological Variables
+
+| Variables | Description |
+|------------------------------------|------------------------------------|
+| ATemp | average air temperature measured in degrees Celsius (C) |
+| RH | average relative humidity measured in percent saturation (%) |
+| BP | average barometric pressure measured in millibars (mb) |
+| WSpd: | average wind speed measured in meters per second (m/s) |
+| MaxWSpd | max wind speed measured in meters per second (m/s)  |
+| MaxWSpdT | time of max wind speed measurement (hh:mm) |
+| Wdir | average wind direction measured in degrees true North as of April 1, 2008. Prior to April 1, 2008 wind direction was measured with no correction for magnetic declination. See Reserve metadata for exact date of shift to true North. |
+| SDWDir |wind direction standard deviation (sd)  |
+| TotPAR | total photosynthetically active radiation measured in millimoles per square meter (total flux integrated over each 15-minute logging interval) |
+|  TotPrcp | total precipitation measured in millimeters (mm) |Meteorological parameters
+| CumPrcp |cumulative precipitation measured in millimeters (mm) | 
+| TotSoRad | total solar radiation measured in watts per square meter* |
 
 ## Parameters
 
 | Parameter | Description |
-|----|----|
+|------------------------------------|------------------------------------|
 | DateTimeStamp | Date and time for the reading or end of interval where reading was taken. |
 | F_Record | Flag column pertaining to all data parameters, may contain specific codes defined in metadata. |
 | F_Parameter | Flag column pertaining to given parameter, may contain relevant flags or codes defined in metadata. |
+
+## New Variables
+
+| Column | Description | Type |
+|------------------------|------------------------|------------------------|
+|  year | Year extracted from the original timestamp | Numeric variable |
+|  date | Date extracted from the original timestamp | Date |
+|  time | Time extracted from the original timestamp (format HH:MM:SS)| hms, difftime | 
+|  month | Time extracted from the original timestamp | Numeric |
+|  season | astronomical seasons  | Character |
+
+# Quality Control
+
+Each variable in both datasets contains a flagged column. The flag column, F_, contains a quality control (QC) flag and any additional QC codes that apply to the corresponding parameter data. Refer to the lists below for the available QC flags and codes and their descriptions.  
+
+## Quality Control Flags 
+
+| Column | Description | 
+|------------------------|------------------------|
+|  -5 | 	Outside high sensor range | 
+|  -4 | Outside low sensor range | 
+|  -3 | Data rejected due to QA/QC |
+|  -2 | Missing data |
+|  -1 | Optional parameter not collected  | 
+|  0 | 	Passed initial QAQC checks | 
+|  1 | Suspect data | 
+|  2 | Reserved for future use* |
+|  3 | Calculated data: non-vented depth/level sensor correction for changes in barometric pressure* | 
+|  4 | Historical: Pre-auto QA/QC  | 
+|  5 | 	Corrected data  |
+
+
+*2 and 3 Flags were used in 2007 and 2008 to designate data that were outside 2 and 3 standard deviations from the historical seasonal mean. This automated check has since been discontinued and the 2 and 3 flags applied to the data during this time are being removed from the dataset as the data are authenticated.
+
+## Quality Control
+
+Water quality codes: 
+
+| Code | Description | 
+|------------------------|------------------------|
+|GIC |	no instrument deployed due to ice |
+|GIM	|	instrument malfunction |
+|GIT	| instrument recording error; recovered telemetry data |
+|GMC	|	no instrument deployed due to maintenance/calibration |
+|GNF	|	deployment tube clogged / no flow |
+|GOW	|	out of water event |
+|GPF	|	power failure / low battery |
+|GQR	|	data rejected due to QA/QC checks |
+|GSM	|	see metadata |
+|SBO	|	blocked optic |
+|SCF	|	conductivity sensor failure |
+|SDF	|	depth port frozen |
+|SDG	|	suspect due to sensor diagnostics |
+|SDO |	DO suspect |
+|SDP	| DO membrane puncture |
+|SIC	|	incorrect calibration / contaminated standard |
+|SNV	|	negative value |
+|SOW	|	sensor out of water |
+|SPC	|	 post calibration out of range |
+|SSD	| sensor drift |
+|SSM	| sensor malfunction |
+|SSR	| sensor removed / not deployed |
+|STF	| catastrophic temperature sensor failure |
+|STS	| turbidity spike |
+|SWM	| wiper malfunction / loss |
+|CAB 	| algal bloom |
+|CAF	| acceptable calibration / accuracy error of sensor |
+|CAP	| depth sensor in water; affected by atmospheric pressure |
+|CBF	| biofouling |
+|CCU	| cause unknown |
+|CDA	| DO hypoxia (<3 mg/L) |
+|CDB	| disturbed bottom |
+|CDF	| data appear to fit conditions |
+|CFK	| fish kill |
+|CIP	| surface ice present at sample station |
+|CLT	| low tide |
+|CMC	| in field maintenance / cleaning |
+|CMD	| mud in probe guard |
+|CND	| new deployment begins |
+|CRE	| significant rain event |
+|CSM	| see metadata |
+|CTS	| turbidity spike |
+|CVT	| possible vandalism/tampering |
+|CWD	| data collected at wrong depth|
+|CWE | significant weather event|
+
+Weather codes: 
+
+| Code | Description | 
+|------------------------|------------------------|
+|GIM | 	instrument malfunction|
+|GIT 	| instrument recording error, recovered telemetry data|
+|GMC 	| no instrument deployed due to maintenance/calibration|
+|GMT |	instrument maintenance|
+|GPD | powered down|
+|GPF 	| power failure/low battery|
+|GPR 	| program reload|
+|GQR 	| data rejected due to QAQC |
+|GSM 	| see metadata|
+|SDG	| suspect due to sensor diagnostics|
+|SIC 	| incorrect calibration constant, multiplier or offset|
+|SIW | 	incorrect wiring|
+|SMT	| sensor maintenance|
+|SNV 	| negative value|
+|SOC 	| out of calibration|
+|SSN 	| not a number/unknown value|
+|SSM 	| sensor malfunction|
+|SSR 	| sensor removed|
+|CAF 	| acceptable calibration/accuracy error of sensor|
+|CDF 	| data appear to fit conditions|
+|CML	| Snow melt from previous snowfall event|
+|CRE 	| significant rain event|
+|CSM 	| see metadata|
+|CCU	| cause unknown|
+|CVT 	| possible vandalism/tampering|
+|CWE	| significant weather event|

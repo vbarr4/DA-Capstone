@@ -110,4 +110,33 @@ wq_line_graph <- function(df, var1, var2) {
     theme_minimal()
 }
 
+scatterplot_mean <- function(df,
+                             var1,
+                             var2,
+                             season,
+                             aes_color = NULL,
+                             ymin = NULL,
+                             ymax = NULL) {
 
+  # creating
+  var1_name <- as_name(ensym(var1))
+  var2_name <- as_name(ensym(var2))
+
+  # accessing the variable name from the wq_clean_names object and assigning it to the x and y labels
+  x_label <- wq_clean_names[[var1_name]]
+  y_label <- wq_clean_names[[var2_name]]
+
+  df |>
+    filter(!is.na({{var2}}) & season %in% {{season}}) |>
+    group_by(year, season) |>
+    summarize(mean = mean({{var2}})) |>
+    ggplot() +
+    geom_point(aes(x = {{var1}}, y = mean, color = {{aes_color}})) +
+    labs(
+      title = glue("Mean {season} {y_label} by Year"),
+      x = x_label,
+      y = y_label) +
+    theme_minimal() +
+    ylim({{ymin}}, {{ymax}}) +
+    scale_color_viridis_d()
+}
